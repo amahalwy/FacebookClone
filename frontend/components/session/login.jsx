@@ -1,4 +1,6 @@
 import React from 'react';
+import SignupContainer from './signup_container';
+import Modal from '../modal/modal';
 
 class Login extends React.Component {
   constructor(props) {
@@ -6,9 +8,12 @@ class Login extends React.Component {
     this.state = {
       email: '',
       password: '',
+      openModal: false
     };
     this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.showModal = this.showModal.bind(this);
+    this.hideModal = this.hideModal.bind(this);
   }
 
   handleInput(f) {
@@ -18,8 +23,18 @@ class Login extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.login(this.state)
-      .then(() => this.props.history.push('/feed'));
+      .then(() => this.props.props.history.push('/feed'));
   }
+
+  showModal(e) {
+    e.preventDefault();
+    this.setState({ openModal: true })
+  };
+
+  hideModal() {
+    this.setState({ openModal: false });
+  };
+
 
   render() {
     return (
@@ -66,17 +81,25 @@ class Login extends React.Component {
             </div>
             <div className='border-below-anchor'></div>
 
+
+
             <div className='login-create-account-button'>
-              {/* Click here and open the SIGNUP component in as a modal */}
-              <button>Create New Account</button>
+              <button onClick={this.showModal}>Create New Account</button>
             </div>
+
           </form>
+
+            
+              <Modal show={this.state.openModal} handleClose={this.hideModal} >
+                <SignupContainer 
+                  history={this.props.history}
+                />
+              </Modal>
+
+            </div>
+
         </div>
-
-
       </div>
-
-
     );
   }
 }

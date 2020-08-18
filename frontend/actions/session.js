@@ -3,9 +3,9 @@ import {postUser, postSession, deleteSession} from '../util/session';
 export const RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER";
 export const LOGOUT_CURRENT_USER = "LOGOUT_CURRENT_USER";
 
-const receiveCurrentUser = user => ({
+const receiveCurrentUser = currentUser => ({
   type: RECEIVE_CURRENT_USER,
-  user
+  currentUser
 })
 
 const logoutCurrentUser = () => ({
