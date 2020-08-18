@@ -1,16 +1,13 @@
 import React from 'react';
 import {Route, Switch} from 'react-router-dom';
+import SignupContainer from './session/signup_container'
+import LoginContainer from './session/login_container'
 
-
-const App = ({children}) => (
+export default () => (
   <div>
-    <h1>App</h1>
-    <Switch>
-      <Route exact path="/" component={LoginContainer} />
-      <Route path='/feed' component={} />
-
-    </Switch>
+    {/* splashpage */}
+    {/* protected /feed, /users/show */}
+    <Route path='/login' component={LoginContainer} />
+    <Route path='/signup' component={SignupContainer} />
   </div>
 )
-
-export default App;

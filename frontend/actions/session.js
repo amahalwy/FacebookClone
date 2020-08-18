@@ -12,6 +12,8 @@ const logoutCurrentUser = () => ({
   type: LOGOUT_CURRENT_USER
 })
 
+// Thunk action creators
+
 export const createNewUser = formUser => dispatch => (
   postUser(formUser)
   .then(user => dispatch(receiveCurrentUser(user)))
@@ -22,7 +24,7 @@ export const login = formUser => dispatch => (
   .then(user => dispatch(receiveCurrentUser(user)))
 )
 
-export const logoutCurrentUser = () => dispatch => (
+export const logout = () => dispatch => (
   deleteSession()
   .then(() => dispatch(logoutCurrentUser()))
 )
