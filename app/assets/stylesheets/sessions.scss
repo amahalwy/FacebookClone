@@ -3,9 +3,119 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-
 .session-login-container {
-  background-color: rgb(241, 241, 241);
+  background-color: rgb(240, 240, 240);
   margin: 0 0;
   width: 100%;
+  display: flex;
+  // align-items: center;
+  padding-bottom: 40px;
+  padding-top: 40px;
+  justify-content: space-around;
+  // margin: 0 auto;
 }
+
+.session-login-sidebar {
+  align-self: center;
+  // margin: 0 auto;
+}
+
+
+
+
+// Form CSS
+// Main session div
+.session-login-form {
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+  width: 320px;
+  height: 280px;
+  // margin: 0 auto;
+  box-shadow: 
+    0 0  0 2px rgb(255,255,255),
+    0.3em 0.3em 1em rgba(0,0,0,0.3);  
+    margin-left: -200px;
+    margin-top: 90px;
+}
+
+
+// Flex fields
+.session-login-form-field {
+  display: flex;
+  justify-content: center;
+}
+
+// Input fields
+.session-login-form-field > input{
+  border-radius: 5px;
+  width: 90%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  height: 25px;
+}
+
+// Flex button
+.login-button { 
+  display: flex;
+  justify-content: center;
+}
+
+.login-button > button {
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  background-color: rgb(26, 102, 245);
+  border-radius: 5px;
+  border: none;
+  width: 96%;
+  height: 40px;
+}
+
+.login-button > button:hover {
+  cursor: pointer;
+}
+
+// Anchor 
+.forgot-account-anchor { 
+  margin: 20px;
+}
+
+.forgot-account-anchor > a {
+  text-decoration: none;
+  color: blue;
+  display: flex;
+  justify-content: center;
+}
+
+// Border
+.border-below-anchor {
+  border-bottom: 1px solid #ccc;
+}
+
+// Flex create acc button
+.login-create-account-button {
+  display: flex;
+  justify-content: center;
+}
+
+.login-create-account-button > button:hover {
+  cursor: pointer;
+}
+
+.login-create-account-button > button {
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  background-color: rgb(31, 209, 46);
+  border-radius: 5px;
+  border: none;
+  width: 50%;
+  height: 40px;
+  margin-top: 20px;
+}
+
+
+
+

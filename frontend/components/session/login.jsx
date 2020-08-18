@@ -40,33 +40,31 @@ class Login extends React.Component {
 
         <div className="session-login-form">
           <form>
-            <div className='email-field'>
-              <label>Email:
+            <div className='session-login-form-field'>
               <input
                   type="text"
                   value={this.state.email}
                   onChange={this.handleInput('email')}
+                  placeholder = "Email"
                 />
-              </label>
             </div>
 
-            <div className='password-field'>
-              <label>Password:
+            <div className='session-login-form-field'>
               <input
                   type="password"
                   value={this.state.password}
                   onChange={this.handleInput('password')}
+                  placeholder = 'Password'
                 />
-                <button onClick={this.handleSubmit}>Log In</button>
-              </label>
             </div>
 
             <div className='login-button'>
-              <button>Log In</button>
+              <button onClick={this.handleSubmit}>Log In</button>
             </div>
             <div className='forgot-account-anchor'>
               <a href="">Forgot account?</a>
             </div>
+            <div className='border-below-anchor'></div>
 
             <div className='login-create-account-button'>
               {/* Click here and open the SIGNUP component in as a modal */}

@@ -56,7 +56,7 @@ class Signup extends React.Component {
           
             <div className='password-field'>
               <input
-                type="text"
+                type="password"
                 value={this.state.password}
                 onChange={this.handleInput('password')}
                 placeholder='New Password'
