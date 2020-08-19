@@ -89,18 +89,23 @@ class Login extends React.Component {
 
           </form>
 
-            
-              <Modal show={this.state.openModal} handleClose={this.hideModal} >
-                <SignupContainer 
-                  history={this.props.history}
-                />
-              </Modal>
-
-            </div>
-
+          <div className='login-create-a-page'>
+            <p><strong><a href="">Create a Page</a></strong> for a celebrity, band or business.</p>
+          </div>
+          
         </div>
+
+          <div >
+              <Modal show={this.state.openModal} handleClose={this.hideModal} >
+              <SignupContainer 
+                history={this.props.history}
+              />
+            </Modal>
+            
+          </div>
+
       </div>
-    );
+    )
   }
 }
 

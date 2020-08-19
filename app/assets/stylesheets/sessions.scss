@@ -9,12 +9,13 @@
   margin: 0 0;
   width: 100%;
   display: flex;
-  padding-bottom: 40px;
+  padding-bottom: 300px;
   padding-top: 40px;
   justify-content: space-around;
 }
 
-.session-login-sidebar {
+.session-login-sidebar,
+.session-login-form {
   align-self: center;
 }
 
@@ -29,8 +30,9 @@
   box-shadow: 
     0 0  0 2px rgb(255,255,255),
     0.3em 0.3em 1em rgba(0,0,0,0.3);  
-    margin-left: -200px;
+    // margin-left: -100px;
     margin-top: 90px;
+    margin-right: -300px;
 }
 
 
