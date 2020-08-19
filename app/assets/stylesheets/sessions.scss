@@ -70,7 +70,8 @@
 }
 
 .login-button > button:hover,
-.login-create-account-button > button:hover {
+.login-create-account-button > button:hover,
+.signup-button > button:hover {
   cursor: pointer;
 }
 
@@ -92,12 +93,14 @@
 }
 
 // Flex create acc button
-.login-create-account-button {
+.login-create-account-button,
+.signup-button {
   display: flex;
   justify-content: center;
 }
 
-.login-create-account-button > button {
+.login-create-account-button > button,
+.signup-button > button  {
   color: white;
   font-size: 15px;
   font-weight: bold;
@@ -200,3 +203,14 @@
   margin-right: 10px;
 }
 
+.login-create-a-page {
+  margin-top: 50px;
+}
+
+.create-text{
+  text-decoration: none;
+}
+
+.signup-button > button {
+  justify-self: center;
+}

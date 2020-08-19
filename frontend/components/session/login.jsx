@@ -90,9 +90,9 @@ class Login extends React.Component {
           </form>
 
           <div className='login-create-a-page'>
-            <p><strong><a href="">Create a Page</a></strong> for a celebrity, band or business.</p>
+            <p><strong><a className='create-text' href="">Create a Page</a></strong> for a celebrity, band or business.</p>
           </div>
-          
+
         </div>
 
           <div >

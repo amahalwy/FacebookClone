@@ -2,19 +2,28 @@ import Redux from 'redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import configureStore from './store/store'
-// import api util functions
 import Root from './components/root'
 
 document.addEventListener('DOMContentLoaded', () => {
-  let preloadedState = undefined;
+  let store;
   if (window.currentUser) {
-    preloadedState = {
-      session: {
-        currentUser: window.currentUser
+    const preloadedState = {
+      session: { id: window.currentUser.id },
+      entities: {
+        users: { [window.currentUser.id]: window.currentUser }
       }
     };
+    store = configureStore(preloadedState);
+    delete window.currentUser;
+  } else {
+    store = configureStore();
   }
-  const store = configureStore(preloadedState);
+
+  // const store = configureStore();
+
+  // TESTING
+    // window.currentUser = current_user
+  // 
 
   const root = document.getElementById('root');
   ReactDOM.render(<Root store={store} />, root)

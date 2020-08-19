@@ -15,8 +15,8 @@ class Signup extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.createNewUser(this.state)
-      .then(() => this.props.history.push('/'))
+    this.props.signup(this.state)
+      .then(response => this.props.history.push(`/users/${response.currentUser.user.id}`))
   }
 
   handleInput(f) {
@@ -149,7 +149,7 @@ class Signup extends React.Component {
 
                 {/* <div className='signup-terms'>By clicking yaaaaa</div> */}
                 <div className='signup-button'>
-                  <button onClick={this.handleSubmit}>Sign Up</button>
+                  <button>Sign Up</button>
                 </div>
               </div>
             </form>
