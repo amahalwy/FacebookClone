@@ -147,21 +147,31 @@ var logout = function logout() {
 /*!******************************************!*\
   !*** ./frontend/actions/user_actions.js ***!
   \******************************************/
-/*! exports provided: RECEIVE_USER, fetchUser */
+/*! exports provided: RECEIVE_USER, RECEIVE_ALL_USERS, fetchUser, fetchUsers */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_USER", function() { return RECEIVE_USER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_ALL_USERS", function() { return RECEIVE_ALL_USERS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUser", function() { return fetchUser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUsers", function() { return fetchUsers; });
 /* harmony import */ var _util_user_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/user_util */ "./frontend/util/user_util.js");
 
 var RECEIVE_USER = "RECEIVE_USER";
+var RECEIVE_ALL_USERS = "RECEIVE_ALL_USERS";
 
 var receiveUser = function receiveUser(user) {
   return {
     type: RECEIVE_USER,
     user: user
+  };
+};
+
+var receiveAllUsers = function receiveAllUsers(users) {
+  return {
+    type: RECEIVE_ALL_USERS,
+    users: users
   };
 }; // Thunk action creators
 
@@ -170,6 +180,13 @@ var fetchUser = function fetchUser(userId) {
   return function (dispatch) {
     return _util_user_util__WEBPACK_IMPORTED_MODULE_0__["fetchUser"](userId).then(function (user) {
       return dispatch(receiveUser(user));
+    });
+  };
+};
+var fetchUsers = function fetchUsers() {
+  return function (dispatch) {
+    return _util_user_util__WEBPACK_IMPORTED_MODULE_0__["fetchUsers"]().then(function (users) {
+      return dispatch(receiveAllUsers(users));
     });
   };
 };
@@ -192,6 +209,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _session_signup_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./session/signup_container */ "./frontend/components/session/signup_container.jsx");
 /* harmony import */ var _session_login_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./session/login_container */ "./frontend/components/session/login_container.jsx");
 /* harmony import */ var _user_show_user_show_container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./user_show/user_show_container */ "./frontend/components/user_show/user_show_container.jsx");
+/* harmony import */ var _user_show_users_index_container__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./user_show/users_index_container */ "./frontend/components/user_show/users_index_container.jsx");
+
 
 
 
@@ -201,17 +220,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (function () {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
-    path: "/",
+    path: "/login",
     component: _session_login_container__WEBPACK_IMPORTED_MODULE_4__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/signup",
     component: _session_signup_container__WEBPACK_IMPORTED_MODULE_3__["default"]
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_2__["ProtectedRoute"], {
+    exact: true,
+    path: "/users",
+    component: _user_show_users_index_container__WEBPACK_IMPORTED_MODULE_6__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_2__["ProtectedRoute"], {
     exact: true,
     path: "/users/:userId",
     component: _user_show_user_show_container__WEBPACK_IMPORTED_MODULE_5__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
-    to: "/"
+    to: "/login"
   })));
 });
 
@@ -337,8 +360,13 @@ var Login = /*#__PURE__*/function (_React$Component) {
       password: '',
       openModal: false
     };
+    _this.demoState = {
+      email: 'demo',
+      password: 'demo1234'
+    };
     _this.handleInput = _this.handleInput.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.handleDemo = _this.handleDemo.bind(_assertThisInitialized(_this));
     _this.showModal = _this.showModal.bind(_assertThisInitialized(_this));
     _this.hideModal = _this.hideModal.bind(_assertThisInitialized(_this));
     return _this;
@@ -360,8 +388,20 @@ var Login = /*#__PURE__*/function (_React$Component) {
 
       e.preventDefault();
       this.props.login(this.state).then(function () {
-        return _this3.props.props.history.push('/feed');
-      });
+        return _this3.props.history.push("/users/");
+      }); // Use this for logging into a show page immediately
+      // .then(response => this.props.history.push(`/users/${response.currentUser.user.id}`))
+    }
+  }, {
+    key: "handleDemo",
+    value: function handleDemo(e) {
+      var _this4 = this;
+
+      e.preventDefault();
+      this.props.login(this.demoState).then(function () {
+        return _this4.props.history.push("/users/");
+      }); // Use this for logging into a show page immediately
+      // .then(response => this.props.history.push(`/users/${response.currentUser.user.id}`))
     }
   }, {
     key: "showModal",
@@ -411,8 +451,12 @@ var Login = /*#__PURE__*/function (_React$Component) {
       }, "Log In")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "forgot-account-anchor"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: ""
+        href: "#"
       }, "Forgot account?")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "demo-account-anchor"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        onClick: this.handleDemo
+      }, "Demo Account")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "border-below-anchor"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "login-create-account-button"
@@ -532,9 +576,10 @@ var Signup = /*#__PURE__*/function (_React$Component) {
       var _this2 = this;
 
       e.preventDefault();
-      this.props.signup(this.state).then(function (response) {
-        return _this2.props.history.push("/users/".concat(response.currentUser.user.id));
-      });
+      this.props.signup(this.state).then(function () {
+        return _this2.props.history.push("/users/");
+      }); // Use this for logging into a show page immediately
+      // .then(response => this.props.history.push(`/users/${response.currentUser.user.id}`))
     }
   }, {
     key: "handleInput",
@@ -682,6 +727,7 @@ var UserShow = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "user's show"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.currentUser.firstName)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.props.logout
       }, "Logout"));
@@ -734,6 +780,145 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 /***/ }),
 
+/***/ "./frontend/components/user_show/users_index.jsx":
+/*!*******************************************************!*\
+  !*** ./frontend/components/user_show/users_index.jsx ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _users_index_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./users_index_item */ "./frontend/components/user_show/users_index_item.jsx");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+var UsersIndex = /*#__PURE__*/function (_React$Component) {
+  _inherits(UsersIndex, _React$Component);
+
+  var _super = _createSuper(UsersIndex);
+
+  function UsersIndex() {
+    _classCallCheck(this, UsersIndex);
+
+    return _super.apply(this, arguments);
+  }
+
+  _createClass(UsersIndex, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchUsers();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      if (this.props.users.length < 2) {
+        return '';
+      } else {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "All users"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.props.users.map(function (user) {
+          debugger;
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_users_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
+            user: user
+          });
+        })));
+      }
+    }
+  }]);
+
+  return UsersIndex;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (UsersIndex);
+
+/***/ }),
+
+/***/ "./frontend/components/user_show/users_index_container.jsx":
+/*!*****************************************************************!*\
+  !*** ./frontend/components/user_show/users_index_container.jsx ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _user_show__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./user_show */ "./frontend/components/user_show/user_show.jsx");
+/* harmony import */ var _actions_user_actions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/user_actions.js */ "./frontend/actions/user_actions.js");
+/* harmony import */ var _users_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./users_index */ "./frontend/components/user_show/users_index.jsx");
+
+
+
+
+
+var mapStateToProps = function mapStateToProps(state) {
+  // debugger;
+  return {
+    users: Object.values(state.entities.users)
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    fetchUsers: function fetchUsers(users) {
+      return dispatch(Object(_actions_user_actions_js__WEBPACK_IMPORTED_MODULE_2__["fetchUsers"])(users));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_users_index__WEBPACK_IMPORTED_MODULE_3__["default"]));
+
+/***/ }),
+
+/***/ "./frontend/components/user_show/users_index_item.jsx":
+/*!************************************************************!*\
+  !*** ./frontend/components/user_show/users_index_item.jsx ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+
+
+var UsersIndexItem = function UsersIndexItem(props) {
+  // debugger
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Hi ", props.user.firstName, " ", props.user.lastName, "; this is your email: ", props.user.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/users/".concat(props.user.id)
+  }, "Check out your page!"));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (UsersIndexItem);
+
+/***/ }),
+
 /***/ "./frontend/facebook_clone.jsx":
 /*!*************************************!*\
   !*** ./frontend/facebook_clone.jsx ***!
@@ -763,20 +948,18 @@ document.addEventListener('DOMContentLoaded', function () {
   if (window.currentUser) {
     var preloadedState = {
       session: {
-        id: window.currentUser.id
+        id: window.currentUser.user.id
       },
       entities: {
-        users: _defineProperty({}, window.currentUser.id, window.currentUser)
+        users: _defineProperty({}, window.currentUser.user.id, window.currentUser.user)
       }
     };
     store = Object(_store_store__WEBPACK_IMPORTED_MODULE_3__["default"])(preloadedState);
     delete window.currentUser;
   } else {
     store = Object(_store_store__WEBPACK_IMPORTED_MODULE_3__["default"])();
-  } // const store = configureStore();
-  // TESTING
-  // window.currentUser = current_user
-  // 
+  } // TESTING
+  // debugger
 
 
   var root = document.getElementById('root');
@@ -892,6 +1075,9 @@ var usersReducer = function usersReducer() {
   Object.freeze(oldState);
 
   switch (action.type) {
+    case _actions_user_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ALL_USERS"]:
+      return Object.assign({}, action.users);
+
     case _actions_user_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_USER"]:
       return Object.assign({}, oldState, _defineProperty({}, action.user.user.id, action.user.user));
 
@@ -1068,18 +1254,18 @@ var logout = function logout() {
 /*!************************************!*\
   !*** ./frontend/util/user_util.js ***!
   \************************************/
-/*! exports provided: fetchUser */
+/*! exports provided: fetchUsers, fetchUser */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUsers", function() { return fetchUsers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUser", function() { return fetchUser; });
-// export const fetchUsers = users => (
-//   $.ajax({
-//     url: '/api/users',
-//     data: { users }
-//   })
-// )
+var fetchUsers = function fetchUsers() {
+  return $.ajax({
+    url: '/api/users'
+  });
+};
 var fetchUser = function fetchUser(userId) {
   return $.ajax({
     url: "/api/users/".concat(userId)

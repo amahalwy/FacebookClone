@@ -16,7 +16,10 @@ class Signup extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.signup(this.state)
-      .then(response => this.props.history.push(`/users/${response.currentUser.user.id}`))
+    .then(() => this.props.history.push(`/users/`))
+    
+    // Use this for logging into a show page immediately
+    // .then(response => this.props.history.push(`/users/${response.currentUser.user.id}`))
   }
 
   handleInput(f) {

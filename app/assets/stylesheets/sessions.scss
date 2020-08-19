@@ -26,7 +26,7 @@
   padding: 10px;
   border-radius: 5px;
   width: 320px;
-  height: 280px;
+  height: 320px;
   box-shadow: 
     0 0  0 2px rgb(255,255,255),
     0.3em 0.3em 1em rgba(0,0,0,0.3);  
@@ -69,23 +69,24 @@
   height: 40px;
 }
 
-.login-button > button:hover,
-.login-create-account-button > button:hover,
-.signup-button > button:hover {
-  cursor: pointer;
-}
-
 // Anchor 
-.forgot-account-anchor { 
+.forgot-account-anchor,
+.demo-account-anchor { 
   margin: 20px;
 }
 
-.forgot-account-anchor > a {
+.forgot-account-anchor > a,
+.demo-account-anchor > a {
   text-decoration: none;
   color: blue;
   display: flex;
   justify-content: center;
 }
+
+a:hover, button:hover {
+  cursor: pointer;
+}
+
 
 // Border
 .border-below-anchor {

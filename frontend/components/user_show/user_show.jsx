@@ -8,6 +8,7 @@ class UserShow extends React.Component {
   }
 
   render() {
+    debugger
     return (
       
       <div>
@@ -58,7 +59,9 @@ class UserShow extends React.Component {
                 <div>Dividor line</div>
                 <div>Rest of stuff
                   <div>Ul list maybe? of buttons to click</div>
-                  <div>Buttons to click on</div>   Edit profile, eye thing, search, etc */}
+                  <div>Buttons to click on</div>           */}
+                  
+                  {/* Edit profile, eye thing, search, etc  */}
                   
                 {/* </div>
               </div>

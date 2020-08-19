@@ -2,6 +2,7 @@ class Api::UsersController < ApplicationController
 
   def index
     @users = User.all
+    render :index, status: 201
   end
 
   def create

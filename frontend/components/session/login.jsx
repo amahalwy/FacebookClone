@@ -10,8 +10,13 @@ class Login extends React.Component {
       password: '',
       openModal: false
     };
+    this.demoState = {
+      email: 'demo',
+      password: 'demo1234'
+    }
     this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDemo = this.handleDemo.bind(this);
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
   }
@@ -23,7 +28,19 @@ class Login extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.login(this.state)
-      .then(() => this.props.props.history.push('/feed'));
+      .then(() => this.props.history.push(`/users/`))
+
+      // Use this for logging into a show page immediately
+      // .then(response => this.props.history.push(`/users/${response.currentUser.user.id}`))
+  }
+
+  handleDemo(e) {
+    e.preventDefault();
+    this.props.login(this.demoState)
+      .then(() => this.props.history.push(`/users/`))
+
+      // Use this for logging into a show page immediately
+      // .then(response => this.props.history.push(`/users/${response.currentUser.user.id}`))
   }
 
   showModal(e) {
@@ -77,8 +94,12 @@ class Login extends React.Component {
               <button onClick={this.handleSubmit}>Log In</button>
             </div>
             <div className='forgot-account-anchor'>
-              <a href="">Forgot account?</a>
+              <a href="#">Forgot account?</a>
             </div>
+            <div className='demo-account-anchor'>
+              <a onClick={this.handleDemo}>Demo Account</a>
+            </div>
+
             <div className='border-below-anchor'></div>
 
 
