@@ -13,31 +13,36 @@ export default ({ currentUser, logout }) => {
 
   return (
     <header className="nav-bar">
-      <h1>NavBar</h1>
+      {/* <h1>NavBar</h1> */}
+
+      {/* <h1>{display}</h1> */}
+
+
       {/* styled with display flex */}
-      {/* <div>Logo/search
-        <a></a>
+      <div className='navbar-search'>
+        <a>Logo</a>
         <div>
-          icon
           search bar
         </div>
       </div>
-      <div>Main
-        <ul>Display flex, icon items
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
+      <div className='navbar-main'>
+        <ul className='navbar-main-ul'>
+          <li>Home</li>
+          <li>Watch</li>
+          <li>Marketplace</li>
+          <li>Groups</li>
+          <li>Gaming</li>
         </ul>
       </div>
-      <div>Profile buttons, display flex
-        <a>Profile</a>
-        <a>Create</a>
-        <a>Messenger</a>
-        <a>Notifications</a>
-        <a>Dropdown</a>
-      </div> */}
+      <div className='navbar-menu'>
+        <h3>Welcome {currentUser.email}!</h3>
+        <button>Profile</button>
+        <button>Create</button>
+        <button>Messenger</button>
+        <button>Notifications</button>
+        <button>Dropdown</button>
+        <button onClick={logout}>Logout</button>
+      </div>
     </header>
   )
 }

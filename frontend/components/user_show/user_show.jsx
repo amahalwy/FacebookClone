@@ -1,4 +1,5 @@
 import React from 'react';
+import NavBarContainer from '../navbar/navbar_container';
 
 class UserShow extends React.Component {
 
@@ -14,6 +15,7 @@ class UserShow extends React.Component {
       return (
         
         <div>
+          <NavBarContainer />
             <h1>user's show</h1>
           <strong><p>{this.props.user.firstName}</p></strong>
           <button onClick={this.props.logout}>Logout</button>

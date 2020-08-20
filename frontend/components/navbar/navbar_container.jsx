@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import NavBar from './navbar';
 import { logout } from '../../actions/session';
 
-const mapStateToProps = (state, ownProps) => {
-  // debugger
+const mapStateToProps = state => {
+  debugger
   return {
-    currentUser: state.entities.users[ownProps.match.params.userId]
+    currentUser: state.entities.users[state.session.id]
   }
 };
 

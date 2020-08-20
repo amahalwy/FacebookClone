@@ -22,7 +22,8 @@ export default () => (
       <ProtectedRoute exact path='/users/:userId' component={UserShowContainer} />
 
 
-      {/* Need to redirect to / if not logged in, else /users if logged in */}
+      {/* Need to redirect to /users if the id is invalid */}
+
       <Redirect to="/users" />
     </Switch>
   </div>

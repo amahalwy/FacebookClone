@@ -1,0 +1,23 @@
+// Place all the styles related to the Users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  border-bottom: 1px solid rgb(221, 223, 226);
+  box-shadow: 0px 1px 6px rgba(0, 0, 0, .2);;
+}
+
+.navbar-search {
+  display: flex;
+}
+
+.navbar-main-ul {
+  display: flex;
+}
+
+.navbar-menu {
+  display: flex;
+}

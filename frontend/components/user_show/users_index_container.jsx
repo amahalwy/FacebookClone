@@ -13,8 +13,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  fetchUsers: users => dispatch(fetchUsers(users)),
-  logout: () => dispatch(logout())
+  fetchUsers: users => dispatch(fetchUsers(users))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(UsersIndex);
