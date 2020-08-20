@@ -16,7 +16,7 @@ class UsersIndex extends React.Component {
   render() {
     
     
-    debugger;
+    // debugger;
     
     if (this.props.users.length < 2) {
       return '';

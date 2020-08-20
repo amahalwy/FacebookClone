@@ -4,7 +4,7 @@ import NavBar from './navbar';
 import { logout } from '../../actions/session';
 
 const mapStateToProps = state => {
-  debugger
+  // debugger
   return {
     currentUser: state.entities.users[state.session.id]
   }

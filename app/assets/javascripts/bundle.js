@@ -332,7 +332,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state) {
-  debugger;
+  // debugger
   return {
     currentUser: state.entities.users[state.session.id]
   };
@@ -932,8 +932,7 @@ var UsersIndex = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      debugger;
-
+      // debugger;
       if (this.props.users.length < 2) {
         return '';
       } else {
