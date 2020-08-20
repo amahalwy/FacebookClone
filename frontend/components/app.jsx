@@ -5,6 +5,7 @@ import SignupContainer from './session/signup_container'
 import LoginContainer from './session/login_container';
 import UserShowContainer from './user_show/user_show_container';
 import UsersIndexContainer from './user_show/users_index_container';
+import NavBarContainer from './navbar/navbar_container';
 
 export default () => (
   <div>
@@ -14,17 +15,15 @@ export default () => (
     {/* Auth route for login */}
 
     {/* Everything else protected */}
-
-
-      <Route exact path='/login' component={LoginContainer} />
+      {/* / should be auth route maybe??? */}
+      <AuthRoute exact path='/login' component={LoginContainer} />
       <Route path='/signup' component={SignupContainer} />
       <ProtectedRoute exact path='/users' component={UsersIndexContainer} />
       <ProtectedRoute exact path='/users/:userId' component={UserShowContainer} />
-      {/* <ProtectedRoute path="/users/" component={UserShowContainer} /> */}
 
-      {/* Catch all redirect */}
-      {/* Either redirect to feed/profile page if logged in */}
-      <Redirect to="/login" />
+
+      {/* Need to redirect to / if not logged in, else /users if logged in */}
+      <Redirect to="/users" />
     </Switch>
   </div>
 )

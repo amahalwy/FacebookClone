@@ -23,12 +23,12 @@ class Login extends React.Component {
 
   handleInput(f) {
     return e => this.setState({ [f]: e.currentTarget.value });
-  }
+  }    
 
   handleSubmit(e) {
     e.preventDefault();
     this.props.login(this.state)
-      .then(() => this.props.history.push(`/users/`))
+      .then(() => this.props.history.push(`/users`))
 
       // Use this for logging into a show page immediately
       // .then(response => this.props.history.push(`/users/${response.currentUser.user.id}`))
@@ -37,10 +37,10 @@ class Login extends React.Component {
   handleDemo(e) {
     e.preventDefault();
     this.props.login(this.demoState)
-      .then(() => this.props.history.push(`/users/`))
+      .then(() => this.props.history.push(`/users`))
 
       // Use this for logging into a show page immediately
-      // .then(response => this.props.history.push(`/users/${response.currentUser.user.id}`))
+      // .then(response =>   console.log(response))  //this.props.history.push(`/users/${response.currentUser.user.id}`))
   }
 
   showModal(e) {
@@ -67,7 +67,6 @@ class Login extends React.Component {
             <div>Last logged in user here</div>
             <div>Add account here</div>
           </div>
-
         </div>
 
         <div className="session-login-form">
@@ -93,9 +92,6 @@ class Login extends React.Component {
             <div className='login-button'>
               <button onClick={this.handleSubmit}>Log In</button>
             </div>
-            <div className='forgot-account-anchor'>
-              <a href="#">Forgot account?</a>
-            </div>
             <div className='demo-account-anchor'>
               <a onClick={this.handleDemo}>Demo Account</a>
             </div>
@@ -116,13 +112,13 @@ class Login extends React.Component {
 
         </div>
 
+
           <div >
               <Modal show={this.state.openModal} handleClose={this.hideModal} >
               <SignupContainer 
                 history={this.props.history}
               />
             </Modal>
-            
           </div>
 
       </div>

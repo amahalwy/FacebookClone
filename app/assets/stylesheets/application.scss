@@ -22,3 +22,7 @@ body {
 main {
   height: 100%;
 }
+
+button:hover, a:hover {
+  cursor: pointer;
+}

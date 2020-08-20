@@ -26,7 +26,7 @@
   padding: 10px;
   border-radius: 5px;
   width: 320px;
-  height: 320px;
+  height: 280px;
   box-shadow: 
     0 0  0 2px rgb(255,255,255),
     0.3em 0.3em 1em rgba(0,0,0,0.3);  
@@ -82,11 +82,6 @@
   display: flex;
   justify-content: center;
 }
-
-a:hover, button:hover {
-  cursor: pointer;
-}
-
 
 // Border
 .border-below-anchor {
