@@ -3,21 +3,97 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .nav-bar {
-  display: flex;
   justify-content: space-between;
   background-color: white;
   border-bottom: 1px solid rgb(221, 223, 226);
-  box-shadow: 0px 1px 6px rgba(0, 0, 0, .2);;
+  box-shadow: 0px 1px 6px rgba(0, 0, 0, .2);
+  height: 60px;
+}
+
+.navbar-search,
+.navbar-main-ul, 
+.navbar-menu,
+.nav-bar,
+.navbar-search-icon+input {
+  display: flex;
 }
 
 .navbar-search {
+  margin: 0px 10px;
+}
+
+.navbar-search-input {
+  margin-left: 50px;
+}
+
+
+.navbar-search-input {
+  height: 50%;
+  color: gray;
+  align-self: center;
+  margin-top: -20px;
+  // padding: 10px 0px;
+}
+
+.navbar-menu-user-profile-container {
+  display: flex;
+  margin: 10px 10px;
+  // align-content: center;
+}
+
+.navbar-menu-user-profile {
+  background-color: white;
+  align-self: center;
+  height: 100%;
+  padding: 2px 2px;
+}
+
+.navbar-menu-user-profile:hover {
+  background-color: rgb(221, 223, 226);
+  border-radius: 50px;
+}
+
+.navbar-menu-list-button {
+  display: flex;
+  margin-right: 5px;
+  align-content: center;
+}
+  
+.navbar-menu-create-post,
+.navbar-menu-users {
+  align-self: center;
+  padding: 10px 5px;
+  height: 20px;
+  width: 30px;
+  background-color: rgb(221, 223, 226);
+  margin-right: 5px;
+  border-radius: 30px;
+}
+
+.navbar-dropdown-list-div {
   display: flex;
 }
 
-.navbar-main-ul {
-  display: flex;
+.dropdown {
+  position: relative;
+  display: inline-block;
 }
 
-.navbar-menu {
-  display: flex;
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 260px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+  right: 0px;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.logout-button {
+  height: 40px;
 }

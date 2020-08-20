@@ -16,6 +16,7 @@ export default () => (
 
     {/* Everything else protected */}
       {/* / should be auth route maybe??? */}
+
       <AuthRoute exact path='/login' component={LoginContainer} />
       <Route path='/signup' component={SignupContainer} />
       <ProtectedRoute exact path='/users' component={UsersIndexContainer} />
