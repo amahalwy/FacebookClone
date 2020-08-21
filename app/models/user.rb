@@ -8,6 +8,14 @@ class User < ApplicationRecord
 
   after_initialize :ensure_session_token
 
+  has_many :friend_requests_as_requestor,
+    foreign_key: :requestor_id,
+    class_name: :FriendRequest
+
+  has_many :friend_requests_as_receiver,
+    foreign_key: :receiver_id,
+    class_name: :FriendRequest
+
   def password=(password)
     @password = password
     self.password_digest = BCrypt::Password.create(@password)
