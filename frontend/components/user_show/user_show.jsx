@@ -16,74 +16,107 @@ class UserShow extends React.Component {
         
         <div>
           <NavBarContainer />
-            <h1>user's show</h1>
-          <strong><p>{this.props.user.firstName}</p></strong>
-          <button onClick={this.props.logout}>Logout</button>
-          
-          <div>Everything
-            {/* Insert navbar component here */}
-            <nav>NavBar</nav>
 
-            <main className='users-show-main'>Main section
+          
+          <section className='cover-photo-section'>
+
+            <div className='cover-photo-container'>   {/* Cover photo section */}
+              <img className='cover-photo-img' src="" alt="" />
+
+
+              <div className='profile-pic-container'> {/* Profile picture */}
+                <img src="" alt="Default Profile pic" />
+                <div className='camera-circle'>
+                  <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="camera" className="camera-icon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M512 144v288c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V144c0-26.5 21.5-48 48-48h88l12.3-32.9c7-18.7 24.9-31.1 44.9-31.1h125.5c20 0 37.9 12.4 44.9 31.1L376 96h88c26.5 0 48 21.5 48 48zM376 288c0-66.2-53.8-120-120-120s-120 53.8-120 120 53.8 120 120 120 120-53.8 120-120zm-32 0c0 48.5-39.5 88-88 88s-88-39.5-88-88 39.5-88 88-88 88 39.5 88 88z"></path></svg>
+                  <input type="file" className='button-file'/>
+                </div>
+              </div>
+
+              <button className='edit-cover-photo'> {/* Edit cover photo button */}
+                <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="camera" className="camera-icon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M512 144v288c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V144c0-26.5 21.5-48 48-48h88l12.3-32.9c7-18.7 24.9-31.1 44.9-31.1h125.5c20 0 37.9 12.4 44.9 31.1L376 96h88c26.5 0 48 21.5 48 48zM376 288c0-66.2-53.8-120-120-120s-120 53.8-120 120 53.8 120 120 120 120-53.8 120-120zm-32 0c0 48.5-39.5 88-88 88s-88-39.5-88-88 39.5-88 88-88 88 39.5 88 88z"></path></svg>
+                <input type="file" className='button-file' />
+                  Edit cover photo
+              </button>
+            </div>
+
+
+            <div className='under-cover-info-container' >     {/* Under cover section */}
+              <div className='under-cover-info'>
+
+                <div className='user-name'>{this.props.user.firstName} {this.props.user.lastName}</div>
+                <div className='user-bio'>
+                  "Some user bio"
+                  <button className='edit-bio-button'>Edit</button>
+                </div>
+
+                {/* This can be a form/modal??? */}
+                {/* <form action=""></form> */}
+                
+              </div>
+
+
+              <div className='under-cover-main'>
+
+                <nav className='under-cover-left-nav'>
+
+                  <div className='under-cover-timeline'>
+                    <span>Timeline</span>
+                  </div>
+                  <div className='under-cover-others under-cover-hover'>
+                    <span>About</span>
+                  </div>
+                  <div className='under-cover-others under-cover-hover'>
+                    <span>Friends</span>
+                  </div>
+                  <div className='under-cover-others under-cover-hover'>
+                    <span>Photos</span>
+                  </div>
+                  <div className='under-cover-others under-cover-hover'>
+                    <span>Archive</span>
+                  </div>
+                  <div className='under-cover-more under-cover-hover'>
+                    <span className='more'>More
+                      <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sort-down" class="more-icon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41z"></path></svg>
+                    </span>
+                  </div>
+
+                </nav>
+                
+                <nav className='under-cover-right-nav'>  
+                  <div><button>{/* svg */} Edit profile</button></div>
+                  <div><button>eye thingy</button></div>
+                  <div><button>magnifying glass</button></div>
+                  <div><button>...</button></div>
+                </nav>
+
+              </div>
+
+
+            </div>
+            
+          </section>
+
+          {/* Profle body section */}
+          <section>
+
             
 
 
 
 
-              
-              {/* Beginning of cover photo section */}
-              <div className='users-show-cover-photo-and-bio'>
 
-                <div>
-                  <div className='cover-photo-container'>Actual cover photo
+            {/* End of cover photo section */}
+            {/* Edit profile, eye thing, search, etc */}
 
-                    <div className='profile-photo-container'>Profile photo
-                        <div className='profile-photo'>Image of the profile picture</div>
-                      <a>Upload photo button</a>
-                    </div>
-                    <div className='cover-photo'>Image of the cover photo tag</div>
-              
-
-                  </div>
-                </div>
-
-                {/* <div>Edit cover photos
-                  <div>Hold the stuff
-                    <div>Div for the actual content
-                      <div>Photo Icon</div>
-                      <div>Edit cover photo button
-                        <button></button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div>Add Bio and name section
-                  <div>Name of user
-                    <h1></h1>
-                  </div>
-                  <div>
-                    <a>Add bio</a>
-                  </div>
-                </div> */}
-
-              </div>
-
-
-
-
-              {/* End of cover photo section */}
-
-              <div>Bottom part of the site
+            {/* <div>Bottom part of the site
 
                 <div>
                   <div>Dividor line</div>
                   <div>Rest of stuff
                     <div>Ul list maybe? of buttons to click</div>
-                    <div>Buttons to click on</div>          
-                    
-                    {/* Edit profile, eye thing, search, etc  */}
-                    
+                    <div>Buttons to click on</div>       
+
+                   
                   </div>
                 </div>
 
@@ -118,10 +151,11 @@ class UserShow extends React.Component {
 
                 </div>
                 
-              </div>
-            </main>
+              </div> */}
 
-          </div>
+          </section>
+          {/* <h1>User's Show Page</h1>
+          <p>To log out now, hover over the 'X' top right and click logout button</p> */}
         </div>
       )
     }
@@ -129,3 +163,5 @@ class UserShow extends React.Component {
 }
 
 export default UserShow;
+
+

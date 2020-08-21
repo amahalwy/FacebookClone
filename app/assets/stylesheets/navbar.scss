@@ -18,23 +18,83 @@
   display: flex;
 }
 
+
+// Beginning of navbar search css
 .navbar-search {
-  margin: 0px 10px;
+  margin-left: 10px;
+}
+
+.navbar-search-icon {
+  margin-top: 5px;
 }
 
 .navbar-search-input {
-  margin-left: 50px;
-}
-
-
-.navbar-search-input {
-  height: 50%;
+  margin-left: 30px;
+  height: 80%;
   color: gray;
   align-self: center;
-  margin-top: -20px;
-  // padding: 10px 0px;
+  margin-top: -35px;
+  border-radius: 20px;
+  // border-color: white;
+}
+// End of navbar search css
+
+
+
+
+// Beginning of navbar main css
+
+.navbar-main-li {
+  margin: 3px 5px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  height: 50px;
+  width: 116px;
+
 }
 
+.navbar-main-home {
+  padding-bottom: 5px;
+  border-bottom: 3px solid rgb(27, 119, 242);
+  margin: 3px 0;
+}
+
+.navbar-main-home,
+.navbar-main-home-hover {
+  height: 100%;
+  width: 90%;
+  margin: 1px 0;
+}
+
+.navbar-main-home-hover:hover {
+  background-color: rgb(240, 242, 245);
+  border-radius: 10px;
+}
+
+.nav-house {
+  color: #2d88ff;
+  margin: 10px 36px 8px 36px;
+  left: 2px;
+}
+
+.nav-linkedin {
+  color: rgb(177, 179, 185);
+  margin: 10px 38px;
+  top: 2px;
+}
+
+.nav-github {
+  color: rgb(177, 179, 185);
+  margin: 10px 38px;
+  top: 2px;
+}
+
+
+// End of navbar main css
+
+
+
+// Beginning of navbar menu css
 .navbar-menu-user-profile-container {
   display: flex;
   margin: 10px 10px;
@@ -60,7 +120,8 @@
 }
   
 .navbar-menu-create-post,
-.navbar-menu-users {
+.navbar-menu-users,
+.navbar-menu-dropdown-click {
   align-self: center;
   padding: 10px 5px;
   height: 20px;
@@ -69,7 +130,14 @@
   margin-right: 5px;
   border-radius: 30px;
 }
+// End of navbar menu css
 
+
+
+
+
+
+// Beginning of navbar dropdown css
 .navbar-dropdown-list-div {
   display: flex;
 }
@@ -97,3 +165,4 @@
 .logout-button {
   height: 40px;
 }
+// End of navbar dropdown css
