@@ -7,7 +7,6 @@ import UsersIndex from './users_index';
 const mapStateToProps = state => {
   // debugger;
   return {
-
     users: Object.values(state.entities.users)
   }
 }

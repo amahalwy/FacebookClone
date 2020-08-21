@@ -108,6 +108,10 @@
   padding: 2px 2px;
 }
 
+.navbar-menu-user-profile a {
+  color: black;
+}
+
 .navbar-menu-user-profile:hover {
   background-color: rgb(221, 223, 226);
   border-radius: 50px;
@@ -130,6 +134,29 @@
   margin-right: 5px;
   border-radius: 30px;
 }
+
+.navbar-menu-create-post a {
+  position: absolute;
+  right: 125px;
+  font-size: 20px;
+}
+
+.navbar-menu-users svg {
+  position: absolute;
+  top: 16px;
+  right: 66px;
+}
+
+.dropdown-icon {
+  position: absolute;
+  right: 31px;
+  top: 12px;
+}
+
+.dropdown-icon svg {
+  color: black;
+}
+
 // End of navbar menu css
 
 
