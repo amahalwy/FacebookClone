@@ -9,3 +9,11 @@ export const fetchUser = userId => (
     url: `/api/users/${userId}`
   })
 )
+
+export const postFriendRequest = (requestor_id, receiver_id) => (
+  $.ajax({
+    url: '/api/friend_requests',
+    method: 'POST',
+    data: {friend_request: { requestor_id, receiver_id }}
+  })
+)

@@ -19,21 +19,28 @@ class UsersIndex extends React.Component {
       return '';
     } else {
       return (
-        <div className='users-index-div'>
+        <div>
           <NavBarContainer/>
-          <h1>All users</h1>
-          <ul>
-            {
-              this.props.users.map(user => {
-                return (
-                  <UsersIndexItem
-                  key={user.id}
-                  user={user}
-                  />
-                )
-              })
-            }
-          </ul>
+          <div className='users-index-div'>
+            {/* WILL INSERT FRIENDING COMPONENT HERE */}
+            <div className='left-users-menu'>USER REQUESTS AND MENU</div>
+            <div className='feed-container'>FEED</div>
+            <div className='users-list'>
+              <h1>All users</h1>
+              <ul>
+                {
+                  this.props.users.map(user => {
+                    return (
+                      <UsersIndexItem
+                      key={user.id}
+                      user={user}
+                      />
+                    )
+                  })
+                }
+              </ul>
+            </div>
+          </div>
         </div>
       )
     }

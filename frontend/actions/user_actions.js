@@ -17,10 +17,14 @@ const receiveAllUsers = users => ({
 
 export const fetchUser = userId => dispatch => (
   APIUtil.fetchUser(userId)
-  .then(user => dispatch(receiveUser(user)))
+    .then(user => dispatch(receiveUser(user)))
 )
 
 export const fetchUsers = () => dispatch => (
   APIUtil.fetchUsers()
-  .then(users => dispatch(receiveAllUsers(users)))
+    .then(users => dispatch(receiveAllUsers(users)))
+)
+
+export const postFriendRequest = (requestor_id, receiver_id) => dispatch => (
+  APIUtil.postFriendRequest(requestor_id, receiver_id)
 )

@@ -1,0 +1,22 @@
+
+
+
+.users-index-div {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.left-users-menu {
+  width: 20%;
+}
+
+.feed-container {
+  height: 100%;
+  width: 40%;
+  // justify-self: center;
+}
+
+.users-list {
+  width: 20%;
+}
