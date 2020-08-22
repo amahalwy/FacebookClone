@@ -81,7 +81,13 @@ class UserShow extends React.Component {
                 <nav className='under-cover-right-nav'>  
                   <div className='right-nav-divs'>
                   {/* Need branching logic here; will be done using a friends association? */}   
-                  <ProfileButton user={this.props.user} currentUser={this.props.currentUser}/>
+                  
+                  <ProfileButton 
+                    user={this.props.user} 
+                    currentUser={this.props.currentUser}
+                    postFriendRequest={this.props.postFriendRequest}
+                  />
+
                   </div>
                   <div className='right-nav-divs'>
                     <button className='right-nav-buttons'>

@@ -1,16 +1,12 @@
 import React from 'react';
 import UsersIndexItem from './users_index_item';
 import NavBarContainer from '../navbar/navbar_container';
+import FriendRequestsContainer from '../friend_requests/friend_requests_container';
 
 class UsersIndex extends React.Component {
-  // If need to hold currentUser, could do it in the constructor to pass into navbar
-  // constructor(props) {
-  //   super(props);
-  //   this.currentUser = this.props.users[0];
-  // }
-  
   componentDidMount() {
     this.props.fetchUsers();
+    // this.props.fetchUserFriendships();
   }
 
   render() {
@@ -23,8 +19,24 @@ class UsersIndex extends React.Component {
           <NavBarContainer/>
           <div className='users-index-div'>
             {/* WILL INSERT FRIENDING COMPONENT HERE */}
-            <div className='left-users-menu'>USER REQUESTS AND MENU</div>
-            <div className='feed-container'>FEED</div>
+            <div className='left-users-menu'>USER REQUESTS AND MENU
+              <FriendRequestsContainer 
+              
+              />
+            </div>
+            <div className='feed-container'>FEED
+
+
+              {/* Testing profilebutton functionality */}
+              {/* 
+              
+                Should be able to click on the button and do some action
+
+              */}
+
+
+
+            </div>
             <div className='users-list'>
               <h1>All users</h1>
               <ul>

@@ -14,7 +14,6 @@ const receiveAllUsers = users => ({
 })
 
 // Thunk action creators
-
 export const fetchUser = userId => dispatch => (
   APIUtil.fetchUser(userId)
     .then(user => dispatch(receiveUser(user)))
@@ -23,8 +22,4 @@ export const fetchUser = userId => dispatch => (
 export const fetchUsers = () => dispatch => (
   APIUtil.fetchUsers()
     .then(users => dispatch(receiveAllUsers(users)))
-)
-
-export const postFriendRequest = (requestor_id, receiver_id) => dispatch => (
-  APIUtil.postFriendRequest(requestor_id, receiver_id)
 )

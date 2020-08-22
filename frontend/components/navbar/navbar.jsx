@@ -3,14 +3,6 @@ import { Link } from 'react-router-dom';
 
 export default ({ currentUser, logout }) => {
 
-  const display = currentUser ? (
-    <div>
-      <h3>Welcome {currentUser.email}!</h3>
-      <button onClick={logout}>Logout</button>
-    </div>
-  ) : ''
-
-
   return (
     <nav className="nav-bar">
     
@@ -32,10 +24,7 @@ export default ({ currentUser, logout }) => {
             // onChange={}
             />
           </div>
-
         </div>
-          
-        {/* </div> */}
       </div>
 
       <div className='navbar-main'>
@@ -84,7 +73,7 @@ export default ({ currentUser, logout }) => {
 
         <div className='navbar-menu-user-profile-container'>
           <div className='navbar-menu-user-profile' >
-            <Link to={`/users/${currentUser.id}`}>{currentUser.firstName} </Link>
+            <Link to={`/users/${currentUser.id}`}>{currentUser.firstName}</Link>
           </div>
         </div>
 

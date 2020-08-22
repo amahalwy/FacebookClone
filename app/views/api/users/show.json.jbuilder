@@ -5,8 +5,4 @@ json.user do
   json.email @user.email
 end
 
-json.requests_received do
-  json.array! @user.friend_requests_as_receiver.each do |request|
-    json.requestor_id request.requestor_id
-  end
-end
+
