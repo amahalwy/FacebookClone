@@ -218,6 +218,12 @@
   padding: 10px 16px 10px 16px;
 }
 
+.right-nav-buttons:hover {
+  background-color: rgb(216, 218, 222);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
 .edit-profile-button {
   display: flex;
   font-weight: 600;

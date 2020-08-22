@@ -4,12 +4,9 @@ import { fetchUsers } from '../../actions/user_actions';
 import { logout } from '../../actions/session';
 import UsersIndex from './users_index';
 
-const mapStateToProps = state => {
-  // debugger;
-  return {
-    users: Object.values(state.entities.users)
-  }
-}
+const mapStateToProps = state => ({
+  users: Object.values(state.entities.users)
+})
 
 const mapDispatchToProps = dispatch => ({
   fetchUsers: users => dispatch(fetchUsers(users))
