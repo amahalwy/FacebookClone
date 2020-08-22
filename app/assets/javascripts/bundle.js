@@ -90,39 +90,46 @@
 /*!****************************************************!*\
   !*** ./frontend/actions/friend_request_actions.js ***!
   \****************************************************/
-/*! exports provided: RECEIVE_FRIENDSHIP, RECEIVE_USER_FRIENDSHIPS, postFriendRequest, fetchUserFriendships */
+/*! exports provided: RECEIVE_FRIEND_REQUEST, RECEIVE_USER_FRIEND_REQUESTS, POST_REQUEST, postFriendRequest, fetchUserFriendships */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_FRIENDSHIP", function() { return RECEIVE_FRIENDSHIP; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_USER_FRIENDSHIPS", function() { return RECEIVE_USER_FRIENDSHIPS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_FRIEND_REQUEST", function() { return RECEIVE_FRIEND_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_USER_FRIEND_REQUESTS", function() { return RECEIVE_USER_FRIEND_REQUESTS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "POST_REQUEST", function() { return POST_REQUEST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postFriendRequest", function() { return postFriendRequest; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUserFriendships", function() { return fetchUserFriendships; });
 /* harmony import */ var _util_user_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/user_util */ "./frontend/util/user_util.js");
 
-var RECEIVE_FRIENDSHIP = "RECEIVE_FRIENDSHIP";
-var RECEIVE_USER_FRIENDSHIPS = "RECEIVE_ALL_FRIENDSHIPS";
+var RECEIVE_FRIEND_REQUEST = "RECEIVE_FRIEND_REQUEST";
+var RECEIVE_USER_FRIEND_REQUESTS = "RECEIVE_USER_FRIEND_REQUESTS";
+var POST_REQUEST = "POST_REQUEST";
 
-var createFriendship = function createFriendship(payload) {
+var createFriendRequest = function createFriendRequest(payload) {
   return {
-    type: RECEIVE_FRIENDSHIP,
+    type: RECEIVE_FRIEND_REQUEST,
     payload: payload
   };
 };
 
 var receiveUsersFriendships = function receiveUsersFriendships(userId) {
   return {
-    type: RECEIVE_USER_FRIENDSHIPS,
+    type: RECEIVE_USER_FRIEND_REQUESTS,
     userId: userId
   };
-}; // Thunk action creators
+}; // const createFriendship = payload => ({
+//   type: POST_FRIENDSHIP,
+//   payload
+// })
+// Thunk action creators
 
 
 var postFriendRequest = function postFriendRequest(requestor_id, receiver_id) {
   return function (dispatch) {
+    // debugger
     _util_user_util__WEBPACK_IMPORTED_MODULE_0__["postFriendRequest"](requestor_id, receiver_id).then(function (payload) {
-      return dispatch(createFriendship(payload));
+      return dispatch(createFriendRequest(payload));
     });
   };
 };
@@ -132,7 +139,7 @@ var fetchUserFriendships = function fetchUserFriendships(userId) {
       return dispatch(receiveUsersFriendships(friend_requests));
     });
   };
-};
+}; // export const postFriendship
 
 /***/ }),
 
@@ -406,17 +413,15 @@ var FriendRequestsIndex = /*#__PURE__*/function (_React$Component) {
   _createClass(FriendRequestsIndex, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      // debugger;
-      this.props.fetchUserFriendships(this.props.currentUser.id); // debugger;
+      this.props.fetchUserFriendships(this.props.currentUser.id);
     }
   }, {
     key: "render",
     value: function render() {
-      // debugger;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.props.friendRequests.map(function (request) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.props.friendRequests.map(function (request, i) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_friend_request_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           requestor: request.requestor,
-          key: request.id
+          key: i
         });
       })));
     }
@@ -1705,15 +1710,15 @@ var friendshipRequestsReducer = function friendshipRequestsReducer() {
   Object.freeze(oldState);
 
   switch (action.type) {
-    case _actions_friend_request_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_FRIENDSHIP"]:
+    case _actions_friend_request_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_FRIEND_REQUEST"]:
       return Object.assign({}, oldState, {
         friendshipRequest: {
-          requestor_id: action.payload.requestor.id,
-          receiver_id: action.payload.receiver.id
+          requestor_id: action.payload.request.requestor_id,
+          receiver_id: action.payload.request.receiver_id
         }
       });
 
-    case _actions_friend_request_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_USER_FRIENDSHIPS"]:
+    case _actions_friend_request_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_USER_FRIEND_REQUESTS"]:
       return Object.assign({}, oldState, {
         requests: action.userId.requests
       });

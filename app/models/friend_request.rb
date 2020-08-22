@@ -3,5 +3,5 @@ class FriendRequest < ApplicationRecord
   belongs_to :receiver, class_name: :User
 
   validates :requestor_id, uniqueness: { scope: :receiver_id,
-    message: "cannot request more than once" }
+    message: "Cannot request more than once" }
 end

@@ -7,6 +7,7 @@ const FriendRequestItem = props =>{
     <li>
       <div className='request-user-card'>
         <Link to={`/users/${props.requestor.id}`}>{props.requestor.firstName} {props.requestor.lastName}</Link>
+        {/* <button onClick={}>Accept Request</button> */}
       </div>
     </li>
   )

@@ -9,8 +9,10 @@ class Api::FriendRequestsController < ApplicationController
     if @friend_request.save
       @requestor = User.find_by(id: params[:friend_request][:requestor_id])
       @receiver = User.find_by(id: params[:friend_request][:receiver_id])
-      render :show
+      render 'api/friend_requests/show'
       # render 'api/users/show', status: 201
+    else
+      # Give some errors pls
     end
   end
 
