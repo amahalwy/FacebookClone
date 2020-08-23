@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import FriendRequestsIndex from './friend_requests_index';
-import { fetchUserFriendships } from '../../actions/friend_request_actions';
+import { fetchUserFriendRequests } from '../../actions/friend_request_actions';
 
 const mapStateToProps = state => {
 
@@ -11,7 +11,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  fetchUserFriendships: userId => dispatch(fetchUserFriendships(userId))
+  fetchUserFriendRequests: userId => dispatch(fetchUserFriendRequests(userId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(FriendRequestsIndex)

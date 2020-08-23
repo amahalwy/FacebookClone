@@ -19,8 +19,10 @@ export const postFriendRequest = (requestor_id, receiver_id) => (
   })
 )
 
-export const fetchUserFriendships = userId => (
+export const fetchUserFriendRequests = userId => (
   $.ajax({
     url: `/api/users/${userId}/friend_requests`
   })
 )
+
+// export const postFriendShip

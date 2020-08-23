@@ -6,7 +6,6 @@ import FriendRequestsContainer from '../friend_requests/friend_requests_containe
 class UsersIndex extends React.Component {
   componentDidMount() {
     this.props.fetchUsers();
-    // this.props.fetchUserFriendships();
   }
 
   render() {
@@ -20,6 +19,7 @@ class UsersIndex extends React.Component {
           <div className='users-index-div'>
             {/* WILL INSERT FRIENDING COMPONENT HERE */}
             <div className='left-users-menu'>USER REQUESTS AND MENU
+            
               <FriendRequestsContainer 
               
               />

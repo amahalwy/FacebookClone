@@ -1,16 +1,17 @@
 class Api::FriendshipsController < ApplicationController
 
-  # FRIENDSHIP STUFF
   def create
-    # debugger
-    @friendship = current_user.friendships.build(friend_id: params[:friend_id])
+    # @friendship = current_user.friendships.build(friend_id: params[:friend_id])
+    @friendship = Friendship.new(req_params)
+    debugger
     if @friendship.save
-      # flash[:notice] = "Added friend."
-      debugger
+      @requestor = User.find_by(id: params[:friendship][:user_id])
+      @receiver = User.find_by(id: params[:friendship][:friend_id])
+      render 'api/friendships/show'
       
     else
       # flash[:notice] = "Unable to add friend."
-      debugger
+      # debugger
       
     end
   end

@@ -9,7 +9,7 @@ const createFriendRequest = payload => ({
   payload
 })
 
-const receiveUsersFriendships = userId => ({
+const receiveUsersFriendRequests = userId => ({
   type: RECEIVE_USER_FRIEND_REQUESTS,
   userId
 })
@@ -28,9 +28,9 @@ export const postFriendRequest = (requestor_id, receiver_id) => dispatch => {
     .then(payload => dispatch(createFriendRequest(payload)))
 }
 
-export const fetchUserFriendships = userId => dispatch => (
-  APIUtil.fetchUserFriendships(userId)
-    .then(friend_requests => dispatch(receiveUsersFriendships(friend_requests)))
+export const fetchUserFriendRequests = userId => dispatch => (
+  APIUtil.fetchUserFriendRequests(userId)
+    .then(friend_requests => dispatch(receiveUsersFriendRequests(friend_requests)))
 )
 
 // export const postFriendship

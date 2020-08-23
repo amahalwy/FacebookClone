@@ -10,7 +10,6 @@ class ProfileButton extends React.Component {
 
   handleRequest(e) {
     e.preventDefault();
-    // debugger;
     this.props.postFriendRequest(this.props.currentUser.id, this.props.user.id);
   }
 
@@ -37,15 +36,6 @@ class ProfileButton extends React.Component {
           </button>
       )
     }
-
-
-
-    
-
-
-
-
-
   }
 }
 
