@@ -370,7 +370,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    friendRequests: Object.values(state.entities.friendRequests.requests || {}),
+    friendRequests: Object.values(state.entities.friendRequests || {}),
     currentUser: state.entities.users[state.session.id]
   };
 };
@@ -438,11 +438,13 @@ var FriendRequestsIndex = /*#__PURE__*/function (_React$Component) {
   _createClass(FriendRequestsIndex, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      debugger;
       this.props.fetchUserFriendRequests(this.props.currentUser.id);
     }
   }, {
     key: "render",
     value: function render() {
+      debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.props.friendRequests.map(function (request, i) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_friend_request_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           requestor: request.requestor,
@@ -1743,9 +1745,7 @@ var friendRequestsReducer = function friendRequestsReducer() {
       });
 
     case _actions_friend_request_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_USER_FRIEND_REQUESTS"]:
-      return Object.assign({}, oldState, {
-        requests: action.userId.requests
-      });
+      return Object.assign({}, oldState, action.userId);
 
     default:
       return oldState;
@@ -1775,6 +1775,10 @@ var friendshipsReducer = function friendshipsReducer() {
 
   switch (action.type) {
     case _actions_friendship_actions__WEBPACK_IMPORTED_MODULE_0__["POST_FRIENDSHIP"]:
+      return Object.assign({}, oldState, {
+        friendship: {}
+      });
+
     default:
       return oldState;
   }

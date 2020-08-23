@@ -12,7 +12,7 @@ const friendRequestsReducer = (oldState = {}, action) => {
         friendshipRequest: {requestor_id: action.payload.request.requestor_id, receiver_id: action.payload.request.receiver_id} 
       })
     case RECEIVE_USER_FRIEND_REQUESTS:
-      return Object.assign({}, oldState, {requests: action.userId.requests}) 
+      return Object.assign({}, oldState, action.userId) 
     default:
       return oldState;
   }

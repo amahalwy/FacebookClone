@@ -5,7 +5,7 @@ import { fetchUserFriendRequests } from '../../actions/friend_request_actions';
 const mapStateToProps = state => {
 
   return {
-    friendRequests: Object.values(state.entities.friendRequests.requests || {}),
+    friendRequests: Object.values(state.entities.friendRequests || {}),
     currentUser: state.entities.users[state.session.id],
   }
 }
