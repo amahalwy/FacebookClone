@@ -6,7 +6,6 @@ class Api::FriendRequestsController < ApplicationController
 
   def create
     @friend_request = FriendRequest.new(req_params)
-    debugger
     if @friend_request.save
       @requestor = User.find_by(id: params[:friend_request][:requestor_id])
       @receiver = User.find_by(id: params[:friend_request][:receiver_id])

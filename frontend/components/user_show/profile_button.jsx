@@ -14,7 +14,6 @@ class ProfileButton extends React.Component {
   }
 
   render() {
-    // debugger
     if (this.props.user.id === this.props.currentUser.id) {
       return (
         <button className='edit-profile-button'>
@@ -25,7 +24,6 @@ class ProfileButton extends React.Component {
         </button>
       )
     } else {
-      // debugger
       return (
         // On click is going to max loop; need to get the currentUser and the user who's page we're on in there
         <button className='edit-profile-button' onClick={this.handleRequest} >

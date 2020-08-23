@@ -1,13 +1,13 @@
 import { 
-    RECEIVE_FRIEND_REQUEST,
+    POST_FRIEND_REQUEST,
     RECEIVE_USER_FRIEND_REQUESTS,
   } from '../actions/friend_request_actions'
 
 // FRIENDSHIP STUFF
-const friendshipRequestsReducer = (oldState = {}, action) => {
+const friendRequestsReducer = (oldState = {}, action) => {
   Object.freeze(oldState);
   switch (action.type) {
-    case RECEIVE_FRIEND_REQUEST:
+    case POST_FRIEND_REQUEST:
       return Object.assign({}, oldState, {
         friendshipRequest: {requestor_id: action.payload.request.requestor_id, receiver_id: action.payload.request.receiver_id} 
       })
@@ -18,4 +18,4 @@ const friendshipRequestsReducer = (oldState = {}, action) => {
   }
 }
 
-export default friendshipRequestsReducer;
+export default friendRequestsReducer;
