@@ -4,7 +4,6 @@ import {
     REMOVE_FRIEND_REQUEST
   } from '../actions/friend_request_actions'
 
-// FRIENDSHIP STUFF
 const friendRequestsReducer = (oldState = {}, action) => {
   Object.freeze(oldState);
   switch (action.type) {
@@ -15,7 +14,9 @@ const friendRequestsReducer = (oldState = {}, action) => {
     case RECEIVE_USER_FRIEND_REQUESTS:
       return Object.assign({}, oldState, action.userId); 
     case REMOVE_FRIEND_REQUEST:
-      
+      let newState = Object.assign({}, oldState);
+      delete newState[action.requestId];
+      return newState;
     default:
       return oldState;
   }

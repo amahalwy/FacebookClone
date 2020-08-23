@@ -4,14 +4,19 @@ import { Link } from 'react-router-dom';
 class FriendRequestItem extends React.Component {
   constructor(props) {
     super(props)
-    this.handleClick = this.handleClick.bind(this);
+    this.handleAccept = this.handleAccept.bind(this);
+    this.handleDecline = this.handleDecline.bind(this);
   }
 
-  handleClick(){
-    debugger;
+  handleAccept(){
     this.props.postFriendship(this.props.currentUser.id, this.props.requestor.id);
+    this.props.postFriendship(this.props.requestor.id, this.props.currentUser.id );
+    // this.props.deleteFriendRequest()
     // Need to delete the request afterwards!!
-    debugger;
+  }
+
+  handleDecline(){
+    // this.props.deleteFriendRequest()
   }
 
   render(){
@@ -19,7 +24,8 @@ class FriendRequestItem extends React.Component {
       <li>
         <div className='request-user-card'>
           <Link to={`/users/${this.props.requestor.id}`}>{this.props.requestor.firstName} {this.props.requestor.lastName}</Link>
-          <button onClick={this.handleClick}>Accept Request</button>
+          <button onClick={this.handleAccept}>Accept Request</button>
+          <button onClick={this.handleDecline}>Decline Request</button>
         </div>
       </li>
     )

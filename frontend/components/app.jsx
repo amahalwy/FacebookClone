@@ -18,13 +18,14 @@ export default () => (
       {/* / should be auth route maybe??? */}
 
       <AuthRoute exact path='/login' component={LoginContainer} />
-      <Route path='/signup' component={SignupContainer} />
+      {/* <Route path='/signup' component={SignupContainer} /> */}
       <ProtectedRoute exact path='/users' component={UsersIndexContainer} />
       <ProtectedRoute exact path='/users/:userId' component={UserShowContainer} />
 
 
       {/* Need to redirect to /users if the id is invalid */}
-
+      
+      {/* Catch all */}
       <Redirect to="/users" />
     </Switch>
   </div>

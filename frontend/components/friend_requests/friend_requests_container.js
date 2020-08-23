@@ -14,7 +14,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   fetchUserFriendRequests: userId => dispatch(fetchUserFriendRequests(userId)),
   postFriendship: (user_id, friend_id) => dispatch(postFriendship((user_id, friend_id))),
-  // delete
+  deleteFriendRequest: requestId => dispatch(deleteFriendRequest(requestId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(FriendRequestsIndex)

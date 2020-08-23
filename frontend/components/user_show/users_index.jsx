@@ -4,6 +4,7 @@ import NavBarContainer from '../navbar/navbar_container';
 import FriendRequestsContainer from '../friend_requests/friend_requests_container';
 
 class UsersIndex extends React.Component {
+
   componentDidMount() {
     this.props.fetchUsers();
   }

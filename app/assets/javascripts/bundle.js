@@ -341,9 +341,6 @@ __webpack_require__.r(__webpack_exports__);
     exact: true,
     path: "/login",
     component: _session_login_container__WEBPACK_IMPORTED_MODULE_4__["default"]
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    path: "/signup",
-    component: _session_signup_container__WEBPACK_IMPORTED_MODULE_3__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_2__["ProtectedRoute"], {
     exact: true,
     path: "/users",
@@ -407,17 +404,21 @@ var FriendRequestItem = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, FriendRequestItem);
 
     _this = _super.call(this, props);
-    _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
+    _this.handleAccept = _this.handleAccept.bind(_assertThisInitialized(_this));
+    _this.handleDecline = _this.handleDecline.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(FriendRequestItem, [{
-    key: "handleClick",
-    value: function handleClick() {
-      debugger;
-      this.props.postFriendship(this.props.currentUser.id, this.props.requestor.id); // Need to delete the request afterwards!!
-
-      debugger;
+    key: "handleAccept",
+    value: function handleAccept() {
+      this.props.postFriendship(this.props.currentUser.id, this.props.requestor.id);
+      this.props.postFriendship(this.props.requestor.id, this.props.currentUser.id); // this.props.deleteFriendRequest()
+      // Need to delete the request afterwards!!
+    }
+  }, {
+    key: "handleDecline",
+    value: function handleDecline() {// this.props.deleteFriendRequest()
     }
   }, {
     key: "render",
@@ -427,8 +428,10 @@ var FriendRequestItem = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/users/".concat(this.props.requestor.id)
       }, this.props.requestor.firstName, " ", this.props.requestor.lastName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: this.handleClick
-      }, "Accept Request")));
+        onClick: this.handleAccept
+      }, "Accept Request"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.handleDecline
+      }, "Decline Request")));
     }
   }]);
 
@@ -471,8 +474,20 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     postFriendship: function postFriendship(user_id, friend_id) {
       return dispatch(Object(_actions_friendship_actions__WEBPACK_IMPORTED_MODULE_3__["postFriendship"])((user_id, friend_id)));
-    } // delete
+    },
+    deleteFriendRequest: function (_deleteFriendRequest) {
+      function deleteFriendRequest(_x) {
+        return _deleteFriendRequest.apply(this, arguments);
+      }
 
+      deleteFriendRequest.toString = function () {
+        return _deleteFriendRequest.toString();
+      };
+
+      return deleteFriendRequest;
+    }(function (requestId) {
+      return dispatch(deleteFriendRequest(requestId));
+    })
   };
 };
 
@@ -531,18 +546,20 @@ var FriendRequestsIndex = /*#__PURE__*/function (_React$Component) {
   _createClass(FriendRequestsIndex, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.fetchUserFriendRequests(this.props.currentUser.id); // debugger;
+      this.props.fetchUserFriendRequests(this.props.currentUser.id);
+      debugger;
     }
   }, {
     key: "render",
     value: function render() {
       var _this = this;
 
-      // debugger
+      debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.props.friendRequests.map(function (request, i) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_friend_request_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           currentUser: _this.props.currentUser,
           postFriendship: _this.props.postFriendship,
+          request: request,
           requestor: request.requestor,
           key: i
         });
@@ -1824,7 +1841,7 @@ var entitiesReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_friend_request_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/friend_request_actions */ "./frontend/actions/friend_request_actions.js");
- // FRIENDSHIP STUFF
+
 
 var friendRequestsReducer = function friendRequestsReducer() {
   var oldState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -1844,6 +1861,10 @@ var friendRequestsReducer = function friendRequestsReducer() {
       return Object.assign({}, oldState, action.userId);
 
     case _actions_friend_request_actions__WEBPACK_IMPORTED_MODULE_0__["REMOVE_FRIEND_REQUEST"]:
+      var newState = Object.assign({}, oldState);
+      delete newState[action.requestId];
+      return newState;
+
     default:
       return oldState;
   }
