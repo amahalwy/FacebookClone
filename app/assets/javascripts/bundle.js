@@ -1993,15 +1993,17 @@ var logout = function logout() {
 /*!************************************!*\
   !*** ./frontend/util/user_util.js ***!
   \************************************/
-/*! exports provided: fetchUsers, fetchUser, postFriendRequest, fetchUserFriendRequests */
+/*! exports provided: fetchUsers, fetchUser, fetchUserFriendRequests, postFriendRequest, deleteFriendRequest, postFriendShip */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUsers", function() { return fetchUsers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUser", function() { return fetchUser; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postFriendRequest", function() { return postFriendRequest; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUserFriendRequests", function() { return fetchUserFriendRequests; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postFriendRequest", function() { return postFriendRequest; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteFriendRequest", function() { return deleteFriendRequest; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postFriendShip", function() { return postFriendShip; });
 var fetchUsers = function fetchUsers() {
   return $.ajax({
     url: '/api/users'
@@ -2013,6 +2015,11 @@ var fetchUser = function fetchUser(userId) {
   });
 }; // FRIENDSHIP STUFF
 
+var fetchUserFriendRequests = function fetchUserFriendRequests(userId) {
+  return $.ajax({
+    url: "/api/users/".concat(userId, "/friend_requests")
+  });
+};
 var postFriendRequest = function postFriendRequest(requestor_id, receiver_id) {
   return $.ajax({
     url: '/api/friend_requests',
@@ -2025,11 +2032,24 @@ var postFriendRequest = function postFriendRequest(requestor_id, receiver_id) {
     }
   });
 };
-var fetchUserFriendRequests = function fetchUserFriendRequests(userId) {
+var deleteFriendRequest = function deleteFriendRequest(requestId) {
   return $.ajax({
-    url: "/api/users/".concat(userId, "/friend_requests")
+    url: "/api/friend_requests/".concat(requestId),
+    method: 'DELETE'
   });
-}; // export const postFriendShip
+};
+var postFriendShip = function postFriendShip(user_id, friend_id) {
+  return $.ajax({
+    url: '/api/friendships',
+    method: 'POST',
+    data: {
+      friendship: {
+        user_id: user_id,
+        friend_id: friend_id
+      }
+    }
+  });
+};
 
 /***/ }),
 

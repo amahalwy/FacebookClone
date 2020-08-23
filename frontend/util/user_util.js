@@ -11,6 +11,12 @@ export const fetchUser = userId => (
 )
 
 // FRIENDSHIP STUFF
+export const fetchUserFriendRequests = userId => (
+  $.ajax({
+    url: `/api/users/${userId}/friend_requests`
+  })
+)
+
 export const postFriendRequest = (requestor_id, receiver_id) => (
   $.ajax({
     url: '/api/friend_requests',
@@ -19,10 +25,17 @@ export const postFriendRequest = (requestor_id, receiver_id) => (
   })
 )
 
-export const fetchUserFriendRequests = userId => (
+export const deleteFriendRequest = requestId => (
   $.ajax({
-    url: `/api/users/${userId}/friend_requests`
+    url: `/api/friend_requests/${requestId}`,
+    method: 'DELETE'
   })
 )
 
-// export const postFriendShip
+export const postFriendShip = (user_id, friend_id) => (
+  $.ajax({
+    url: '/api/friendships',
+    method: 'POST',
+    data: { friendship: { user_id, friend_id } }
+  })
+)
