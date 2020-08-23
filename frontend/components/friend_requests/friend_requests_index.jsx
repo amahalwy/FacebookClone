@@ -7,18 +7,20 @@ class FriendRequestsIndex extends React.Component {
   }
 
   componentDidMount() {
-    debugger
     this.props.fetchUserFriendRequests(this.props.currentUser.id);
+    // debugger;
   }
 
   render() {
-    debugger
+    // debugger
     return (
       <div>
         <ul>
         {this.props.friendRequests.map((request, i) => {
           return (
             <FriendRequestItem
+              currentUser={this.props.currentUser}
+              postFriendship={this.props.postFriendship}
               requestor={request.requestor}
               key={i}
             />
