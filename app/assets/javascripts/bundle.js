@@ -203,6 +203,73 @@ var fetchFriendships = function fetchFriendships(userId) {
 
 /***/ }),
 
+/***/ "./frontend/actions/post_actions.js":
+/*!******************************************!*\
+  !*** ./frontend/actions/post_actions.js ***!
+  \******************************************/
+/*! exports provided: RECEIVE_POST, RECEIVE_POSTS, POST_POST, fetchPost, fetchPosts, postPost */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_POST", function() { return RECEIVE_POST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_POSTS", function() { return RECEIVE_POSTS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "POST_POST", function() { return POST_POST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchPost", function() { return fetchPost; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchPosts", function() { return fetchPosts; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postPost", function() { return postPost; });
+/* harmony import */ var _util_posts_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/posts_util */ "./frontend/util/posts_util.js");
+
+var RECEIVE_POST = "RECEIVE_POST";
+var RECEIVE_POSTS = "RECEIVE_POSTS";
+var POST_POST = "POST_POST";
+
+var receivePost = function receivePost(postId) {
+  return {
+    type: RECEIVE_POST,
+    postId: postId
+  };
+};
+
+var receivePosts = function receivePosts(posts) {
+  return {
+    type: RECEIVE_POSTS,
+    posts: posts
+  };
+};
+
+var createPost = function createPost(post) {
+  return {
+    type: POST_POST,
+    post: post
+  };
+}; // Thunks
+
+
+var fetchPost = function fetchPost(postId) {
+  return function (dispatch) {
+    return _util_posts_util__WEBPACK_IMPORTED_MODULE_0__["fetchPost"](postId).then(function (post) {
+      return dispatch(receivePost(post));
+    });
+  };
+};
+var fetchPosts = function fetchPosts() {
+  return function (dispatch) {
+    return _util_posts_util__WEBPACK_IMPORTED_MODULE_0__["fetchPosts"]().then(function (posts) {
+      return dispatch(receivePosts(posts));
+    });
+  };
+};
+var postPost = function postPost(post) {
+  return function (dispatch) {
+    return _util_posts_util__WEBPACK_IMPORTED_MODULE_0__["postPost"](post).then(function (post) {
+      return dispatch(receivePost(post));
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/session.js":
 /*!*************************************!*\
   !*** ./frontend/actions/session.js ***!
@@ -1955,6 +2022,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _friendships_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./friendships_reducer */ "./frontend/reducers/friendships_reducer.js");
 /* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./users_reducer */ "./frontend/reducers/users_reducer.js");
 /* harmony import */ var _friend_request_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./friend_request_reducer */ "./frontend/reducers/friend_request_reducer.js");
+/* harmony import */ var _posts_reducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./posts_reducer */ "./frontend/reducers/posts_reducer.js");
+
 
 
 
@@ -1962,8 +2031,8 @@ __webpack_require__.r(__webpack_exports__);
 var entitiesReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   users: _users_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
   friendRequests: _friend_request_reducer__WEBPACK_IMPORTED_MODULE_3__["default"],
-  friendships: _friendships_reducer__WEBPACK_IMPORTED_MODULE_1__["default"] // comments: commentsReducer,
-  // posts: postsReducer
+  friendships: _friendships_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  posts: _posts_reducer__WEBPACK_IMPORTED_MODULE_4__["default"] // comments: commentsReducer,
 
 });
 /* harmony default export */ __webpack_exports__["default"] = (entitiesReducer);
@@ -2045,6 +2114,42 @@ var friendshipsReducer = function friendshipsReducer() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (friendshipsReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/posts_reducer.js":
+/*!********************************************!*\
+  !*** ./frontend/reducers/posts_reducer.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_post_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/post_actions */ "./frontend/actions/post_actions.js");
+
+
+var postsReducer = function postsReducer() {
+  var oldState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(oldState);
+
+  switch (action.type) {
+    case _actions_post_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_POST"]:
+      return Object.assign({}, oldState);
+
+    case _actions_post_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_POSTS"]:
+      return Object.assign({});
+
+    case _actions_post_actions__WEBPACK_IMPORTED_MODULE_0__["POST_POST"]:
+      return Object.assign({});
+
+    default:
+      return oldState;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (postsReducer);
 
 /***/ }),
 
@@ -2272,6 +2377,37 @@ var postFriendship = function postFriendship(user_id, friend_id) {
 var fetchFriendships = function fetchFriendships(userId) {
   return $.ajax({
     url: "/api/users/".concat(userId, "/friendships")
+  });
+};
+
+/***/ }),
+
+/***/ "./frontend/util/posts_util.js":
+/*!*************************************!*\
+  !*** ./frontend/util/posts_util.js ***!
+  \*************************************/
+/*! exports provided: fetchPosts, fetchPost, postPost */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchPosts", function() { return fetchPosts; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchPost", function() { return fetchPost; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postPost", function() { return postPost; });
+var fetchPosts = function fetchPosts() {
+  return $.ajax({
+    url: '/api/posts'
+  });
+};
+var fetchPost = function fetchPost(postId) {
+  return $.ajax({
+    url: "/api/posts/".concat(postId)
+  });
+};
+var postPost = function postPost(post) {
+  return $.ajax({
+    url: '/api/posts',
+    method: 'POST'
   });
 };
 
