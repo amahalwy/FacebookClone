@@ -1,5 +1,6 @@
 import {connect} from 'react-redux'
-// import 
+import PostsIndex from './posts_index';
+import { fetchPosts, fetchPost } from '../../actions/post_actions';
 
 const mapStateToProps = state => ({
   currentUser: state.entities.users[state.session.id],
@@ -7,7 +8,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-
+  fetchPosts: posts => dispatch(fetchPosts(posts)),
+  fetchPost: postId => dispatch(fetchPosts(postId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostsIndex);

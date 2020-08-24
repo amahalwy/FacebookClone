@@ -1,5 +1,5 @@
 import React from 'react'
-import FriendshipItem from './friendship_item';
+import FriendshipItem from './friendship_index_item';
 
 class FriendshipIndex extends React.Component {
   constructor(props) {
