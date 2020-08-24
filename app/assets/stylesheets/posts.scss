@@ -1,3 +1,26 @@
 // Place all the styles related to the posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.post-card {
+  border: 1px solid rgb(225, 227, 229);
+  border-radius: 5px;
+  width: 35%;
+  height: 100%;
+  margin: 20px auto;
+}
+
+.post-header {
+  border: 1px solid black;
+  margin: 5px;
+}
+
+.post-header-top {
+  display: flex;
+}
+
+.post-header-info {
+  display: flex;
+  justify-content: space-between;
+}
+

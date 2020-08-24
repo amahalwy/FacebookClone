@@ -4,7 +4,6 @@ import PostIndexItem from './post_index_item';
 class PostsIndex extends React.Component {
 
   componentDidMount(){
-    debugger
     this.props.fetchPosts();
   }
 

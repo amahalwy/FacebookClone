@@ -1,30 +1,46 @@
 import React from 'react'
 
 class PostIndexItem extends React.Component {
+
+  // props will hold the post itself, can access some information about it
+
   render() {
+    const post = this.props.post;
     return (
-      <div>
+      <div className='post-card'>
+
         <div className='post-top'>
           <div className='post-header'>
-            <div className='post-header-left'>
+
+            <div className='post-header-top'>
+
               <div className='post-header-img'>
                 <img src="" alt=""/>
               </div>
+
               <div className='post-header-info'>
-                <p className='post-header-name'>Name</p>
+                <p className='post-header-name'>Name/ {post.body}</p>
                 <p className='post-header-date'>Date posted</p>
+                <button>... icon</button>
               </div>
+
             </div>
-            <div className='post-header-right'>
-              ... icon
-            </div>
+
+
           </div>
+
           <div className='post-body'>
+
+          </div>
+          <div className='post-photo'>
 
           </div>
         </div>
 
-        <div className='post-buttons'></div>
+        <div className='post-buttons'>
+
+        </div>
+
         <div className='post-comment'>
           <div className='comment-container'>
             <img src="" alt=""/>
@@ -36,6 +52,7 @@ class PostIndexItem extends React.Component {
             </form>
           </div>
         </div>
+
       </div>
     )
   }

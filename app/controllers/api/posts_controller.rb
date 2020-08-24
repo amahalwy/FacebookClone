@@ -16,10 +16,6 @@ class Api::PostsController < ApplicationController
     
   end
 
-  def method_name
-    
-  end
-
   # def method_name
     
   # end
