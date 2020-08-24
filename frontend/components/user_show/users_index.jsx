@@ -2,6 +2,7 @@ import React from 'react';
 import UsersIndexItem from './users_index_item';
 import NavBarContainer from '../navbar/navbar_container';
 import FriendRequestsContainer from '../friend_requests/friend_requests_container';
+import FriendshipContainer from '../friendships/friendship_container';
 
 class UsersIndex extends React.Component {
 
@@ -25,33 +26,26 @@ class UsersIndex extends React.Component {
               
               />
             </div>
-            <div className='feed-container'>FEED
-
-
-              {/* Testing profilebutton functionality */}
-              {/* 
-              
-                Should be able to click on the button and do some action
-
-              */}
-
-
-
-            </div>
-            <div className='users-list'>
-              <h1>All users</h1>
-              <ul>
+            <div className='feed-container'>All Users
+            <ul>
                 {
                   this.props.users.map(user => {
                     return (
                       <UsersIndexItem
-                      key={user.id}
-                      user={user}
+                        key={user.id}
+                        user={user}
                       />
                     )
                   })
                 }
               </ul>
+
+            </div>
+            <div className='friends-list'>
+              <h1>Contacts</h1>
+              <FriendshipContainer
+
+              />
             </div>
           </div>
         </div>

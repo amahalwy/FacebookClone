@@ -10,10 +10,15 @@ class Api::FriendRequestsController < ApplicationController
       @requestor = User.find_by(id: params[:friend_request][:requestor_id])
       @receiver = User.find_by(id: params[:friend_request][:receiver_id])
       render 'api/friend_requests/show'
-      # render 'api/users/show', status: 201
     else
       # Render error here on not being able to request again
     end
+  end
+
+  def destroy
+    @friend_request = FriendRequest.find_by(id: params[:id])
+    @friend_request.destroy
+    render 'api/users/show'
   end
 
   private
@@ -21,3 +26,5 @@ class Api::FriendRequestsController < ApplicationController
     params.require(:friend_request).permit(:requestor_id, :receiver_id)
   end
 end
+
+# TODO => errors, rendering correct page on delete

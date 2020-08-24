@@ -8,11 +8,14 @@ class FriendRequestsIndex extends React.Component {
 
   componentDidMount() {
     this.props.fetchUserFriendRequests(this.props.currentUser.id);
-    debugger;
+  }
+
+  componentDidUpdate(){
+    // this.props.fetchUserFriendRequests(this.props.currentUser.id);
   }
 
   render() {
-    debugger
+    // debugger
     return (
       <div>
         <ul>
@@ -20,9 +23,9 @@ class FriendRequestsIndex extends React.Component {
           return (
             <FriendRequestItem
               currentUser={this.props.currentUser}
+              deleteFriendRequest={this.props.deleteFriendRequest}
               postFriendship={this.props.postFriendship}
               request={request}
-              requestor={request.requestor}
               key={i}
             />
           )

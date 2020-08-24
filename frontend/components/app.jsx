@@ -6,6 +6,7 @@ import LoginContainer from './session/login_container';
 import UserShowContainer from './user_show/user_show_container';
 import UsersIndexContainer from './user_show/users_index_container';
 import NavBarContainer from './navbar/navbar_container';
+// import PostsIndexContainer from 
 
 export default () => (
   <div>
@@ -21,6 +22,8 @@ export default () => (
       {/* <Route path='/signup' component={SignupContainer} /> */}
       <ProtectedRoute exact path='/users' component={UsersIndexContainer} />
       <ProtectedRoute exact path='/users/:userId' component={UserShowContainer} />
+      <ProtectedRoute exact path='/posts' component={PostsIndexContainer} />
+      {/* <ProtectedRoute exact path='/posts/:postId' component={UserShowContainer} /> */}
 
 
       {/* Need to redirect to /users if the id is invalid */}

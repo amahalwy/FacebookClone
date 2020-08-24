@@ -9,23 +9,22 @@ class FriendRequestItem extends React.Component {
   }
 
   handleAccept(){
-    this.props.postFriendship(this.props.currentUser.id, this.props.requestor.id);
-    this.props.postFriendship(this.props.requestor.id, this.props.currentUser.id );
-    // this.props.deleteFriendRequest()
-    // Need to delete the request afterwards!!
+    this.props.postFriendship(this.props.currentUser.id, this.props.request.requestor.id);
+    // this.props.deleteFriendRequest(this.props.request.requestId)
   }
 
   handleDecline(){
-    // this.props.deleteFriendRequest()
+    this.props.deleteFriendRequest(this.props.request.requestId)
   }
 
   render(){
+    // debugger
     return (
       <li>
         <div className='request-user-card'>
-          <Link to={`/users/${this.props.requestor.id}`}>{this.props.requestor.firstName} {this.props.requestor.lastName}</Link>
-          <button onClick={this.handleAccept}>Accept Request</button>
-          <button onClick={this.handleDecline}>Decline Request</button>
+          <Link to={`/users/${this.props.request.requestor.id}`}>{this.props.request.requestor.firstName} {this.props.request.requestor.lastName}</Link>
+          <button onClick={this.handleAccept} className='request-button'>Accept</button>
+          <button onClick={this.handleDecline} className='request-button'>Decline</button>
         </div>
       </li>
     )

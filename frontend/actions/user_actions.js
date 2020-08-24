@@ -20,7 +20,6 @@ export const fetchUser = userId => dispatch => (
 )
 
 export const fetchUsers = () => dispatch => (
-
     APIUtil.fetchUsers()
       .then(users => dispatch(receiveAllUsers(users)))
   )

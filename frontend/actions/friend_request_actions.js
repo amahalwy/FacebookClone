@@ -34,3 +34,5 @@ export const deleteFriendRequest = requestId => dispatch => (
   APIUtil.deleteFriendRequest(requestId)
     .then(() => dispatch(removeFriendRequest(requestId)))
 )
+
+// TODO fix naming of payloads

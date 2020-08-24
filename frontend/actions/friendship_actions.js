@@ -23,3 +23,5 @@ export const fetchFriendships = userId => dispatch => (
   APIUtil.fetchFriendships(userId)
     .then(userId => dispatch(receiveUsersFriendships(userId)))
 )
+
+// TODO fix naming of payloads

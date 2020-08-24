@@ -17,6 +17,26 @@
   // justify-self: center;
 }
 
-.users-list {
+.friends-list {
   width: 20%;
+}
+
+.friends-list > h1 {
+  margin: 20px 0px;
+}
+
+.friends-list li {
+  width: 200px; 
+  height: 24px;
+  padding: 5px 0px;
+}
+
+.friends-list li:hover {
+  background-color: rgb(221, 223, 226);
+}
+
+.user-profile-link {
+  height: 100%;
+  width: 200px;
+  padding: 20px 20px;
 }

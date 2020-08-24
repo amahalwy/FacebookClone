@@ -1,5 +1,6 @@
 @friend_requests.each do |request|
   json.set! request.id do
+    json.requestId request.id
     json.requestor do
       json.id request.requestor.id
       json.firstName request.requestor.first_name
