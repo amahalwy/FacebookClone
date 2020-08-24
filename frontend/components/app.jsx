@@ -22,7 +22,7 @@ export default () => (
       {/* <Route path='/signup' component={SignupContainer} /> */}
       <ProtectedRoute exact path='/users' component={UsersIndexContainer} />
       <ProtectedRoute exact path='/users/:userId' component={UserShowContainer} />
-      <ProtectedRoute exact path='/posts' component={PostsIndexContainer} />
+      {/* <ProtectedRoute exact path='/posts' component={PostsIndexContainer} /> */}
       {/* <ProtectedRoute exact path='/posts/:postId' component={UserShowContainer} /> */}
 
 

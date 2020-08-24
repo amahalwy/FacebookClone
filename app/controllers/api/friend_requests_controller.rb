@@ -18,7 +18,8 @@ class Api::FriendRequestsController < ApplicationController
   def destroy
     @friend_request = FriendRequest.find_by(id: params[:id])
     @friend_request.destroy
-    render 'api/users/show'
+    @friend_requests = FriendRequest.where(receiver_id: current_user.id)
+    render 'api/friend_requests/index'
   end
 
   private

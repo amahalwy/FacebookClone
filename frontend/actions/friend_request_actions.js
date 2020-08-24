@@ -4,14 +4,14 @@ export const POST_FRIEND_REQUEST = "POST_FRIEND_REQUEST";
 export const RECEIVE_USER_FRIEND_REQUESTS = "RECEIVE_USER_FRIEND_REQUESTS";
 export const REMOVE_FRIEND_REQUEST = "REMOVE_FRIEND_REQUEST";
 
-const createFriendRequest = payload => ({
+const createFriendRequest = request => ({
   type: POST_FRIEND_REQUEST,
-  payload
+  request
 })
 
-const receiveUsersFriendRequests = userId => ({
+const receiveUsersFriendRequests = requests => ({
   type: RECEIVE_USER_FRIEND_REQUESTS,
-  userId
+  requests
 })
 
 const removeFriendRequest = requestId => ({
@@ -22,17 +22,15 @@ const removeFriendRequest = requestId => ({
 // Thunk action creators
 export const postFriendRequest = (requestor_id, receiver_id) => dispatch => {
   APIUtil.postFriendRequest(requestor_id, receiver_id)
-    .then(payload => dispatch(createFriendRequest(payload)))
+    .then(request => dispatch(createFriendRequest(request)))
 }
 
 export const fetchUserFriendRequests = userId => dispatch => (
   APIUtil.fetchUserFriendRequests(userId)
-    .then(friend_requests => dispatch(receiveUsersFriendRequests(friend_requests)))
+    .then(requests => dispatch(receiveUsersFriendRequests(requests)))
 )
 
 export const deleteFriendRequest = requestId => dispatch => (
   APIUtil.deleteFriendRequest(requestId)
     .then(() => dispatch(removeFriendRequest(requestId)))
 )
-
-// TODO fix naming of payloads

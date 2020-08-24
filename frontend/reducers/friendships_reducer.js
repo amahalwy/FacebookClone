@@ -4,9 +4,9 @@ const friendshipsReducer = (oldState = {}, action) => {
   Object.freeze(oldState);
   switch (action.type) {
     case POST_FRIENDSHIP:
-      return Object.assign({}, oldState, {friendship: {} })
+      return Object.assign({}, oldState, action.friendship)
     case RECEIVE_USER_FRIENDSHIPS:
-      return Object.assign({}, oldState, action.userId)
+      return Object.assign({}, oldState, action.friendships)
     default:
       return oldState;
   }

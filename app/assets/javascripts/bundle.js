@@ -107,17 +107,17 @@ var POST_FRIEND_REQUEST = "POST_FRIEND_REQUEST";
 var RECEIVE_USER_FRIEND_REQUESTS = "RECEIVE_USER_FRIEND_REQUESTS";
 var REMOVE_FRIEND_REQUEST = "REMOVE_FRIEND_REQUEST";
 
-var createFriendRequest = function createFriendRequest(payload) {
+var createFriendRequest = function createFriendRequest(request) {
   return {
     type: POST_FRIEND_REQUEST,
-    payload: payload
+    request: request
   };
 };
 
-var receiveUsersFriendRequests = function receiveUsersFriendRequests(userId) {
+var receiveUsersFriendRequests = function receiveUsersFriendRequests(requests) {
   return {
     type: RECEIVE_USER_FRIEND_REQUESTS,
-    userId: userId
+    requests: requests
   };
 };
 
@@ -131,15 +131,15 @@ var removeFriendRequest = function removeFriendRequest(requestId) {
 
 var postFriendRequest = function postFriendRequest(requestor_id, receiver_id) {
   return function (dispatch) {
-    _util_friend_request_util__WEBPACK_IMPORTED_MODULE_0__["postFriendRequest"](requestor_id, receiver_id).then(function (payload) {
-      return dispatch(createFriendRequest(payload));
+    _util_friend_request_util__WEBPACK_IMPORTED_MODULE_0__["postFriendRequest"](requestor_id, receiver_id).then(function (request) {
+      return dispatch(createFriendRequest(request));
     });
   };
 };
 var fetchUserFriendRequests = function fetchUserFriendRequests(userId) {
   return function (dispatch) {
-    return _util_friend_request_util__WEBPACK_IMPORTED_MODULE_0__["fetchUserFriendRequests"](userId).then(function (friend_requests) {
-      return dispatch(receiveUsersFriendRequests(friend_requests));
+    return _util_friend_request_util__WEBPACK_IMPORTED_MODULE_0__["fetchUserFriendRequests"](userId).then(function (requests) {
+      return dispatch(receiveUsersFriendRequests(requests));
     });
   };
 };
@@ -149,7 +149,7 @@ var deleteFriendRequest = function deleteFriendRequest(requestId) {
       return dispatch(removeFriendRequest(requestId));
     });
   };
-}; // TODO fix naming of payloads
+};
 
 /***/ }),
 
@@ -171,32 +171,32 @@ __webpack_require__.r(__webpack_exports__);
 var POST_FRIENDSHIP = "POST_FRIENDSHIP";
 var RECEIVE_USER_FRIENDSHIPS = "RECEIVE_USER_FRIENDSHIPS";
 
-var createFriendship = function createFriendship(payload) {
+var createFriendship = function createFriendship(friendship) {
   return {
     type: POST_FRIENDSHIP,
-    payload: payload
+    friendship: friendship
   };
 };
 
-var receiveUsersFriendships = function receiveUsersFriendships(userId) {
+var receiveUsersFriendships = function receiveUsersFriendships(friendships) {
   return {
     type: RECEIVE_USER_FRIENDSHIPS,
-    userId: userId
+    friendships: friendships
   };
 }; // Thunk action creators
 
 
 var postFriendship = function postFriendship(user_id, friend_id) {
   return function (dispatch) {
-    return _util_friendship_util__WEBPACK_IMPORTED_MODULE_0__["postFriendship"](user_id, friend_id).then(function (payload) {
-      return dispatch(createFriendship(payload));
+    return _util_friendship_util__WEBPACK_IMPORTED_MODULE_0__["postFriendship"](user_id, friend_id).then(function (friendship) {
+      return dispatch(createFriendship(friendship));
     });
   };
 };
 var fetchFriendships = function fetchFriendships(userId) {
   return function (dispatch) {
-    return _util_friendship_util__WEBPACK_IMPORTED_MODULE_0__["fetchFriendships"](userId).then(function (userId) {
-      return dispatch(receiveUsersFriendships(userId));
+    return _util_friendship_util__WEBPACK_IMPORTED_MODULE_0__["fetchFriendships"](userId).then(function (friendships) {
+      return dispatch(receiveUsersFriendships(friendships));
     });
   };
 }; // TODO fix naming of payloads
@@ -417,10 +417,6 @@ __webpack_require__.r(__webpack_exports__);
     exact: true,
     path: "/users/:userId",
     component: _user_show_user_show_container__WEBPACK_IMPORTED_MODULE_5__["default"]
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_2__["ProtectedRoute"], {
-    exact: true,
-    path: "/posts",
-    component: PostsIndexContainer
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
     to: "/users"
   })));
@@ -484,7 +480,8 @@ var FriendRequestItem = /*#__PURE__*/function (_React$Component) {
   _createClass(FriendRequestItem, [{
     key: "handleAccept",
     value: function handleAccept() {
-      this.props.postFriendship(this.props.currentUser.id, this.props.request.requestor.id); // this.props.deleteFriendRequest(this.props.request.requestId)
+      this.props.postFriendship(this.props.currentUser.id, this.props.request.requestorId);
+      this.props.deleteFriendRequest(this.props.request.requestId);
     }
   }, {
     key: "handleDecline",
@@ -494,12 +491,11 @@ var FriendRequestItem = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      // debugger
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "request-user-card"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: "/users/".concat(this.props.request.requestor.id)
-      }, this.props.request.requestor.firstName, " ", this.props.request.requestor.lastName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        to: "/users/".concat(this.props.request.requestorId)
+      }, this.props.request.firstName, " ", this.props.request.lastName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.handleAccept,
         className: "request-button"
       }, "Accept"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -535,6 +531,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state) {
+  debugger;
   return {
     friendRequests: Object.values(state.entities.friendRequests || {}),
     currentUser: state.entities.users[state.session.id]
@@ -613,15 +610,10 @@ var FriendRequestsIndex = /*#__PURE__*/function (_React$Component) {
       this.props.fetchUserFriendRequests(this.props.currentUser.id);
     }
   }, {
-    key: "componentDidUpdate",
-    value: function componentDidUpdate() {// this.props.fetchUserFriendRequests(this.props.currentUser.id);
-    }
-  }, {
     key: "render",
     value: function render() {
       var _this = this;
 
-      // debugger
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.props.friendRequests.map(function (request, i) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_friend_request_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           currentUser: _this.props.currentUser,
@@ -737,7 +729,7 @@ var FriendshipIndex = /*#__PURE__*/function (_React$Component) {
       }, this.props.friendships.map(function (friendship) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_friendship_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: friendship.id,
-          friend: friendship.friend
+          friendship: friendship
         });
       })));
     }
@@ -767,9 +759,9 @@ __webpack_require__.r(__webpack_exports__);
 
 var FriendshipItem = function FriendshipItem(props) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/users/".concat(props.friend.friendId),
+    to: "/users/".concat(props.friendship.friendId),
     className: "user-profile-link"
-  }, props.friend.firstName, " ", props.friend.lastName));
+  }, props.friendship.firstName, " ", props.friendship.lastName));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (FriendshipItem);
@@ -1506,7 +1498,6 @@ var ProfileButton = /*#__PURE__*/function (_React$Component) {
           d: "M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"
         })), "Edit Profile");
       } else {
-        debugger;
         return (
           /*#__PURE__*/
           // On click is going to max loop; need to get the currentUser and the user who's page we're on in there
@@ -2060,13 +2051,13 @@ var friendRequestsReducer = function friendRequestsReducer() {
     case _actions_friend_request_actions__WEBPACK_IMPORTED_MODULE_0__["POST_FRIEND_REQUEST"]:
       return Object.assign({}, oldState, {
         friendshipRequest: {
-          requestor_id: action.payload.request.requestor_id,
-          receiver_id: action.payload.request.receiver_id
+          requestor_id: action.request.request.requestor_id,
+          receiver_id: action.request.request.receiver_id
         }
       });
 
     case _actions_friend_request_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_USER_FRIEND_REQUESTS"]:
-      return Object.assign({}, oldState, action.userId);
+      return Object.assign({}, oldState, action.requests);
 
     case _actions_friend_request_actions__WEBPACK_IMPORTED_MODULE_0__["REMOVE_FRIEND_REQUEST"]:
       var newState = Object.assign({}, oldState);
@@ -2101,12 +2092,10 @@ var friendshipsReducer = function friendshipsReducer() {
 
   switch (action.type) {
     case _actions_friendship_actions__WEBPACK_IMPORTED_MODULE_0__["POST_FRIENDSHIP"]:
-      return Object.assign({}, oldState, {
-        friendship: {}
-      });
+      return Object.assign({}, oldState, action.friendship);
 
     case _actions_friendship_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_USER_FRIENDSHIPS"]:
-      return Object.assign({}, oldState, action.userId);
+      return Object.assign({}, oldState, action.friendships);
 
     default:
       return oldState;

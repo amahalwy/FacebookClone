@@ -3,25 +3,25 @@ import * as APIUtil from '../util/friendship_util';
 export const POST_FRIENDSHIP = "POST_FRIENDSHIP";
 export const RECEIVE_USER_FRIENDSHIPS = "RECEIVE_USER_FRIENDSHIPS";
 
-const createFriendship = payload => ({
+const createFriendship = friendship => ({
   type: POST_FRIENDSHIP,
-  payload
+  friendship
 })
 
-const receiveUsersFriendships = userId => ({
+const receiveUsersFriendships = friendships => ({
   type: RECEIVE_USER_FRIENDSHIPS,
-  userId
+  friendships
 })
 
 // Thunk action creators
 export const postFriendship = (user_id, friend_id) => dispatch => (
   APIUtil.postFriendship(user_id, friend_id)
-    .then(payload => dispatch(createFriendship(payload)))
+    .then(friendship => dispatch(createFriendship(friendship)))
 )
 
 export const fetchFriendships = userId => dispatch => (
   APIUtil.fetchFriendships(userId)
-    .then(userId => dispatch(receiveUsersFriendships(userId)))
+    .then(friendships => dispatch(receiveUsersFriendships(friendships)))
 )
 
 // TODO fix naming of payloads

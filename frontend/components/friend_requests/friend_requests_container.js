@@ -4,7 +4,7 @@ import { fetchUserFriendRequests, deleteFriendRequest } from '../../actions/frie
 import { postFriendship } from '../../actions/friendship_actions';
 
 const mapStateToProps = state => {
-
+  debugger
   return {
     friendRequests: Object.values(state.entities.friendRequests || {}),
     currentUser: state.entities.users[state.session.id],

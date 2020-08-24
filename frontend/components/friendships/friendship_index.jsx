@@ -20,7 +20,7 @@ class FriendshipIndex extends React.Component {
             return (
               <FriendshipItem 
                 key={friendship.id}
-                friend={friendship.friend}
+                friendship={friendship}
               />
             )
           })

@@ -10,12 +10,7 @@ class FriendRequestsIndex extends React.Component {
     this.props.fetchUserFriendRequests(this.props.currentUser.id);
   }
 
-  componentDidUpdate(){
-    // this.props.fetchUserFriendRequests(this.props.currentUser.id);
-  }
-
   render() {
-    // debugger
     return (
       <div>
         <ul>
