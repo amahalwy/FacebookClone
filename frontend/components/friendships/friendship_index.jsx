@@ -11,7 +11,6 @@ class FriendshipIndex extends React.Component {
   }
 
   render() {
-    
     return (
       <div>
         <ul className='friends-list'>
@@ -19,7 +18,7 @@ class FriendshipIndex extends React.Component {
           this.props.friendships.map(friendship =>{
             return (
               <FriendshipItem 
-                key={friendship.friendshipId}
+                key={friendship.id}
                 friendship={friendship}
               />
             )

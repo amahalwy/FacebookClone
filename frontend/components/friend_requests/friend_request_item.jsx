@@ -10,11 +10,11 @@ class FriendRequestItem extends React.Component {
 
   handleAccept(){
     this.props.postFriendship(this.props.currentUser.id, this.props.request.requestorId);
-    this.props.deleteFriendRequest(this.props.request.requestId)
+    this.props.deleteFriendRequest(this.props.request.id)
   }
 
   handleDecline(){
-    this.props.deleteFriendRequest(this.props.request.requestId)
+    this.props.deleteFriendRequest(this.props.request.id)
   }
 
   render(){

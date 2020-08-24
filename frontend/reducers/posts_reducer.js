@@ -6,7 +6,7 @@ const postsReducer = (oldState = {}, action) => {
     case RECEIVE_POST:
       return Object.assign({}, oldState, )
     case RECEIVE_POSTS:
-      return Object.assign({})
+      return Object.assign({}, oldState, action.posts)
     case POST_POST:
       return Object.assign({})
     default:

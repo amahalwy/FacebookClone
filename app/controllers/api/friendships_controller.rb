@@ -10,10 +10,7 @@ class Api::FriendshipsController < ApplicationController
     @request = FriendRequest.find_by(requestor_id: req_params.dig(:friend_id), receiver_id: req_params.dig(:user_id))
 
     if @friendship.save && @friendship2.save
-      # debugger
-      # @request.destroy
       render '/api/friendships/show', status: 201
-      # Want to re-render the friendrequest-index, and the friendship-index
     else
       # flash[:notice] = "Unable to add friend."
     end

@@ -199,7 +199,7 @@ var fetchFriendships = function fetchFriendships(userId) {
       return dispatch(receiveUsersFriendships(friendships));
     });
   };
-}; // TODO fix naming of payloads
+};
 
 /***/ }),
 
@@ -207,7 +207,7 @@ var fetchFriendships = function fetchFriendships(userId) {
 /*!******************************************!*\
   !*** ./frontend/actions/post_actions.js ***!
   \******************************************/
-/*! exports provided: RECEIVE_POST, RECEIVE_POSTS, POST_POST, fetchPost, fetchPosts, postPost */
+/*! exports provided: RECEIVE_POST, RECEIVE_POSTS, POST_POST, fetchPost, fetchPosts, createPost */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -217,17 +217,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "POST_POST", function() { return POST_POST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchPost", function() { return fetchPost; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchPosts", function() { return fetchPosts; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postPost", function() { return postPost; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createPost", function() { return createPost; });
 /* harmony import */ var _util_posts_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/posts_util */ "./frontend/util/posts_util.js");
 
 var RECEIVE_POST = "RECEIVE_POST";
 var RECEIVE_POSTS = "RECEIVE_POSTS";
 var POST_POST = "POST_POST";
 
-var receivePost = function receivePost(postId) {
+var receivePost = function receivePost(post) {
   return {
     type: RECEIVE_POST,
-    postId: postId
+    post: post
   };
 };
 
@@ -235,13 +235,6 @@ var receivePosts = function receivePosts(posts) {
   return {
     type: RECEIVE_POSTS,
     posts: posts
-  };
-};
-
-var createPost = function createPost(post) {
-  return {
-    type: POST_POST,
-    post: post
   };
 }; // Thunks
 
@@ -260,9 +253,9 @@ var fetchPosts = function fetchPosts() {
     });
   };
 };
-var postPost = function postPost(post) {
+var createPost = function createPost(post) {
   return function (dispatch) {
-    return _util_posts_util__WEBPACK_IMPORTED_MODULE_0__["postPost"](post).then(function (post) {
+    return _util_posts_util__WEBPACK_IMPORTED_MODULE_0__["createPost"](post).then(function (post) {
       return dispatch(receivePost(post));
     });
   };
@@ -481,12 +474,12 @@ var FriendRequestItem = /*#__PURE__*/function (_React$Component) {
     key: "handleAccept",
     value: function handleAccept() {
       this.props.postFriendship(this.props.currentUser.id, this.props.request.requestorId);
-      this.props.deleteFriendRequest(this.props.request.requestId);
+      this.props.deleteFriendRequest(this.props.request.id);
     }
   }, {
     key: "handleDecline",
     value: function handleDecline() {
-      this.props.deleteFriendRequest(this.props.request.requestId);
+      this.props.deleteFriendRequest(this.props.request.id);
     }
   }, {
     key: "render",
@@ -727,7 +720,7 @@ var FriendshipIndex = /*#__PURE__*/function (_React$Component) {
         className: "friends-list"
       }, this.props.friendships.map(function (friendship) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_friendship_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
-          key: friendship.friendshipId,
+          key: friendship.id,
           friendship: friendship
         });
       })));
@@ -1940,8 +1933,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var UsersIndexItem = function UsersIndexItem(props) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/users/".concat(props.user.id),
-    className: "user-profile-link"
+    to: "/users/".concat(props.user.id)
   }, props.user.firstName, " ", props.user.lastName));
 };
 
@@ -2039,6 +2031,8 @@ var entitiesReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_friend_request_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/friend_request_actions */ "./frontend/actions/friend_request_actions.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 var friendRequestsReducer = function friendRequestsReducer() {
@@ -2048,12 +2042,9 @@ var friendRequestsReducer = function friendRequestsReducer() {
 
   switch (action.type) {
     case _actions_friend_request_actions__WEBPACK_IMPORTED_MODULE_0__["POST_FRIEND_REQUEST"]:
-      return Object.assign({}, oldState, {
-        friendshipRequest: {
-          requestor_id: action.request.request.requestor_id,
-          receiver_id: action.request.request.receiver_id
-        }
-      });
+      return Object.assign({}, oldState, _defineProperty({}, action.request.id, action.request));
+    // friendshipRequest: {requestor_id: action.request.request.requestor_id, receiver_id: action.request.request.receiver_id} 
+    // });
 
     case _actions_friend_request_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_USER_FRIEND_REQUESTS"]:
       return Object.assign({}, oldState, action.requests);
@@ -2127,7 +2118,7 @@ var postsReducer = function postsReducer() {
       return Object.assign({}, oldState);
 
     case _actions_post_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_POSTS"]:
-      return Object.assign({});
+      return Object.assign({}, oldState, action.posts);
 
     case _actions_post_actions__WEBPACK_IMPORTED_MODULE_0__["POST_POST"]:
       return Object.assign({});
@@ -2374,14 +2365,14 @@ var fetchFriendships = function fetchFriendships(userId) {
 /*!*************************************!*\
   !*** ./frontend/util/posts_util.js ***!
   \*************************************/
-/*! exports provided: fetchPosts, fetchPost, postPost */
+/*! exports provided: fetchPosts, fetchPost, createPost */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchPosts", function() { return fetchPosts; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchPost", function() { return fetchPost; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postPost", function() { return postPost; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createPost", function() { return createPost; });
 var fetchPosts = function fetchPosts() {
   return $.ajax({
     url: '/api/posts'
@@ -2392,10 +2383,13 @@ var fetchPost = function fetchPost(postId) {
     url: "/api/posts/".concat(postId)
   });
 };
-var postPost = function postPost(post) {
+var createPost = function createPost(post) {
   return $.ajax({
     url: '/api/posts',
-    method: 'POST'
+    method: 'POST',
+    data: {
+      post: post
+    }
   });
 };
 
