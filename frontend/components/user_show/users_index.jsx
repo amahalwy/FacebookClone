@@ -20,7 +20,7 @@ class UsersIndex extends React.Component {
           <NavBarContainer/>
           <div className='users-index-div'>
             {/* WILL INSERT FRIENDING COMPONENT HERE */}
-            <div className='left-users-menu'>USER REQUESTS AND MENU
+            <div className='left-users-menu'>USER REQUESTS
             
               <FriendRequestsContainer 
               

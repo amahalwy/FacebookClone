@@ -19,7 +19,7 @@ class FriendshipIndex extends React.Component {
           this.props.friendships.map(friendship =>{
             return (
               <FriendshipItem 
-                key={friendship.id}
+                key={friendship.friendshipId}
                 friendship={friendship}
               />
             )

@@ -1,0 +1,43 @@
+// Place all the styles related to the friendships controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.users-index-div {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30px;
+}
+
+.left-users-menu {
+  width: 20%;
+}
+
+.feed-container {
+  height: 100%;
+  width: 40%;
+  // justify-self: center;
+}
+
+.friends-list {
+  width: 20%;
+}
+
+.friends-list > h1 {
+  margin: 20px 0px;
+}
+
+.friends-list li {
+  width: 200px; 
+  height: 24px;
+  padding: 5px 0px;
+}
+
+.friends-list li:hover {
+  background-color: rgb(221, 223, 226);
+}
+
+.user-profile-link {
+  height: 100%;
+  width: 200px;
+  padding: 20px 20px;
+}

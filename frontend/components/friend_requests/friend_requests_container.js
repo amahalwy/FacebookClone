@@ -3,13 +3,10 @@ import FriendRequestsIndex from './friend_requests_index';
 import { fetchUserFriendRequests, deleteFriendRequest } from '../../actions/friend_request_actions';
 import { postFriendship } from '../../actions/friendship_actions';
 
-const mapStateToProps = state => {
-  debugger
-  return {
+const mapStateToProps = state => ({
     friendRequests: Object.values(state.entities.friendRequests || {}),
     currentUser: state.entities.users[state.session.id],
-  }
-}
+})
 
 const mapDispatchToProps = dispatch => ({
     fetchUserFriendRequests: userId => dispatch(fetchUserFriendRequests(userId)),

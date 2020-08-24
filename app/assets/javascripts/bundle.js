@@ -531,7 +531,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state) {
-  debugger;
   return {
     friendRequests: Object.values(state.entities.friendRequests || {}),
     currentUser: state.entities.users[state.session.id]
@@ -728,7 +727,7 @@ var FriendshipIndex = /*#__PURE__*/function (_React$Component) {
         className: "friends-list"
       }, this.props.friendships.map(function (friendship) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_friendship_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
-          key: friendship.id,
+          key: friendship.friendshipId,
           friendship: friendship
         });
       })));
@@ -1862,7 +1861,7 @@ var UsersIndex = /*#__PURE__*/function (_React$Component) {
           className: "users-index-div"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "left-users-menu"
-        }, "USER REQUESTS AND MENU", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_friend_requests_friend_requests_container__WEBPACK_IMPORTED_MODULE_3__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, "USER REQUESTS", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_friend_requests_friend_requests_container__WEBPACK_IMPORTED_MODULE_3__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "feed-container"
         }, "All Users", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.props.users.map(function (user) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_users_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
