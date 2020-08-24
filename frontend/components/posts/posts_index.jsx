@@ -10,6 +10,7 @@ class PostsIndex extends React.Component {
   render() {
     return (
       <div>
+        <ul>
         {
           this.props.posts.map(post =>{
             return (
@@ -21,6 +22,7 @@ class PostsIndex extends React.Component {
             )
           })
         }
+        </ul>
       </div>
     )
   }

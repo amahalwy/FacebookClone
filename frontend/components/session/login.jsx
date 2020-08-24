@@ -113,7 +113,7 @@ class Login extends React.Component {
         </div>
 
 
-          <div >
+          <div>
             <Modal show={this.state.openModal} handleClose={this.hideModal} >
               <SignupContainer 
                 history={this.props.history}

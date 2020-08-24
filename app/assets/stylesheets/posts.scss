@@ -12,15 +12,116 @@
 
 .post-header {
   border: 1px solid black;
-  margin: 5px;
+  margin: 10px auto;
+  width: 95%;
 }
 
 .post-header-top {
   display: flex;
 }
 
+.post-header-img {
+  margin: 0px 10px;
+} 
+
 .post-header-info {
+  width: 100%;
   display: flex;
   justify-content: space-between;
+  margin: 5px 0px;
 }
 
+.post-header-info span a {
+  font-size: 18px;
+  color: black;
+}
+
+.post-header-info span a:hover {
+  text-decoration: underline;
+}
+
+.post-header-date {
+  font-size: 12px;
+}
+
+.post-header-info button {
+  background-color: white;
+  border: none;
+  margin-right: 10px;
+}
+
+// End of header
+
+// Beg of body
+
+.post-body {
+  border: 1px solid red;
+  width: 95%;
+  margin: 0px auto;
+  padding: 20px 0;
+}
+
+.post-body-text {
+  font-size: 20px;
+  margin: 0 10px;
+}
+
+// End of body
+
+// Beg of buttons
+
+.post-buttons {
+  border-top: 1px solid rgb(225, 227, 229);
+  border-bottom: 1px solid rgb(225, 227, 229);
+  width: 95%;
+  margin: 10px auto;
+}
+
+.post-buttons-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.post-buttons-hover {
+  width: 50%;
+}
+
+.post-buttons-hover:hover {
+  background-color: rgb(223, 226, 229);
+  cursor: pointer;
+}
+
+.post-buttons-like span,
+.post-buttons-comment span {
+  display: flex;
+  margin: 10px;
+  justify-content: center;
+}
+
+.thumbs-up-svg,
+.comment-svg {
+  width: 16px;
+  height: 16px;
+  margin-right: 10px;
+}
+
+// End of buttons
+
+// Beg of comment section
+
+.post-comment {
+  width: 95%;
+  margin: 8px auto;
+  border: 1px solid black;
+}
+
+.comment-container {
+  border: 1px solid red;
+  margin: 10px;
+}
+
+.post-comment-form {
+  display: flex;
+}
+// End of comment section
