@@ -5,8 +5,16 @@ import Modal from '../modal/modal';
 class Navbar extends React.Component {
   constructor(props) {
     super(props);
+
+    this.handleInput = this.handleInput.bind(this);
   }
-  
+
+  handleInput(f) {
+    return e => ({
+      [f]: e.currentTarget.value
+    })
+  }
+
   render () {
     return (
       <nav className="nav-bar">
@@ -24,9 +32,9 @@ class Navbar extends React.Component {
             <div className='navbar-search-input'>
               <input 
               type="text"
-              value='Search Facebook'
+              placeholder='Search Facebook'
               className='navbar-search-input'
-              // onChange={}
+              onChange={this.handleInput}
               />
             </div>
           </div>
