@@ -46,7 +46,20 @@
 .post-header-info button {
   background-color: white;
   border: none;
-  margin-right: 10px;
+}
+
+.post-header-info button svg {
+  border: none;
+  height: 50%;
+  align-content: center;
+  height: 20px;
+  width: 20px;
+  padding: 3px;
+  border-radius: 10px;
+}
+
+.post-header-info button svg:hover {
+  background-color: rgb(225, 227, 229);
 }
 
 // End of header
@@ -83,18 +96,21 @@
 
 .post-buttons-hover {
   width: 50%;
-}
-
-.post-buttons-hover:hover {
-  background-color: rgb(223, 226, 229);
-  cursor: pointer;
+  margin: 4px 0;
 }
 
 .post-buttons-like span,
 .post-buttons-comment span {
   display: flex;
-  margin: 10px;
+  padding: 8px;
   justify-content: center;
+}
+
+.post-buttons-like span:hover,
+.post-buttons-comment span:hover {
+  background-color: rgb(223, 226, 229);
+  border-radius: 6px;
+  cursor: pointer;
 }
 
 .thumbs-up-svg,

@@ -12,18 +12,12 @@ export default () => (
   <div>
 
     <Switch> 
-
-    {/* Auth route for login */}
-
-    {/* Everything else protected */}
-      {/* / should be auth route maybe??? */}
-
       <AuthRoute exact path='/login' component={LoginContainer} />
       {/* <Route path='/signup' component={SignupContainer} /> */}
       <ProtectedRoute exact path='/users' component={UsersIndexContainer} />
       <ProtectedRoute exact path='/users/:userId' component={UserShowContainer} />
       <ProtectedRoute exact path='/posts' component={PostsIndexContainer} />
-      {/* <ProtectedRoute exact path='/posts/:postId' component={UserShowContainer} /> */}
+      <Route exact path='/postform' component={PostFormContainer}/>
 
 
       {/* Need to redirect to /users if the id is invalid */}

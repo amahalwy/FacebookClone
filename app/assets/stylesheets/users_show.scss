@@ -183,6 +183,18 @@
   cursor: pointer;
 }
 
+.friends-span {
+  display: flex;
+}
+
+.friends-span p:last-child {
+  color: black;
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-left: 5px;
+  margin-top: 1px;
+}
+
 .under-cover-others:hover,
 .under-cover-more:hover {
   background-color: rgb(240, 242, 245);

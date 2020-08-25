@@ -1,15 +1,17 @@
 import React from 'react';
 import NavBarContainer from '../navbar/navbar_container';
 import ProfileButton from './profile_button';
+import PostIndexItem from '../posts/post_index_item';
+import PostIndexContainer from '../posts/posts_index_container';
 
 class UserShow extends React.Component {
 
   componentDidMount(){
-    this.props.fetchUser(this.props.match.params.userId)
+    this.props.fetchUser(this.props.match.params.userId);
+    this.props.fetchUserPosts(this.props.match.params.userId);
   }
 
   render() {
-
     if (!this.props.user) {
       return '';
     } else {
@@ -62,7 +64,10 @@ class UserShow extends React.Component {
                     <span>About</span>
                   </div>
                   <div className='under-cover-others under-cover-hover'>
-                    <span>Friends</span>
+                    <span className='friends-span'>
+                      <p>Friends</p> 
+                      <p>{this.props.user.friendCount}</p>
+                    </span>
                   </div>
                   <div className='under-cover-others under-cover-hover'>
                     <span>Photos</span>
@@ -147,11 +152,13 @@ class UserShow extends React.Component {
                     </div>
                   </div>
 
-                  <div>Posts section
+                  <div>
                     <div>
-                      <div>Posts</div>
-                      <div>Filters button and manage posts button</div>
-
+                      <ul>
+                        <PostIndexContainer 
+                          user={this.props.user}
+                        />
+                      </ul>
                     </div>
 
                     <div>Dividor div</div>

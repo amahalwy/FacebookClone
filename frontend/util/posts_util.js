@@ -1,7 +1,7 @@
 
-export const fetchPosts = () => (
+export const fetchUserPosts = userId => (
   $.ajax({
-    url: '/api/posts'
+    url: `/api/users/${userId}/posts`
   })
 )
 
@@ -16,5 +16,12 @@ export const createPost = post => (
     url: '/api/posts',
     method: 'POST',
     data: { post }
+  })
+)
+
+export const deletePost = postId => (
+  $.ajax({
+    url: `/api/posts/${postId}`,
+    method: 'DELETE'
   })
 )

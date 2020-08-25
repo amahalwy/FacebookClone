@@ -1,10 +1,11 @@
 import React from 'react'
 import PostIndexItem from './post_index_item';
+import { reset } from 'redux-form'
 
 class PostsIndex extends React.Component {
 
-  componentDidMount(){
-    this.props.fetchPosts();
+  componentWillUnmount(){
+    this.props.clearPosts();
   }
 
   render() {
