@@ -1,6 +1,11 @@
 .post-form-header {
-  border: 1px solid black;
   height: 40px;
+}
+
+.post-dividor {
+  width: 90%;
+  border-bottom: 1px solid rgb(229, 229, 229);
+  margin: 0 auto
 }
 
 .post-form-header div > span {
@@ -10,12 +15,11 @@
 }
 
 .post-form-header div span h1 {
-  color: red;
+  color: black;
   margin-right: 200px;
+  font-size: 18px;
 }
-
 // End of header
-
 
 .post-form-button-div {
   margin: 0px 20px;
@@ -23,7 +27,6 @@
 
 .post-form-user {
   display: flex;
-  border: 1px solid red;
   height: 40px;
 }
 
@@ -33,7 +36,6 @@
 
 .post-form-friends-click {
   display: flex;
-  border: 1px solid blue;
   height: 20px;
 }
 
@@ -53,11 +55,66 @@
   height: 9px;
   margin-bottom: 10px;
 }
-
 // End of below header
 
-
-.post-form {
-  border: 1px solid black;
+.post-form-text textarea {
+  margin-top: 5px;
+  margin-left: 20px;
+  outline: none;
+  width: 92%;
+  min-height: 100px;
+  overflow: hidden;
+  resize: none;
+  border: none;
 }
 
+.post-form-text textarea::placeholder {
+  color: rgb(144, 148, 156);
+  font-size: 16px;
+}
+// End of post text
+
+.add-to-your-post {
+  width: 92%;
+  height: 40px;
+  display: flex;
+  border: 1px solid rgb(206, 208, 210);
+  border-radius: 10px;
+  margin: 10px auto;
+}
+
+.add-to-your-post > div {
+  width: 100%;
+  align-self: center;
+}
+
+.post-add-to-post {
+  margin-left: 30px;
+}
+
+.post-icons {
+  display: flex;
+  margin-left: 250px;
+  margin-right: -80px;
+  width: 30px;
+}
+
+.post-form-smile-icon-input {
+  display: none;
+}
+
+.post-button button {
+  display: flex;
+  background-color: rgb(27, 119, 242);
+  border-radius: 10px;
+  border: none;
+  color: white;
+  width: 92%;
+  justify-self: center;
+  justify-content: center;
+  margin: 20px auto;
+}
+
+.post-button button > span {
+  margin: 5px 0;
+}

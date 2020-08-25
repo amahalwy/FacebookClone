@@ -7,9 +7,4 @@ const mapStateToProps = (state, ownProps) => ({
     posts: Object.values(state.entities.posts || {})
 })
 
-// const mapDispatchToProps = dispatch => ({
-//   fetchUserPosts: userId => dispatch(fetchUserPosts(userId)),
-//   clearPosts: () => dispatch(clearPosts())
-// })
-
 export default connect(mapStateToProps, null)(PostsIndex);

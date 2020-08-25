@@ -16,6 +16,12 @@ class Api::PostsController < ApplicationController
 
   def create
     @post = Post.new(req_params)
+    if @post 
+      debugger
+      render '/api/posts/show'
+    else
+      # Render errors
+    end
   end
 
   # def method_name

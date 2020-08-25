@@ -5,6 +5,7 @@ import { reset } from 'redux-form'
 class PostsIndex extends React.Component {
 
   render() {
+    debugger;
     return (
       <div>
         <ul>
