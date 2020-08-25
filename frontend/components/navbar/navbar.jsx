@@ -1,13 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Modal from '../modal/modal';
+import PostFormContainer from '../posts_form/post_form_container';
 
 class Navbar extends React.Component {
   constructor(props) {
     super(props);
-
+    this.state = {
+      openModal: false
+    }
     this.handleInput = this.handleInput.bind(this);
+    this.showModal = this.showModal.bind(this);
+    this.hideModal = this.hideModal.bind(this);
   }
+
+  showModal(e) {
+    e.preventDefault();
+    this.setState({ openModal: true })
+  };
+
+  hideModal() {
+    this.setState({ openModal: false });
+  };
 
   handleInput(f) {
     return e => ({
@@ -92,8 +106,16 @@ class Navbar extends React.Component {
 
           <div className='navbar-menu-list-button'>
             <div className='navbar-menu-create-post' >
-              {/* On click, open create post modal */}
-              <a href="/users">+</a>
+              
+              <Modal show={this.state.openModal} handleClose={this.hideModal} >
+                <PostFormContainer
+                  history={this.props.history}
+                  handleClose={this.hideModal}
+                />
+              </Modal>
+
+              <a onClick={this.showModal}>+</a>
+
             </div>
           </div>
 

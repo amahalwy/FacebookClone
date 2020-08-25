@@ -31,7 +31,13 @@ class Signup extends React.Component {
     return (
       <div className='session-signup-form'>
         <div className='session-signup-form-header'>
-          <div className='session-signup-form-text'><p>Sign Up</p></div>
+          
+          <div className='session-signup-form-text'>
+            <p>Sign Up</p>
+            <span>
+              <button onClick={this.props.handleClose}><p>x</p></button>
+            </span>
+            </div>
           <div className='session-signup-form-preamble'><p>It's quick and easy.</p></div>
         </div>
         

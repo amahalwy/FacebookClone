@@ -10,7 +10,6 @@ const Modal = ({ handleClose, show, children }) => {
   return (
     <div className={showHideClassName}>
       <section className="modal-main">
-        <a className='modal-close-anchor'onClick={handleClose}>X</a>
         {children}
       </section>
     </div>

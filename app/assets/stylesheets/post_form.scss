@@ -1,5 +1,35 @@
+.post-card {
+  min-height: 120px;
+}
+
 .post-form-header {
-  height: 40px;
+  justify-content: center;
+  height: 30px;
+  width: 90%;
+  margin-top: 10px;
+  margin: 10px auto;
+}
+
+.post-form-header > div {
+  display: flex;
+}
+
+.post-form-header div > span:first-child {
+  display: flex;
+  margin: 10px auto;
+  justify-content: center;
+  align-content: center;
+}
+
+.post-form-header div > span:last-child {
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+.post-form-header div > span:last-child button {
+  border: none;
+  background-color: white;
 }
 
 .post-dividor {
@@ -7,72 +37,70 @@
   border-bottom: 1px solid rgb(229, 229, 229);
   margin: 0 auto
 }
-
-.post-form-header div > span {
-  display: flex;
-  margin: 10px auto;
-  justify-content: flex-end;
-}
-
-.post-form-header div span h1 {
-  color: black;
-  margin-right: 200px;
-  font-size: 18px;
-}
-// End of header
-
-.post-form-button-div {
-  margin: 0px 20px;
-}
+// // End of header
 
 .post-form-user {
+  margin-bottom: 10px;
   display: flex;
-  height: 40px;
+  height: 30px;
 }
 
 .post-form-user-image {
   margin: 10px;
 }
 
-.post-form-friends-click {
-  display: flex;
-  height: 20px;
+.friends-p {
+  font-size: 12px;
+  align-self: center
 }
 
-.post-form-friends-click p {
-  font-size: 13px;
-  margin-right: 3px;
+.post-form-friends-click {
+  display: flex;
+  height: 16px;
+  width: 68px;
+  background-color: rgb(229, 229, 229);
+  border-radius: 10px;
+}
+
+.post-form-friends-click div {
+  height: 10px;
+  width: 14px;
 }
 
 .friends-icon {
   width: 8px;
   height: 8px;
-  margin-left: 3px;
+  margin-top: 4px;
+  margin-right: 8px;
+  margin-left: 4px;
+  margin-bottom: 2px;
 }
 
 .arrow-down {
   width: 9px;
   height: 9px;
   margin-bottom: 10px;
+  margin-top: 2px;
+  margin-left: 3px;
 }
 // End of below header
 
 .post-form-text textarea {
   margin-top: 5px;
-  margin-left: 20px;
+  margin-left: 10px;
   outline: none;
-  width: 92%;
-  min-height: 100px;
+  width: 93%;
+  min-height: 130px;
   overflow: hidden;
   resize: none;
-  border: none;
+  // border: none;
 }
 
 .post-form-text textarea::placeholder {
   color: rgb(144, 148, 156);
   font-size: 16px;
 }
-// End of post text
+// // End of post text
 
 .add-to-your-post {
   width: 92%;
@@ -94,9 +122,14 @@
 
 .post-icons {
   display: flex;
-  margin-left: 250px;
+  margin-left: 150px;
   margin-right: -80px;
   width: 30px;
+}
+
+.form-icons {
+  width: 10px;
+  height: 10px;
 }
 
 .post-form-smile-icon-input {

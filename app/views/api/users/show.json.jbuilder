@@ -5,5 +5,3 @@ json.user do
   json.email @user.email
   json.friendCount @user.friends.length
 end
-
-

@@ -16,7 +16,9 @@ class Api::PostsController < ApplicationController
 
   def create
     @post = Post.new(req_params)
-    if @post 
+    debugger
+    if @post.save
+      debugger
       render '/api/posts/show'
     else
       # Render errors
