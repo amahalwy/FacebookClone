@@ -24,6 +24,7 @@ export default () => (
       {/* Need to redirect to /users if the id is invalid */}
       
       {/* Catch all */}
+
       <Redirect to="/users" />
     </Switch>
   </div>

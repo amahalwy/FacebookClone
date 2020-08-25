@@ -4,10 +4,6 @@ import { reset } from 'redux-form'
 
 class PostsIndex extends React.Component {
 
-  componentWillUnmount(){
-    this.props.clearPosts();
-  }
-
   render() {
     return (
       <div>
