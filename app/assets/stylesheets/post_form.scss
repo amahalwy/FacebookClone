@@ -1,0 +1,10 @@
+.post-form-header {
+  border: 1px solid black;
+  height: 40px;
+}
+
+.post-form-header div > span {
+  display: flex;
+  margin: 10px auto;
+  justify-content: center;
+}
