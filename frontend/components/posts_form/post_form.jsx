@@ -22,7 +22,6 @@ class PostForm extends React.Component {
   }
 
   render() {
-    debugger
     return (
       <div className='post-form-card'>
         <div className='post-form-header'>

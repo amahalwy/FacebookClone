@@ -6,7 +6,6 @@ import React from 'react'
 class EditPostForm extends React.Component {
 
   componentDidMount(){
-    debugger;
     this.props.fetchPost(this.props.match.params.postId)
   }
 

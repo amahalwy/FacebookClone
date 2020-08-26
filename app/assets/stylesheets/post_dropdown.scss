@@ -1,0 +1,31 @@
+.post-dropdown-button {
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  left: 20px;
+}
+
+.post-dropdown-button:hover {
+  background-color: rgb(225, 227, 229);
+}
+
+.post-dropdown-menu {
+  margin: 4px;
+  top: 20px;
+  border: 1px solid black;
+}
+
+.post-dropdown-edit, 
+.post-dropdown-delete {
+  display: flex;
+  margin: 4px;
+  padding: 10px;
+  border: 1px solid red;
+  border-radius: 6px;
+}
+
+.post-dropdown-edit:hover, 
+.post-dropdown-delete:hover {
+  background-color: rgb(225, 227, 229);
+  cursor: pointer;
+}

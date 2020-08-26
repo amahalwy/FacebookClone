@@ -13,7 +13,7 @@ class PostsIndex extends React.Component {
               <PostIndexItem
                 key={post.id}
                 post={post}
-                fetchPost={this.props.fetchPost}
+                deletePost={this.props.deletePost}
               />
             )
           })
