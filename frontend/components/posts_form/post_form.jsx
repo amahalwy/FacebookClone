@@ -72,24 +72,12 @@ class PostForm extends React.Component {
                 type="file"
                 className='button-file'/>
               </div>
-              <div>
-                {/* svg */}
-              </div>
-              <div>
-                {/* svg */}
-              </div>
-              <div>
-                {/* svg */}
-              </div>
-              <div>
-                {/* svg */}
-              </div>
             </div>
           </div>
           <div className='post-button'>
             <button onClick={this.handleSubmit}>
               <span>
-                Post
+                {this.props.buttonText}
               </span>
             </button>
           </div>

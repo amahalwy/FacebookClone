@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Dropdown from '../dropdown/dropdown';
+import NavbarDropdown from '../navbar_dropdown/navbar_dropdown';
 import Modal from '../modal/modal';
 import CreatePostFormContainer from '../posts_form/create_post_container';
 import EditPostFormContainer from '../posts_form/edit_post_container';
@@ -137,7 +137,7 @@ class Navbar extends React.Component {
             </div>
           </div>
           
-          <Dropdown 
+          <NavbarDropdown 
             logout={this.props.logout} 
             currentUser={this.props.currentUser} 
           />

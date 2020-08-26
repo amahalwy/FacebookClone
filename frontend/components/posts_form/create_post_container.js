@@ -3,9 +3,6 @@ import { createPost } from '../../actions/post_actions';
 import PostForm from './post_form';
 
 const mapStateToProps = state => ({
-  history: ownProps.history,
-  match: ownProps.match,
-  params: ownProps.params,
   post: {
     user_id: '',
     body: ''

@@ -22,6 +22,7 @@ class EditPostForm extends React.Component {
           action={action}
           formType={formType}
           post={post}
+          buttonText={buttonText}
         />
       </div>
     )
