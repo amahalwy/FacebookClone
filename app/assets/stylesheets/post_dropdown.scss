@@ -1,8 +1,10 @@
 .post-dropdown-button {
+  position: relative;
+  display: inline-block;
   width: 20px;
   height: 20px;
   border-radius: 10px;
-  left: 20px;
+  // left: 20px;
 }
 
 .post-dropdown-button:hover {
@@ -10,22 +12,37 @@
 }
 
 .post-dropdown-menu {
+  position: absolute;
+  height: 61px;
+  width: 100px;
+  right: 560px;
   margin: 4px;
-  top: 20px;
+  // top: 20px;
   border: 1px solid black;
+  border-radius: 4px;
 }
 
 .post-dropdown-edit, 
 .post-dropdown-delete {
   display: flex;
-  margin: 4px;
-  padding: 10px;
-  border: 1px solid red;
+  margin: 2px;
+  padding: 8px;
   border-radius: 6px;
+}
+
+.post-dropdown-edit span, 
+.post-dropdown-delete span {
+  font-size: 10px;
 }
 
 .post-dropdown-edit:hover, 
 .post-dropdown-delete:hover {
   background-color: rgb(225, 227, 229);
   cursor: pointer;
+}
+
+.post-dropdown-icons {
+  width: 8px;
+  height: 8px;
+  margin-right: 5px;
 }
