@@ -1,8 +1,9 @@
 import React from 'react'
 
-class PostForm extends React.Component {
+class CreatePostForm extends React.Component {
   constructor(props) {
     super(props);
+    this.state = props.post;
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInput = this.handleInput.bind(this);
   }
@@ -10,7 +11,7 @@ class PostForm extends React.Component {
   handleSubmit(event){
     event.preventDefault();
     this.state.user_id = this.props.currentUser.id;
-    this.props.action(this.state);
+    this.props.createPost(this.state);
     this.props.handleClose();
     // Need to reroute maybe?
   }
@@ -85,4 +86,4 @@ class PostForm extends React.Component {
     )
   }
 }
-export default PostForm
+export default CreatePostForm;

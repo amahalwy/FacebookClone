@@ -18,7 +18,6 @@ class Api::PostsController < ApplicationController
     @post = Post.new(req_params)
     debugger
     if @post.save
-      debugger
       render '/api/posts/show'
     else
       # Render errors

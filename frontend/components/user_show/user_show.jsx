@@ -1,7 +1,6 @@
 import React from 'react';
 import NavBarContainer from '../navbar/navbar_container';
 import ProfileButton from './profile_button';
-import PostIndexItem from '../posts/post_index_item';
 import PostIndexContainer from '../posts/posts_index_container';
 
 class UserShow extends React.Component {

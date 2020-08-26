@@ -1,45 +1,16 @@
 import { connect } from 'react-redux';
-import { fetchPost, updatePost } from '../../actions/post_actions';
-import PostForm from './post_form';
-import React from 'react'
+import { fetchUserPosts, updatePost } from '../../actions/post_actions';
+import EditPostForm from './edit_post_form';
 
-class EditPostForm extends React.Component {
-
-  componentDidMount(){
-    this.props.fetchPost(this.props.match.params.postId)
-  }
-
-  render() {
-    
-
-    const { action, formType, post } = this.props;
-
-    if (!post) return null;
-    return (
-      <div>
-        <PostForm
-          action={action}
-          formType={formType}
-          post={post}
-          buttonText={buttonText}
-        />
-      </div>
-    )
-  }
-}
-
-const mapStateToProps = (state, ownProps) => ({
-  history: ownProps.history,
-  match: ownProps.match,
-  params: ownProps.params,
+const mapStateToProps = state => ({
   currentUser: state.entities.users[state.session.id],
   formType: 'Update Post',
-  buttonText: 'Update',
+  buttonText: 'Update'
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchPost: postId => dispatch(fetchPost(postId)),
   updatePost: post => dispatch(updatePost(post)),
+  fetchUserPosts: userId => dispatch(fetchUserPosts(userId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditPostForm)

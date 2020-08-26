@@ -115,15 +115,6 @@ class Navbar extends React.Component {
 
               </Modal>
 
-              {/* <Modal show={this.state.openModal} handleClose={this.hideModal} >
-
-                <EditPostFormContainer
-                  history={this.props.history}
-                  handleClose={this.hideModal}
-                />
-
-              </Modal> */}
-
               <a onClick={this.showModal}>+</a>
 
             </div>

@@ -19,7 +19,7 @@ export default () => (
       <ProtectedRoute exact path='/users' component={UsersIndexContainer} />
       <ProtectedRoute exact path='/users/:userId' component={UserShowContainer} />
       <ProtectedRoute exact path='/posts' component={PostsIndexContainer} />
-      <Route exact path='/postform' component={PostFormContainer}/>
+      {/* <Route exact path='/postform' component={PostFormContainer}/> */}
 
 
       {/* Need to redirect to /users if the id is invalid */}

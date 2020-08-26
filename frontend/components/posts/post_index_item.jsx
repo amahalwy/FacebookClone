@@ -1,10 +1,13 @@
 import React from 'react'
 import {Link} from 'react-router-dom';
-import PostDropdown from '../posts_dropdown/post_dropdown';
+import PostDropdownContainer from '../posts_dropdown/post_dropdown_container';
 
 class PostIndexItem extends React.Component {
 
-  // props will hold the post itself, can access some information about it
+
+  componentDidUpdate(prevProps){
+    debugger
+  }
 
   render() {
     const post = this.props.post;
@@ -27,8 +30,7 @@ class PostIndexItem extends React.Component {
                     <Link to={`/users/${post.authorId}`}>{post.authorFirstName} {post.authorLastName}</Link>
                     <p className='post-header-date'>Date posted</p>
                   </span>
-                    <PostDropdown 
-                      deletePost={this.props.deletePost}
+                    <PostDropdownContainer 
                       post={this.props.post}
                     />
                 </div>
