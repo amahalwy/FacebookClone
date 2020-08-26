@@ -1,0 +1,126 @@
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: block;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 350px;
+  border: 1px solid black;
+  border-radius: 10px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 6px;
+  z-index: 1;
+  right: 0px;
+  top: 50px;
+}
+
+.dropdown-icon {
+  position: absolute;
+  height: 25px;
+  width: 25px;
+  top: 200px;
+}
+
+.logout-button {
+  height: 40px;
+}
+
+.profile-parent-div {
+  display: flex;
+  margin-bottom: 6px;
+}
+
+.dropdown-profile-pic {
+  margin: 10px;
+}
+
+.dropdown-username {
+  font-size: 20px;
+  margin: 5px 0px;
+}
+
+.dropdown-see-profile {
+  font-size: 12px;
+}
+
+.dropdown-dividor {
+  margin: 0 auto;
+  width: 96%;
+  border-bottom: 1px solid black;
+}
+
+
+.dropdown-feedback-card {
+  display: flex;
+  margin: 5px 0px; 
+}
+
+
+.icons-div {
+  display: flex;
+  position: relative;
+  background-color: rgb(228, 230, 234);
+  border-radius: 20px;
+  padding: 6px;
+  margin: 4px 13px;
+  width: 20px;
+  align-items: center;
+}
+
+.feedback-icon {
+  height: 18px;
+  width: 18px;
+  color: rgb(94,104,113);
+  margin: 1px;
+}
+
+.exclamation-icon {
+  position: absolute;
+  left: 11px;
+  margin-bottom: 4px;
+  margin-left: 2px;
+  color: white;
+  height: 6px;
+  width: 6px;
+}
+
+.feedback-div {
+  margin: 5px 0px; 
+}
+
+.feedback-div div:last-child {
+  color: rgb(123, 125, 129);
+  font-size: 10px;
+}
+
+.dropdown-bottom {
+  margin: 0 auto;
+  width: 95%;
+}
+
+.dropdown-bottom-icon {
+  margin: 10px;
+}
+
+.dropdown-bottom-text {
+  margin: 10px 0px;
+}
+
+.dropdown-switch-classic {
+  font-size: 12px;
+  color: rgb(113, 116, 120);
+  margin-top: 5px;
+}
+
+.navbar-dropdown-list-div {
+  margin: 2px;
+  display: flex;
+}
+
+.navbar-dropdown-list-div:hover {
+  background-color: rgb(239, 239, 239);
+  // cursor: pointer;
+}

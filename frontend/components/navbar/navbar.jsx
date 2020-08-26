@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Dropdown from '../dropdown/dropdown';
 import Modal from '../modal/modal';
 import PostFormContainer from '../posts_form/post_form_container';
 
@@ -30,6 +31,7 @@ class Navbar extends React.Component {
   }
 
   render () {
+    // debugger;
     return (
       <nav className="nav-bar">
       
@@ -87,12 +89,6 @@ class Navbar extends React.Component {
               </div>
             </li>
 
-            <li className='navbar-main-li'>
-              <div className='navbar-main-gaming navbar-main-home-hover'>
-                gaming
-              </div>
-            </li>
-
           </ul>
         </div>
 
@@ -106,6 +102,7 @@ class Navbar extends React.Component {
 
           <div className='navbar-menu-list-button'>
             <div className='navbar-menu-create-post' >
+              
               
               <Modal show={this.state.openModal} handleClose={this.hideModal} >
                 <PostFormContainer
@@ -127,91 +124,10 @@ class Navbar extends React.Component {
             </div>
           </div>
           
-              {/* DROP DOWN HTML */}
-
-          <div className='navbar-menu-list-button'>
-            <div className="dropdown navbar-menu-dropdown-click">
-              <span className='dropdown-icon'><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sort-down" className="more-icon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41z"></path></svg></span>
-              <div className="dropdown-content">
-
-                <div>
-
-                  <div>Profile Div
-                    <div>Profile pic</div>
-
-                    <div>Profile stuff itself
-                      <div>User's Full name</div>
-                      <div>See your profile</div>
-                    </div>
-                  </div>
-                  
-
-                  <div>Feedback
-                    <div>Help icon thing</div>
-
-                    <div>
-                      <div>Give Feedback</div>
-                      <div>Help us improve the cloned Facebook.</div>
-                    </div>
-
-                  </div>
-
-                  <div>Bottom list
-                    <div>List
-
-                      <div>
-                        <div className='navbar-dropdown-list-div'>
-                          <div>Icon</div>
-                          <div>Settings and Privacy</div>
-                        </div>
-                      </div>
-
-                      <div>
-                        <div className='navbar-dropdown-list-div'>
-                          <div>Icon</div>
-                          <div>Help & Support</div>
-                        </div>
-                      </div>
-
-                      <div>
-                        <div className='navbar-dropdown-list-div'>
-                          <div>Icon</div>
-                          <div>Dark Mode</div>
-                          <div>TOGGLE THINGG</div>
-                        </div>
-                      </div>
-
-                      <div>
-                        <div className='navbar-dropdown-list-div'>
-                          <div>Icon</div>
-                          <div>
-                            <div>Switch to classic Facebook</div>
-                            <div>The classic Facebook will no longer be available starting in September</div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div>
-                        <div className='navbar-dropdown-list-div'>
-                          <div>Icon</div>
-                          <div>
-                            <button onClick={this.props.logout}>Logout</button>
-                          </div>
-                        </div>
-                      </div>
-
-                    </div>
-
-                    <div>Privacy, cookies, etc</div>
-
-                  </div>
-
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* <button onClick={logout} className='logout-button'>Logout</button> */}
+          <Dropdown 
+            logout={this.props.logout} 
+            currentUser={this.props.currentUser} 
+          />
 
         </div>
       </nav>

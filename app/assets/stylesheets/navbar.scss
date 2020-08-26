@@ -140,11 +140,20 @@
   background-color: rgb(221, 223, 226);
 }
 
+.navbar-menu-create-post:hover,
+.navbar-menu-users:hover,
+.navbar-menu-dropdown-click:hover {
+  background-color: rgb(177, 179, 185);
+  cursor: pointer;
+}
+
 .navbar-menu-create-post a {
   position: absolute;
-  right: 125px;
+  right: 107px;
   font-size: 20px;
   color: black;
+  height: 30px;
+  width: 30px;
 }
 
 .navbar-menu-users svg {
@@ -164,38 +173,3 @@
 }
 
 // End of navbar menu css
-
-
-
-
-
-
-// Beginning of navbar dropdown css
-.navbar-dropdown-list-div {
-  display: flex;
-}
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 260px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  padding: 12px 16px;
-  z-index: 1;
-  right: 0px;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-.logout-button {
-  height: 40px;
-}
-// End of navbar dropdown css
