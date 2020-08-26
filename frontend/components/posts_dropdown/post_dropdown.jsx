@@ -103,6 +103,8 @@ class PostDropdown extends React.Component {
                   deletePost={this.props.deletePost} 
                   post={this.props.post}
                 />
+
+                {/* / */}
                 
 
               </div>
