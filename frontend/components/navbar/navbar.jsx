@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Dropdown from '../dropdown/dropdown';
 import Modal from '../modal/modal';
-import PostFormContainer from '../posts_form/post_form_container';
+import CreatePostFormContainer from '../posts_form/create_post_container';
+import EditPostFormContainer from '../posts_form/edit_post_container';
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -31,7 +32,6 @@ class Navbar extends React.Component {
   }
 
   render () {
-    // debugger;
     return (
       <nav className="nav-bar">
       
@@ -105,11 +105,24 @@ class Navbar extends React.Component {
               
               
               <Modal show={this.state.openModal} handleClose={this.hideModal} >
-                <PostFormContainer
+
+                <CreatePostFormContainer
+                  history={this.props.history}
+                  match={this.props.match}
+                  location={this.props.location}
+                  handleClose={this.hideModal}
+                />
+
+              </Modal>
+
+              {/* <Modal show={this.state.openModal} handleClose={this.hideModal} >
+
+                <EditPostFormContainer
                   history={this.props.history}
                   handleClose={this.hideModal}
                 />
-              </Modal>
+
+              </Modal> */}
 
               <a onClick={this.showModal}>+</a>
 

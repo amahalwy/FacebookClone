@@ -17,7 +17,11 @@ class UsersIndex extends React.Component {
     } else {
       return (
         <div>
-          <NavBarContainer/>
+          <NavBarContainer
+            history={this.props.history}
+            match={this.props.match}
+            location={this.props.location}
+          />
           <div className='users-index-div'>
             {/* WILL INSERT FRIENDING COMPONENT HERE */}
             <div className='left-users-menu'>USER REQUESTS

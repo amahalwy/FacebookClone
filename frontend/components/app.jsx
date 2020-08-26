@@ -7,7 +7,8 @@ import UserShowContainer from './user_show/user_show_container';
 import UsersIndexContainer from './user_show/users_index_container';
 import NavBarContainer from './navbar/navbar_container';
 import PostsIndexContainer from './posts/posts_index_container';
-import PostFormContainer from './posts_form/post_form_container';
+// import PostFormContainer from './posts_form/post_form_container';
+import PostFormContainer from './posts_form/edit_post_container';
 
 export default () => (
   <div>

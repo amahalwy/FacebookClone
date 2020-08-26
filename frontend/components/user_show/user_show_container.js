@@ -6,8 +6,11 @@ import { fetchUserPosts, clearPosts } from '../../actions/post_actions';
 import {logout} from '../../actions/session';
 
 const mapStateToProps = (state, ownProps) => ({
-    user: state.entities.users[ownProps.match.params.userId],
-    currentUser: state.entities.users[state.session.id],
+  history: ownProps.history,
+  match: ownProps.match,
+  params: ownProps.params,
+  user: state.entities.users[ownProps.match.params.userId],
+  currentUser: state.entities.users[state.session.id],
 })
 
 const mapDispatchToProps = dispatch => ({

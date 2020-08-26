@@ -28,7 +28,7 @@ class Api::PostsController < ApplicationController
   def update
     @post = Post.find_by(id: params[:id])
     if @post.update(req_params)
-      
+      render '/api/posts/show'
     else
       # Render errors
     end

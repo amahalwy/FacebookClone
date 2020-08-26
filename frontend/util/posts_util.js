@@ -19,10 +19,11 @@ export const createPost = post => (
   })
 )
 
-export const updatePost = postId => (
+export const updatePost = post => (
   $.ajax({
-    url: `/api/posts/${postId}`,
-    method: 'PATCH'
+    url: `/api/posts/${post.id}`,
+    method: 'PATCH',
+    data: {post}
   })
 )
 

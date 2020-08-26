@@ -25,7 +25,11 @@ class UserShow extends React.Component {
     } else {
       return (
         <div>
-          <NavBarContainer />
+          <NavBarContainer
+            history={this.props.history}
+            match={this.props.match}
+            location={this.props.location}
+          />
           <section className='cover-photo-section'>
 
             <div className='cover-photo-container'>   {/* Cover photo section */}

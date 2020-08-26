@@ -2,20 +2,15 @@ import React from 'react'
 
 class PostForm extends React.Component {
   constructor(props) {
-    super(props)
-    this.state = {
-      user_id: '',
-      body: ''
-    }
+    super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInput = this.handleInput.bind(this);
   }
 
   handleSubmit(event){
-    debugger;
     event.preventDefault();
     this.state.user_id = this.props.currentUser.id;
-    this.props.createPost(this.state);
+    this.props.action(this.state);
     this.props.handleClose();
     // Need to reroute maybe?
   }
@@ -27,12 +22,14 @@ class PostForm extends React.Component {
   }
 
   render() {
+    debugger
     return (
       <div className='post-form-card'>
         <div className='post-form-header'>
           <div>
             <span>
-              <h1>Create Post</h1>
+              <h1>{this.props.formType}</h1>
+              {/* <h1>Create Post</h1> */}
             </span>
             <span>
               <button onClick={this.props.handleClose}><p>X</p></button>
