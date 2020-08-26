@@ -16,9 +16,10 @@ class Api::PostsController < ApplicationController
 
   def create
     @post = Post.new(req_params)
-    debugger
+    # debugger
     if @post.save
-      render '/api/posts/show'
+      @posts = Post.where(user_id: params[:post][:user_id])
+      render '/api/posts/index'
     else
       # Render errors
     end
@@ -27,7 +28,8 @@ class Api::PostsController < ApplicationController
   def update
     @post = Post.find_by(id: params[:id])
     if @post.update(req_params)
-      render '/api/posts/show'
+      @posts = Post.where(user_id: params[:post][:authorId])
+      render '/api/posts/index'
     else
       # Render errors
     end
@@ -35,7 +37,9 @@ class Api::PostsController < ApplicationController
 
   def destroy
     @post = Post.find_by(id: params[:id])
+    debugger
     @post.destroy
+    @posts = Post.where(user_id: @post.user_id)
     render '/api/posts/index'
   end
 

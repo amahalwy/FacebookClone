@@ -83,12 +83,6 @@ class Navbar extends React.Component {
               </li>
             </a>
 
-            <li className='navbar-main-li'>
-              <div className='navbar-main-groups navbar-main-home-hover'>
-                Groups
-              </div>
-            </li>
-
           </ul>
         </div>
 

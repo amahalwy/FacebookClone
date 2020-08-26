@@ -1,11 +1,8 @@
 import React from "react";
-// import SignupContainer from '../session/signup_container'
 
-
-// Need to thread props (history in particular through modal's children)
 const Modal = ({ handleClose, show, children }) => {
 
-  const showHideClassName = show ? "modal display-block" : "modal display-none";
+  const showHideClassName = show ? "modal display-block modal-z" : "modal display-none";
 
   return (
     <div className={showHideClassName}>

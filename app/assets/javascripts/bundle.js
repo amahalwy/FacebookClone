@@ -274,14 +274,14 @@ var fetchUserPosts = function fetchUserPosts(userId) {
 var createPost = function createPost(post) {
   return function (dispatch) {
     return _util_posts_util__WEBPACK_IMPORTED_MODULE_0__["createPost"](post).then(function (post) {
-      return dispatch(receivePost(post));
+      return dispatch(receiveUserPosts(post));
     });
   };
 };
 var updatePost = function updatePost(post) {
   return function (dispatch) {
     return _util_posts_util__WEBPACK_IMPORTED_MODULE_0__["updatePost"](post).then(function (post) {
-      return dispatch(receivePost(post));
+      return dispatch(receiveUserPosts(post));
     });
   };
 };
@@ -805,6 +805,48 @@ var FriendshipItem = function FriendshipItem(props) {
 
 /***/ }),
 
+/***/ "./frontend/components/modal/delete_modal.jsx":
+/*!****************************************************!*\
+  !*** ./frontend/components/modal/delete_modal.jsx ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var DeleteModal = function DeleteModal(_ref) {
+  var handleClose = _ref.handleClose,
+      show = _ref.show,
+      deletePost = _ref.deletePost,
+      post = _ref.post;
+  var showHideClassName = show ? "modal display-block modal-z" : "modal display-none";
+  debugger;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: showHideClassName
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+    className: "delete-modal-section"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "delete-modal"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "delete-modal-sure"
+  }, "Are you sure?"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "delete-modal-buttons-div"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "delete-modal-buttons"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Yes"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "delete-modal-buttons",
+    onClick: handleClose
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "No"))))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (DeleteModal);
+
+/***/ }),
+
 /***/ "./frontend/components/modal/modal.jsx":
 /*!*********************************************!*\
   !*** ./frontend/components/modal/modal.jsx ***!
@@ -816,14 +858,13 @@ var FriendshipItem = function FriendshipItem(props) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
- // import SignupContainer from '../session/signup_container'
-// Need to thread props (history in particular through modal's children)
+
 
 var Modal = function Modal(_ref) {
   var handleClose = _ref.handleClose,
       show = _ref.show,
       children = _ref.children;
-  var showHideClassName = show ? "modal display-block" : "modal display-none";
+  var showHideClassName = show ? "modal display-block modal-z" : "modal display-none";
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: showHideClassName
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
@@ -1026,11 +1067,7 @@ var Navbar = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
         fill: "currentColor",
         d: "M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"
-      }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "navbar-main-li"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "navbar-main-groups navbar-main-home-hover"
-      }, "Groups")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "navbar-menu"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "navbar-menu-user-profile-container"
@@ -1364,11 +1401,6 @@ var PostIndexItem = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(PostIndexItem, [{
-    key: "componentDidUpdate",
-    value: function componentDidUpdate(prevProps) {
-      debugger;
-    }
-  }, {
     key: "render",
     value: function render() {
       var post = this.props.post;
@@ -1607,7 +1639,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _modal_modal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../modal/modal */ "./frontend/components/modal/modal.jsx");
-/* harmony import */ var _posts_form_edit_post_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../posts_form/edit_post_container */ "./frontend/components/posts_form/edit_post_container.js");
+/* harmony import */ var _modal_delete_modal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../modal/delete_modal */ "./frontend/components/modal/delete_modal.jsx");
+/* harmony import */ var _posts_form_edit_post_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../posts_form/edit_post_container */ "./frontend/components/posts_form/edit_post_container.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1634,6 +1667,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var PostDropdown = /*#__PURE__*/function (_React$Component) {
   _inherits(PostDropdown, _React$Component);
 
@@ -1647,12 +1681,15 @@ var PostDropdown = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.state = {
       showMenu: false,
-      openModal: false
+      openModal: false,
+      openDeleteModal: false
     };
     _this.showMenu = _this.showMenu.bind(_assertThisInitialized(_this));
     _this.closeMenu = _this.closeMenu.bind(_assertThisInitialized(_this));
     _this.showModal = _this.showModal.bind(_assertThisInitialized(_this));
     _this.hideModal = _this.hideModal.bind(_assertThisInitialized(_this));
+    _this.showDeleteModal = _this.showDeleteModal.bind(_assertThisInitialized(_this));
+    _this.hideDeleteModal = _this.hideDeleteModal.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -1697,10 +1734,26 @@ var PostDropdown = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
+    key: "showDeleteModal",
+    value: function showDeleteModal(e) {
+      e.preventDefault();
+      this.setState({
+        openDeleteModal: true
+      });
+    }
+  }, {
+    key: "hideDeleteModal",
+    value: function hideDeleteModal() {
+      this.setState({
+        openDeleteModal: false
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this4 = this;
 
+      debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.showMenu,
         className: "post-dropdown-button"
@@ -1736,12 +1789,11 @@ var PostDropdown = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
         fill: "currentColor",
         d: "M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174L402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z"
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        onClick: this.showModal
-      }, "Edit Post")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Edit Post")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "dropdown-dividor"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "post-dropdown-delete"
+        className: "post-dropdown-delete",
+        onClick: this.showDeleteModal
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
         "aria-hidden": "true",
         focusable: "false",
@@ -1757,10 +1809,15 @@ var PostDropdown = /*#__PURE__*/function (_React$Component) {
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Delete Post")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modal_modal__WEBPACK_IMPORTED_MODULE_1__["default"], {
         show: this.state.openModal,
         handleClose: this.hideModal
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_posts_form_edit_post_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_posts_form_edit_post_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
         handleClose: this.hideModal,
         post: this.props.post
-      }))) : null);
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modal_delete_modal__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        show: this.state.openDeleteModal,
+        handleClose: this.hideDeleteModal,
+        deletePost: this.props.deletePost,
+        post: this.props.post
+      })) : null);
     }
   }]);
 
@@ -1902,7 +1959,8 @@ var CreatePostForm = /*#__PURE__*/function (_React$Component) {
       event.preventDefault();
       this.state.user_id = this.props.currentUser.id;
       this.props.createPost(this.state);
-      this.props.handleClose(); // Need to reroute maybe?
+      this.props.handleClose();
+      this.props.history.push("/users/".concat(this.props.currentUser.id));
     }
   }, {
     key: "handleInput",
@@ -2106,7 +2164,7 @@ var EditPostForm = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, EditPostForm);
 
     _this = _super.call(this, props);
-    _this.state = props.post;
+    _this.state = _this.props.post;
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.handleInput = _this.handleInput.bind(_assertThisInitialized(_this));
     return _this;

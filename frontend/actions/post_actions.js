@@ -37,12 +37,12 @@ export const fetchUserPosts = userId => dispatch => (
 
 export const createPost = post => dispatch => (
   APIUtil.createPost(post)
-  .then(post => dispatch(receivePost(post)))
+    .then(post => dispatch(receiveUserPosts(post)))
 )
 
 export const updatePost = post => dispatch => (
   APIUtil.updatePost(post)
-    .then(post => dispatch(receivePost(post)))
+    .then(post => dispatch(receiveUserPosts(post)))
 )
 
 export const deletePost = postId => dispatch => (

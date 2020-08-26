@@ -13,7 +13,7 @@ class CreatePostForm extends React.Component {
     this.state.user_id = this.props.currentUser.id;
     this.props.createPost(this.state);
     this.props.handleClose();
-    // Need to reroute maybe?
+    this.props.history.push(`/users/${this.props.currentUser.id}`);
   }
 
   handleInput(f){

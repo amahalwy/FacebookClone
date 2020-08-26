@@ -1,0 +1,40 @@
+.delete-modal-section {
+  position: fixed;
+  background: white;
+  width: 20%;
+  height: 100px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  border-radius: 5px;
+  z-index: 100;
+  background-color: white;
+}
+
+.delete-modal {
+  display: flex;
+  justify-content: center;
+  margin: 18px auto;
+}
+
+.delete-modal-sure {
+  font-size: 20px;
+}
+
+.delete-modal-buttons-div {
+  display: flex;
+  justify-content: space-around;
+}
+
+.delete-modal-buttons {
+  background-color: rgb(27, 119, 242);
+  border: none;
+  border-radius: 10px;
+  height: 32px;
+  width: 40px;
+  outline: none;
+}
+
+.delete-modal-buttons span {
+  color: white;
+}

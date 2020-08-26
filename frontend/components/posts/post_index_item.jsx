@@ -4,11 +4,6 @@ import PostDropdownContainer from '../posts_dropdown/post_dropdown_container';
 
 class PostIndexItem extends React.Component {
 
-
-  componentDidUpdate(prevProps){
-    debugger
-  }
-
   render() {
     const post = this.props.post;
     return (

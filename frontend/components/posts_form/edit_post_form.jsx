@@ -3,7 +3,7 @@ import React from 'react';
 class EditPostForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = props.post;
+    this.state = this.props.post;
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInput = this.handleInput.bind(this);
   }
