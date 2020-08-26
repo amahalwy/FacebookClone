@@ -25,9 +25,20 @@ class Api::PostsController < ApplicationController
     end
   end
 
-  # def method_name
-    
-  # end
+  def update
+    @post = Post.find_by(id: params[:id])
+    if @post.update(req_params)
+      
+    else
+      # Render errors
+    end
+  end
+
+  def destroy
+    @post = Post.find_by(id: params[:id])
+    @post.destroy
+    render '/api/posts/index'
+  end
 
   private
   def req_params

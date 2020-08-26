@@ -40,6 +40,11 @@ export const createPost = post => dispatch => (
   .then(post => dispatch(receivePost(post)))
 )
 
+export const updatePost = postId => dispatch => (
+  APIUtil.updatePost(postId)
+    .then(post => dispatch(receivePost(post)))
+)
+
 export const deletePost = postId => dispatch => (
   APIUtil.deletePost(postId)
     .then(() => dispatch(removePost(postId)))

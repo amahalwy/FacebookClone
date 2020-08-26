@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import { createPost } from '../../actions/post_actions';
+import { createPost, updatePost } from '../../actions/post_actions';
 import PostForm from './post_form';
 
 const mapStateToProps = state => ({
@@ -7,7 +7,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  createPost: post => dispatch(createPost(post))
+  createPost: post => dispatch(createPost(post)),
+  updatePost: postId => dispatch(updatePost(postId))
   // createPost: (user_id, post) => dispatch(createPost(user_id, post))
 })
 

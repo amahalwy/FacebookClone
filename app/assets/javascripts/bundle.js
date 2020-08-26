@@ -207,7 +207,7 @@ var fetchFriendships = function fetchFriendships(userId) {
 /*!******************************************!*\
   !*** ./frontend/actions/post_actions.js ***!
   \******************************************/
-/*! exports provided: RECEIVE_POST, RECEIVE_USER_POSTS, REMOVE_POST, CLEAR_POSTS, fetchPost, fetchUserPosts, createPost, deletePost, clearPosts */
+/*! exports provided: RECEIVE_POST, RECEIVE_USER_POSTS, REMOVE_POST, CLEAR_POSTS, fetchPost, fetchUserPosts, createPost, updatePost, deletePost, clearPosts */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -219,6 +219,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchPost", function() { return fetchPost; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUserPosts", function() { return fetchUserPosts; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createPost", function() { return createPost; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updatePost", function() { return updatePost; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deletePost", function() { return deletePost; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearPosts", function() { return clearPosts; });
 /* harmony import */ var _util_posts_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/posts_util */ "./frontend/util/posts_util.js");
@@ -273,6 +274,13 @@ var fetchUserPosts = function fetchUserPosts(userId) {
 var createPost = function createPost(post) {
   return function (dispatch) {
     return _util_posts_util__WEBPACK_IMPORTED_MODULE_0__["createPost"](post).then(function (post) {
+      return dispatch(receivePost(post));
+    });
+  };
+};
+var updatePost = function updatePost(postId) {
+  return function (dispatch) {
+    return _util_posts_util__WEBPACK_IMPORTED_MODULE_0__["updatePost"](postId).then(function (post) {
       return dispatch(receivePost(post));
     });
   };
@@ -651,77 +659,9 @@ var Dropdown = /*#__PURE__*/function (_React$Component) {
   }]);
 
   return Dropdown;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component); // className = 'dropdown-icon'
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 
-
-{
-  /* <div className='navbar-menu-list-button'>
-             <div className="dropdown navbar-menu-dropdown-click">
-               <span className='dropdown-icon'><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sort-down" className="more-icon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41z"></path></svg></span>
-               <div className="dropdown-content">
-                  <div>
-                    <div>Profile Div
-                     <div>Profile pic</div>
-                      <div>Profile stuff itself
-                       <div>User's Full name</div>
-                       <div>See your profile</div>
-                     </div>
-                   </div>
-  
-                   <div>Feedback
-                     <div>Help icon thing</div>
-                      <div>
-                       <div>Give Feedback</div>
-                       <div>Help us improve the cloned Facebook.</div>
-                     </div>
-                    </div>
-                    <div>Bottom list
-                     <div>List
-                        <div>
-                         <div className='navbar-dropdown-list-div'>
-                           <div>Icon</div>
-                           <div>Settings and Privacy</div>
-                         </div>
-                       </div>
-                        <div>
-                         <div className='navbar-dropdown-list-div'>
-                           <div>Icon</div>
-                           <div>Help & Support</div>
-                         </div>
-                       </div>
-                        <div>
-                         <div className='navbar-dropdown-list-div'>
-                           <div>Icon</div>
-                           <div>Dark Mode</div>
-                           <div>TOGGLE THINGG</div>
-                         </div>
-                       </div>
-                        <div>
-                         <div className='navbar-dropdown-list-div'>
-                           <div>Icon</div>
-                           <div>
-                             <div>Switch to classic Facebook</div>
-                             <div>The classic Facebook will no longer be available starting in September</div>
-                           </div>
-                         </div>
-                       </div>
-                        <div>
-                         <div className='navbar-dropdown-list-div'>
-                           <div>Icon</div>
-                           <div>
-                             <button onClick={this.props.logout}>Logout</button>
-                           </div>
-                         </div>
-                       </div>
-                      </div>
-                      <div>Privacy, cookies, etc</div>
-                    </div>
-                  </div>
-               </div>
-             </div>
-           </div> */
-}
 
 /***/ }),
 
@@ -1851,6 +1791,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     createPost: function createPost(post) {
       return dispatch(Object(_actions_post_actions__WEBPACK_IMPORTED_MODULE_1__["createPost"])(post));
+    },
+    updatePost: function updatePost(postId) {
+      return dispatch(Object(_actions_post_actions__WEBPACK_IMPORTED_MODULE_1__["updatePost"])(postId));
     } // createPost: (user_id, post) => dispatch(createPost(user_id, post))
 
   };
@@ -3237,7 +3180,7 @@ var fetchFriendships = function fetchFriendships(userId) {
 /*!*************************************!*\
   !*** ./frontend/util/posts_util.js ***!
   \*************************************/
-/*! exports provided: fetchUserPosts, fetchPost, createPost, deletePost */
+/*! exports provided: fetchUserPosts, fetchPost, createPost, updatePost, deletePost */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3245,6 +3188,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUserPosts", function() { return fetchUserPosts; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchPost", function() { return fetchPost; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createPost", function() { return createPost; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updatePost", function() { return updatePost; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deletePost", function() { return deletePost; });
 var fetchUserPosts = function fetchUserPosts(userId) {
   return $.ajax({
@@ -3263,6 +3207,12 @@ var createPost = function createPost(post) {
     data: {
       post: post
     }
+  });
+};
+var updatePost = function updatePost(postId) {
+  return $.ajax({
+    url: "/api/posts/".concat(postId),
+    method: 'PATCH'
   });
 };
 var deletePost = function deletePost(postId) {
