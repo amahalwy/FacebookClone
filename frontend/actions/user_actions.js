@@ -24,7 +24,7 @@ export const fetchUsers = () => dispatch => (
     .then(users => dispatch(receiveAllUsers(users)))
 )
 
-export const createUserPhoto = formData => dispatch => (
-  APIUtil.createUserPhoto(formData)
+export const updateUserPhoto = (userId, formData) => dispatch => (
+  APIUtil.updateUserPhoto(userId, formData)
     .then(user => dispatch(receiveUser(user)))
 )

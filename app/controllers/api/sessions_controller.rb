@@ -8,7 +8,6 @@ class Api::SessionsController < ApplicationController
 
     if @user
       login!(@user)
-      # Fine until news feed
       render "api/users/show"
     else
       render json: ["Invalid email/password combination"], status: 401

@@ -40,9 +40,10 @@ class UserShow extends React.Component {
     const reader = new FileReader();
     const file = e.currentTarget.files[0];
     reader.onloadend = () =>
-      this.setState({ imageUrl: reader.result, imageFile: file });
+      this.setState({ profilePhotoFile: file }, () => this.coverProfileSubmit());
 
     if (file) {
+      console.log(file);
       reader.readAsDataURL(file);
     } else {
       this.setState({ profilePhotoFile: null });
@@ -53,30 +54,36 @@ class UserShow extends React.Component {
     const reader = new FileReader();
     const file = e.currentTarget.files[0];
     reader.onloadend = () =>
-      this.setState({ imageUrl: reader.result, imageFile: file });
+      this.setState({ coverPhotoFile: file }, () => this.coverHandleSubmit()); 
+      // 
 
     if (file) {
       reader.readAsDataURL(file);
+
     } else {
       this.setState({ coverPhotoFile: null });
     }
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
+  coverHandleSubmit() {
     const formData = new FormData();
-    formData.append('user[photo]', this.state.photoFile);
-    this.props.createUserPhoto(formData);
+    formData.append('user[cover_photo]', this.state.coverPhotoFile);
+    this.props.updateUserPhoto(this.props.user.id, formData);
+  }
+
+  coverProfileSubmit() {
+    const formData = new FormData();
+    formData.append('user[profile_photo]', this.state.profilePhotoFile);
+    this.props.updateUserPhoto(this.props.user.id, formData);
   }
 
   coverPhotoUpload() {
-    this.photoCoverUpload.current.click()
+    this.photoCoverUpload.current.click();
   }
   
   profilePhotoUpload() {
     this.photoProfileUpload.current.click()
   }
-
 
   render() {
     if (!this.props.user) return '';
@@ -90,37 +97,46 @@ class UserShow extends React.Component {
         <section className='cover-photo-section'>
 
           <div className='cover-photo-container'>
-            <img className='cover-photo-img' src="" alt="" />
+            
+            <img className='cover-photo-img' 
+              src={this.props.user.coverPhoto} 
+              alt="Cover Image" 
+            />
 
-            <div className='profile-pic-container'> {/* Profile picture */}
+            <div className='profile-pic-container'> 
               <img 
-                className='cover-image'
-                // src={this.props.user.coverPhoto} 
-                alt="Default Profile pic" 
+                className='profile-photo-img'
+                src={this.props.user.profilePhoto} 
+                alt="Profile Image" 
               />
-
-              <div className='camera-circle'>
+            
+              <button onClick={this.profilePhotoUpload} className='camera-circle'>
                 <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="camera" className="camera-icon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M512 144v288c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V144c0-26.5 21.5-48 48-48h88l12.3-32.9c7-18.7 24.9-31.1 44.9-31.1h125.5c20 0 37.9 12.4 44.9 31.1L376 96h88c26.5 0 48 21.5 48 48zM376 288c0-66.2-53.8-120-120-120s-120 53.8-120 120 53.8 120 120 120 120-53.8 120-120zm-32 0c0 48.5-39.5 88-88 88s-88-39.5-88-88 39.5-88 88-88 88 39.5 88 88z"></path></svg>
-
                 <input
                   type="file"
                   className='button-file'
-                  // onChange={this.handleFile.bind(this)}
+                  ref={this.photoProfileUpload}
+                  onChange={this.handleProfileFile}
                 />
-              </div>
+              </button>
 
             </div>
 
-            <button className='edit-cover-photo'> {/* Edit cover photo button */}
+            <button className='edit-cover-photo' onClick={this.coverPhotoUpload}>
               <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="camera" className="camera-icon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M512 144v288c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V144c0-26.5 21.5-48 48-48h88l12.3-32.9c7-18.7 24.9-31.1 44.9-31.1h125.5c20 0 37.9 12.4 44.9 31.1L376 96h88c26.5 0 48 21.5 48 48zM376 288c0-66.2-53.8-120-120-120s-120 53.8-120 120 53.8 120 120 120 120-53.8 120-120zm-32 0c0 48.5-39.5 88-88 88s-88-39.5-88-88 39.5-88 88-88 88 39.5 88 88z"></path></svg>
-              <input type="file" className='button-file' />
+              <input 
+                type="file" 
+                className='button-file' 
+                ref={this.photoCoverUpload}
+                onChange={this.handleCoverFile}
+              />
                 Edit cover photo
             </button>
 
           </div>
 
 
-          <div className='under-cover-info-container' >     {/* Under cover section */}
+          <div className='under-cover-info-container' > 
             <div className='under-cover-info'>
 
               <div className='user-name'>{this.props.user.firstName} {this.props.user.lastName}</div>
@@ -237,6 +253,7 @@ class UserShow extends React.Component {
                         history={this.props.history}
                         user={this.props.user}
                       />
+
                     </ul>
                   </div>
 

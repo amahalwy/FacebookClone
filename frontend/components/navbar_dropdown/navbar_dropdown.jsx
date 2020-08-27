@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default class NavbarDropdown extends React.Component {
   constructor(props) {
@@ -44,8 +45,10 @@ export default class NavbarDropdown extends React.Component {
 
                 <div>
 
-                  <div className='profile-parent-div'>
-                    <div className='dropdown-profile-pic'>IMAGE</div>
+                  <Link to={`/users/${this.props.currentUser.id}`}  className='profile-parent-div'>
+                    <div className='dropdown-profile-pic'>
+                      <img src={this.props.currentUser.profilePhoto} alt="Current User Profile"/>
+                    </div>
 
                     <div className='dropdown-profile-stuff'>
                       <div className='dropdown-username'>
@@ -54,7 +57,7 @@ export default class NavbarDropdown extends React.Component {
                       <div className='dropdown-see-profile'>See your profile</div>
                     </div>
 
-                  </div>
+                  </Link>
                 </div>
 
                 <div className='dropdown-dividor'></div>
@@ -103,7 +106,7 @@ export default class NavbarDropdown extends React.Component {
                         <div className='dropdown-bottom-icon'>Icon</div>
                         <div className='dropdown-bottom-text'>
                           <div>Switch to classic Facebook</div>
-                          <div className='dropdown-switch-classic'>The classic Facebook will no longer be available starting in September</div>
+                          <div className='dropdown-switch-classic'>The classic Facebook is gone. This fake "Facebook" is taking over.</div>
                         </div>
                       </div>
                     </div>
@@ -117,15 +120,6 @@ export default class NavbarDropdown extends React.Component {
 
                   </div>
 
-                  <div>Privacy, cookies, etc
-                    <ul>
-                      <li></li>
-                      <li></li>
-                      <li></li>
-                      <li></li>
-                      <li></li>
-                    </ul>
-                  </div>
                 </div>
               </div>
             )

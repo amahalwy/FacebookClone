@@ -10,10 +10,10 @@ export const fetchUser = userId => (
   })
 )
 
-export const createUserPhoto = (userId, formData) => (
+export const updateUserPhoto = (userId, formData) => (
   $.ajax({
     url: `/api/users/${userId}`,
-    method: 'POST',
+    method: 'PATCH',
     data: formData,
     contentType: false,
     processData: false

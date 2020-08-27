@@ -15,6 +15,7 @@
   z-index: 1;
   right: 0px;
   top: 50px;
+  height: 360px;
 }
 
 .dropdown-icon {
@@ -30,15 +31,27 @@
 
 .profile-parent-div {
   display: flex;
-  margin-bottom: 6px;
+  margin: 15px 10px;
+  text-decoration: none;
+  color: black;
 }
 
 .dropdown-profile-pic {
-  margin: 10px;
+  margin-right: 20px;
+  height: 40px;
+  width: 30px;
+}
+
+.dropdown-profile-pic > img {
+  height: 100%;
+  width: 100%;
+  border: 1px solid black;
+  border-radius: 8px;
 }
 
 .dropdown-username {
   font-size: 20px;
+  letter-spacing: 0.05em;
   margin: 5px 0px;
 }
 
@@ -55,7 +68,7 @@
 
 .dropdown-feedback-card {
   display: flex;
-  margin: 5px 0px; 
+  margin: 10px 0px; 
 }
 
 
@@ -97,7 +110,7 @@
 }
 
 .dropdown-bottom {
-  margin: 0 auto;
+  margin: 10px auto;
   width: 95%;
 }
 

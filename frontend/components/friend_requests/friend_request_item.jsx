@@ -18,6 +18,7 @@ class FriendRequestItem extends React.Component {
   }
 
   render(){
+    debugger
     return (
       <li>
         <div className='request-user-card'>
