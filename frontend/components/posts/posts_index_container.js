@@ -9,7 +9,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     deletePost: postId => dispatch(deletePost(postId)),
-    fetchPostComments: postId => dispatch(fetchPostComments(postId)),
     deleteComment: commentId => dispatch(deleteComment(commentId))
 })
 

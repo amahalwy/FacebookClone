@@ -6,15 +6,16 @@
     json.authorLastName post.author.last_name
     json.body post.body
 
-    json.comments do
-      post.comments.each do |comment|
-        json.set! comment.id do
-          json.id comment.id
-          json.body comment.body
-        end
-      end
-    end
 
-    
+    json.comments post.comments
+    # json.comments do
+    #   json.array! post.comments.each do |comment|
+    #     json.set! comment.id do
+    #       json.id comment.id
+    #       json.body comment.body
+    #     end
+    #   end
+    # end
+
   end
 end

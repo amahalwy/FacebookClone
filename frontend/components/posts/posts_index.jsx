@@ -13,7 +13,7 @@ class PostsIndex extends React.Component {
               <PostIndexItem
                 key={post.id}
                 post={post}
-                comments={this.props.comments}
+                deleteComment={this.props.deleteComment}
               />
             )
           })

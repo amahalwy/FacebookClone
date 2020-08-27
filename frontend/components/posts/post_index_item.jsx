@@ -1,6 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom';
 import PostDropdownContainer from '../posts_dropdown/post_dropdown_container';
+import CommentIndexItem from '../comments/comment_index_item';
 
 class PostIndexItem extends React.Component {
 
@@ -63,9 +64,15 @@ class PostIndexItem extends React.Component {
 
           <div className='posts-comments'>
 
-            {/* {post.comments.map(comment => {
-
-            })} */}
+            {post.comments.map(comment => {
+              return (
+                <CommentIndexItem
+                  key={comment.id}
+                  comment={comment} 
+                  deleteComment={this.props.deleteComment}
+                />
+              )
+            })}
 
 
 
