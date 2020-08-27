@@ -10,7 +10,7 @@ class Api::UsersController < ApplicationController
     if @user.save 
       login!(@user)
       # Render user's show page by popping in ID
-      render :show, status: 202
+      render :show, status: 201
     else
       render json: @user.errors.full_messages, status: 422
     end
@@ -23,7 +23,7 @@ class Api::UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password)
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :cover_photo)
   end
   
 end

@@ -12,8 +12,13 @@ class PostsIndex extends React.Component {
             return (
               <PostIndexItem
                 key={post.id}
+                history={this.props.history}
                 post={post}
                 deleteComment={this.props.deleteComment}
+                createComment={this.props.createComment}
+                currentUser={this.props.currentUser}
+                fetchUserPosts={this.props.fetchUserPosts}
+                fetchPostComments={this.props.fetchPostComments}
               />
             )
           })

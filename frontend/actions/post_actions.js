@@ -2,7 +2,7 @@ import * as APIUtil from '../util/posts_util';
 
 export const RECEIVE_POST = "RECEIVE_POST";
 export const RECEIVE_USER_POSTS = "RECEIVE_USER_POSTS";
-export const REMOVE_POST = "REMOST_POST"
+export const REMOVE_POST = "REMOVE_POST"
 export const CLEAR_POSTS = "CLEAR_POSTS"
 
 const receivePost = post => ({

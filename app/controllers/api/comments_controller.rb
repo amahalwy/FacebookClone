@@ -7,13 +7,19 @@ class Api::CommentsController < ApplicationController
   def create
     @comment = Comment.new(req_params)
     if @comment.save
-      debugger
       @comments = Comment.where(post_id: params[:comment][:post_id])
       render '/api/comments/index'
     else
       debugger
       # Render errors
     end
+  end
+
+  def destroy
+    @comment = Comment.find_by(id: params[:id])
+    @comment.destroy
+    @comments = Comment.where(post_id: @comment[:post_id])
+    render '/api/comments/index'
   end
 
   private

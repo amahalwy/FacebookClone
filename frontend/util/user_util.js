@@ -10,3 +10,12 @@ export const fetchUser = userId => (
   })
 )
 
+export const createUserPhoto = formData => (
+  $.ajax({
+    url: '/api/users',
+    method: 'POST',
+    data: formData,
+    contentType: false,
+    processData: false
+  })
+)

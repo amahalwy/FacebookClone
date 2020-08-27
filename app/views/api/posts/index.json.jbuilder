@@ -7,15 +7,13 @@
     json.body post.body
 
 
-    json.comments post.comments
-    # json.comments do
-    #   json.array! post.comments.each do |comment|
-    #     json.set! comment.id do
-    #       json.id comment.id
-    #       json.body comment.body
-    #     end
-    #   end
-    # end
+    json.comments post.comments do |comment|
+      json.id comment.id
+      json.authorId comment.user_id
+      json.body comment.body
+      json.authorFirstName comment.author.first_name
+      json.authorLastName comment.author.last_name
+    end
 
   end
 end

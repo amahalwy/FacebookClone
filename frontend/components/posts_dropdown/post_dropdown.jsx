@@ -103,9 +103,6 @@ class PostDropdown extends React.Component {
                   post={this.props.post}
                 />
 
-                {/* / */}
-                
-
               </div>
             )
             : (

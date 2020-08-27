@@ -1,12 +1,10 @@
 class Api::PostsController < ApplicationController
   def index
     @posts = Post.where(user_id: params[:user_id])
-    # debugger
   end
 
   def show
     @post = Post.find_by(id: params[:id])
-    # debugger
     if @post 
       render '/api/posts/show'
     else
@@ -16,7 +14,6 @@ class Api::PostsController < ApplicationController
 
   def create
     @post = Post.new(req_params)
-    # debugger
     if @post.save
       @posts = Post.where(user_id: params[:post][:user_id])
       render '/api/posts/index'
@@ -37,7 +34,6 @@ class Api::PostsController < ApplicationController
 
   def destroy
     @post = Post.find_by(id: params[:id])
-    debugger
     @post.destroy
     @posts = Post.where(user_id: @post.user_id)
     render '/api/posts/index'

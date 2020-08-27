@@ -1,3 +1,114 @@
 // Place all the styles related to the Comments controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.comment-card {
+  margin: 0 auto;
+  width: 95%;
+  display: flex;
+}
+
+.comment-avatar {
+  margin: 6px;
+  padding: 6px;
+  border: 1px solid red;
+  display: flex;
+  align-self: center;
+}
+
+.comment-body {
+  border: 1px solid red;
+  // border: 1px solid rgb(240, 242, 245);
+  border-radius: 8px;
+  min-width: 320px;
+  margin: 4px;
+  padding: 5px;
+  align-self: center;
+}
+
+.comment-user-name {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.comment-user-name a {
+  color: rgb(49, 49, 49);
+}
+
+.comment-text {
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.comment-delete-button button {
+  margin: 14px;
+  background: white;
+  border: none;
+  border-radius: 10px;
+  height: 20px; 
+  width: 42px;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.post-comment-text {
+  width: 94%;
+  height: 28px;
+  border: none;
+  border-radius: 50px;
+  background-color: rgb(225, 227, 229);
+  color: black;
+  overflow: auto;
+  outline: none;
+  resize: none;
+  padding-left: 20px;
+  padding-top: 10px;
+  font-size: 14px;
+}
+
+.post-comment {
+  width: 95%;
+  margin: 8px auto;
+}
+
+.comment-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.post-comment-avatar {
+  width: 40px;
+  height: 40px;
+  margin: 0 10px;
+}
+
+.post-comment-form {
+  position: relative;
+  align-self: center;
+  width: 95%;
+}
+
+.comment-icons {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+
+.smile-icon,
+.image-icon {
+  height: 18px;
+  width: 18px;
+  margin-top: 5px;
+  margin-right: 8px;
+}
+
+.comment-icons svg:hover {
+  cursor: pointer;
+}
+
+.post-form-input::placeholder {
+  margin-left: 20px;
+}
+
+// End of comment section
+

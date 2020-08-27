@@ -20,7 +20,11 @@ export const fetchUser = userId => dispatch => (
 )
 
 export const fetchUsers = () => dispatch => (
-    APIUtil.fetchUsers()
-      .then(users => dispatch(receiveAllUsers(users)))
-  )
+  APIUtil.fetchUsers()
+    .then(users => dispatch(receiveAllUsers(users)))
+)
 
+export const createUserPhoto = formData => dispatch => (
+  APIUtil.createUserPhoto(formData)
+    .then(user => dispatch(receiveUser(user)))
+)

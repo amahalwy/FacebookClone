@@ -2,6 +2,7 @@ import React from 'react';
 import NavBarContainer from '../navbar/navbar_container';
 import ProfileButton from './profile_button';
 import PostIndexContainer from '../posts/posts_index_container';
+import ProfileImage from './profile_image';
 
 class UserShow extends React.Component {
 
@@ -32,14 +33,17 @@ class UserShow extends React.Component {
           <section className='cover-photo-section'>
 
             <div className='cover-photo-container'>   {/* Cover photo section */}
+
               <img className='cover-photo-img' src="" alt="" />
 
               <div className='profile-pic-container'> {/* Profile picture */}
-                <img src="" alt="Default Profile pic" />
-                <div className='camera-circle'>
-                  <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="camera" className="camera-icon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M512 144v288c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V144c0-26.5 21.5-48 48-48h88l12.3-32.9c7-18.7 24.9-31.1 44.9-31.1h125.5c20 0 37.9 12.4 44.9 31.1L376 96h88c26.5 0 48 21.5 48 48zM376 288c0-66.2-53.8-120-120-120s-120 53.8-120 120 53.8 120 120 120 120-53.8 120-120zm-32 0c0 48.5-39.5 88-88 88s-88-39.5-88-88 39.5-88 88-88 88 39.5 88 88z"></path></svg>
-                  <input type="file" className='button-file'/>
-                </div>
+                <img 
+                  src="" 
+                  alt="Default Profile pic" 
+                />
+
+                <ProfileImage createUserPhoto={this.props.createUserPhoto} />
+
               </div>
 
               <button className='edit-cover-photo'> {/* Edit cover photo button */}
@@ -167,6 +171,7 @@ class UserShow extends React.Component {
                     <div>
                       <ul>
                         <PostIndexContainer 
+                          history={this.props.history}
                           user={this.props.user}
                         />
                       </ul>
@@ -195,5 +200,3 @@ class UserShow extends React.Component {
 }
 
 export default UserShow;
-
-
