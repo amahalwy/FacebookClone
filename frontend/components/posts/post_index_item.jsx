@@ -94,7 +94,6 @@ class PostIndexItem extends React.Component {
       </li>
     )
 
-
   }
 }
 

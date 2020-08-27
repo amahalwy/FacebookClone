@@ -23,6 +23,7 @@ class UserShow extends React.Component {
     if (!this.props.user) {
       return '';
     } else {
+      debugger
       return (
         <div>
           <NavBarContainer
@@ -62,9 +63,6 @@ class UserShow extends React.Component {
                   "Some user bio"
                   <button className='edit-bio-button'>Edit</button>
                 </div>
-
-                {/* This can be a form/modal??? */}
-                {/* <form action=""></form> */}
                 
               </div>
 

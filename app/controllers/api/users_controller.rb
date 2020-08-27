@@ -9,7 +9,6 @@ class Api::UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save 
       login!(@user)
-      # Render user's show page by popping in ID
       render :show, status: 201
     else
       render json: @user.errors.full_messages, status: 422
