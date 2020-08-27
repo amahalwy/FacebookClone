@@ -8,6 +8,8 @@ class User < ApplicationRecord
 
   after_initialize :ensure_session_token
 
+  has_one_attached :profile_photo
+
   has_many :friend_requests_as_requestor,
     foreign_key: :requestor_id,
     class_name: :FriendRequest
