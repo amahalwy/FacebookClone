@@ -11,6 +11,7 @@ class Api::UsersController < ApplicationController
       login!(@user)
       render :show, status: 201
     else
+      # Render errors
       render json: @user.errors.full_messages, status: 422
     end
   end
@@ -18,6 +19,15 @@ class Api::UsersController < ApplicationController
   def show
     @user = User.find_by(id: params[:id])
     render :show
+  end
+
+  def update
+    @user = User.find_by(id: params[:id])
+    if @user.update(req_params)
+      render :show
+    else
+      # Render errors
+    end
   end
 
   private

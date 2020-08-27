@@ -17,7 +17,6 @@ class ProfileButton extends React.Component {
   // }
 
   render() {
-    debugger
     if (this.props.user.id === this.props.currentUser.id) {
       // My profile
       return (

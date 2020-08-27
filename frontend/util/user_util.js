@@ -10,9 +10,9 @@ export const fetchUser = userId => (
   })
 )
 
-export const createUserPhoto = formData => (
+export const createUserPhoto = (userId, formData) => (
   $.ajax({
-    url: '/api/users',
+    url: `/api/users/${userId}`,
     method: 'POST',
     data: formData,
     contentType: false,

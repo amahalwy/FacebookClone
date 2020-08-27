@@ -10,7 +10,6 @@ class Api::CommentsController < ApplicationController
       @comments = Comment.where(post_id: params[:comment][:post_id])
       render '/api/comments/index'
     else
-      debugger
       # Render errors
     end
   end
