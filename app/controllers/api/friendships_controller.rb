@@ -2,6 +2,7 @@ class Api::FriendshipsController < ApplicationController
 
   def index
     @friendships = Friendship.where(user_id: current_user.id)
+    # @friendships = Friendship.where(user_id: 78)
   end
 
   def create

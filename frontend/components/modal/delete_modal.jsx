@@ -3,7 +3,6 @@ import React from "react";
 const DeleteModal = ({ handleClose, show, deletePost, post }) => {
 
   const showHideClassName = show ? "modal display-block modal-z" : "modal display-none";
-  debugger
   return (
     <div className={showHideClassName}>
       <section className="delete-modal-section">
@@ -16,7 +15,8 @@ const DeleteModal = ({ handleClose, show, deletePost, post }) => {
 
         <div className='delete-modal-buttons-div'>
           <div>
-            <button className='delete-modal-buttons'>
+            <button className='delete-modal-buttons' onClick={() => deletePost(post.id)}>
+              
               <span>Yes</span>
             </button>
           </div>

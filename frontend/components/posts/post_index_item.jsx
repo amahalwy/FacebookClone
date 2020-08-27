@@ -29,11 +29,7 @@ class PostIndexItem extends React.Component {
                       post={this.props.post}
                     />
                 </div>
-
-
               </div>
-
-
             </div>
 
             <div className='post-body'>
@@ -65,6 +61,17 @@ class PostIndexItem extends React.Component {
             </div>
           </div>
 
+          <div className='posts-comments'>
+
+            {/* {post.comments.map(comment => {
+
+            })} */}
+
+
+
+
+          </div>
+
           <div className='post-comment'>
             {/* render comment index for this post */}
             <div className='comment-container'>
@@ -84,6 +91,8 @@ class PostIndexItem extends React.Component {
         </div>
       </li>
     )
+
+
   }
 }
 

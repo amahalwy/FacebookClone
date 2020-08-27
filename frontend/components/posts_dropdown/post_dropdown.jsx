@@ -54,7 +54,6 @@ class PostDropdown extends React.Component {
   }
 
   render() {
-    debugger
     return (
       <div>
         <button onClick={this.showMenu} className='post-dropdown-button'>

@@ -8,12 +8,12 @@ class PostsIndex extends React.Component {
       <div>
         <ul>
         {
-          this.props.posts.map(post =>{
+          this.props.posts.map(post => {
             return (
               <PostIndexItem
                 key={post.id}
                 post={post}
-                deletePost={this.props.deletePost}
+                comments={this.props.comments}
               />
             )
           })

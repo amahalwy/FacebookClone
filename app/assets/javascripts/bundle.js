@@ -891,7 +891,6 @@ var DeleteModal = function DeleteModal(_ref) {
       deletePost = _ref.deletePost,
       post = _ref.post;
   var showHideClassName = show ? "modal display-block modal-z" : "modal display-none";
-  debugger;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: showHideClassName
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
@@ -903,7 +902,10 @@ var DeleteModal = function DeleteModal(_ref) {
   }, "Are you sure?"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "delete-modal-buttons-div"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "delete-modal-buttons"
+    className: "delete-modal-buttons",
+    onClick: function onClick() {
+      return deletePost(post.id);
+    }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Yes"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "delete-modal-buttons",
     onClick: handleClose
@@ -1531,6 +1533,8 @@ var PostIndexItem = /*#__PURE__*/function (_React$Component) {
         fill: "currentColor",
         d: "M256 32C114.6 32 0 125.1 0 240c0 47.6 19.9 91.2 52.9 126.3C38 405.7 7 439.1 6.5 439.5c-6.6 7-8.4 17.2-4.6 26S14.4 480 24 480c61.5 0 110-25.7 139.1-46.3C192 442.8 223.2 448 256 448c141.4 0 256-93.1 256-208S397.4 32 256 32zm0 368c-26.7 0-53.1-4.1-78.4-12.1l-22.7-7.2-19.5 13.8c-14.3 10.1-33.9 21.4-57.5 29 7.3-12.1 14.4-25.7 19.9-40.2l10.6-28.1-20.6-21.8C69.7 314.1 48 282.2 48 240c0-88.2 93.3-160 208-160s208 71.8 208 160-93.3 160-208 160z"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Comment"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "posts-comments"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "post-comment"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "comment-container"
@@ -1638,7 +1642,7 @@ var PostsIndex = /*#__PURE__*/function (_React$Component) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_post_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: post.id,
           post: post,
-          deletePost: _this.props.deletePost
+          comments: _this.props.comments
         });
       })));
     }
@@ -1662,10 +1666,12 @@ var PostsIndex = /*#__PURE__*/function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _posts_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./posts_index */ "./frontend/components/posts/posts_index.jsx");
+/* harmony import */ var _actions_comment_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/comment_actions */ "./frontend/actions/comment_actions.js");
 
- // import { fetchUserPosts, clearPosts } from '../../actions/post_actions';
 
-var mapStateToProps = function mapStateToProps(state, ownProps) {
+
+
+var mapStateToProps = function mapStateToProps(state) {
   return {
     currentUser: state.entities.users[state.session.id],
     posts: Object.values(state.entities.posts || {})
@@ -1686,7 +1692,13 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
       return deletePost;
     }(function (postId) {
       return dispatch(deletePost(postId));
-    })
+    }),
+    fetchPostComments: function fetchPostComments(postId) {
+      return dispatch(Object(_actions_comment_actions__WEBPACK_IMPORTED_MODULE_2__["fetchPostComments"])(postId));
+    },
+    deleteComment: function deleteComment(commentId) {
+      return dispatch(Object(_actions_comment_actions__WEBPACK_IMPORTED_MODULE_2__["deleteComment"])(commentId));
+    }
   };
 };
 
@@ -1820,7 +1832,6 @@ var PostDropdown = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this4 = this;
 
-      debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.showMenu,
         className: "post-dropdown-button"
@@ -3727,7 +3738,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteComment", function() { return deleteComment; });
 var fetchPostComments = function fetchPostComments(postId) {
   return $.ajax({
-    url: "/api/".concat(postId, "/comments")
+    url: "/api/posts/".concat(postId, "/comments")
   });
 };
 var createComment = function createComment(comment) {
