@@ -19,7 +19,7 @@ class PostIndexItem extends React.Component {
 
                 <div className='post-header-img'>
                   <img src="" alt=""/>
-                  <p><strong>IMAGE</strong></p>
+                  <p><strong></strong></p>
                 </div>
 
                 <div className='post-header-info'>

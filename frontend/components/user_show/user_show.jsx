@@ -252,13 +252,13 @@ class UserShow extends React.Component {
               <div className='post-on-your-mind'>
 
                 <div className='post-input-click'>
-                  <div className='post-input-photo'>IMAGE</div>
+                  <div className='post-input-photo'></div>
                   <div className='post-actual-input' onClick={this.showModal}>What's on your mind, {this.props.currentUser.firstName}?</div>
                 </div>
 
-                <div className='post-dividor'></div>
+                {/* <div className='post-dividor'></div> */}
 
-                <div className='under-on-your-mind'>
+                {/* <div className='under-on-your-mind'>
 
                   <div className='on-your-mind-icons'>
                     <div className='under-mind-icon'>ICON</div>
@@ -275,7 +275,7 @@ class UserShow extends React.Component {
                     <div>Life Event</div>
                   </div>
 
-                </div>
+                </div> */}
 
               </div>
 
