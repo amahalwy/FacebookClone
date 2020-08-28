@@ -17,12 +17,12 @@ Friendship.destroy_all
 # Users
 # User.new(first_name, last_name, email, password)
 
-u1 = User.create(first_name: 'Demo', last_name: 'User', email: 'demo', password: 'demo1234', profile_photo: "app/assets/images/facebook_default.png")
-u2 = User.create(first_name: 'Demo2', last_name: 'User2', email: 'duser2', password: 'demo1234', profile_photo: "app/assets/images/facebook_default.png")
-u3 = User.create(first_name: 'Demo3', last_name: 'User3', email: 'duser3', password: 'demo1234', profile_photo: "app/assets/images/facebook_default.png")
-u4 = User.create(first_name: 'John', last_name: 'Appleseed', email: 'jappleseed', password: 'demo1234', profile_photo: "app/assets/images/facebook_default.png")
-u5 = User.create(first_name: 'Sponge', last_name: 'Bob', email: 'sbob', password: 'demo1234', profile_photo: "app/assets/images/facebook_default.png")
-u6 = User.create(first_name: 'Darth', last_name: 'Vader', email: 'dvader', password: 'demo1234', profile_photo: "app/assets/images/facebook_default.png")
+u1 = User.create(first_name: 'Demo', last_name: 'User', email: 'demo', password: 'demo1234', profile_photo: "app/assets/images/facebook_default.png", cover_photo: 'app/assets/images/default-background.jpg')
+u2 = User.create(first_name: 'Demo2', last_name: 'User2', email: 'duser2', password: 'demo1234', profile_photo: "app/assets/images/facebook_default.png", cover_photo: 'app/assets/images/default-background.jpg')
+u3 = User.create(first_name: 'Demo3', last_name: 'User3', email: 'duser3', password: 'demo1234', profile_photo: "app/assets/images/facebook_default.png", cover_photo: 'app/assets/images/default-background.jpg')
+u4 = User.create(first_name: 'John', last_name: 'Appleseed', email: 'jappleseed', password: 'demo1234', profile_photo: "app/assets/images/facebook_default.png", cover_photo: 'app/assets/images/default-background.jpg')
+u5 = User.create(first_name: 'Sponge', last_name: 'Bob', email: 'sbob', password: 'demo1234', profile_photo: "app/assets/images/facebook_default.png", cover_photo: 'app/assets/images/default-background.jpg')
+u6 = User.create(first_name: 'Darth', last_name: 'Vader', email: 'dvader', password: 'demo1234', profile_photo: "app/assets/images/facebook_default.png", cover_photo: 'app/assets/images/default-background.jpg')
 
 # Requests
 # FriendRequest.new(requestor_id, receiver_id)
