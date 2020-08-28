@@ -1,5 +1,5 @@
 class Api::PostsController < ApplicationController
-    before_action :require_logged_in, only: [:create, :update, :destroy]
+    before_action :require_logged_in!, only: [:create, :update, :destroy]
 
   def index
     @posts = Post.where(user_id: params[:user_id])
@@ -11,7 +11,7 @@ class Api::PostsController < ApplicationController
       @posts = Post.where(user_id: params[:post][:user_id])
       render '/api/posts/index'
     else
-      # Render errors
+      render json: @post.errors.full_messages
     end
   end
 

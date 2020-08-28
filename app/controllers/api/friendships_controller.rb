@@ -1,5 +1,5 @@
 class Api::FriendshipsController < ApplicationController
-  before_action :require_logged_in, only: [:create]
+  before_action :require_logged_in!, only: [:create, :index]
 
   def index
     @friendships = Friendship.where(user_id: current_user.id)
