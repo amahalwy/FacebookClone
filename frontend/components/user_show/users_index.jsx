@@ -23,7 +23,11 @@ class UsersIndex extends React.Component {
           <div className='users-index-div'>
             <div className='left-users-menu'>
               <h1>Friend Requests</h1>
-              <FriendRequestsContainer/>
+              <FriendRequestsContainer
+                history={this.props.history}
+                match={this.props.match}
+                location={this.props.location}
+              />
             </div>
             <div className='feed-container'>
               <h1>All Users</h1>
@@ -44,7 +48,9 @@ class UsersIndex extends React.Component {
             <div className='friends-list'>
               <h1>Friends</h1>
               <FriendshipContainer
-
+                history={this.props.history}
+                match={this.props.match}
+                location={this.props.location}
               />
             </div>
           </div>

@@ -1,4 +1,4 @@
-import { POST_FRIENDSHIP, RECEIVE_USER_FRIENDSHIPS } from '../actions/friendship_actions';
+import { POST_FRIENDSHIP, RECEIVE_USER_FRIENDSHIPS, CLEAR_FRIENDSHIPS } from '../actions/friendship_actions';
 
 const friendshipsReducer = (oldState = {}, action) => {
   Object.freeze(oldState);
@@ -7,6 +7,8 @@ const friendshipsReducer = (oldState = {}, action) => {
       return Object.assign({}, oldState, action.friendship)
     case RECEIVE_USER_FRIENDSHIPS:
       return Object.assign({}, oldState, action.friendships)
+    case CLEAR_FRIENDSHIPS: 
+      return {};
     default:
       return oldState;
   }

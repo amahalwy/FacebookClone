@@ -10,6 +10,10 @@ class FriendshipIndex extends React.Component {
     this.props.fetchFriendships(this.props.currentUser.id);
   }
 
+  componentWillUnmount(){
+    this.props.clearFriendships();
+  }
+
   render() {
     return (
       <div>

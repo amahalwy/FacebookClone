@@ -65,7 +65,6 @@ class PostIndexItem extends React.Component {
 
           <div className='posts-comments'>
             {post.comments.map(comment => {
-              debugger
               return (
                 <CommentIndexItem
                   key={comment.id}

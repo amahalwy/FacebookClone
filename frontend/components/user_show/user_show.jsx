@@ -34,7 +34,7 @@ class UserShow extends React.Component {
 
   componentDidUpdate(prevProps){
     if (this.props.match.params.userId !== prevProps.match.params.userId) {
-      this.props.fetchUser(this.props.match.params.userId);
+      this.props.fetchUser(this.props.match.params.userId); 
       this.props.clearPosts();
       this.props.fetchUserPosts(this.props.match.params.userId);
     }

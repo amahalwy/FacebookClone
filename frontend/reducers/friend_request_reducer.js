@@ -1,7 +1,8 @@
 import { 
     POST_FRIEND_REQUEST,
     RECEIVE_USER_FRIEND_REQUESTS,
-    REMOVE_FRIEND_REQUEST
+    REMOVE_FRIEND_REQUEST,
+    CLEAR_FRIEND_REQUESTS
   } from '../actions/friend_request_actions'
 
 const friendRequestsReducer = (oldState = {}, action) => {
@@ -15,6 +16,8 @@ const friendRequestsReducer = (oldState = {}, action) => {
       let newState = Object.assign({}, oldState);
       delete newState[action.requestId];
       return newState;
+    case CLEAR_FRIEND_REQUESTS: 
+      return {};
     default:
       return oldState;
   }

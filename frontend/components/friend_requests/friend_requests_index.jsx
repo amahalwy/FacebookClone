@@ -10,6 +10,11 @@ class FriendRequestsIndex extends React.Component {
     this.props.fetchUserFriendRequests(this.props.currentUser.id);
   }
 
+  componentWillUnmount() {
+    debugger
+    this.props.clearFriendRequests();
+  }
+
   render() {
     return (
       <div>
