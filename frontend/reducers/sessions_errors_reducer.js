@@ -9,8 +9,8 @@ export default (state = _nullErrors, action) => {
       return action.errors;
     case RECEIVE_CURRENT_USER:
       return _nullErrors;
-    case CLEAR_ERRORS:
-      return _nullErrors;
+    // case CLEAR_ERRORS:
+    //   return _nullErrors;
     default:
       return state;
   }
