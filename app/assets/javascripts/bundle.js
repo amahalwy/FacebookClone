@@ -996,7 +996,6 @@ var FriendRequestsIndex = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
-      debugger;
       this.props.clearFriendRequests();
     }
   }, {
