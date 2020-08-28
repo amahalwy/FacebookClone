@@ -3,6 +3,14 @@ import PostIndexItem from './post_index_item';
 
 class PostsIndex extends React.Component {
 
+  // componentDidMount(){
+    // this.props.fetchUserPosts(this.props.user.id)
+  // }
+
+  // componentWillUnmount(){
+    // this.props.clearPosts()
+  // }
+
   render() {
     return (
       <div>

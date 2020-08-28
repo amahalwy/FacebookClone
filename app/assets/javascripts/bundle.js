@@ -1926,6 +1926,12 @@ var PostsIndex = /*#__PURE__*/function (_React$Component) {
 
   _createClass(PostsIndex, [{
     key: "render",
+    // componentDidMount(){
+    // this.props.fetchUserPosts(this.props.user.id)
+    // }
+    // componentWillUnmount(){
+    // this.props.clearPosts()
+    // }
     value: function render() {
       var _this = this;
 
@@ -2002,7 +2008,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     fetchPostComments: function fetchPostComments(postId) {
       return dispatch(Object(_actions_comment_actions__WEBPACK_IMPORTED_MODULE_2__["fetchPostComments"])(postId));
-    }
+    } // clearPosts: () => dispatch(clearPosts())
+
   };
 };
 
