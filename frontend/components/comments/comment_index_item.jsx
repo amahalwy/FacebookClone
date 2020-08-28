@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 class CommentIndexItem extends React.Component {
 
   handleDelete(){
-    debugger
     this.props.deleteComment(this.props.comment.id)
     .then(() => this.props.fetchUserPosts(this.props.currentUser.id))
   }

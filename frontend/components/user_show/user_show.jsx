@@ -1,26 +1,30 @@
 import React from 'react';
+import Modal from '../modal/modal';
 import NavBarContainer from '../navbar/navbar_container';
 import ProfileButton from './profile_button';
 import PostIndexContainer from '../posts/posts_index_container';
+import CreatePostFormContainer from '../posts_form/create_post_container';
 
 class UserShow extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       profilePhotoFile: null,
-      coverPhotoFile: null
+      coverPhotoFile: null,
+      openModal: false
     }
 
     this.photoProfileUpload = React.createRef();
     this.photoCoverUpload = React.createRef();
 
     this.handleCoverFile = this.handleCoverFile.bind(this);
-    // this.coverHandleSubmit = this.coverHandleSubmit.bind(this);
     this.coverPhotoUpload = this.coverPhotoUpload.bind(this);
 
     this.handleProfileFile = this.handleProfileFile.bind(this);
-    // this.profileHandleSubmit = this.profileHandleSubmit.bind(this);
     this.profilePhotoUpload = this.profilePhotoUpload.bind(this);
+
+    this.showModal = this.showModal.bind(this);
+    this.hideModal = this.hideModal.bind(this);
   }
 
   componentDidMount(){
@@ -84,6 +88,15 @@ class UserShow extends React.Component {
   profilePhotoUpload() {
     this.photoProfileUpload.current.click()
   }
+
+  showModal(e) {
+    e.preventDefault();
+    this.setState({ openModal: true })
+  };
+
+  hideModal() {
+    this.setState({ openModal: false });
+  };
 
   render() {
     if (!this.props.user) return '';
@@ -211,68 +224,82 @@ class UserShow extends React.Component {
 
         {/* Profle body section */}
         <section className='profile-body-section'>
+          <div className='profile-body'>
+            <div className='profile-main-left-section'>
+              <div className='profile-intro-card'>
+                <div className='profile-intro'>Intro</div>
 
-          
+                <div className='profile-intro-details'>
+                  <button>
+                    <span>
+                      Edit Details
+                    </span>
+                  </button>
+                </div>
 
-
-
-
-
-          {/* End of cover photo section */}
-          {/* Edit profile, eye thing, search, etc */}
-
-          <div className='profile-body'>Bottom part of the site
-
-              <div>
-                <div>Dividor line</div>
-                <div>Rest of stuff
-                  <div>Ul list maybe? of buttons to click</div>
-                  <div>Buttons to click on</div>       
-
-                  
+                <div className='profile-intro-featured'>
+                  <button>
+                    <span>
+                      Edit Featured
+                    </span>
+                  </button>
                 </div>
               </div>
-
-              <div>
-                <div>Left bar</div>
-
-
-
-                <div>Right bar
-                  <div>What's on your mind div
-                    <div>Div for the what's on your mind input</div>
-                    <div>Dividor div</div>
-                    <div>Buttons to do stuff</div>
-                  </div>
-                </div>
-
-                <div>
-                  <div>
-                    <ul>
-                      <PostIndexContainer 
-                        history={this.props.history}
-                        user={this.props.user}
-                      />
-
-                    </ul>
-                  </div>
-
-                  <div>Dividor div</div>
-
-                  <div>
-                    <div>List View</div>
-                    <div>Grid View</div>
-                  </div>
-                  
-                </div>
-
-              </div>
-              
             </div>
 
+            <div className='profile-main-right-section'>
+
+              <div className='post-on-your-mind'>
+
+                <div className='post-input-click'>
+                  <div className='post-input-photo'>IMAGE</div>
+                  <div className='post-actual-input' onClick={this.showModal}>What's on your mind, {this.props.currentUser.firstName}?</div>
+                </div>
+
+                <div className='post-dividor'></div>
+
+                <div className='under-on-your-mind'>
+
+                  <div className='on-your-mind-icons'>
+                    <div className='under-mind-icon'>ICON</div>
+                    <div>Live Video</div>
+                  </div>
+
+                  <div className='on-your-mind-icons'>
+                    <div className='under-mind-icon'>ICON</div>
+                    <div>Photo/Video</div>
+                  </div>
+
+                  <div className='on-your-mind-icons'>
+                    <div className='under-mind-icon'>ICON</div>
+                    <div>Life Event</div>
+                  </div>
+
+                </div>
+
+              </div>
+
+              <Modal show={this.state.openModal} handleClose={this.hideModal} >
+                <CreatePostFormContainer
+                  history={this.props.history}
+                  match={this.props.match}
+                  location={this.props.location}
+                  handleClose={this.hideModal}
+                />
+              </Modal>
+
+              <div className='posts-index-div'>
+                <ul>
+                  <PostIndexContainer
+                    history={this.props.history}
+                    user={this.props.user}
+                  />
+                </ul>
+              </div>
+
+            </div>
+          </div>
         </section>
-        {/* <h1>User's Show Page</h1>
-        <p>To log out now, hover over the 'X' top right and click logout button</p> */}
       </div>
     )
   }

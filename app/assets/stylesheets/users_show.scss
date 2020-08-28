@@ -272,7 +272,96 @@
 
 // End of under cover photo section
 
+.profile-body-section {
+  background-color: rgb(240, 242, 245);
+}
+
 .profile-body {
   background-color: rgb(240, 242, 245);
-  // box-shadow: 0px 2px 6px rgba(0, 0, 0, .9);
+  margin: 0 400px;
+  display: flex;
+}
+
+.profile-main-left-section {
+  width: 40%;
+}
+
+.profile-intro-card {
+  width: 100%;
+  height: 16%;
+  background-color: white;
+  // border: 1px solid black;
+  border-radius: 10px;
+}
+
+.profile-intro {
+  margin: 20px 10px;
+  font-weight: bold;
+}
+
+.profile-intro-details,
+.profile-intro-featured {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0px;
+}
+
+.profile-intro-details button,
+.profile-intro-featured button {
+  background-color: rgb(204, 206, 210);
+  border: none;
+  width: 94%;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.post-on-your-mind {
+  // border: 1px solid black;
+  background-color: white;
+  border-radius: 10px;
+  width: 90%;
+  height: 14%;
+  margin: 20px auto;
+}
+
+.post-input-click {
+  display: flex;
+  padding: 10px;
+}
+
+.post-input-photo {
+  margin: 10px;
+}
+
+.post-actual-input {
+  // background-color: rgb(212, 212, 212);
+  background-color: rgb(240, 242, 245);
+  border-radius: 20px;
+  width: 80%;
+  height: 100%;
+  padding: 10px;
+  color: gray;
+}
+
+.under-on-your-mind {
+  justify-content: space-around;
+}
+
+.under-on-your-mind,
+.on-your-mind-icons {
+  display: flex;
+}
+
+.on-your-mind-icons {
+  margin: 15px 0;
+  border: 1px solid black;
+  padding: 5px;
+}
+
+.under-mind-icon {
+  margin-right: 10px;
+}
+
+.posts-index-div {
+  margin: 28px;
 }

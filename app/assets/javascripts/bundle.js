@@ -728,7 +728,6 @@ var CommentIndexItem = /*#__PURE__*/function (_React$Component) {
     value: function handleDelete() {
       var _this = this;
 
-      debugger;
       this.props.deleteComment(this.props.comment.id).then(function () {
         return _this.props.fetchUserPosts(_this.props.currentUser.id);
       });
@@ -1196,7 +1195,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _navbar_dropdown_navbar_dropdown__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../navbar_dropdown/navbar_dropdown */ "./frontend/components/navbar_dropdown/navbar_dropdown.jsx");
 /* harmony import */ var _modal_modal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../modal/modal */ "./frontend/components/modal/modal.jsx");
 /* harmony import */ var _posts_form_create_post_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../posts_form/create_post_container */ "./frontend/components/posts_form/create_post_container.js");
-/* harmony import */ var _posts_form_edit_post_container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../posts_form/edit_post_container */ "./frontend/components/posts_form/edit_post_container.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -1227,7 +1225,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-
 var Navbar = /*#__PURE__*/function (_React$Component) {
   _inherits(Navbar, _React$Component);
 
@@ -1249,6 +1246,13 @@ var Navbar = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(Navbar, [{
+    key: "handleInput",
+    value: function handleInput(f) {
+      return function (e) {
+        return _defineProperty({}, f, e.currentTarget.value);
+      };
+    }
+  }, {
     key: "showModal",
     value: function showModal(e) {
       e.preventDefault();
@@ -1262,13 +1266,6 @@ var Navbar = /*#__PURE__*/function (_React$Component) {
       this.setState({
         openModal: false
       });
-    }
-  }, {
-    key: "handleInput",
-    value: function handleInput(f) {
-      return function (e) {
-        return _defineProperty({}, f, e.currentTarget.value);
-      };
     }
   }, {
     key: "render",
@@ -3148,9 +3145,11 @@ var ProfileButton = /*#__PURE__*/function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _navbar_navbar_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../navbar/navbar_container */ "./frontend/components/navbar/navbar_container.jsx");
-/* harmony import */ var _profile_button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./profile_button */ "./frontend/components/user_show/profile_button.jsx");
-/* harmony import */ var _posts_posts_index_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../posts/posts_index_container */ "./frontend/components/posts/posts_index_container.js");
+/* harmony import */ var _modal_modal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../modal/modal */ "./frontend/components/modal/modal.jsx");
+/* harmony import */ var _navbar_navbar_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../navbar/navbar_container */ "./frontend/components/navbar/navbar_container.jsx");
+/* harmony import */ var _profile_button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./profile_button */ "./frontend/components/user_show/profile_button.jsx");
+/* harmony import */ var _posts_posts_index_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../posts/posts_index_container */ "./frontend/components/posts/posts_index_container.js");
+/* harmony import */ var _posts_form_create_post_container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../posts_form/create_post_container */ "./frontend/components/posts_form/create_post_container.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3178,6 +3177,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
+
 var UserShow = /*#__PURE__*/function (_React$Component) {
   _inherits(UserShow, _React$Component);
 
@@ -3191,16 +3192,17 @@ var UserShow = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.state = {
       profilePhotoFile: null,
-      coverPhotoFile: null
+      coverPhotoFile: null,
+      openModal: false
     };
     _this.photoProfileUpload = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
     _this.photoCoverUpload = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
-    _this.handleCoverFile = _this.handleCoverFile.bind(_assertThisInitialized(_this)); // this.coverHandleSubmit = this.coverHandleSubmit.bind(this);
-
+    _this.handleCoverFile = _this.handleCoverFile.bind(_assertThisInitialized(_this));
     _this.coverPhotoUpload = _this.coverPhotoUpload.bind(_assertThisInitialized(_this));
-    _this.handleProfileFile = _this.handleProfileFile.bind(_assertThisInitialized(_this)); // this.profileHandleSubmit = this.profileHandleSubmit.bind(this);
-
+    _this.handleProfileFile = _this.handleProfileFile.bind(_assertThisInitialized(_this));
     _this.profilePhotoUpload = _this.profilePhotoUpload.bind(_assertThisInitialized(_this));
+    _this.showModal = _this.showModal.bind(_assertThisInitialized(_this));
+    _this.hideModal = _this.hideModal.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -3294,10 +3296,25 @@ var UserShow = /*#__PURE__*/function (_React$Component) {
       this.photoProfileUpload.current.click();
     }
   }, {
+    key: "showModal",
+    value: function showModal(e) {
+      e.preventDefault();
+      this.setState({
+        openModal: true
+      });
+    }
+  }, {
+    key: "hideModal",
+    value: function hideModal() {
+      this.setState({
+        openModal: false
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       if (!this.props.user) return '';
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
         history: this.props.history,
         match: this.props.match,
         location: this.props.location
@@ -3401,7 +3418,7 @@ var UserShow = /*#__PURE__*/function (_React$Component) {
         className: "under-cover-right-nav"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "right-nav-divs"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_profile_button__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_profile_button__WEBPACK_IMPORTED_MODULE_3__["default"], {
         user: this.props.user,
         currentUser: this.props.currentUser,
         postFriendRequest: this.props.postFriendRequest
@@ -3456,10 +3473,57 @@ var UserShow = /*#__PURE__*/function (_React$Component) {
         className: "profile-body-section"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "profile-body"
-      }, "Bottom part of the site", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Dividor line"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Rest of stuff", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Ul list maybe? of buttons to click"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Buttons to click on"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Left bar"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Right bar", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "What's on your mind div", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Div for the what's on your mind input"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Dividor div"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Buttons to do stuff"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_posts_posts_index_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "profile-main-left-section"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "profile-intro-card"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "profile-intro"
+      }, "Intro"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "profile-intro-details"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Edit Details"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "profile-intro-featured"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Edit Featured"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "profile-main-right-section"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "post-on-your-mind"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "post-input-click"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "post-input-photo"
+      }, "IMAGE"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "post-actual-input",
+        onClick: this.showModal
+      }, "What's on your mind, ", this.props.currentUser.firstName, "?")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "post-dividor"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "under-on-your-mind"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "on-your-mind-icons"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "under-mind-icon"
+      }, "ICON"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Live Video")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "on-your-mind-icons"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "under-mind-icon"
+      }, "ICON"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Photo/Video")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "on-your-mind-icons"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "under-mind-icon"
+      }, "ICON"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Life Event")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modal_modal__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        show: this.state.openModal,
+        handleClose: this.hideModal
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_posts_form_create_post_container__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        history: this.props.history,
+        match: this.props.match,
+        location: this.props.location,
+        handleClose: this.hideModal
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "posts-index-div"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_posts_posts_index_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
         history: this.props.history,
         user: this.props.user
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Dividor div"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "List View"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Grid View")))))));
+      })))))));
     }
   }]);
 
@@ -3591,28 +3655,25 @@ var UsersIndex = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      if (this.props.users.length < 2) {
-        return '';
-      } else {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
-          history: this.props.history,
-          match: this.props.match,
-          location: this.props.location
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "users-index-div"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "left-users-menu"
-        }, "Friend Requests", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_friend_requests_friend_requests_container__WEBPACK_IMPORTED_MODULE_3__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "feed-container"
-        }, "All Users", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.props.users.map(function (user) {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_users_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
-            key: user.id,
-            user: user
-          });
-        }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "friends-list"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Friends"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_friendships_friendship_container__WEBPACK_IMPORTED_MODULE_4__["default"], null))));
-      }
+      if (this.props.users.length < 2) return '';
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        history: this.props.history,
+        match: this.props.match,
+        location: this.props.location
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "users-index-div"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "left-users-menu"
+      }, "Friend Requests", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_friend_requests_friend_requests_container__WEBPACK_IMPORTED_MODULE_3__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "feed-container"
+      }, "All Users", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.props.users.map(function (user) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_users_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          key: user.id,
+          user: user
+        });
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "friends-list"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Friends"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_friendships_friendship_container__WEBPACK_IMPORTED_MODULE_4__["default"], null))));
     }
   }]);
 

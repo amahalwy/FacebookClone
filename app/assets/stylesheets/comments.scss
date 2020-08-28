@@ -51,6 +51,10 @@
   font-weight: bold;
 }
 
+.comment-delete-button button:hover {
+  background-color: rgb(225, 227, 229);
+}
+
 .post-comment-text {
   width: 94%;
   height: 28px;

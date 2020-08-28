@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import NavbarDropdown from '../navbar_dropdown/navbar_dropdown';
 import Modal from '../modal/modal';
 import CreatePostFormContainer from '../posts_form/create_post_container';
-import EditPostFormContainer from '../posts_form/edit_post_container';
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -16,6 +15,12 @@ class Navbar extends React.Component {
     this.hideModal = this.hideModal.bind(this);
   }
 
+  handleInput(f) {
+    return e => ({
+      [f]: e.currentTarget.value
+    })
+  }
+
   showModal(e) {
     e.preventDefault();
     this.setState({ openModal: true })
@@ -24,12 +29,6 @@ class Navbar extends React.Component {
   hideModal() {
     this.setState({ openModal: false });
   };
-
-  handleInput(f) {
-    return e => ({
-      [f]: e.currentTarget.value
-    })
-  }
 
   render () {
     return (

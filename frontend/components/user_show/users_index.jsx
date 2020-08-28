@@ -12,9 +12,7 @@ class UsersIndex extends React.Component {
 
   render() {
 
-    if (this.props.users.length < 2) {
-      return '';
-    } else {
+    if (this.props.users.length < 2) return '';
       return (
         <div>
           <NavBarContainer
@@ -52,6 +50,6 @@ class UsersIndex extends React.Component {
       )
     }
   }
-}
+
 
 export default UsersIndex;
