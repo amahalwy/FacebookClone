@@ -99,14 +99,19 @@
 // Beginning of navbar menu css
 
 .navbar-menu-user-profile {
-  background-color: white;
   align-self: center;
-  height: 100%;
-  padding: 2px 2px;
+  justify-content: center;
+  padding: 10px 5px;
+  height: 20px;
+  width: 60px;
+  margin: 0 5px;
+  border-radius: 30px;
 }
 
 .navbar-menu-user-profile a {
   color: black;
+  // width: 60px;
+  margin: 0 auto;
 }
 
 .navbar-menu-user-profile:hover {
@@ -121,8 +126,6 @@
   align-content: center;
 }
 
-
-.navbar-menu-user-profile,
 .navbar-menu-create-post,
 .navbar-menu-users,
 .navbar-menu-dropdown-click {

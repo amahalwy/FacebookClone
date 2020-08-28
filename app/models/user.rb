@@ -14,26 +14,32 @@ class User < ApplicationRecord
 
   has_many :friend_requests_as_requestor,
     foreign_key: :requestor_id,
-    class_name: :FriendRequest
+    class_name: :FriendRequest,
+    dependent: :destroy
 
   has_many :friend_requests_as_receiver,
     foreign_key: :receiver_id,
-    class_name: :FriendRequest
+    class_name: :FriendRequest,
+    dependent: :destroy
 
   has_many :friendships,
     foreign_key: :user_id,
-    class_name: :Friendship
+    class_name: :Friendship,
+    dependent: :destroy
 
   has_many :friends,
-    through: :friendships
+    through: :friendships,
+    dependent: :destroy
 
   has_many :posts,
     foreign_key: :user_id,
-    class_name: :Post
+    class_name: :Post,
+    dependent: :destroy
 
   has_many :comments,
     foreign_key: :user_id,
-    class_name: :Comment
+    class_name: :Comment,
+    dependent: :destroy
 
   def password=(password)
     @password = password

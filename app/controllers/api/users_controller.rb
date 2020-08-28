@@ -11,14 +11,12 @@ class Api::UsersController < ApplicationController
       login!(@user)
       render :show, status: 201
     else
-      # Render errors
       render json: @user.errors.full_messages, status: 422
     end
   end
 
   def show
     @user = User.find_by(id: params[:id])
-    render :show
   end
 
   def update
@@ -26,7 +24,8 @@ class Api::UsersController < ApplicationController
     if @user.update(user_params)
       render :show
     else
-      # Render errors
+      render json: ["Can't complete that update. Try again."], status: 404
+      render json: @user.errors.full_messages, status: 422
     end
   end
 

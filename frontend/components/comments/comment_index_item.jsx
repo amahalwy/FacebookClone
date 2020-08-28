@@ -12,7 +12,6 @@ class CommentIndexItem extends React.Component {
     return (
       <div className='comment-card'>
         <div className='comment-avatar'>
-          IMAGE
         </div>
         <div className='comment-body'>
           <div className='comment-user-name'>

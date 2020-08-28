@@ -21,10 +21,12 @@ class UsersIndex extends React.Component {
             location={this.props.location}
           />
           <div className='users-index-div'>
-            <div className='left-users-menu'>Friend Requests
+            <div className='left-users-menu'>
+              <h1>Friend Requests</h1>
               <FriendRequestsContainer/>
             </div>
-            <div className='feed-container'>All Users
+            <div className='feed-container'>
+              <h1>All Users</h1>
             <ul>
                 {
                   this.props.users.map(user => {
