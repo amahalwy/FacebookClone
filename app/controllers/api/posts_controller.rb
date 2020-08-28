@@ -1,5 +1,6 @@
 class Api::PostsController < ApplicationController
-  
+    before_action :require_logged_in, only: [:create, :update, :destroy]
+
   def index
     @posts = Post.where(user_id: params[:user_id])
   end
