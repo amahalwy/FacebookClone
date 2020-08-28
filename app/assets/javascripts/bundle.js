@@ -600,9 +600,15 @@ var CreateCommentForm = /*#__PURE__*/function (_Component) {
   _createClass(CreateCommentForm, [{
     key: "handleSubmit",
     value: function handleSubmit() {
-      this.props.createComment(this.state);
-      this.props.fetchUserPosts(this.props.currentUser.id);
-      this.props.history.push("/users/".concat(this.props.currentUser.id));
+      var _this2 = this;
+
+      this.props.createComment(this.state).then(function () {
+        _this2.props.fetchUserPosts(_this2.props.currentUser.id);
+
+        _this2.setState({
+          body: ''
+        });
+      });
     }
   }, {
     key: "handleUserKeyPress",
@@ -614,10 +620,10 @@ var CreateCommentForm = /*#__PURE__*/function (_Component) {
   }, {
     key: "handleInput",
     value: function handleInput(f) {
-      var _this2 = this;
+      var _this3 = this;
 
       return function (e) {
-        return _this2.setState(_defineProperty({}, f, e.currentTarget.value));
+        return _this3.setState(_defineProperty({}, f, e.currentTarget.value));
       };
     }
   }, {
@@ -628,6 +634,7 @@ var CreateCommentForm = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
         className: "post-comment-text",
         type: "text",
+        value: this.state.body,
         onKeyPress: this.handleUserKeyPress,
         onChange: this.handleInput('body'),
         placeholder: "Write a comment..."
@@ -717,10 +724,18 @@ var CommentIndexItem = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(CommentIndexItem, [{
-    key: "render",
-    value: function render() {
+    key: "handleDelete",
+    value: function handleDelete() {
       var _this = this;
 
+      debugger;
+      this.props.deleteComment(this.props.comment.id).then(function () {
+        return _this.props.fetchUserPosts(_this.props.currentUser.id);
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "comment-card"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -736,9 +751,7 @@ var CommentIndexItem = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, this.props.comment.body))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "comment-delete-button"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: function onClick() {
-          return _this.props.deleteComment(_this.props.comment.id);
-        }
+        onClick: this.handleDelete.bind(this)
       }, "Delete")));
     }
   }]);
@@ -817,7 +830,6 @@ var FriendRequestItem = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "request-user-card"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
@@ -1084,7 +1096,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var FriendshipItem = function FriendshipItem(props) {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "friendship-card"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/users/".concat(props.friendship.friendId),
     className: "user-profile-link"
   }, props.friendship.firstName, " ", props.friendship.lastName));
@@ -1772,6 +1786,8 @@ var PostIndexItem = /*#__PURE__*/function (_React$Component) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_comments_comment_index_item__WEBPACK_IMPORTED_MODULE_3__["default"], {
           key: comment.id,
           comment: comment,
+          currentUser: _this.props.currentUser,
+          fetchUserPosts: _this.props.fetchUserPosts,
           deleteComment: _this.props.deleteComment
         });
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -3586,7 +3602,7 @@ var UsersIndex = /*#__PURE__*/function (_React$Component) {
           className: "users-index-div"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "left-users-menu"
-        }, "USER REQUESTS", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_friend_requests_friend_requests_container__WEBPACK_IMPORTED_MODULE_3__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, "Friend Requests", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_friend_requests_friend_requests_container__WEBPACK_IMPORTED_MODULE_3__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "feed-container"
         }, "All Users", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.props.users.map(function (user) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_users_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -3595,7 +3611,7 @@ var UsersIndex = /*#__PURE__*/function (_React$Component) {
           });
         }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "friends-list"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Contacts"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_friendships_friendship_container__WEBPACK_IMPORTED_MODULE_4__["default"], null))));
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Friends"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_friendships_friendship_container__WEBPACK_IMPORTED_MODULE_4__["default"], null))));
       }
     }
   }]);
@@ -3661,9 +3677,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var UsersIndexItem = function UsersIndexItem(props) {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "users-index-card"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/users/".concat(props.user.id)
-  }, props.user.firstName, " ", props.user.lastName));
+  }, props.user.firstName, " ", props.user.lastName)));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (UsersIndexItem);

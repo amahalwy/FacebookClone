@@ -69,6 +69,8 @@ class PostIndexItem extends React.Component {
                 <CommentIndexItem
                   key={comment.id}
                   comment={comment} 
+                  currentUser={this.props.currentUser}
+                  fetchUserPosts={this.props.fetchUserPosts}
                   deleteComment={this.props.deleteComment}
                 />
               )

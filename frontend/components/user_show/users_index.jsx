@@ -23,12 +23,8 @@ class UsersIndex extends React.Component {
             location={this.props.location}
           />
           <div className='users-index-div'>
-            {/* WILL INSERT FRIENDING COMPONENT HERE */}
-            <div className='left-users-menu'>USER REQUESTS
-            
-              <FriendRequestsContainer 
-              
-              />
+            <div className='left-users-menu'>Friend Requests
+              <FriendRequestsContainer/>
             </div>
             <div className='feed-container'>All Users
             <ul>
@@ -46,7 +42,7 @@ class UsersIndex extends React.Component {
 
             </div>
             <div className='friends-list'>
-              <h1>Contacts</h1>
+              <h1>Friends</h1>
               <FriendshipContainer
 
               />

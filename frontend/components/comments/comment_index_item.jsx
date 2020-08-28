@@ -3,6 +3,12 @@ import { Link } from 'react-router-dom';
 
 class CommentIndexItem extends React.Component {
 
+  handleDelete(){
+    debugger
+    this.props.deleteComment(this.props.comment.id)
+    .then(() => this.props.fetchUserPosts(this.props.currentUser.id))
+  }
+
   render() {
     return (
       <div className='comment-card'>
@@ -18,7 +24,7 @@ class CommentIndexItem extends React.Component {
           </div>
         </div>
         <div className='comment-delete-button'>
-          <button onClick={() => this.props.deleteComment(this.props.comment.id)}>
+          <button onClick={this.handleDelete.bind(this)}>
             Delete
           </button>
         </div>

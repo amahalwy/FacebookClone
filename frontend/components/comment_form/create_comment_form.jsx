@@ -15,11 +15,13 @@ class CreateCommentForm extends Component {
 
   // want to re-render the post item immediately upon creation and deletion of comment
 
-
   handleSubmit() {
-    this.props.createComment(this.state);
-    this.props.fetchUserPosts(this.props.currentUser.id)
-    this.props.history.push(`/users/${this.props.currentUser.id}`);
+    this.props.createComment(this.state)
+    .then(() => {
+      this.props.fetchUserPosts(this.props.currentUser.id);
+      this.setState({ body: '' });
+    })
+    
   }
 
   handleUserKeyPress(e) {
@@ -34,7 +36,6 @@ class CreateCommentForm extends Component {
     })
   }
 
-
   render() {
     return (
         <form className='post-comment-form'>
@@ -42,6 +43,7 @@ class CreateCommentForm extends Component {
           <textarea
             className='post-comment-text'
             type="text"
+            value={this.state.body}
             onKeyPress={this.handleUserKeyPress}
             onChange={this.handleInput('body')}
             placeholder='Write a comment...'
