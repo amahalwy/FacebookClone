@@ -8,4 +8,8 @@
 
 # Destroy all
 
+User.destroy_all
+
+demo = User.create(first_name: 'Demo', last_name: 'User', email: 'demo', password: 'demo1234')
+
 # Populate
