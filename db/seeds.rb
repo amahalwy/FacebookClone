@@ -27,7 +27,6 @@ u6 = User.create(first_name: 'Darth', last_name: 'Vader', email: 'dvader', passw
 # Requests
 # FriendRequest.new(requestor_id, receiver_id)
 
-FriendRequest.create(requestor_id: 5, receiver_id: 1)
 
 FriendRequest.create(requestor_id: u5.id, receiver_id: u1.id)
 FriendRequest.create(requestor_id: u4.id, receiver_id: u1.id)
