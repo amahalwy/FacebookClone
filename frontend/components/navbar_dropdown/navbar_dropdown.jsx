@@ -82,28 +82,28 @@ export default class NavbarDropdown extends React.Component {
                   <div>
                     <div>
                       <div className='navbar-dropdown-list-div'>
-                        <div className='dropdown-bottom-icon'>Icon</div>
+                        <div className='dropdown-bottom-icon'></div>
                         <div className='dropdown-bottom-text'>Settings and Privacy</div>
                       </div>
                     </div>
 
                     <div>
                       <div className='navbar-dropdown-list-div'>
-                        <div className='dropdown-bottom-icon'>Icon</div>
+                        <div className='dropdown-bottom-icon'></div>
                         <div className='dropdown-bottom-text'>Help & Support</div>
                       </div>
                     </div>
 
                     <div>
                       <div className='navbar-dropdown-list-div'>
-                        <div className='dropdown-bottom-icon'>Icon</div>
+                        <div className='dropdown-bottom-icon'></div>
                         <div className='dropdown-bottom-text'>Toggle Color Mode</div>
                       </div>
                     </div>
 
                     <div>
                       <div className='navbar-dropdown-list-div'>
-                        <div className='dropdown-bottom-icon'>Icon</div>
+                        <div className='dropdown-bottom-icon'></div>
                         <div className='dropdown-bottom-text'>
                           <div>Switch to classic Facebook</div>
                           <div className='dropdown-switch-classic'>The classic Facebook is gone. This fake "Facebook" is taking over.</div>
