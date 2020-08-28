@@ -58,14 +58,15 @@ class Login extends React.Component {
       <div className='session-login-container'>
 
         <div className='session-login-sidebar'>
-          <div>FACEBOOK IMAGE
-            <img src="" alt=""/>
-          </div>
-          <div>Recent Logins</div>
-          <div>Click your picture or add an account</div>
           <div>
-            <div>Last logged in user here</div>
-            <div>Add account here</div>
+            <span className='facebook-text'>
+              FACEBOOK
+            </span>
+          </div>
+          <div>
+            <span className='facebook-clone'>
+              Cloned
+            </span>
           </div>
         </div>
 
