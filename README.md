@@ -17,13 +17,11 @@ get a *one-click* login to the site where you'll be met with a users index page 
 
 Notable screen snippets:
 
+User's show page:
+https://photos.google.com/photo/AF1QipNgDVDZ4N7msnc_3HwhHYvTRp6-s6bgJQnZQlG8
 
-
-
-
-
-
-
+Create/edit a post modal:
+https://photos.google.com/photo/AF1QipNp6mlz_U0EKCiFM9GWRujMlzqGYOl3to5otm0F
 
 A few features I'd like to implement in the future:
 
