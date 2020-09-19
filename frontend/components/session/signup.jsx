@@ -35,9 +35,9 @@ class Signup extends React.Component {
           <div className='session-signup-form-text'>
             <p>Sign Up</p>
             <span>
-              <button onClick={this.props.handleClose}><p>x</p></button>
+              <button onClick={this.props.handleClose}><p>X</p></button>
             </span>
-            </div>
+          </div>
           <div className='session-signup-form-preamble'><p>It's quick and easy.</p></div>
         </div>
         

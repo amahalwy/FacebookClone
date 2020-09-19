@@ -104,6 +104,11 @@
   justify-content: center;
 }
 
+
+.signup-button > button {
+  justify-self: center;
+}
+
 .login-create-account-button > button,
 .signup-button > button  {
   color: white;
@@ -164,11 +169,11 @@
 
 .session-signup-form-text {
   display: flex;
+  justify-content: space-between;
 }
 
 .session-signup-form-text span {
   margin: 20px;
-  margin-left: 230px;
 }
 
 .session-signup-form-text span > button {
@@ -206,7 +211,7 @@
 
 .fullname-field > input{
   border-radius: 5px;
-  width: 230px;
+  width: 50%;
   padding: 10px;
   border: 1px solid #ccc;
   margin-bottom: 10px;
@@ -237,8 +242,4 @@
 
 .login-create-a-page {
   margin-top: 50px;
-}
-
-.signup-button > button {
-  justify-self: center;
 }
