@@ -27,6 +27,10 @@ button:hover, a:hover {
   cursor: pointer;
 }
 
+button {
+  outline: none;
+}
+
 a {
   text-decoration: none;
 }

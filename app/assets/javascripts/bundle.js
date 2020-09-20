@@ -2970,10 +2970,10 @@ var Signup = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      first_name: '',
-      last_name: '',
-      email: '',
-      password: ''
+      first_name: "",
+      last_name: "",
+      email: "",
+      password: ""
     };
     _this.handleInput = _this.handleInput.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
@@ -3001,6 +3001,17 @@ var Signup = /*#__PURE__*/function (_React$Component) {
       };
     }
   }, {
+    key: "renderErrors",
+    value: function renderErrors() {
+      var _this4 = this;
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, Object.keys(this.props.errors).map(function (error, i) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          key: "error-".concat(i)
+        }, _this4.props.errors[error]);
+      }));
+    }
+  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -3022,30 +3033,32 @@ var Signup = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         value: this.state.first_name,
-        onChange: this.handleInput('first_name'),
+        onChange: this.handleInput("first_name"),
         placeholder: "First name"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         value: this.state.last_name,
-        onChange: this.handleInput('last_name'),
+        onChange: this.handleInput("last_name"),
         placeholder: "Last name"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "email-field"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         value: this.state.email,
-        onChange: this.handleInput('email'),
+        onChange: this.handleInput("email"),
         placeholder: "Email"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "password-field"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "password",
         value: this.state.password,
-        onChange: this.handleInput('password'),
+        onChange: this.handleInput("password"),
         placeholder: "New Password"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "signup-button"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Sign Up")))))));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Sign Up")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "signup-errors"
+      }, this.renderErrors()))))));
     }
   }]);
 
@@ -3072,6 +3085,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    errors: state.errors
+  };
+};
+
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     signup: function signup(user) {
@@ -3080,7 +3099,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(null, mapDispatchToProps)(_signup__WEBPACK_IMPORTED_MODULE_2__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_signup__WEBPACK_IMPORTED_MODULE_2__["default"]));
 
 /***/ }),
 
