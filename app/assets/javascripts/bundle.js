@@ -1925,13 +1925,17 @@ var PostsIndex = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(PostsIndex, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchUserPosts(this.props.user.id);
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      this.props.clearPosts();
+    }
+  }, {
     key: "render",
-    // componentDidMount(){
-    // this.props.fetchUserPosts(this.props.user.id)
-    // }
-    // componentWillUnmount(){
-    // this.props.clearPosts()
-    // }
     value: function render() {
       var _this = this;
 
@@ -2008,8 +2012,10 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     fetchPostComments: function fetchPostComments(postId) {
       return dispatch(Object(_actions_comment_actions__WEBPACK_IMPORTED_MODULE_2__["fetchPostComments"])(postId));
-    } // clearPosts: () => dispatch(clearPosts())
-
+    },
+    clearPosts: function clearPosts() {
+      return dispatch(Object(_actions_post_actions__WEBPACK_IMPORTED_MODULE_3__["clearPosts"])());
+    }
   };
 };
 
