@@ -2768,13 +2768,13 @@ var Login = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
       openModal: false
     };
     _this.demoState = {
-      email: 'demo',
-      password: 'demo1234'
+      email: "demo",
+      password: "demo1234"
     };
     _this.handleInput = _this.handleInput.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
@@ -2831,6 +2831,17 @@ var Login = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
+    key: "renderErrors",
+    value: function renderErrors() {
+      var _this5 = this;
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, Object.keys(this.props.errors).map(function (error, i) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          key: "error-".concat(i)
+        }, _this5.props.errors[error]);
+      }));
+    }
+  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2841,27 +2852,29 @@ var Login = /*#__PURE__*/function (_React$Component) {
         className: "facebook-text"
       }, "FACEBOOK")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "facebook-clone"
-      }, "Cloned"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Cloned"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "session-login-form"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "session-login-form-field"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         value: this.state.email,
-        onChange: this.handleInput('email'),
+        onChange: this.handleInput("email"),
         placeholder: "Email"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "session-login-form-field"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "password",
         value: this.state.password,
-        onChange: this.handleInput('password'),
+        onChange: this.handleInput("password"),
         placeholder: "Password"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "login-button"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.handleSubmit
       }, "Log In")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "login-errors"
+      }, this.renderErrors()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "demo-account-anchor"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         onClick: this.handleDemo
@@ -2876,7 +2889,7 @@ var Login = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         className: "create-text",
         href: ""
-      }, "Create a Page")), " for a celebrity, band or business."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modal_modal__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      }, "Create a Page")), " ", "for a celebrity, band or business.")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modal_modal__WEBPACK_IMPORTED_MODULE_2__["default"], {
         show: this.state.openModal,
         handleClose: this.hideModal
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_signup_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -2909,6 +2922,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    errors: state.errors
+  };
+};
+
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     login: function login(formUser) {
@@ -2917,7 +2936,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(null, mapDispatchToProps)(_login__WEBPACK_IMPORTED_MODULE_2__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_login__WEBPACK_IMPORTED_MODULE_2__["default"]));
 
 /***/ }),
 

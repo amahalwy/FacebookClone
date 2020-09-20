@@ -31,12 +31,21 @@
 
 // Login component CSS
 // Main session div
+.login-errors {
+  margin-top: 3%;
+  line-height: 1em;
+  margin-left: 12%;
+  text-align: left;
+  color: red;
+  font-weight: lighter;
+}
+
 .session-login-form {
   background-color: white;
   padding: 10px;
   border-radius: 5px;
   width: 320px;
-  height: 280px;
+  height: 64%;
   box-shadow: 
     0 0  0 2px rgb(255,255,255),
     0.3em 0.3em 1em rgba(0,0,0,0.3);  
