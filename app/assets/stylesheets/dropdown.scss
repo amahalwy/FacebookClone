@@ -18,6 +18,10 @@
   height: 360px;
 }
 
+.dropdown-content div:hover {
+ background-color: red;
+}
+
 .dropdown-icon {
   position: absolute;
   height: 25px;
@@ -39,7 +43,7 @@
 .dropdown-profile-pic {
   margin-right: 20px;
   height: 40px;
-  width: 30px;
+  width: 40px;
 }
 
 .dropdown-profile-pic > img {

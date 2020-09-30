@@ -11,7 +11,7 @@ export default props => {
   const [openModal, setModal] = useState(false);
   const [search, setSearch] = useState('');
   const currentUser = useSelector(state => state.entities.users[state.session.id])
-  
+
   const dispatch = useDispatch();
 
   const showModal = () => {
@@ -54,7 +54,7 @@ export default props => {
       <div className='navbar-main'>
         <ul className='navbar-main-ul'>
 
-          <a href="">
+          <a href="#">
             <li className='navbar-main-li'>
               <div className='navbar-main-home'>
                 <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="home" className="nav-house" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z"></path></svg>
@@ -85,27 +85,26 @@ export default props => {
 
         <div className='navbar-menu-user-profile-container'>
           <div className='navbar-menu-user-profile' >
-            <Link to={`/users/${currentUser.id}`}>{currentUser.firstName}</Link>
+            <div className='navbar-menu-user-picture'>
+              <img src={currentUser.profilePhoto} alt=""/>
+            </div>
+            <div className='navbar-menu-user-link'>
+              <Link to={`/users/${currentUser.id}`}>{currentUser.firstName}</Link>
+            </div>
           </div>
         </div>
 
         <div className='navbar-menu-list-button'>
           <div className='navbar-menu-create-post' >
-            
-            
             <Modal show={openModal} handleClose={hideModal} >
-
               <CreatePostFormContainer
                 history={props.history}
                 match={props.match}
                 location={props.location}
                 handleClose={hideModal}
               />
-
             </Modal>
-
             <a onClick={showModal}>+</a>
-
           </div>
         </div>
 

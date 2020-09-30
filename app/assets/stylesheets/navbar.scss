@@ -103,9 +103,10 @@
   padding: 10px 5px;
   justify-content: center;
   height: 20px;
-  width: 60px;
+  width: 80px;
   margin: 0 5px;
   border-radius: 30px;
+  display: flex;
 }
 
 .navbar-menu-user-profile a {
@@ -117,6 +118,7 @@
 .navbar-menu-user-profile:hover {
   background-color: rgb(221, 223, 226);
   border-radius: 50px;
+  cursor: pointer;
 }
 
 .navbar-menu-user-profile-container,
@@ -124,6 +126,21 @@
   display: flex;
   margin-right: 5px;
   align-content: center;
+}
+
+.navbar-menu-user-picture {
+  width: 30px; 
+  height: 20px;
+}
+
+.navbar-menu-user-picture img {
+  width: 100%; 
+  height: 100%;
+  border-radius: 10px;
+}
+
+.navbar-menu-user-link {
+  margin-top: 2px;
 }
 
 .navbar-menu-create-post,
