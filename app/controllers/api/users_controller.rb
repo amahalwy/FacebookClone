@@ -6,6 +6,11 @@ class Api::UsersController < ApplicationController
     render :index, status: 201
   end
 
+  def show
+    debugger
+    @user = User.find_by(id: params)
+  end
+
   def create
     @user = User.new(user_params)
     if @user.save 

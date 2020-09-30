@@ -3,6 +3,9 @@ import logger from 'redux-logger';
 import RootReducer from '../reducers/root_reducer';
 import thunk from '../thunk/thunk';
 
-export default ( preloadedState = {} ) => createStore(
-  RootReducer, preloadedState, applyMiddleware(thunk, logger)
-);
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const configureStore = (preloadedState = {}) =>
+  createStore(RootReducer, preloadedState, composeEnhancer(applyMiddleware(thunk, logger)));
+
+export default configureStore;

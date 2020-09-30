@@ -71,6 +71,18 @@
   height: 25px;
 }
 
+.session-login-pictures {
+  display: flex;
+}
+
+.session-login-pictures img {
+  width: 210px;
+  height: 210px;
+  margin: 10px;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
 // Flex button
 .login-button { 
   display: flex;

@@ -17,6 +17,7 @@ class Login extends React.Component {
     this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDemo = this.handleDemo.bind(this);
+    this.handleClickSignup = this.handleClickSignup.bind(this);
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
   }
@@ -43,8 +44,7 @@ class Login extends React.Component {
     // .then(response =>   console.log(response))  //this.props.history.push(`/users/${response.currentUser.user.id}`))
   }
 
-  showModal(e) {
-    e.preventDefault();
+  showModal() {
     this.setState({ openModal: true });
   }
 
@@ -53,13 +53,22 @@ class Login extends React.Component {
   }
 
   renderErrors() {
-    return (
-      <ul>
-        {Object.keys(this.props.errors).map((error, i) => (
-          <li key={`error-${i}`}>{this.props.errors[error]}</li>
-        ))}
-      </ul>
-    );
+    if (this.props.errors[0] === "Invalid email/password combination") {
+      return (
+        <ul>
+          {Object.keys(this.props.errors).map((error, i) => (
+            <li key={`error-${i}`}>{this.props.errors[error]}</li>
+          ))}
+        </ul>
+      );
+    } else {
+      return '';
+    }
+  }
+
+  handleClickSignup () {
+    this.showModal();
+    this.props.clearErrors();
   }
 
   render() {
@@ -67,10 +76,15 @@ class Login extends React.Component {
       <div className="session-login-container">
         <div className="session-login-sidebar">
           <div>
-            <span className="facebook-text">FACEBOOK</span>
+            <span className="facebook-text">FAKEBOOK</span>
           </div>
-          <div>
-            <span className="facebook-clone">Cloned</span>
+          <div className='session-login-pictures'>
+            <div>
+              <img src="https://facebook-clone-pro.s3.us-east-2.amazonaws.com/laughing-right.png" alt=""/>
+            </div>
+            <div>
+              <img src="https://facebook-clone-pro.s3.us-east-2.amazonaws.com/laughing-left.jpeg" alt=""/>
+            </div>
           </div>
         </div>
 
@@ -106,7 +120,7 @@ class Login extends React.Component {
               <div className="border-below-anchor"></div>
 
               <div className="login-create-account-button">
-                <button onClick={this.showModal}>Create New Account</button>
+                <button onClick={this.handleClickSignup}>Create New Account</button>
               </div>
             </form>
             <div className="login-create-a-page">

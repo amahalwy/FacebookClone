@@ -15,6 +15,9 @@ class ProfileButton extends React.Component {
   //   e.preventDefault();
   //   this.props.deleteFriendRequest()
   // }
+  componentDidUpdate(){
+    
+  }
 
   render() {
     if (this.props.user.id === this.props.currentUser.id) {
