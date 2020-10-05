@@ -29,7 +29,6 @@ class CreatePostForm extends React.Component {
           <div>
             <span>
               <h1>{this.props.formType}</h1>
-              {/* <h1>Create Post</h1> */}
             </span>
             <span>
               <button onClick={this.props.handleClose}><p>X</p></button>
@@ -39,7 +38,7 @@ class CreatePostForm extends React.Component {
         </div>
         <div className='post-form-user'>
           <div className='post-form-user-image'>
-            <p>Image</p>
+            <img src={this.props.currentUser.profilePhoto} alt=""/>
           </div>
           <div className='post-form-user-name'>
             <p>{this.props.currentUser.firstName} {this.props.currentUser.lastName}</p>

@@ -7,10 +7,10 @@ export default props => {
   const [last_name, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [profile_photo, setProfilePhoto] = useState("https://facebook-clone-pro.s3.us-east-2.amazonaws.com/default_profile");
-  const[cover_photo, setCoverPhoto] = useState('https://facebook-clone-pro.s3.us-east-2.amazonaws.com/default_background');
+  // const [profile_photo, setProfilePhoto] = useState("https://facebook-clone-pro.s3.us-east-2.amazonaws.com/default_profile");
+  // const[cover_photo, setCoverPhoto] = useState('https://facebook-clone-pro.s3.us-east-2.amazonaws.com/default_background');
   
-  const errors = useSelector(state => state.errors)
+  const errors = useSelector(state => state.errors.session)
   const dispatch = useDispatch();
   
   const handleSubmit = () => {
@@ -18,10 +18,11 @@ export default props => {
       first_name,
       last_name,
       email,
-      password
+      password,
+      // profile_photo,
+      // cover_photo
     }
     dispatch(signup(user));
-    props.history.push(`/users`);
 
     // Use this for logging into a show page immediately
     // .then(response => this.props.history.push(`/users/${response.currentUser.user.id}`))
@@ -29,7 +30,7 @@ export default props => {
 
   const handleCloseButton = () => {
     props.handleClose();
-    clearErrors();
+    dispatch(clearErrors());
   }
 
   const renderErrors = () => {

@@ -8,16 +8,13 @@ const _nullUser = {
   id: null
 };
 
-const sessionReducer = (state = _nullUser, action) => {
+export default (state = _nullUser, action) => {
   switch (action.type) {
     case RECEIVE_CURRENT_USER:
-      const { id } = action.currentUser.user;
-      return Object.assign({}, { id });
+      return Object.assign({}, action.currentUser.user);
     case LOGOUT_CURRENT_USER:
       return _nullUser;
     default:
       return state;
   }
 };
-
-export default sessionReducer;

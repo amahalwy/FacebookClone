@@ -14,13 +14,15 @@ export default class NavbarDropdown extends React.Component {
 
   showMenu(e) {
     e.preventDefault();
-    // document.getElementsByClassName("dropdown-content").classList.toggle("show");
     this.setState({ showMenu: true }, () => {
       document.addEventListener('click', this.closeMenu);
     });
   }
 
   closeMenu(e) {
+    if (!this.dropdownMenu) {
+      return '';
+    }
     if (!this.dropdownMenu.contains(e.target)) {
       this.setState({ showMenu: false }, () => {
         document.removeEventListener('click', this.closeMenu);

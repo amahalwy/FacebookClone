@@ -17,14 +17,17 @@ const receiveAllUsers = users => ({
 export const fetchUser = userId => dispatch => (
   APIUtil.fetchUser(userId)
     .then(user => dispatch(receiveUser(user)))
+    // .catch(err => dispatch(receiveError(err)))
 )
 
 export const fetchUsers = () => dispatch => (
   APIUtil.fetchUsers()
     .then(users => dispatch(receiveAllUsers(users)))
+    // .catch(err => dispatch(receiveError(err)))
 )
 
 export const updateUserPhoto = (userId, formData) => dispatch => (
   APIUtil.updateUserPhoto(userId, formData)
     .then(user => dispatch(receiveUser(user)))
+    // .catch(err => dispatch(receiveError(err)))
 )

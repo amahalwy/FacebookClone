@@ -2,7 +2,7 @@ import {
       RECEIVE_COMMENT, RECEIVE_COMMENTS, REMOVE_COMMENT 
       } from '../actions/comment_actions';
 
-const commentsReducer = (oldState = {}, action) => {
+export default (oldState = {}, action) => {
   Object.freeze(oldState);
   switch (action.type) {
     // Clean this up
@@ -19,5 +19,3 @@ const commentsReducer = (oldState = {}, action) => {
       return oldState;
   }
 }
-
-export default commentsReducer;

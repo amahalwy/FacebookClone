@@ -9,17 +9,20 @@
 }
 
 .comment-avatar {
-  margin: 6px 20px;
-  padding: 6px;
   display: flex;
   align-self: center;
 }
 
+.comment-avatar img {
+  width: 34px;
+  height: 34px;
+  border-radius: 20px;
+}
+
 .comment-body {
   background-color: rgb(225, 227, 229);
-  // border: 1px solid rgb(240, 242, 245);
   border-radius: 8px;
-  min-width: 320px;
+  min-width: 290px;
   margin: 4px;
   padding: 5px;
   align-self: center;
@@ -40,7 +43,7 @@
 }
 
 .comment-delete-button button {
-  margin: 14px;
+  margin: 14px 2px;
   background: white;
   border: none;
   border-radius: 10px;

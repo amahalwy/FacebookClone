@@ -1,6 +1,6 @@
 import { POST_FRIENDSHIP, RECEIVE_USER_FRIENDSHIPS, CLEAR_FRIENDSHIPS } from '../actions/friendship_actions';
 
-const friendshipsReducer = (oldState = {}, action) => {
+export default (oldState = {}, action) => {
   Object.freeze(oldState);
   switch (action.type) {
     case POST_FRIENDSHIP:
@@ -13,5 +13,3 @@ const friendshipsReducer = (oldState = {}, action) => {
       return oldState;
   }
 }
-
-export default friendshipsReducer;

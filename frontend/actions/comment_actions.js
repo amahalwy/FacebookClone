@@ -23,14 +23,17 @@ const removeComment = commentId => ({
 export const fetchPostComments = postId => dispatch => (
   APIUtil.fetchPostComments(postId)
     .then(comments => dispatch(receiveComments(comments)))
+    // .catch(err => dispatch(receiveError(err)))
 )
 
 export const createComment = comment => dispatch => (
   APIUtil.createComment(comment)
     .then(comment => dispatch(receiveComment(comment)))
+    // .catch(err => dispatch(receiveError(err)))
 )
 
 export const deleteComment = commentId => dispatch => (
   APIUtil.deleteComment(commentId)
     .then(() => dispatch(removeComment(commentId)))
+    // .catch(err => dispatch(receiveError(err)))
 )

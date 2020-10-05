@@ -8,6 +8,7 @@ class PostIndexItem extends React.Component {
 
   render() {
     const post = this.props.post;
+    
     return (
       <li>
         <div className='post-card'>
@@ -80,7 +81,7 @@ class PostIndexItem extends React.Component {
           <div className='post-comment'>
             <div className='comment-container'>
               <div className='post-comment-avatar'>
-                <img src="" alt=""/>
+                {/* <img src="" alt=""/> */}
               </div>
                 <CreateCommentForm
                   history={this.props.history}

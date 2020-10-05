@@ -47,8 +47,11 @@
   height: 30px;
 }
 
-.post-form-user-image {
-  margin: 10px;
+.post-form-user-image img {
+  width: 40px;
+  height: 40px;
+  margin: 0 10px;
+  border-radius: 10px;
 }
 
 .friends-p {

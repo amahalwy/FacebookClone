@@ -5,7 +5,7 @@ import {
     CLEAR_FRIEND_REQUESTS
   } from '../actions/friend_request_actions'
 
-const friendRequestsReducer = (oldState = {}, action) => {
+export default (oldState = {}, action) => {
   Object.freeze(oldState);
   switch (action.type) {
     case POST_FRIEND_REQUEST:
@@ -22,5 +22,3 @@ const friendRequestsReducer = (oldState = {}, action) => {
       return oldState;
   }
 }
-
-export default friendRequestsReducer;

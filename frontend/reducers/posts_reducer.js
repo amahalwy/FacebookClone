@@ -2,7 +2,7 @@ import {
    RECEIVE_POST, RECEIVE_USER_POSTS, REMOVE_POST, CLEAR_POSTS
   } from '../actions/post_actions';
 
-const postsReducer = (oldState = {}, action) => {
+export default (oldState = {}, action) => {
   Object.freeze(oldState);
   switch (action.type) {
     case RECEIVE_POST:
@@ -19,5 +19,3 @@ const postsReducer = (oldState = {}, action) => {
       return oldState;
   }
 }
-
-export default postsReducer;

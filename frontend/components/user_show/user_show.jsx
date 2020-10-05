@@ -28,15 +28,13 @@ class UserShow extends React.Component {
   }
 
   componentDidMount(){
-    this.props.fetchUser(this.props.match.params.userId);
-    this.props.fetchUserPosts(this.props.match.params.userId);
+    // this.props.fetchUser(this.props.match.params.userId);
   }
 
   componentDidUpdate(prevProps){
     if (this.props.match.params.userId !== prevProps.match.params.userId) {
       this.props.fetchUser(this.props.match.params.userId); 
       this.props.clearPosts();
-      this.props.fetchUserPosts(this.props.match.params.userId);
     }
   }
 
@@ -47,7 +45,6 @@ class UserShow extends React.Component {
       this.setState({ profilePhotoFile: file }, () => this.coverProfileSubmit());
 
     if (file) {
-      console.log(file);
       reader.readAsDataURL(file);
     } else {
       this.setState({ profilePhotoFile: null });
@@ -59,7 +56,6 @@ class UserShow extends React.Component {
     const file = e.currentTarget.files[0];
     reader.onloadend = () =>
       this.setState({ coverPhotoFile: file }, () => this.coverHandleSubmit()); 
-      // 
 
     if (file) {
       reader.readAsDataURL(file);

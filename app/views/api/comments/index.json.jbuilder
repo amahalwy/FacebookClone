@@ -6,5 +6,6 @@
     json.authorFirstName comment.author.first_name
     json.authorLastName comment.author.last_name
     json.body comment.body
+    json.avatar comment.author.profile_photo
   end 
 end

@@ -24,30 +24,36 @@ const clear = () => ({
   type: CLEAR_POSTS
 })
 
+
 // Thunks
 export const fetchPost = postId => dispatch => (
   APIUtil.fetchPost(postId)
     .then(post => dispatch(receivePost(post)))
+    // .catch(err => dispatch(receiveError(err)))
 )
 
 export const fetchUserPosts = userId => dispatch => (
   APIUtil.fetchUserPosts(userId)
     .then(posts => dispatch(receiveUserPosts(posts)))
+    // .catch(err => dispatch(receiveError(err)))
 )
 
 export const createPost = post => dispatch => (
   APIUtil.createPost(post)
     .then(post => dispatch(receiveUserPosts(post)))
+    // .catch(err => dispatch(receiveError(err)))
 )
 
 export const updatePost = post => dispatch => (
   APIUtil.updatePost(post)
     .then(post => dispatch(receiveUserPosts(post)))
+    // .catch(err => dispatch(receiveError(err)))
 )
 
 export const deletePost = postId => dispatch => (
   APIUtil.deletePost(postId)
     .then(() => dispatch(removePost(postId)))
+    // .catch(err => dispatch(receiveError(err)))
 )
 
 export const clearPosts = () => dispatch => (

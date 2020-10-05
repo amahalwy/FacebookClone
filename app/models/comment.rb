@@ -8,5 +8,9 @@ class Comment < ApplicationRecord
   belongs_to :post,
     foreign_key: :post_id,
     class_name: :Post
+
+  has_many :profile_photo,
+    through: :author,
+    source: :profile_photo_attachment
     
 end

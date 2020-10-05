@@ -277,12 +277,15 @@
 
 .profile-body {
   background-color: rgb(240, 242, 245);
-  margin: 0 400px;
+  width: 50%;
+  margin: 0 auto;
   display: flex;
+  justify-content: center;
 }
 
-.profile-main-left-section {
-  width: 40%;
+.profile-main-left-section,
+.profile-main-right-section {
+  width: 48%;
 }
 
 .profile-intro-card {
@@ -314,7 +317,6 @@
 }
 
 .post-on-your-mind {
-  // border: 1px solid black;
   background-color: white;
   border-radius: 10px;
   width: 90%;

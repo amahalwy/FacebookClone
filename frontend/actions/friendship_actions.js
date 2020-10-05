@@ -22,11 +22,13 @@ const clear = () => ({
 export const postFriendship = (user_id, friend_id) => dispatch => (
   APIUtil.postFriendship(user_id, friend_id)
     .then(friendship => dispatch(createFriendship(friendship)))
+    // .catch(err => dispatch(receiveError(err)))
 )
 
 export const fetchFriendships = userId => dispatch => (
   APIUtil.fetchFriendships(userId)
     .then(friendships => dispatch(receiveUsersFriendships(friendships)))
+    // .catch(err => dispatch(receiveError(err)))
 )
 
 export const clearFriendships = () => dispatch => (
