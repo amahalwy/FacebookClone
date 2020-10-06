@@ -28,7 +28,7 @@ export const fetchPostComments = postId => dispatch => (
 
 export const createComment = comment => dispatch => (
   APIUtil.createComment(comment)
-    .then(comment => dispatch(receiveComment(comment)))
+    .then(comment => console.log(comment))//dispatch(receiveComment(comment)))
     // .catch(err => dispatch(receiveError(err)))
 )
 

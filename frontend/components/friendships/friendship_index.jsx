@@ -1,37 +1,36 @@
-import React from 'react'
+import React, {useEffect} from 'react'
+import { useDispatch, useSelector } from "react-redux";
 import FriendshipItem from './friendship_index_item';
+import { clearFriendships, fetchFriendships } from "../../actions/friendship_actions";
 
-class FriendshipIndex extends React.Component {
-  constructor(props) {
-    super(props)
-  }
+export default props =>{
+  const currentUser = useSelector((state) => state.session.user);
+  const friendships = useSelector(state => Object.values(state.entities.friendships));
+  const dispatch = useDispatch();
 
-  componentDidMount(){
-    this.props.fetchFriendships(this.props.currentUser.id);
-  }
+  useEffect(() => {
+    dispatch(fetchFriendships(currentUser.id));
+    return () => {
+      clearFriendships();
+    }
+  }, [])
 
-  componentWillUnmount(){
-    this.props.clearFriendships();
-  }
+  if (!friendships) return ""; 
 
-  render() {
-    return (
-      <div>
-        <ul className='friends-list'>
-        {
-          this.props.friendships.map(friendship =>{
-            return (
-              <FriendshipItem 
-                key={friendship.id}
-                friendship={friendship}
-              />
-            )
-          })
-        }
-        </ul>
-      </div>
-    )
-  }
+  return (
+    <div>
+      <ul className='friends-list'>
+      {
+        friendships.map(friendship =>{
+          return (
+            <FriendshipItem 
+              key={friendship.id}
+              friendship={friendship}
+            />
+          )
+        })
+      }
+      </ul>
+    </div>
+  )
 }
-
-export default FriendshipIndex;

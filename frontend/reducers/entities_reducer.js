@@ -1,14 +1,18 @@
 import { combineReducers} from 'redux';
-import friendshipsReducer from './friendships_reducer'
-import usersReducer from './users_reducer';
-import friendRequestsReducer from './friend_request_reducer';
-import postsReducer from './posts_reducer';
+import friendships from './friendships_reducer'
+import users from './users_reducer';
+import userShow from './user_show_reducer';
+import friendRequests from './friend_request_reducer';
+import posts from './posts_reducer';
+import comments from './comments_reducer';
 
 const entitiesReducer = combineReducers({
-  users: usersReducer,
-  friendRequests: friendRequestsReducer,
-  friendships: friendshipsReducer,
-  posts: postsReducer,
+  comments,
+  users,
+  userShow,
+  friendRequests,
+  friendships,
+  posts,
 })
 
 export default entitiesReducer;

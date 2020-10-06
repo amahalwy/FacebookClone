@@ -10,7 +10,7 @@ class Api::CommentsController < ApplicationController
       @comments = Comment.where(post_id: params[:comment][:post_id])
       render '/api/comments/index'
     else
-      # Render errors
+      render json: @user.errors.full_messages, status: 422
     end
   end
 

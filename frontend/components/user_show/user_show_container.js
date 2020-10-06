@@ -3,7 +3,7 @@ import UserShow from './user_show';
 import { fetchUser, updateUserPhoto} from '../../actions/user_actions.js';
 import { postFriendRequest } from '../../actions/friend_request_actions'
 import { fetchUserPosts, clearPosts } from '../../actions/post_actions';
-import {logout} from '../../actions/session';
+import {logout} from '../../actions/session_actions';
 
 const mapStateToProps = (state, ownProps) => ({
   history: ownProps.history,

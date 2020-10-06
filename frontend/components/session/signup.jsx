@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import { signup, clearErrors } from '../../actions/session';
+import { signup, clearErrors } from '../../actions/session_actions';
 
 export default props => {
   const [first_name, setFirstName] = useState('');

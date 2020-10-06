@@ -1,39 +1,35 @@
-import React from 'react'
+import React, {useEffect} from 'react'
+import {useSelector, useDispatch} from 'react-redux';
 import PostIndexItem from './post_index_item';
+import {fetchUserPosts, clearPosts} from '../../actions/post_actions';
 
-class PostsIndex extends React.Component {
+export default props => {
+  const posts = useSelector(state => Object.values(state.entities.posts));
+  const dispatch = useDispatch();
 
-  componentDidMount(){
-    this.props.fetchUserPosts(this.props.user.id)
-  }
+  useEffect(() => {
+    dispatch(fetchUserPosts(props.user.id));
+    return () => {
+      dispatch(clearPosts());
+    }
+  }, [])
+  
 
-  componentWillUnmount(){
-    this.props.clearPosts()
-  }
-
-  render() {
-    return (
-      <div>
-        <ul>
-        {
-          this.props.posts.map(post => {
-            return (
-              <PostIndexItem
-                key={post.id}
-                history={this.props.history}
-                post={post}
-                deleteComment={this.props.deleteComment}
-                createComment={this.props.createComment}
-                currentUser={this.props.currentUser}
-                fetchUserPosts={this.props.fetchUserPosts}
-                fetchPostComments={this.props.fetchPostComments}
-              />
-            )
-          })
-        }
-        </ul>
-      </div>
-    )
-  }
+  return (
+    <div>
+      <ul>
+      {
+        posts.map(post => {
+          return (
+            <PostIndexItem
+              key={post.id}
+              history={props.history}
+              post={post}
+            />
+          )
+        })
+      }
+      </ul>
+    </div>
+  )
 }
-export default PostsIndex

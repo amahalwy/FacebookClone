@@ -1,17 +1,16 @@
 import {
   RECEIVE_USER,
-  RECEIVE_ALL_USERS,
-  CLEAR_USERS,
+  CLEAR_USER,
 } from "../actions/user_actions";
 
 export default (oldState = {}, action) => {
   Object.freeze(oldState);
   switch (action.type) {
-    case RECEIVE_ALL_USERS:
-      return Object.assign({}, action.users)
-    case CLEAR_USERS:
+    case RECEIVE_USER:
+      return Object.assign({}, oldState, action.user);
+    case CLEAR_USER:
       return {};
     default:
       return oldState;
   }
-}
+};

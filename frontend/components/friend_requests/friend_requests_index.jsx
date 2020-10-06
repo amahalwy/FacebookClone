@@ -1,40 +1,37 @@
-import React from 'react'
+import React, {useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import FriendRequestItem from './friend_request_item';
+import {
+  clearFriendRequests,
+  fetchUserFriendRequests,
+} from "../../actions/friend_request_actions";
 
-class FriendRequestsIndex extends React.Component {
-  constructor(props) {
-    super(props)
-  }
+export default props => {
+  const currentUser = useSelector((state) => state.session.user);
+  // const friendRequests = useSelector(state => Object.values(state.entities.friendRequests));
+  const dispatch = useDispatch();
 
-  componentDidMount() {
-    this.props.clearFriendRequests();
-    this.props.fetchUserFriendRequests(this.props.currentUser.id);
-  }
+  useEffect(() => {
+    // dispatch(fetchUserFriendRequests(currentUser.id));
+    return () => {
+      dispatch(clearFriendRequests());
+    }
+  }, [])
 
-  componentWillUnmount() {
-    this.props.clearFriendRequests();
-  }
-
-  render() {
-    return (
-      <div>
-        <ul>
-        {this.props.friendRequests.map((request, i) => {
-          return (
-            <FriendRequestItem
-              currentUser={this.props.currentUser}
-              deleteFriendRequest={this.props.deleteFriendRequest}
-              postFriendship={this.props.postFriendship}
-              request={request}
-              key={i}
-            />
-          )
-        })}
-        </ul>
-      </div>
-    )
-  }
+  if (!currentUser) return '';
+  return (
+    <div>
+      <ul>
+      {currentUser.requestsAsReceiver.map(request => {
+        return (
+          <FriendRequestItem
+            currentUser={currentUser}
+            request={request}
+            key={request.id}
+          />
+        )
+      })}
+      </ul>
+    </div>
+  )
 }
-
-
-export default FriendRequestsIndex;

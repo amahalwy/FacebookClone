@@ -5,12 +5,10 @@ import {
 export default (oldState = {}, action) => {
   Object.freeze(oldState);
   switch (action.type) {
-    // Clean this up
     case RECEIVE_COMMENT:
       return Object.assign({}, oldState, {[action.comment.id]: action.comment})
     case RECEIVE_COMMENTS:
       return Object.assign({}, oldState, action.comments)
-    // 
     case REMOVE_COMMENT:
       let newState = Object.assign({}, oldState);
       delete newState[action.commentId];

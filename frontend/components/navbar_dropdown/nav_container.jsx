@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import NavbarDropdown from './navbar_dropdown';
-import {logout} from '../../actions/session';
+import {logout} from '../../actions/session_actions';
 
 const mapStateToProps = state => ({
   currentUser: state.entities.users[state.session.id]

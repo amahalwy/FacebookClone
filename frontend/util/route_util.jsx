@@ -26,7 +26,7 @@ const Protected = ({ component: Component, path, loggedIn, exact }) => (
 
 // access the Redux state to check if the user is logged in
 const mapStateToProps = state => {
-  return { loggedIn: Boolean(state.session.id) };
+  return { loggedIn: Boolean(state.session.user) };
 }
 
 // connect Auth to the redux state

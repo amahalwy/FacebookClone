@@ -4,15 +4,11 @@ import { Link } from 'react-router-dom';
 import NavbarContainer from '../navbar_dropdown/nav_container';
 import Modal from '../modal/modal';
 import CreatePostFormContainer from '../posts_form/create_post_container';
-import {fetchUser} from '../../actions/user_actions';
+import { fetchCurrentUser} from '../../actions/session_actions';
 
 export default props => {
-
   const [openModal, setModal] = useState(false);
   const [search, setSearch] = useState('');
-  const currentUser = useSelector(state => state.entities.users[state.session.id])
-
-  const dispatch = useDispatch();
 
   const showModal = () => {
     setModal(true);
@@ -21,11 +17,8 @@ export default props => {
   const hideModal = () => {
     setModal(false);
   };
-
-  useEffect(() => {
-    dispatch(fetchUser(currentUser.id));
-  }, [])
-
+  
+  if (!props.currentUser) return '';
   return (
     <nav className="nav-bar">
     
@@ -86,10 +79,10 @@ export default props => {
         <div className='navbar-menu-user-profile-container'>
           <div className='navbar-menu-user-profile' >
             <div className='navbar-menu-user-picture'>
-              <img src={currentUser.profilePhoto} alt=""/>
+              <img src={props.currentUser.profilePhoto} alt=""/>
             </div>
             <div className='navbar-menu-user-link'>
-              <Link to={`/users/${currentUser.id}`}>{currentUser.firstName}</Link>
+              <Link to={`/users/${props.currentUser.id}`}>{props.currentUser.firstName}</Link>
             </div>
           </div>
         </div>
@@ -115,12 +108,9 @@ export default props => {
             </Link>
           </div>
         </div>
-        
-        <NavbarContainer  />
 
+        <NavbarContainer />
       </div>
     </nav>
   )
-
 }
-

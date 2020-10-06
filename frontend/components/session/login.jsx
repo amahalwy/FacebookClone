@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Signup from './signup';
 import Modal from '../modal/modal';
 
-import { login, clearErrors } from '../../actions/session';
+import { login, clearErrors } from '../../actions/session_actions';
 
 export default props => {
   const errors = useSelector(state => state.errors.session)
@@ -14,10 +14,9 @@ export default props => {
     email: 'demo',
     password: 'demo1234'
   }
-  
+
   const dispatch = useDispatch();
   
-
   const handleSubmit = (e) => {
     e.preventDefault();
     let user = {
@@ -27,15 +26,16 @@ export default props => {
     dispatch(login(user));
 
     // Use this for logging into a show page immediately
-    // .then(response => this.props.history.push(`/users/${response.currentUser.user.id}`))
+    props.history.push(`/users/${currentUser.id}`);
   }
 
-  const handleDemo = (e) => {
-    e.preventDefault();
-    dispatch(login(demoUser))
 
+  const handleDemo = () => {
+    dispatch(login(demoUser));
+  
     // Use this for logging into a show page immediately
     // .then(response =>   console.log(response))  //this.props.history.push(`/users/${response.currentUser.user.id}`))
+  
   }
 
   const showModal = () => {

@@ -1,23 +1,27 @@
-import React from 'react'
+import React from 'react';
+import {useDispatch} from 'react-redux';
 import { Link } from 'react-router-dom';
+import {
+  deleteComment,
+  createComment,
+  fetchPostComments,
+} from "../../actions/comment_actions";
+import {fetchUserPosts} from '../../actions/post_actions';
 
-class CommentIndexItem extends React.Component {
-  constructor(props) {
-    super(props);
+export default props => {
 
-    this.renderButton = this.renderButton.bind(this);
+  const dispatch = useDispatch();
+
+  const handleDelete = () =>{
+    dispatch(deleteComment(props.comment.id));
+    dispatch(fetchUserPosts(props.currentUser.id));
   }
 
-  handleDelete(){
-    this.props.deleteComment(this.props.comment.id)
-    .then(() => this.props.fetchUserPosts(this.props.currentUser.id))
-  }
-
-  renderButton() {
-    if (this.props.comment.authorId === this.props.currentUser.id) {
+  const renderButton = () =>{
+    if (props.comment.authorId === props.currentUser.id) {
       return (
         <div className='comment-delete-button'>
-          <button onClick={this.handleDelete.bind(this)}>
+          <button onClick={handleDelete}>
             Delete
           </button>
         </div >
@@ -27,24 +31,20 @@ class CommentIndexItem extends React.Component {
     }
   }
 
-  render() {
-    return (
-      <div className='comment-card'>
-        <div className='comment-avatar'>
-          <img src={this.props.comment.profilePhoto} alt=""/>
-        </div>
-        <div className='comment-body'>
-          <div className='comment-user-name'>
-            <Link to={`/users/${this.props.comment.authorId}`}>{this.props.comment.authorFirstName} {this.props.comment.authorLastName}</Link>
-          </div>
-          <div className='comment-text'>
-            <span>{this.props.comment.body}</span>
-          </div>
-        </div>
-        {this.renderButton()}
+  return (
+    <div className='comment-card'>
+      <div className='comment-avatar'>
+        <img src={props.comment.profilePhoto} alt=""/>
       </div>
-    )
-  }
+      <div className='comment-body'>
+        <div className='comment-user-name'>
+          <Link to={`/users/${props.comment.authorId}`}>{props.comment.authorFirstName} {props.comment.authorLastName}</Link>
+        </div>
+        <div className='comment-text'>
+          <span>{props.comment.body}</span>
+        </div>
+      </div>
+      {renderButton()}
+    </div>
+  )
 }
-
-export default CommentIndexItem;
