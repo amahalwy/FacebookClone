@@ -4,9 +4,7 @@ import UsersIndexItem from './users_index_item';
 import NavBar from '../navbar/navbar';
 import FriendRequestsContainer from '../friend_requests/friend_requests_container';
 import FriendshipContainer from '../friendships/friendship_container';
-import { fetchCurrentUser} from '../../actions/session_actions';
 import {fetchUsers, clearUsers} from '../../actions/user_actions';
-import {clearFriendships} from '../../actions/friendship_actions';
 
 export default props => {
   const users = useSelector(state => Object.values(state.entities.users));
@@ -17,16 +15,19 @@ export default props => {
   useEffect(() => {
     dispatch(fetchUsers());
     return () => {
-      dispatch(clearFriendships);
       dispatch(clearUsers());
     }
   }, [])
 
   if (!currentUser) return '';
+  
   return (
     <div>
       <NavBar
         currentUser={currentUser}
+        history={props.history}
+        match={props.match}
+        location={props.location}
       />
       <div className='users-index-div'>
         <div className='left-users-menu'>

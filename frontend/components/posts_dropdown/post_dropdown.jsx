@@ -90,7 +90,7 @@ class PostDropdown extends React.Component {
                 <Modal show={this.state.openModal} handleClose={this.hideModal} >
 
                   <EditPostFormContainer
-                    handleClose={this.hideModal}
+                    hideModal={this.hideModal}
                     post={this.props.post}
                   />
 

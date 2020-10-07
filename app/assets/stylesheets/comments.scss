@@ -22,7 +22,7 @@
 .comment-body {
   background-color: rgb(225, 227, 229);
   border-radius: 8px;
-  min-width: 290px;
+  // width: 100%;
   margin: 4px;
   padding: 5px;
   align-self: center;
@@ -40,6 +40,7 @@
 .comment-text {
   font-size: 14px;
   margin-top: 4px;
+  width: 100%;
 }
 
 .comment-delete-button button {
@@ -70,6 +71,7 @@
   padding-left: 20px;
   padding-top: 10px;
   font-size: 14px;
+    margin-left: 4px;
 }
 
 .post-comment {
@@ -83,9 +85,14 @@
 }
 
 .post-comment-avatar {
-  width: 40px;
-  height: 40px;
-  margin: 0 10px;
+  width: 34px;
+  height: 34px;
+}
+
+.post-comment-avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
 }
 
 .post-comment-form {

@@ -3,8 +3,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import { Link } from 'react-router-dom';
 import NavbarContainer from '../navbar_dropdown/nav_container';
 import Modal from '../modal/modal';
-import CreatePostFormContainer from '../posts_form/create_post_container';
-import { fetchCurrentUser} from '../../actions/session_actions';
+import CreatePostForm from '../posts_form/create_post_form';
 
 export default props => {
   const [openModal, setModal] = useState(false);
@@ -19,6 +18,7 @@ export default props => {
   };
   
   if (!props.currentUser) return '';
+  
   return (
     <nav className="nav-bar">
     
@@ -90,11 +90,11 @@ export default props => {
         <div className='navbar-menu-list-button'>
           <div className='navbar-menu-create-post' >
             <Modal show={openModal} handleClose={hideModal} >
-              <CreatePostFormContainer
+              <CreatePostForm
                 history={props.history}
                 match={props.match}
                 location={props.location}
-                handleClose={hideModal}
+                hideModal={hideModal}
               />
             </Modal>
             <a onClick={showModal}>+</a>
@@ -109,7 +109,8 @@ export default props => {
           </div>
         </div>
 
-        <NavbarContainer />
+        <NavbarContainer 
+        />
       </div>
     </nav>
   )

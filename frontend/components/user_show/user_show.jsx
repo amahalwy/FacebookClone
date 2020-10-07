@@ -9,9 +9,7 @@ import { fetchUser, clearUsers, clearShow } from '../../actions/user_actions';
 import {clearPosts} from '../../actions/post_actions';
 
 export default props => {
-  const user = useSelector(
-    (state) => state.entities.users[props.match.params.userId]
-  );
+  const user = useSelector(state => state.entities.userShow);
 
   const currentUser = useSelector(state => state.session.user)
   const [profilePhotoFile, setProfilePhoto] = useState(null);
@@ -24,12 +22,10 @@ export default props => {
   const photoCoverUpload = React.createRef();
 
   useEffect(() => {
-    setTimeout(() => {
-      dispatch(fetchUser(props.match.params.userId));
-    }, 1000)
+    dispatch(fetchUser(props.match.params.userId));
     return () => {
       dispatch(clearShow());
-      // dispatch(clearPosts());
+      dispatch(clearPosts());
     }
   }, [])
 
@@ -98,10 +94,9 @@ export default props => {
   const hideModal = () => {
     setModal(false);
   };
-
-  // if (Object.values(user).length <= 0) return '';
-  if (!user) return '';
   
+  if (Object.values(user).length <= 0 ) return '';
+  debugger
   return (
     <div>
       <NavBar
@@ -170,16 +165,16 @@ export default props => {
               <div className='under-cover-timeline'>
                 <span>Timeline</span>
               </div>
-              <div className='under-cover-others under-cover-hover'>
+              {/* <div className='under-cover-others under-cover-hover'>
                 <span>About</span>
-              </div>
+              </div> */}
               <div className='under-cover-others under-cover-hover'>
                 <span className='friends-span'>
                   <p>Friends</p> 
                   <p>{user.friendCount}</p>
                 </span>
               </div>
-              <div className='under-cover-others under-cover-hover'>
+              {/* <div className='under-cover-others under-cover-hover'>
                 <span>Photos</span>
               </div>
               <div className='under-cover-others under-cover-hover'>
@@ -189,7 +184,7 @@ export default props => {
                 <span className='more'>More
                   <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sort-down" className="more-icon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41z"></path></svg>
                 </span>
-              </div>
+              </div> */}
 
             </nav>
             
@@ -204,7 +199,7 @@ export default props => {
               />
 
               </div>
-              <div className='right-nav-divs'>
+              {/* <div className='right-nav-divs'>
                 <button className='right-nav-buttons'>
                   <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="eye" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M572.52 241.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400a144 144 0 1 1 144-144 143.93 143.93 0 0 1-144 144zm0-240a95.31 95.31 0 0 0-25.31 3.79 47.85 47.85 0 0 1-66.9 66.9A95.78 95.78 0 1 0 288 160z"></path></svg>
                 </button>
@@ -218,7 +213,7 @@ export default props => {
                 <button className='right-nav-buttons'>
                   <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis-h" className="svg-inline--fa fa-w-16 fa-ellipsis-h dark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M328 256c0 39.8-32.2 72-72 72s-72-32.2-72-72 32.2-72 72-72 72 32.2 72 72zm104-72c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm-352 0c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72z"></path></svg>
                 </button>
-              </div>
+              </div> */}
             </nav>
           </div>
         </div>
@@ -252,44 +247,27 @@ export default props => {
 
           <div className='profile-main-right-section'>
 
-            <div className='post-on-your-mind'>
-
-              <div className='post-input-click'>
-                <div className='post-input-photo'></div>
-                <div className='post-actual-input' onClick={showModal}>What's on your mind, {currentUser.firstName}?</div>
+            <div className='post-on-your-mind-container'>
+              <div className='post-on-your-mind'>
+                <div className='post-input-click'>
+                  <div className='post-input-photo'>
+                    <img src={currentUser.profilePhoto} alt=""/>
+                  </div>
+                  <div className='post-actual-input' onClick={showModal}>What's on your mind, {currentUser.firstName}?</div>
+                </div>
               </div>
 
-              {/* <div className='post-dividor'></div> */}
-
-              {/* <div className='under-on-your-mind'>
-
-                <div className='on-your-mind-icons'>
-                  <div className='under-mind-icon'>ICON</div>
-                  <div>Live Video</div>
-                </div>
-
-                <div className='on-your-mind-icons'>
-                  <div className='under-mind-icon'>ICON</div>
-                  <div>Photo/Video</div>
-                </div>
-
-                <div className='on-your-mind-icons'>
-                  <div className='under-mind-icon'>ICON</div>
-                  <div>Life Event</div>
-                </div>
-
-              </div> */}
-
+              
             </div>
 
-            {/* <Modal show={openModal} handleClose={hideModal} >
-              <CreatePostForm
+            <Modal show={openModal} handleClose={hideModal} >
+              <CreatePostFormContainer
                 history={props.history}
                 match={props.match}
                 location={props.location}
-                handleClose={hideModal}
+                hideModal={hideModal}
               />
-            </Modal> */}
+            </Modal>
 
             <div className='posts-index-div'>
               <ul>

@@ -5,7 +5,6 @@ import Login from './session/login';
 import UserShow from './user_show/user_show';
 import UsersIndex from './user_show/users_index';
 import PostsIndex from './posts/posts_index';
-import PostFormContainer from './posts_form/edit_post_container';
 
 export default () => (
   <div>

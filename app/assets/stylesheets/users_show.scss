@@ -316,11 +316,16 @@
   padding: 5px;
 }
 
+.post-on-your-mind-container {
+  min-height: 60px;
+}
+
 .post-on-your-mind {
+  border: 1px solid rgb(225, 227, 229);
   background-color: white;
   border-radius: 10px;
   width: 90%;
-  height: 64px;
+  height: 90%;
   margin: 20px auto;
 }
 
@@ -330,7 +335,13 @@
 }
 
 .post-input-photo {
-  margin: 10px 20px;
+  margin: 0 20px;
+}
+
+.post-input-photo img {
+  width: 34px;
+  height: 34px;
+  border-radius: 20px;
 }
 
 .post-actual-input {

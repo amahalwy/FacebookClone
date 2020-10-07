@@ -11,7 +11,7 @@ export default props =>{
   useEffect(() => {
     dispatch(fetchFriendships(currentUser.id));
     return () => {
-      clearFriendships();
+      dispatch(clearFriendships());
     }
   }, [])
 

@@ -81,7 +81,7 @@ export default props => {
         <div className='post-comment'>
           <div className='comment-container'>
             <div className='post-comment-avatar'>
-              {/* <img src="" alt=""/> */}
+              <img src={currentUser.profilePhoto} alt=""/>
             </div>
               <CreateCommentForm
                 history={props.history}

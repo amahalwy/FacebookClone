@@ -19,7 +19,7 @@ const clear = () => ({
   type: CLEAR_USERS
 })
 
-const clearShow = () => ({
+const clearUser = () => ({
   type: CLEAR_USER,
 });
 
@@ -46,6 +46,6 @@ export const clearUsers = () => dispatch => (
   dispatch(clear())
 )
 
-export const clearUser = () => dispatch => (
-  dispatch(clearShow())
+export const clearShow = () => dispatch => (
+  dispatch(clearUser())
 )

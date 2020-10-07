@@ -8,6 +8,7 @@ export default props => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    // debugger
     dispatch(fetchUserPosts(props.user.id));
     return () => {
       dispatch(clearPosts());
