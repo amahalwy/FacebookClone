@@ -1,5 +1,4 @@
-import React, {useState, useEffect} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import NavbarContainer from '../navbar_dropdown/nav_container';
 import Modal from '../modal/modal';

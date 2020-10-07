@@ -5,11 +5,25 @@ import NavBar from '../navbar/navbar';
 import ProfileButton from './profile_button';
 import PostIndex from '../posts/posts_index';
 import CreatePostFormContainer from '../posts_form/create_post_container';
-import { fetchUser, clearUsers, clearShow } from '../../actions/user_actions';
+import FriendshipItem from '../friendships/friendship_profle_card';
+import { fetchUser, clearShow } from '../../actions/user_actions';
 import {clearPosts} from '../../actions/post_actions';
+import {clearFriendships, fetchFriendships} from '../../actions/friendship_actions';
 
 export default props => {
+
+  useEffect(() => {
+    dispatch(fetchUser(props.match.params.userId));
+    dispatch(fetchFriendships(props.match.params.userId));
+    return () => {
+      dispatch(clearShow());
+      dispatch(clearPosts());
+      dispatch(clearFriendships());
+    }
+  }, [])
+
   const user = useSelector(state => state.entities.userShow);
+  const friendships = useSelector(state => Object.values(state.entities.friendships));
 
   const currentUser = useSelector(state => state.session.user)
   const [profilePhotoFile, setProfilePhoto] = useState(null);
@@ -21,13 +35,6 @@ export default props => {
   const photoProfileUpload = React.createRef();
   const photoCoverUpload = React.createRef();
 
-  useEffect(() => {
-    dispatch(fetchUser(props.match.params.userId));
-    return () => {
-      dispatch(clearShow());
-      dispatch(clearPosts());
-    }
-  }, [])
 
 
   const handleProfileFile = (e) =>{
@@ -96,7 +103,7 @@ export default props => {
   };
   
   if (Object.values(user).length <= 0 ) return '';
-  debugger
+  
   return (
     <div>
       <NavBar
@@ -224,24 +231,22 @@ export default props => {
       <section className='profile-body-section'>
         <div className='profile-body'>
           <div className='profile-main-left-section'>
-            <div className='profile-intro-card'>
-              <div className='profile-intro'>Intro</div>
+            <div className='profile-friends-card'>
+              <div className='profile-friend-header'>Friends</div>
 
-              <div className='profile-intro-details'>
-                <button>
-                  <span>
-                    Edit Details
-                  </span>
-                </button>
+              <div className='profile-friendship-cards'>
+                {
+                  friendships.map(friendship => {
+                    return (
+                      <FriendshipItem 
+                        friendship={friendship}
+                        user={user}
+                      />
+                    )
+                  })
+                }
               </div>
-
-              <div className='profile-intro-featured'>
-                <button>
-                  <span>
-                    Edit Featured
-                  </span>
-                </button>
-              </div>
+              
             </div>
           </div>
 

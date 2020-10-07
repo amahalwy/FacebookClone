@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import UsersIndexItem from './users_index_item';
 import NavBar from '../navbar/navbar';
 import FriendRequestsContainer from '../friend_requests/friend_requests_container';
-import FriendshipContainer from '../friendships/friendship_container';
+import Friendship from '../friendships/friendship_index';
 import {fetchUsers, clearUsers} from '../../actions/user_actions';
 
 export default props => {
@@ -57,7 +57,7 @@ export default props => {
         </div>
         <div className='friends-list'>
           <h1>Friends</h1>
-          <FriendshipContainer
+          <Friendship
             history={props.history}
             match={props.match}
             location={props.location}
