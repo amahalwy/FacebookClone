@@ -1,12 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-const UsersIndexItem = props => (
+export default props => (
   <li>
     <div className='users-index-card'>
-      <Link to={`/users/${props.user.id}`}>{props.user.firstName} {props.user.lastName}</Link>
+      <img src={props.user.profilePhoto} alt="" className='friendship-card-image'/>
+      <Link to={`/users/${props.user.id}`} className='user-profile-link'>{props.user.firstName} {props.user.lastName}</Link>
     </div>
   </li>
 )
-
-export default UsersIndexItem;
