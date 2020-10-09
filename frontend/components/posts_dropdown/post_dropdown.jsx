@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from '../modal/modal';
 import DeleteModal from '../modal/delete_modal';
-import EditPostFormContainer from '../posts_form/edit_post_container';
+import EditPostForm from '../posts_form/edit_post_form';
 
 class PostDropdown extends React.Component {
   constructor(props) {
@@ -35,18 +35,17 @@ class PostDropdown extends React.Component {
     }
   }
 
-  showModal(e) {
-    e.preventDefault();
-    this.setState({ openModal: true })
+  showModal() {
+    this.setState({ openModal: true });
   };
 
   hideModal() {
     this.setState({ openModal: false });
   };
 
-  showDeleteModal(e) {
-    e.preventDefault();
-    this.setState({ openDeleteModal: true })
+  showDeleteModal() {
+    this.setState({ openDeleteModal: true });
+    this.setState({ showMenu: false });
   }
 
   hideDeleteModal() {
@@ -88,12 +87,10 @@ class PostDropdown extends React.Component {
                 </div>
 
                 <Modal show={this.state.openModal} handleClose={this.hideModal} >
-
-                  <EditPostFormContainer
+                  <EditPostForm
                     hideModal={this.hideModal}
                     post={this.props.post}
                   />
-
                 </Modal>
 
                 <DeleteModal 

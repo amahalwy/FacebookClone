@@ -2,7 +2,7 @@ class Api::FriendRequestsController < ApplicationController
   before_action :require_logged_in!, only: [:create, :destroy]
 
   def index
-    @friend_requests = FriendRequest.where(receiver_id: current_user.id)
+    @friend_requests = FriendRequest.where(receiver_id: params[:user_id])
   end
 
   def create

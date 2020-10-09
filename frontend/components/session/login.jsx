@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Signup from './signup';
 import Modal from '../modal/modal';
-
 import { login, clearErrors } from '../../actions/session_actions';
 
 export default props => {
@@ -26,7 +25,6 @@ export default props => {
     dispatch(login(user));
 
     // Use this for logging into a show page immediately
-    props.history.push(`/users/${currentUser.id}`);
   }
 
 

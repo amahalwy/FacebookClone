@@ -141,23 +141,30 @@
 
 .navbar-menu-user-link {
   margin-top: 2px;
+  margin-left: 4px;
 }
 
-.navbar-menu-create-post,
+.navbar-menu-create-post {
+  background-color: rgb(221, 223, 226);
+  align-self: center;
+  justify-content: center;
+  // padding: 10px 5px;
+  height: 40px;
+  width: 40px;
+  margin-right: 5px;
+  border-radius: 30px;
+}
+
+
 .navbar-menu-users,
 .navbar-menu-dropdown-click {
+  background-color: rgb(221, 223, 226);
   align-self: center;
   padding: 10px 5px;
   height: 20px;
   width: 30px;
   margin-right: 5px;
   border-radius: 30px;
-}
-
-.navbar-menu-create-post,
-.navbar-menu-users,
-.navbar-menu-dropdown-click {
-  background-color: rgb(221, 223, 226);
 }
 
 .navbar-menu-create-post:hover,
@@ -167,13 +174,10 @@
   cursor: pointer;
 }
 
-.navbar-menu-create-post a {
-  position: absolute;
-  right: 107px;
+.navbar-menu-create-post p {
   font-size: 20px;
   color: black;
-  height: 30px;
-  width: 30px;
+  margin: 11px 13px 13px 13px;
 }
 
 .navbar-menu-users svg {

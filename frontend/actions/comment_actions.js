@@ -21,19 +21,19 @@ const removeComment = commentId => ({
 
 // 
 export const fetchPostComments = postId => dispatch => (
-  APIUtil.fetchPostComments(postId)
-    .then(comments => dispatch(receiveComments(comments)))
-    // .catch(err => dispatch(receiveError(err)))
+  APIUtil.fetchPostComments(postId).then(
+    comments => dispatch(receiveComments(comments)),
+    err => dispatch(receiveErrors(err.responseJSON)))
 )
 
 export const createComment = comment => dispatch => (
-  APIUtil.createComment(comment)
-    .then(comment => dispatch(receiveComment(comment)))
-    // .catch(err => dispatch(receiveError(err)))
+  APIUtil.createComment(comment).then(
+    comment => dispatch(receiveComment(comment)),
+    err => dispatch(receiveErrors(err.responseJSON)))
 )
 
 export const deleteComment = commentId => dispatch => (
-  APIUtil.deleteComment(commentId)
-    .then(() => dispatch(removeComment(commentId)))
-    // .catch(err => dispatch(receiveError(err)))
+  APIUtil.deleteComment(commentId).then(
+    () => dispatch(removeComment(commentId)),
+    err => dispatch(receiveErrors(err.responseJSON)))
 )

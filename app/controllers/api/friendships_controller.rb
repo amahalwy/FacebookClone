@@ -17,6 +17,14 @@ class Api::FriendshipsController < ApplicationController
     end
   end
 
+  def destroy
+    @friendship = Friendship.find_by(id: params[:id])
+    # @friend_request.destroy
+    # @friend_requests = FriendRequest.where(receiver_id: current_user.id)
+    render 'api/friend_requests/index'
+  end
+
+
   private
   def req_params
     params.require(:friendship).permit(:friend_id, :user_id)

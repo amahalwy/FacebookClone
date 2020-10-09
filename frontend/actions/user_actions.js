@@ -25,20 +25,21 @@ const clearUser = () => ({
 
 // Thunk action creators
 export const fetchUser = userId => dispatch => (
-  APIUtil.fetchUser(userId)
-    .then(user => dispatch(receiveUser(user)))
-    // .catch(err => dispatch(receiveError(err)))
+  APIUtil.fetchUser(userId).then(
+    user => dispatch(receiveUser(user)),
+    err => dispatch(receiveErrors(err.responseJSON)))
 )
 
 export const fetchUsers = () => dispatch => (
-  APIUtil.fetchUsers()
-    .then(users => dispatch(receiveAllUsers(users)))
-    // .catch(err => dispatch(receiveError(err)))
+  APIUtil.fetchUsers().then(
+    users => dispatch(receiveAllUsers(users)),
+    err => dispatch(receiveErrors(err.responseJSON)))
 )
 
 export const updateUserPhoto = (userId, formData) => dispatch => (
-  APIUtil.updateUserPhoto(userId, formData)
-    .then(user => dispatch(receiveUser(user)))
+  APIUtil.updateUserPhoto(userId, formData).then(
+    user => dispatch(receiveUser(user)),
+    err => dispatch(receiveErrors(err.responseJSON)))
     // .catch(err => dispatch(receiveError(err)))
 )
 

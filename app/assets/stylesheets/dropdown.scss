@@ -15,11 +15,16 @@
   z-index: 1;
   right: 0px;
   top: 50px;
-  height: 360px;
+  height: 370px;
 }
 
-.dropdown-content div:hover {
- background-color: red;
+.dropdown-hover:hover {
+ background-color: rgb(209, 209, 209);
+}
+
+.dropdown-hover,
+.navbar-dropdown-list-div {
+  border-radius: 5px;
 }
 
 .dropdown-icon {
@@ -36,6 +41,7 @@
 .profile-parent-div {
   display: flex;
   margin: 15px 10px;
+  padding: 4px 0;
   text-decoration: none;
   color: black;
 }
@@ -72,7 +78,7 @@
 
 .dropdown-feedback-card {
   display: flex;
-  margin: 10px 0px; 
+  margin: 10px auto; 
 }
 
 
@@ -138,6 +144,5 @@
 }
 
 .navbar-dropdown-list-div:hover {
-  background-color: rgb(239, 239, 239);
-  // cursor: pointer;
+  background-color: rgb(209, 209, 209);
 }

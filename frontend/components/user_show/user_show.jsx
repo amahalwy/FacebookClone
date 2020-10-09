@@ -4,7 +4,7 @@ import Modal from '../modal/modal';
 import NavBar from '../navbar/navbar';
 import ProfileButton from './profile_button';
 import PostIndex from '../posts/posts_index';
-import CreatePostFormContainer from '../posts_form/create_post_container';
+import CreatePostForm from '../posts_form/create_post_form';
 import FriendshipItem from '../friendships/friendship_profle_card';
 import { fetchUser, clearShow } from '../../actions/user_actions';
 import {clearPosts} from '../../actions/post_actions';
@@ -201,7 +201,6 @@ export default props => {
               
               <ProfileButton 
                 user={user} 
-                currentUser={currentUser}
                 // postFriendRequest={postFriendRequest}
               />
 
@@ -251,7 +250,6 @@ export default props => {
           </div>
 
           <div className='profile-main-right-section'>
-
             <div className='post-on-your-mind-container'>
               <div className='post-on-your-mind'>
                 <div className='post-input-click'>
@@ -260,28 +258,25 @@ export default props => {
                   </div>
                   <div className='post-actual-input' onClick={showModal}>What's on your mind, {currentUser.firstName}?</div>
                 </div>
-              </div>
-
-              
+              </div>              
             </div>
 
+
+            <div className='posts-index-div'>
+                <PostIndex
+                  history={props.history}
+                  user={user}
+                />
+            </div>
+          
             <Modal show={openModal} handleClose={hideModal} >
-              <CreatePostFormContainer
+              <CreatePostForm
                 history={props.history}
                 match={props.match}
                 location={props.location}
                 hideModal={hideModal}
               />
             </Modal>
-
-            <div className='posts-index-div'>
-              <ul>
-                <PostIndex
-                  history={props.history}
-                  user={user}
-                />
-              </ul>
-            </div>
 
           </div>
         </div>

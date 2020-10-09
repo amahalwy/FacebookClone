@@ -1,33 +1,29 @@
 import React from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import { Link } from 'react-router-dom';
+import {postFriendship} from '../../actions/friendship_actions';
+import {deleteFriendRequest} from '../../actions/friend_request_actions';
 
-class FriendRequestItem extends React.Component {
-  constructor(props) {
-    super(props)
-    this.handleAccept = this.handleAccept.bind(this);
-    this.handleDecline = this.handleDecline.bind(this);
+export default props => {
+  const currentUser = useSelector(state => state.session.user);
+  const dispatch = useDispatch();
+
+  const handleAccept = () =>{
+    dispatch(postFriendship(currentUser.id, props.request.requestorId));
+    dispatch(deleteFriendRequest(props.request.id))
   }
 
-  handleAccept(){
-    this.props.postFriendship(this.props.currentUser.id, this.props.request.requestorId);
-    this.props.deleteFriendRequest(this.props.request.id)
+  const handleDecline = () => {
+    dispatch(deleteFriendRequest(props.request.id))
   }
 
-  handleDecline(){
-    this.props.deleteFriendRequest(this.props.request.id)
-  }
-
-  render(){
-    return (
-      <li>
-        <div className='request-user-card'>
-          <Link to={`/users/${this.props.request.requestorId}`}>{this.props.request.firstName} {this.props.request.lastName}</Link>
-          <button onClick={this.handleAccept} className='request-button'>Accept</button>
-          <button onClick={this.handleDecline} className='request-button'>Decline</button>
-        </div>
-      </li>
-    )
-  }
+  return (
+    <li>
+      <div className='request-user-card'>
+        <Link to={`/users/${props.request.requestorId}`}>{props.request.firstName} {props.request.lastName}</Link>
+        <button onClick={handleAccept} className='request-button'>Accept</button>
+        <button onClick={handleDecline} className='request-button'>Decline</button>
+      </div>
+    </li>
+  )
 }
-
-export default FriendRequestItem;

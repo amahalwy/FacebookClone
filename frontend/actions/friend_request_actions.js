@@ -26,21 +26,21 @@ const clear = () => ({
 
 // Thunk action creators
 export const postFriendRequest = (requestor_id, receiver_id) => dispatch => {
-  APIUtil.postFriendRequest(requestor_id, receiver_id)
-    .then(request => dispatch(createFriendRequest(request)))
-    // .catch(err => dispatch(receiveError(err)))
+  APIUtil.postFriendRequest(requestor_id, receiver_id).then(
+    request => dispatch(createFriendRequest(request)),
+    err => dispatch(receiveErrors(err.responseJSON)))
 }
 
 export const fetchUserFriendRequests = userId => dispatch => (
-  APIUtil.fetchUserFriendRequests(userId)
-    .then(requests => dispatch(receiveUsersFriendRequests(requests)))
-    // .catch(err => dispatch(receiveError(err)))
+  APIUtil.fetchUserFriendRequests(userId).then(
+    requests => dispatch(receiveUsersFriendRequests(requests)),
+    err => dispatch(receiveErrors(err.responseJSON)))
 )
 
 export const deleteFriendRequest = requestId => dispatch => (
-  APIUtil.deleteFriendRequest(requestId)
-    .then(() => dispatch(removeFriendRequest(requestId)))
-    // .catch(err => dispatch(receiveError(err)))
+  APIUtil.deleteFriendRequest(requestId).then(
+    () => dispatch(removeFriendRequest(requestId)),
+    err => dispatch(receiveErrors(err.responseJSON)))
 )
 
 export const clearFriendRequests = () => dispatch => (

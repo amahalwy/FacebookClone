@@ -27,33 +27,35 @@ const clear = () => ({
 
 // Thunks
 export const fetchPost = postId => dispatch => (
-  APIUtil.fetchPost(postId)
-    .then(post => dispatch(receivePost(post)))
-    // .catch(err => dispatch(receiveError(err)))
+  APIUtil.fetchPost(postId).then(
+    post => dispatch(receivePost(post)),
+    err => dispatch(receiveErrors(err.responseJSON)))
+  
 )
 
 export const fetchUserPosts = userId => dispatch => (
-  APIUtil.fetchUserPosts(userId)
-    .then(posts => dispatch(receiveUserPosts(posts)))
+  APIUtil.fetchUserPosts(userId).then(
+    posts => dispatch(receiveUserPosts(posts)),
+    err => dispatch(receiveErrors(err.responseJSON)))
     // .catch(err => dispatch(receiveError(err)))
 )
 
 export const createPost = post => dispatch => (
-  APIUtil.createPost(post)
-    .then(post => dispatch(receiveUserPosts(post)))
-    // .catch(err => dispatch(receiveError(err)))
+  APIUtil.createPost(post).then(
+    post => dispatch(receiveUserPosts(post)),
+    err => dispatch(receiveErrors(err.responseJSON)))
 )
 
 export const updatePost = post => dispatch => (
-  APIUtil.updatePost(post)
-    .then(post => dispatch(receiveUserPosts(post)))
-    // .catch(err => dispatch(receiveError(err)))
+  APIUtil.updatePost(post).then(
+    post => dispatch(receiveUserPosts(post)),
+    err => dispatch(receiveErrors(err.responseJSON)))
 )
 
 export const deletePost = postId => dispatch => (
-  APIUtil.deletePost(postId)
-    .then(() => dispatch(removePost(postId)))
-    // .catch(err => dispatch(receiveError(err)))
+  APIUtil.deletePost(postId).then(
+    () => dispatch(removePost(postId)),
+    err => dispatch(receiveErrors(err.responseJSON)))
 )
 
 export const clearPosts = () => dispatch => (
