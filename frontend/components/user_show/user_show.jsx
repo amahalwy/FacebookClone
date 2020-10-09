@@ -178,7 +178,7 @@ export default props => {
               <div className='under-cover-others under-cover-hover'>
                 <span className='friends-span'>
                   <p>Friends</p> 
-                  <p>{user.friendCount}</p>
+                  <p>{friendships.length}</p>
                 </span>
               </div>
               {/* <div className='under-cover-others under-cover-hover'>
@@ -197,13 +197,10 @@ export default props => {
             
             <nav className='under-cover-right-nav'>  
               <div className='right-nav-divs'>
-              {/* Need branching logic here; will be done using a friends association? */}   
-              
-              <ProfileButton 
-                user={user} 
-                // postFriendRequest={postFriendRequest}
-              />
-
+                <ProfileButton 
+                  user={user} 
+                  friendships={friendships}
+                />
               </div>
               {/* <div className='right-nav-divs'>
                 <button className='right-nav-buttons'>

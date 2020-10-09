@@ -4,6 +4,7 @@ export const POST_FRIEND_REQUEST = "POST_FRIEND_REQUEST";
 export const RECEIVE_USER_FRIEND_REQUESTS = "RECEIVE_USER_FRIEND_REQUESTS";
 export const REMOVE_FRIEND_REQUEST = "REMOVE_FRIEND_REQUEST";
 export const CLEAR_FRIEND_REQUESTS = "CLEAR_FRIEND_REQUESTS"
+export const RECEIVE_REQUEST_ERRORS = "RECEIVE_REQUEST_ERRORS";
 
 const createFriendRequest = request => ({
   type: POST_FRIEND_REQUEST,
@@ -19,6 +20,11 @@ const removeFriendRequest = requestId => ({
   type: REMOVE_FRIEND_REQUEST,
   requestId
 })
+
+const receiveErrors = errors => ({
+  type: RECEIVE_REQUEST_ERRORS,
+  errors
+});
 
 const clear = () => ({
   type: CLEAR_FRIEND_REQUESTS

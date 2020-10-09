@@ -10,11 +10,11 @@ export default props => {
 
   const handleAccept = () =>{
     dispatch(postFriendship(currentUser.id, props.request.requestorId));
-    dispatch(deleteFriendRequest(props.request.id))
+    dispatch(deleteFriendRequest(props.request.id));
   }
 
   const handleDecline = () => {
-    dispatch(deleteFriendRequest(props.request.id))
+    dispatch(deleteFriendRequest(props.request.id));
   }
 
   return (

@@ -163,7 +163,7 @@ var deleteComment = function deleteComment(commentId) {
 /*!****************************************************!*\
   !*** ./frontend/actions/friend_request_actions.js ***!
   \****************************************************/
-/*! exports provided: POST_FRIEND_REQUEST, RECEIVE_USER_FRIEND_REQUESTS, REMOVE_FRIEND_REQUEST, CLEAR_FRIEND_REQUESTS, postFriendRequest, fetchUserFriendRequests, deleteFriendRequest, clearFriendRequests */
+/*! exports provided: POST_FRIEND_REQUEST, RECEIVE_USER_FRIEND_REQUESTS, REMOVE_FRIEND_REQUEST, CLEAR_FRIEND_REQUESTS, RECEIVE_REQUEST_ERRORS, postFriendRequest, fetchUserFriendRequests, deleteFriendRequest, clearFriendRequests */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -172,6 +172,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_USER_FRIEND_REQUESTS", function() { return RECEIVE_USER_FRIEND_REQUESTS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_FRIEND_REQUEST", function() { return REMOVE_FRIEND_REQUEST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR_FRIEND_REQUESTS", function() { return CLEAR_FRIEND_REQUESTS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_REQUEST_ERRORS", function() { return RECEIVE_REQUEST_ERRORS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postFriendRequest", function() { return postFriendRequest; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUserFriendRequests", function() { return fetchUserFriendRequests; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteFriendRequest", function() { return deleteFriendRequest; });
@@ -182,6 +183,7 @@ var POST_FRIEND_REQUEST = "POST_FRIEND_REQUEST";
 var RECEIVE_USER_FRIEND_REQUESTS = "RECEIVE_USER_FRIEND_REQUESTS";
 var REMOVE_FRIEND_REQUEST = "REMOVE_FRIEND_REQUEST";
 var CLEAR_FRIEND_REQUESTS = "CLEAR_FRIEND_REQUESTS";
+var RECEIVE_REQUEST_ERRORS = "RECEIVE_REQUEST_ERRORS";
 
 var createFriendRequest = function createFriendRequest(request) {
   return {
@@ -201,6 +203,13 @@ var removeFriendRequest = function removeFriendRequest(requestId) {
   return {
     type: REMOVE_FRIEND_REQUEST,
     requestId: requestId
+  };
+};
+
+var receiveErrors = function receiveErrors(errors) {
+  return {
+    type: RECEIVE_REQUEST_ERRORS,
+    errors: errors
   };
 };
 
@@ -682,7 +691,7 @@ __webpack_require__.r(__webpack_exports__);
     path: "/posts",
     component: _posts_posts_index__WEBPACK_IMPORTED_MODULE_7__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
-    to: "/users"
+    to: "/feed"
   })));
 });
 
@@ -2670,6 +2679,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_friend_request_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/friend_request_actions */ "./frontend/actions/friend_request_actions.js");
+/* harmony import */ var _actions_friendship_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/friendship_actions */ "./frontend/actions/friendship_actions.js");
+
 
 
 
@@ -2684,15 +2695,29 @@ __webpack_require__.r(__webpack_exports__);
   }; // const cancelRequest = () => {
   // dispatch(deleteFriendRequest())
   // }
-  // const removeFriend = () => {
-  // dispatch()
-  // }
 
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     return;
   }, []);
-  debugger;
+
+  if (Object.values(props.friendships) <= 0) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      className: "edit-profile-button",
+      onClick: handleRequest
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+      "aria-hidden": "true",
+      focusable: "false",
+      "data-prefix": "fas",
+      "data-icon": "user-plus",
+      role: "img",
+      xmlns: "http://www.w3.org/2000/svg",
+      viewBox: "0 0 640 512"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+      fill: "currentColor",
+      d: "M624 208h-64v-64c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v64h-64c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h64v64c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-64h64c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm-400 48c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"
+    })), "Add Friend");
+  }
 
   if (props.user.id === currentUser.id) {
     // My profile
@@ -2713,33 +2738,38 @@ __webpack_require__.r(__webpack_exports__);
   } else if (props.user.friendships && props.user.friendships.some(function (user) {
     return user.friend_id === currentUser.id;
   })) {
+    var friendship = props.friendships.filter(function (ship) {
+      if (ship.friendId === currentUser.id) {
+        return ship;
+      }
+    });
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-      className: "edit-profile-button"
+      className: "edit-profile-button",
+      onClick: function onClick() {
+        dispatch(Object(_actions_friendship_actions__WEBPACK_IMPORTED_MODULE_3__["deleteFriendship"])(friendship[0].id));
+      }
     }, "Remove Friend");
   } else if (props.user.requestsAsReceiver && props.user.requestsAsReceiver.some(function (user) {
     return user.requestor_id === currentUser.id;
   })) {
     // if (this.props.currentUser.requestsSent)
+    var request = props.user.requestsAsReceiver.filter(function (req) {
+      if (req.requestor_id === currentUser.id) {
+        return req;
+      }
+    });
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       className: "edit-profile-button"
     }, "Requested");
-  } else {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-      className: "edit-profile-button",
-      onClick: handleRequest
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
-      "aria-hidden": "true",
-      focusable: "false",
-      "data-prefix": "fas",
-      "data-icon": "user-plus",
-      role: "img",
-      xmlns: "http://www.w3.org/2000/svg",
-      viewBox: "0 0 640 512"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
-      fill: "currentColor",
-      d: "M624 208h-64v-64c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v64h-64c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h64v64c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-64h64c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm-400 48c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"
-    })), "Add Friend");
-  }
+  } // else {
+  //   return (
+  //     <button className='edit-profile-button' onClick={handleRequest} >
+  //       <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user-plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M624 208h-64v-64c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v64h-64c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h64v64c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-64h64c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm-400 48c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"></path></svg>
+  //       Add Friend
+  //     </button >
+  //   )
+  // }
+
 });
 
 /***/ }),
@@ -2975,13 +3005,13 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     className: "under-cover-others under-cover-hover"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "friends-span"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Friends"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, user.friendCount)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Friends"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, friendships.length)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
     className: "under-cover-right-nav"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "right-nav-divs"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_profile_button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    user: user // postFriendRequest={postFriendRequest}
-
+    user: user,
+    friendships: friendships
   })))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
     className: "profile-body-section"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -3378,6 +3408,12 @@ __webpack_require__.r(__webpack_exports__);
 
     case _actions_friendship_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_USER_FRIENDSHIPS"]:
       return Object.assign({}, oldState, action.friendships);
+
+    case _actions_friendship_actions__WEBPACK_IMPORTED_MODULE_0__["REMOVE_FRIENDSHIP"]:
+      debugger;
+      var newState = Object.assign({}, oldState);
+      delete newState[action.friendshipId];
+      return newState;
 
     case _actions_friendship_actions__WEBPACK_IMPORTED_MODULE_0__["CLEAR_FRIENDSHIPS"]:
       return {};

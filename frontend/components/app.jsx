@@ -20,7 +20,7 @@ export default () => (
       
       {/* Catch all */}
 
-      <Redirect to="/users" />
+      <Redirect to="/feed" />
     </Switch>
   </div>
 )

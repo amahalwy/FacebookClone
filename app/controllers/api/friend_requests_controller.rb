@@ -12,7 +12,7 @@ class Api::FriendRequestsController < ApplicationController
       @receiver = User.find_by(id: params[:friend_request][:receiver_id])
       render 'api/friend_requests/show'
     else
-      # Render error here on not being able to request again
+      render json: ["Couldn't create that friend request."], status: 404
     end
   end
 
