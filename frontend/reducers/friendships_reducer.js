@@ -8,7 +8,6 @@ export default (oldState = {}, action) => {
     case RECEIVE_USER_FRIENDSHIPS:
       return Object.assign({}, oldState, action.friendships)
     case REMOVE_FRIENDSHIP:
-      debugger
       let newState = Object.assign({}, oldState);
       delete newState[action.friendshipId];
       return newState;

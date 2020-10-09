@@ -5,6 +5,7 @@ export const RECEIVE_USER_FRIEND_REQUESTS = "RECEIVE_USER_FRIEND_REQUESTS";
 export const REMOVE_FRIEND_REQUEST = "REMOVE_FRIEND_REQUEST";
 export const CLEAR_FRIEND_REQUESTS = "CLEAR_FRIEND_REQUESTS"
 export const RECEIVE_REQUEST_ERRORS = "RECEIVE_REQUEST_ERRORS";
+export const CLEAR_REQUEST_ERRORS = "CLEAR_REQUEST_ERRORS";
 
 const createFriendRequest = request => ({
   type: POST_FRIEND_REQUEST,
@@ -30,6 +31,10 @@ const clear = () => ({
   type: CLEAR_FRIEND_REQUESTS
 })
 
+const clearErrs = () => ({
+  type: CLEAR_REQUEST_ERRORS
+})
+
 // Thunk action creators
 export const postFriendRequest = (requestor_id, receiver_id) => dispatch => {
   APIUtil.postFriendRequest(requestor_id, receiver_id).then(
@@ -51,4 +56,8 @@ export const deleteFriendRequest = requestId => dispatch => (
 
 export const clearFriendRequests = () => dispatch => (
   dispatch(clear())
+)
+
+export const clearErrors = () => dispatch => (
+  dispatch(clearErrs())
 )

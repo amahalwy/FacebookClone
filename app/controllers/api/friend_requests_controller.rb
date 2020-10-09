@@ -12,15 +12,18 @@ class Api::FriendRequestsController < ApplicationController
       @receiver = User.find_by(id: params[:friend_request][:receiver_id])
       render 'api/friend_requests/show'
     else
-      render json: ["Couldn't create that friend request."], status: 404
+      render json: @friend_request.errors.full_messages, status: 422
     end
   end
 
   def destroy
     @friend_request = FriendRequest.find_by(id: params[:id])
-    @friend_request.destroy
-    @friend_requests = FriendRequest.where(receiver_id: current_user.id)
-    render 'api/friend_requests/index'
+    if @friend_request.destroy
+      @friend_requests = FriendRequest.where(receiver_id: current_user.id)
+      render 'api/friend_requests/index'
+    else
+      render json: @friend_request.errors.full_messages, status: 422
+    end
   end
 
   private

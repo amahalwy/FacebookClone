@@ -10,15 +10,18 @@ class Api::CommentsController < ApplicationController
       @comments = Comment.where(post_id: params[:comment][:post_id])
       render '/api/comments/index'
     else
-      render json: @user.errors.full_messages, status: 422
+      render json: @comment.errors.full_messages, status: 422
     end
   end
 
   def destroy
     @comment = Comment.find_by(id: params[:id])
-    @comment.destroy
-    @comments = Comment.where(post_id: @comment[:post_id])
-    render '/api/comments/index'
+    if @comment.destroy
+      @comments = Comment.where(post_id: @comment[:post_id])
+      render '/api/comments/index'
+    else
+      render json: @comment.errors.full_messages, status: 422
+    end
   end
 
   private

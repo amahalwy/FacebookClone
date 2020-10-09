@@ -11,7 +11,7 @@ class Api::PostsController < ApplicationController
       @posts = Post.where(user_id: params[:post][:user_id])
       render '/api/posts/index'
     else
-      render json: @post.errors.full_messages
+      render json: @post.errors.full_messages, status: 422
     end
   end
 
@@ -21,15 +21,18 @@ class Api::PostsController < ApplicationController
       @posts = Post.where(user_id: params[:post][:authorId])
       render '/api/posts/index'
     else
-      # Render errors
+      render json: @post.errors.full_messages, status: 422
     end
   end
 
   def destroy
     @post = Post.find_by(id: params[:id])
-    @post.destroy
-    @posts = Post.where(user_id: @post.user_id)
-    render '/api/posts/index'
+    if @post.destroy
+      @posts = Post.where(user_id: @post.user_id)
+      render '/api/posts/index'
+    else
+      render json: @post.errors.full_messages, status: 422
+    end
   end
 
   private

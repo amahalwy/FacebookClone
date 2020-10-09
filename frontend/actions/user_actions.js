@@ -4,6 +4,8 @@ export const RECEIVE_USER = "RECEIVE_USER";
 export const RECEIVE_ALL_USERS = "RECEIVE_ALL_USERS"
 export const CLEAR_USERS = "CLEAR_USERS";
 export const CLEAR_USER = "CLEAR_USER";
+export const RECEIVE_USER_ERRORS = "RECEIVE_USER_ERRORS";
+export const CLEAR_USER_ERRORS = "CLEAR_USER_ERRORS";
 
 const receiveUser = user => ({
   type: RECEIVE_USER,
@@ -23,6 +25,15 @@ const clearUser = () => ({
   type: CLEAR_USER,
 });
 
+const receiveErrors = errors => ({
+  type: RECEIVE_USER_ERRORS,
+  errors
+})
+
+const clearErrs = () => ({
+  type: CLEAR_USER_ERRORS
+})
+
 // Thunk action creators
 export const fetchUser = userId => dispatch => (
   APIUtil.fetchUser(userId).then(
@@ -40,7 +51,6 @@ export const updateUserPhoto = (userId, formData) => dispatch => (
   APIUtil.updateUserPhoto(userId, formData).then(
     user => dispatch(receiveUser(user)),
     err => dispatch(receiveErrors(err.responseJSON)))
-    // .catch(err => dispatch(receiveError(err)))
 )
 
 export const clearUsers = () => dispatch => (
@@ -49,4 +59,8 @@ export const clearUsers = () => dispatch => (
 
 export const clearShow = () => dispatch => (
   dispatch(clearUser())
+)
+
+export const clearErrors = () => dispatch => (
+  dispatch(clearErrs())
 )
