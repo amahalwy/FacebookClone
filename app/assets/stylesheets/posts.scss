@@ -21,8 +21,14 @@
 }
 
 .post-header-img {
-  margin: 0px 30px;
-} 
+  margin: 5px 20px;
+}
+
+.post-header-img img {
+  width: 34px;
+  height: 34px;
+  border-radius: 20px;
+}
 
 .post-header-info {
   width: 100%;

@@ -7,7 +7,6 @@ import CreateCommentForm from '../comment_form/create_comment_form';
 import { fetchUserPosts, clearPosts } from "../../actions/post_actions";
 
 export default props => {
-
   const currentUser = useSelector(state => state.session.user);
   const post = props.post;
   
@@ -21,8 +20,7 @@ export default props => {
             <div className='post-header-top'>
 
               <div className='post-header-img'>
-                <img src="" alt=""/>
-                <p><strong></strong></p>
+                <img src={post.authorProfilePhoto} alt=""/>
               </div>
 
               <div className='post-header-info'>

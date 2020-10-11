@@ -5,6 +5,7 @@
     json.authorFirstName post.author.first_name
     json.authorLastName post.author.last_name
     json.body post.body
+    json.authorProfilePhoto post.author.profile_photo.attached? ? url_for(post.author.profile_photo) : ''
 
     json.comments post.comments do |comment|
       json.id comment.id

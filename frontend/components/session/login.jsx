@@ -23,17 +23,11 @@ export default props => {
       password
     }
     dispatch(login(user));
-
-    // Use this for logging into a show page immediately
   }
 
 
   const handleDemo = () => {
     dispatch(login(demoUser));
-  
-    // Use this for logging into a show page immediately
-    // .then(response =>   console.log(response))  //this.props.history.push(`/users/${response.currentUser.user.id}`))
-  
   }
 
   const showModal = () => {

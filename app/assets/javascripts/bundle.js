@@ -849,9 +849,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     };
     dispatch(Object(_actions_comment_actions__WEBPACK_IMPORTED_MODULE_2__["createComment"])(comment));
     setTimeout(function () {
-      dispatch(Object(_actions_post_actions__WEBPACK_IMPORTED_MODULE_3__["fetchUserPosts"])(props.currentUser.id));
       setBody('');
-    }, 1);
+      dispatch(Object(_actions_post_actions__WEBPACK_IMPORTED_MODULE_3__["fetchUserPosts"])(props.currentUser.id));
+    }, 100);
   };
 
   var handleUserKeyPress = function handleUserKeyPress(e) {
@@ -1847,9 +1847,9 @@ __webpack_require__.r(__webpack_exports__);
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "post-header-img"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: "",
+    src: post.authorProfilePhoto,
     alt: ""
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "post-header-info"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
     to: "/users/".concat(post.authorId)
@@ -2527,12 +2527,11 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       email: email,
       password: password
     };
-    dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_4__["login"])(user)); // Use this for logging into a show page immediately
+    dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_4__["login"])(user));
   };
 
   var handleDemo = function handleDemo() {
-    dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_4__["login"])(demoUser)); // Use this for logging into a show page immediately
-    // .then(response =>   console.log(response))  //this.props.history.push(`/users/${response.currentUser.user.id}`))
+    dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_4__["login"])(demoUser));
   };
 
   var showModal = function showModal() {
