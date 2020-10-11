@@ -9,6 +9,7 @@ import FriendshipItem from '../friendships/friendship_profle_card';
 import { fetchUser, clearShow } from '../../actions/user_actions';
 import {clearPosts} from '../../actions/post_actions';
 import {clearFriendships, fetchFriendships} from '../../actions/friendship_actions';
+import { clearFriendRequests } from '../../actions/friend_request_actions';
 
 export default props => {
 
@@ -19,6 +20,7 @@ export default props => {
       dispatch(clearShow());
       dispatch(clearPosts());
       dispatch(clearFriendships());
+      dispatch(clearFriendRequests());
     }
   }, [])
 

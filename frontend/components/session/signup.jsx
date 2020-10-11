@@ -23,9 +23,6 @@ export default props => {
       // cover_photo
     }
     dispatch(signup(user));
-
-    // Use this for logging into a show page immediately
-    // .then(response => this.props.history.push(`/users/${response.currentUser.user.id}`))
   }
 
   const handleCloseButton = () => {
@@ -46,7 +43,7 @@ export default props => {
   };
 
   useEffect(() => {
-    clearErrors();
+    dispatch(clearErrors());
   }, [])
 
   return (
