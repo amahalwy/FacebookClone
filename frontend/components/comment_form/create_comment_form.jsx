@@ -20,9 +20,9 @@ export default props => {
     }
     dispatch(createComment(comment));
     setTimeout(() => {
-      dispatch(fetchUserPosts(props.currentUser.id));
       setBody('');
-    }, 300)
+      dispatch(fetchUserPosts(props.currentUser.id));
+    }, 100)
   }
 
   const handleUserKeyPress = (e) => {
