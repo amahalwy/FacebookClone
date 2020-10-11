@@ -22,7 +22,7 @@ export default props => {
     setTimeout(() => {
       dispatch(fetchUserPosts(props.currentUser.id));
       setBody('');
-    }, 1)
+    }, 300)
   }
 
   const handleUserKeyPress = (e) => {
