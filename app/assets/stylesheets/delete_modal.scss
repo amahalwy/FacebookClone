@@ -38,3 +38,15 @@
 .delete-modal-buttons span {
   color: white;
 }
+
+.create-modal-main {
+  position: fixed;
+  background: white;
+  width: 25%;
+  height: 32%;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  border-radius: 5px;
+  z-index: 100;
+}

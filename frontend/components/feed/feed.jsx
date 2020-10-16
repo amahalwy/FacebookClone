@@ -4,7 +4,7 @@ import NavBar from '../navbar/navbar';
 import FriendRequests from '../friend_requests/friend_requests_index';
 import Friendship from '../friendships/friendship_index';
 import PostIndex from '../posts/posts_index';
-import Modal from '../modal/modal';
+import DynamicModal from '../modal/dynamic_modal';
 import CreatePostForm from '../posts_form/create_post_form';
 import { clearUsers } from '../../actions/user_actions';
 import { fetchUserFriendRequests} from '../../actions/friend_request_actions';
@@ -84,14 +84,15 @@ export default props => {
         </div>
 
       </div>
-      <Modal show={openModal} handleClose={hideModal} >
+      <DynamicModal show={openModal} handleClose={hideModal} >
         <CreatePostForm
           history={props.history}
           match={props.match}
           location={props.location}
           hideModal={hideModal}
+          currentUser={currentUser}
         />
-      </Modal>
+      </DynamicModal>
 
     </div>
   )

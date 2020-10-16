@@ -5,7 +5,7 @@ import FriendRequests from '../friend_requests/friend_requests_index';
 import Friendship from '../friendships/friendship_index';
 import {fetchUsers, clearUsers} from '../../actions/user_actions';
 import PostIndex from '../posts/posts_index';
-import Modal from '../modal/modal';
+import DynamicModal from '../modal/dynamic_modal';
 import CreatePostForm from '../posts_form/create_post_form';
 import UsersIndexItem from '../user_show/users_index_item';
 
@@ -74,14 +74,14 @@ export default props => {
         </div>
       </div>
 
-      <Modal show={openModal} handleClose={hideModal} >
+      <DynamicModal show={openModal} handleClose={hideModal} >
         <CreatePostForm
           history={props.history}
           match={props.match}
           location={props.location}
           hideModal={hideModal}
         />
-      </Modal>
+      </DynamicModal>
 
     </div>
   )

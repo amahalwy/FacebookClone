@@ -53,7 +53,8 @@ export default props => {
     }
   }
 
-  if (!props.currentUser) return '';
+  if (!props.currentUser) return 'hello';
+  // debugger
   return (
     <div className='post-form-card'>
       <div className='post-form-header'>
@@ -81,14 +82,12 @@ export default props => {
         </div>
       </div>
       <form className='post-form'>
-        <div className='post-form-text'>
 
           <textarea 
           type="text"
           onChange={e => setBody(e.currentTarget.value)}
           placeholder= "What's on your mind?"
           ></textarea>
-        </div>
         {/* <div className='add-to-your-post'>
           <div className='post-add-to-post'>Add to Your Post</div>
           <div className='post-icons'>

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import NavbarContainer from '../navbar_dropdown/nav_container';
-import Modal from '../modal/modal';
+import DynamicModal from '../modal/dynamic_modal';
 import CreatePostForm from '../posts_form/create_post_form';
 
 export default props => {
@@ -108,7 +108,7 @@ export default props => {
         <NavbarContainer 
         />
       </div>
-      <Modal show={openModal} handleClose={hideModal} >
+      <DynamicModal show={openModal} handleClose={hideModal} >
         <CreatePostForm
           history={props.history}
           match={props.match}
@@ -116,7 +116,7 @@ export default props => {
           hideModal={hideModal}
           currentUser={props.currentUser}
         />
-      </Modal>
+      </DynamicModal>
     </nav>
   )
 }

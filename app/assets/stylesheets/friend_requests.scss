@@ -2,12 +2,24 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.request-user-card {
-  margin: 10px 0px;
-  width: 100%;
+.request-card {
+  border-radius: 5px;
+  min-width: 240px;
+  display: flex;
+  align-items: center;
+  padding: 5px 0px;
+}
+
+.request-card-image {
+  width: 26px;
   height: 20px;
+  border-radius: 10px;
+  margin-left: 4px;
 }
 
 .request-button {
   margin-left: 10px;
+  background-color: #2d88ff;
+  color: white;
+  border-radius: 10px;
 }

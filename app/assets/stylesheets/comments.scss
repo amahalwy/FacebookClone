@@ -58,8 +58,8 @@
   background-color: rgb(225, 227, 229);
 }
 
-#post-comment-text {
-  width: 94%;
+.post-comment-text {
+  width: 98%;
   height: 28px;
   border: none;
   border-radius: 50px;
@@ -68,10 +68,10 @@
   overflow: auto;
   outline: none;
   resize: none;
-  padding-left: 20px;
+  padding-left: 14px;
   padding-top: 10px;
   font-size: 14px;
-    margin-left: 4px;
+  margin-left: 4px;
 }
 
 .post-comment {
@@ -99,6 +99,11 @@
   position: relative;
   align-self: center;
   width: 95%;
+}
+
+.post-comment-form-text {
+  width: 98%;
+  margin: 0;
 }
 
 .comment-icons {

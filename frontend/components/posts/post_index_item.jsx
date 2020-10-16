@@ -11,8 +11,8 @@ export default props => {
   
   const clickForm = (e) => {
     e.preventDefault();
-    // const form = document.querySelector('#post-comment-text');
-    const form2 = document.getElementById('post-comment-text');
+    const form = document.querySelector('.post-comment-text');
+    // const form2 = document.getElementById('post-comment-text');
     form2.click();
   }
 

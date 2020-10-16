@@ -26,7 +26,7 @@
 }
 
 .friends-list li {
-  width: 200px; 
+  min-width: 240px; 
   height: 24px;
   padding: 5px 0px;
 }
@@ -37,16 +37,15 @@
 
 .friendship-card {
   border-radius: 5px;
-  min-width: 240px;
   display: flex;
   align-items: center;
 }
 
 .user-profile-link {
-height: 100%;
-width: 100%;
-margin-top: 6px;
-margin-left: 4px;
+  height: 100%;
+  width: 100%;
+  margin-top: 6px;
+  margin-left: 4px;
 }
 
 .friendship-card-image {

@@ -43,6 +43,7 @@
 
 .post-form-user {
   margin-bottom: 10px;
+  padding-top: 8px;
   display: flex;
   height: 30px;
 }
@@ -89,8 +90,7 @@
   margin-left: 3px;
 }
 // End of below header
-
-.post-form-text textarea {
+.post-form textarea {
   margin-top: 5px;
   margin-left: 10px;
   outline: none;

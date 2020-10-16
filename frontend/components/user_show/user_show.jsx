@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import Modal from '../modal/modal';
+import DynamicModal from '../modal/dynamic_modal';
 import NavBar from '../navbar/navbar';
 import ProfileButton from './profile_button';
 import PostIndex from '../posts/posts_index';
@@ -303,7 +303,7 @@ export default props => {
                 />
             </div>
           
-            <Modal show={openModal} handleClose={hideModal} >
+            <DynamicModal show={openModal} handleClose={hideModal} >
               <CreatePostForm
                 history={props.history}
                 match={props.match}
@@ -312,7 +312,7 @@ export default props => {
                 user={user}
                 currentUser={currentUser}
               />
-            </Modal>
+            </DynamicModal>
 
           </div>
         </div>

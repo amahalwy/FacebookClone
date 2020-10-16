@@ -19,7 +19,7 @@ export default props => {
   if (!currentUser) return '';
   return (
     <div>
-      <ul>
+      <ul className='requests-list'>
       {requests.map(request => {
         return (
           <FriendRequestItem

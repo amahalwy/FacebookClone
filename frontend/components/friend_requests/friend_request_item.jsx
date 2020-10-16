@@ -18,13 +18,13 @@ export default props => {
   }
 
   return (
-    <li>
-      <div className='request-user-card'>
-        <img src={props.request.profilePhoto} alt="" className='friendship-card-image'/>
-        <Link to={`/users/${props.request.requestorId}`} className='user-profile-link'>{props.request.firstName} {props.request.lastName}</Link>
-        <button onClick={handleAccept} className='request-button'>Accept</button>
-        <button onClick={handleDecline} className='request-button'>Decline</button>
-      </div>
+    <li className='request-card'>
+      <img src={props.request.profilePhoto} alt="" className='request-card-image'/>
+      <Link to={`/users/${props.request.requestorId}`} className='user-profile-link'>
+        {props.request.firstName} {props.request.lastName}
+      </Link>
+      <button onClick={handleAccept} className='request-button button-accept'>Accept</button>
+      <button onClick={handleDecline} className='request-button button-decline'>Decline</button>
     </li>
   )
 }

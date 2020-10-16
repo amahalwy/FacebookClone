@@ -1,5 +1,5 @@
 import React from 'react';
-import Modal from '../modal/modal';
+import DynamicModal from '../modal/dynamic_modal';
 import DeleteModal from '../modal/delete_modal';
 import EditPostForm from '../posts_form/edit_post_form';
 
@@ -85,12 +85,12 @@ class PostDropdown extends React.Component {
                   <span>Delete Post</span>
                 </div>
 
-                <Modal show={this.state.openModal} handleClose={this.hideModal} >
+                <DynamicModal show={this.state.openModal} handleClose={this.hideModal} >
                   <EditPostForm
                     hideModal={this.hideModal}
                     post={this.props.post}
                   />
-                </Modal>
+                </DynamicModal>
 
                 <DeleteModal 
                   show={this.state.openDeleteModal} 
