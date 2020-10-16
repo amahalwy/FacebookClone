@@ -8,8 +8,7 @@ class Api::PostsController < ApplicationController
   def create
     @post = Post.new(req_params)
     if @post.save
-      @posts = Post.where(user_id: params[:post][:user_id])
-      render '/api/posts/index'
+      render '/api/posts/show'
     else
       render json: @post.errors.full_messages, status: 422
     end
@@ -37,7 +36,7 @@ class Api::PostsController < ApplicationController
 
   private
   def req_params
-    params.require(:post).permit(:user_id, :body)
+    params.require(:post).permit(:user_id, :owner_id, :body)
   end
 
 end

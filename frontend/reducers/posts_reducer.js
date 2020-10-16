@@ -6,7 +6,7 @@ export default (oldState = {}, action) => {
   Object.freeze(oldState);
   switch (action.type) {
     case RECEIVE_POST:
-      return Object.assign({}, oldState, {[action.post.id]: action.post });
+      return Object.assign({}, oldState, action.post);
     case RECEIVE_USER_POSTS:
       return Object.assign({}, oldState, action.posts);
     case REMOVE_POST:

@@ -45,7 +45,6 @@ class PostDropdown extends React.Component {
 
   showDeleteModal() {
     this.setState({ openDeleteModal: true });
-    this.setState({ showMenu: false });
   }
 
   hideDeleteModal() {

@@ -6,6 +6,6 @@
     json.authorFirstName comment.author.first_name
     json.authorLastName comment.author.last_name
     json.body comment.body
-    json.profilePhoto comment.author.profile_photo.attached? ? url_for(comment.author.profile_photo) : ''
+    json.profilePhoto comment.author.profile_photo.attached? ? url_for(comment.author.profile_photo) : "https://facebook-clone-pro.s3.us-east-2.amazonaws.com/default_profile"
   end 
 end

@@ -6,8 +6,8 @@ import ProfileButton from './profile_button';
 import PostIndex from '../posts/posts_index';
 import CreatePostForm from '../posts_form/create_post_form';
 import FriendshipItem from '../friendships/friendship_profle_card';
-import { fetchUser, clearShow } from '../../actions/user_actions';
-import {clearPosts} from '../../actions/post_actions';
+import { fetchUser, clearShow, updateUserPhoto } from '../../actions/user_actions';
+import {clearPosts, fetchUserPosts} from '../../actions/post_actions';
 import {clearFriendships, fetchFriendships} from '../../actions/friendship_actions';
 import { clearFriendRequests } from '../../actions/friend_request_actions';
 
@@ -15,6 +15,7 @@ export default props => {
 
   useEffect(() => {
     dispatch(fetchUser(props.match.params.userId));
+    dispatch(fetchUserPosts(props.match.params.userId))
     dispatch(fetchFriendships(props.match.params.userId));
     return () => {
       dispatch(clearShow());
@@ -22,7 +23,7 @@ export default props => {
       dispatch(clearFriendships());
       dispatch(clearFriendRequests());
     }
-  }, [])
+  }, [props.match.params.userId])
 
   const user = useSelector(state => state.entities.userShow);
   const friendships = useSelector(state => Object.values(state.entities.friendships));
@@ -31,22 +32,22 @@ export default props => {
   const [profilePhotoFile, setProfilePhoto] = useState(null);
   const [coverPhotoFile, setCoverPhoto] = useState(null);
   const [openModal, setModal] = useState(false);
-
+  
   const dispatch = useDispatch();
-
+  
   const photoProfileUpload = React.createRef();
   const photoCoverUpload = React.createRef();
-
-
-
+  
   const handleProfileFile = (e) =>{
     const reader = new FileReader();
     const file = e.currentTarget.files[0];
-    reader.onloadend = () =>
-    setProfilePhoto(file);
-    setTimeout(() => {
-      coverProfileSubmit()
-    }, 1000)
+    reader.onloadend = () => {
+      setProfilePhoto(file);
+      setTimeout(() => {
+        console.log('pro', profilePhotoFile);
+        coverProfileSubmit()
+      }, 2000)
+    }
       // this.setState({ profilePhotoFile: file }, () => coverProfileSubmit());
 
     if (file) {
@@ -60,18 +61,19 @@ export default props => {
   const handleCoverFile = (e) => {
     const reader = new FileReader();
     const file = e.currentTarget.files[0];
-    reader.onloadend = () =>
-    setProfilePhoto(file);
-    setTimeout(() => {
-      coverHandleSubmit()
-    }, 1000)
+    reader.onloadend = () =>{
+      setCoverPhoto(file);
+      setTimeout(() => {
+        coverHandleSubmit()
+      }, 2000)
+    }
       // this.setState({ coverPhotoFile: file }, () => this.coverHandleSubmit()); 
 
     if (file) {
       reader.readAsDataURL(file);
-
     } else {
       // this.setState({ coverPhotoFile: null });
+      debugger
       setCoverPhoto(null);
     }
   }
@@ -103,8 +105,58 @@ export default props => {
   const hideModal = () => {
     setModal(false);
   };
+
+  const renderOnMind = () => {
+    if (currentUser.id !== user.id) {
+      return (
+        <div className='post-actual-input' onClick={showModal}>Write something to {user.firstName}</div>
+      )
+    } else {
+      return (
+        <div className='post-actual-input' onClick={showModal}>What's on your mind, {currentUser.firstName}?</div>
+      )
+    }
+
+  }
+
+  const renderProfile = () => {
+    if (user.id === currentUser.id) {
+      return (
+        <button onClick={profilePhotoUpload} className='camera-circle'>
+          <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="camera" className="camera-icon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M512 144v288c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V144c0-26.5 21.5-48 48-48h88l12.3-32.9c7-18.7 24.9-31.1 44.9-31.1h125.5c20 0 37.9 12.4 44.9 31.1L376 96h88c26.5 0 48 21.5 48 48zM376 288c0-66.2-53.8-120-120-120s-120 53.8-120 120 53.8 120 120 120 120-53.8 120-120zm-32 0c0 48.5-39.5 88-88 88s-88-39.5-88-88 39.5-88 88-88 88 39.5 88 88z"></path></svg>
+          <input
+            type="file"
+            className='button-file'
+            ref={photoProfileUpload}
+            onChange={handleProfileFile}
+          />
+        </button>
+      )
+    } else {
+      return '';
+    }
+  }
+
+  const renderCover = () => {
+    if (user.id === currentUser.id) {
+      return (
+        <button className='edit-cover-photo' onClick={coverPhotoUpload}>
+          <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="camera" className="camera-icon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M512 144v288c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V144c0-26.5 21.5-48 48-48h88l12.3-32.9c7-18.7 24.9-31.1 44.9-31.1h125.5c20 0 37.9 12.4 44.9 31.1L376 96h88c26.5 0 48 21.5 48 48zM376 288c0-66.2-53.8-120-120-120s-120 53.8-120 120 53.8 120 120 120 120-53.8 120-120zm-32 0c0 48.5-39.5 88-88 88s-88-39.5-88-88 39.5-88 88-88 88 39.5 88 88z"></path></svg>
+          <input 
+            type="file" 
+            className='button-file' 
+            ref={photoCoverUpload}
+            onChange={handleCoverFile}
+          />
+            Edit cover photo
+        </button>
+      )
+    } else {
+      return '';
+    }
+  }
   
-  if (Object.values(user).length <= 0 ) return '';
+  if (Object.values(user).length <= 0 || Object.values(currentUser).length <= 0) return '';
   
   return (
     <div>
@@ -129,30 +181,9 @@ export default props => {
               src={user.profilePhoto} 
               alt="Profile Image" 
             />
-          
-            <button onClick={profilePhotoUpload} className='camera-circle'>
-              <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="camera" className="camera-icon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M512 144v288c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V144c0-26.5 21.5-48 48-48h88l12.3-32.9c7-18.7 24.9-31.1 44.9-31.1h125.5c20 0 37.9 12.4 44.9 31.1L376 96h88c26.5 0 48 21.5 48 48zM376 288c0-66.2-53.8-120-120-120s-120 53.8-120 120 53.8 120 120 120 120-53.8 120-120zm-32 0c0 48.5-39.5 88-88 88s-88-39.5-88-88 39.5-88 88-88 88 39.5 88 88z"></path></svg>
-              <input
-                type="file"
-                className='button-file'
-                ref={photoProfileUpload}
-                onChange={handleProfileFile}
-              />
-            </button>
-
+            {renderProfile()}
           </div>
-
-          <button className='edit-cover-photo' onClick={coverPhotoUpload}>
-            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="camera" className="camera-icon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M512 144v288c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V144c0-26.5 21.5-48 48-48h88l12.3-32.9c7-18.7 24.9-31.1 44.9-31.1h125.5c20 0 37.9 12.4 44.9 31.1L376 96h88c26.5 0 48 21.5 48 48zM376 288c0-66.2-53.8-120-120-120s-120 53.8-120 120 53.8 120 120 120 120-53.8 120-120zm-32 0c0 48.5-39.5 88-88 88s-88-39.5-88-88 39.5-88 88-88 88 39.5 88 88z"></path></svg>
-            <input 
-              type="file" 
-              className='button-file' 
-              ref={photoCoverUpload}
-              onChange={handleCoverFile}
-            />
-              Edit cover photo
-          </button>
-
+          {renderCover()}
         </div>
 
 
@@ -162,7 +193,7 @@ export default props => {
             <div className='user-name'>{user.firstName} {user.lastName}</div>
             <div className='user-bio'>
               "Some user bio"
-              <button className='edit-bio-button'>Edit</button>
+              {/* <button className='edit-bio-button'>Edit</button> */}
             </div>
             
           </div>
@@ -255,7 +286,10 @@ export default props => {
                   <div className='post-input-photo'>
                     <img src={currentUser.profilePhoto} alt=""/>
                   </div>
-                  <div className='post-actual-input' onClick={showModal}>What's on your mind, {currentUser.firstName}?</div>
+
+                  {renderOnMind()}
+                  {/* <div className='post-actual-input' onClick={showModal}>What's on your mind, {currentUser.firstName}?</div> */}
+
                 </div>
               </div>              
             </div>
@@ -274,6 +308,8 @@ export default props => {
                 match={props.match}
                 location={props.location}
                 hideModal={hideModal}
+                user={user}
+                currentUser={currentUser}
               />
             </Modal>
 

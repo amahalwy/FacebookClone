@@ -17,7 +17,6 @@ export default props => {
     dispatch(deleteFriendRequest(props.request.id));
   }
 
-  debugger
   return (
     <li>
       <div className='request-user-card'>

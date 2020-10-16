@@ -117,6 +117,7 @@ export default props => {
           match={props.match}
           location={props.location}
           hideModal={hideModal}
+          currentUser={props.currentUser}
         />
       </Modal>
     </nav>

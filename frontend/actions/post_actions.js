@@ -51,7 +51,7 @@ export const fetchUserPosts = userId => dispatch => (
 
 export const createPost = post => dispatch => (
   APIUtil.createPost(post).then(
-    post => dispatch(receiveUserPosts(post)),
+    post => dispatch(receivePost(post)),
     err => dispatch(receiveErrors(err.responseJSON)))
 )
 
