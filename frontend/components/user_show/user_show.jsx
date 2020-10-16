@@ -270,6 +270,7 @@ export default props => {
                       <FriendshipItem 
                         friendship={friendship}
                         user={user}
+                        history={props.history}
                       />
                     )
                   })

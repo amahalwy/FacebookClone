@@ -65,7 +65,7 @@ export default props => {
         </div>
         <div className='session-login-pictures'>
           <div>
-            <img src="https://facebook-clone-pro.s3.us-east-2.amazonaws.com/laughing-right.png" alt=""/>
+            <img src="https://facebook-clone-pro.s3.us-east-2.amazonaws.com/ahmed-pic" alt=""/>
           </div>
           <div>
             <img src="https://facebook-clone-pro.s3.us-east-2.amazonaws.com/laughing-left.jpeg" alt=""/>

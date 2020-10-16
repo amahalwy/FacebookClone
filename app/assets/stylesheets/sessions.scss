@@ -75,12 +75,18 @@
   display: flex;
 }
 
+
 .session-login-pictures img {
   width: 210px;
   height: 210px;
   margin: 10px;
   border: 1px solid black;
   border-radius: 10px;
+  overflow: hidden;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-image: url('https://facebook-clone-pro.s3.us-east-2.amazonaws.com/ahmed-pic');
 }
 
 // Flex button

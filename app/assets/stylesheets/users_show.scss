@@ -391,9 +391,19 @@
   width: 84px;
 }
 
-.profile-friendship-image img {
+.profile-friends-card:hover {
+  cursor: pointer;
+}
+
+.profile-friendship-image {
   width: 84px;
-  height: 84px;
+  height: 74px;
+}
+
+.profile-friendship-image img {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
 }
 
 .profile-friendship-name {
