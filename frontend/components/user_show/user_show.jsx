@@ -15,7 +15,7 @@ export default props => {
 
   useEffect(() => {
     dispatch(fetchUser(props.match.params.userId));
-    dispatch(fetchUserPosts(props.match.params.userId))
+    dispatch(fetchUserPosts(props.match.params.userId));
     dispatch(fetchFriendships(props.match.params.userId));
     return () => {
       dispatch(clearShow());
@@ -208,12 +208,12 @@ export default props => {
               {/* <div className='under-cover-others under-cover-hover'>
                 <span>About</span>
               </div> */}
-              <div className='under-cover-others under-cover-hover'>
+              {/* <div className='under-cover-others under-cover-hover'>
                 <span className='friends-span'>
                   <p>Friends</p> 
                   <p>{friendships.length}</p>
                 </span>
-              </div>
+              </div> */}
               {/* <div className='under-cover-others under-cover-hover'>
                 <span>Photos</span>
               </div>

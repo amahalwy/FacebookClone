@@ -41,6 +41,11 @@ class User < ApplicationRecord
     class_name: :Comment,
     dependent: :destroy
 
+   has_many :likes,
+    foreign_key: :user_id,
+    class_name: :Like,
+    dependent: :destroy
+
   def password=(password)
     @password = password
     self.password_digest = BCrypt::Password.create(@password)
