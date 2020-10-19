@@ -125,12 +125,10 @@ export default props => {
           </form>
           <div className="login-create-a-page">
             <p>
-              <strong>
-                <a className="create-text" href="">
-                  Create a Page
-                </a>
-              </strong>{" "}
+              <p className="create-text" href="">
+                Create a Page
               for a celebrity, band or business.
+              </p>
             </p>
           </div>
         </div>
