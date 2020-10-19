@@ -2001,9 +2001,8 @@ __webpack_require__.r(__webpack_exports__);
 
   var clickForm = function clickForm(e) {
     e.preventDefault();
-    var form = document.querySelector('.post-comment-text'); // const form2 = document.getElementById('post-comment-text');
-
-    form2.click();
+    var form = document.querySelector('.post-comment-text');
+    form.focus();
   };
 
   if (!props.post) return '';
@@ -3006,6 +3005,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_friend_request_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/friend_request_actions */ "./frontend/actions/friend_request_actions.js");
 /* harmony import */ var _actions_friendship_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/friendship_actions */ "./frontend/actions/friendship_actions.js");
+/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
+
 
 
 
@@ -3014,18 +3015,23 @@ __webpack_require__.r(__webpack_exports__);
   var currentUser = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(function (state) {
     return state.session.user;
   });
+  var user = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(function (state) {
+    return state.entities.userShow;
+  });
+  var request = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(function (state) {
+    return Object.values(state.entities.friendRequests);
+  });
   var dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useDispatch"])();
 
   var handleRequest = function handleRequest() {
-    dispatch(Object(_actions_friend_request_actions__WEBPACK_IMPORTED_MODULE_2__["postFriendRequest"])(currentUser.id, props.user.id));
+    dispatch(Object(_actions_friend_request_actions__WEBPACK_IMPORTED_MODULE_2__["postFriendRequest"])(currentUser.id, user.id));
+    setTimeout(function () {
+      dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_4__["fetchUser"])(user.id));
+    }, 10);
   }; // const cancelRequest = () => {
   // dispatch(deleteFriendRequest())
   // }
-
-
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    return;
-  }, [props.user.friendships, props.user.requestsAsReceiver]); // if (Object.values(props.friendships).length <= 0) {
+  // if (Object.values(props.friendships).length <= 0) {
   //   return (
   //     <button className='edit-profile-button' onClick={handleRequest} >
   //       <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user-plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M624 208h-64v-64c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v64h-64c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h64v64c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-64h64c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm-400 48c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"></path></svg>
@@ -3034,7 +3040,8 @@ __webpack_require__.r(__webpack_exports__);
   //   )
   // }
 
-  if (props.user.id === currentUser.id) {
+
+  if (user.id === currentUser.id) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       className: "edit-profile-button"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
@@ -3049,7 +3056,7 @@ __webpack_require__.r(__webpack_exports__);
       fill: "currentColor",
       d: "M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"
     })), "Edit Profile");
-  } else if (props.user.friendships && props.user.friendships.some(function (user) {
+  } else if (user.friendships && user.friendships.some(function (user) {
     return user.friend_id === currentUser.id;
   })) {
     var friendship = props.friendships.filter(function (ship) {
@@ -3058,23 +3065,38 @@ __webpack_require__.r(__webpack_exports__);
       }
     });
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-      className: "edit-profile-button",
+      className: "edit-profile-button friend-button",
       onClick: function onClick() {
         dispatch(Object(_actions_friendship_actions__WEBPACK_IMPORTED_MODULE_3__["deleteFriendship"])(friendship[0].id));
       }
-    }, "Remove Friend");
-  } else if (props.user.requestsAsReceiver && props.user.requestsAsReceiver.some(function (user) {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      className: "friended"
+    }, "Friend"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      className: "unfriend"
+    }, "Unfriend?"));
+  } else if (user.requestsAsReceiver && user.requestsAsReceiver.some(function (user) {
     return user.requestor_id === currentUser.id;
   })) {
     // if (this.props.currentUser.requestsSent)
-    var request = props.user.requestsAsReceiver.filter(function (req) {
+    var _request = user.requestsAsReceiver.filter(function (req) {
       if (req.requestor_id === currentUser.id) {
         return req;
       }
     });
+
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-      className: "edit-profile-button"
-    }, "Requested");
+      className: "edit-profile-button requested-button",
+      onClick: function onClick() {
+        dispatch(Object(_actions_friend_request_actions__WEBPACK_IMPORTED_MODULE_2__["deleteFriendRequest"])(_request[0].id));
+        setTimeout(function () {
+          dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_4__["fetchUser"])(user.id));
+        }, 10);
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      className: "requested"
+    }, "Requested"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      className: "unrequest"
+    }, "Unrequest?"));
   } else {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       className: "edit-profile-button",
@@ -3787,8 +3809,6 @@ var _nullErrors = [];
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_friend_request_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/friend_request_actions */ "./frontend/actions/friend_request_actions.js");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 /* harmony default export */ __webpack_exports__["default"] = (function () {
   var oldState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -3797,7 +3817,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
   switch (action.type) {
     case _actions_friend_request_actions__WEBPACK_IMPORTED_MODULE_0__["POST_FRIEND_REQUEST"]:
-      return Object.assign({}, oldState, _defineProperty({}, action.request.id, action.request));
+      return Object.assign({}, oldState, action.request);
 
     case _actions_friend_request_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_USER_FRIEND_REQUESTS"]:
       return Object.assign({}, oldState, action.requests);
