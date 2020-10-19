@@ -25,7 +25,6 @@ export default props => {
     dispatch(login(user));
   }
 
-
   const handleDemo = () => {
     dispatch(login(demoUser));
   }
@@ -36,6 +35,14 @@ export default props => {
 
   const hideModal = () => {
     setModal(false);
+  }
+
+  const handleLinkedIn = () => {
+    location = "https://www.linkedin.com/in/ahmed-elmahallawy/"
+  }
+
+  const handleGithub = () => {
+    location = "https://github.com/amahalwy/FacebookClone"
   }
 
   const renderErrors =() => {
@@ -65,10 +72,18 @@ export default props => {
         </div>
         <div className='session-login-pictures'>
           <div>
-            <img src="https://facebook-clone-pro.s3.us-east-2.amazonaws.com/ahmed-pic" alt=""/>
+            <img 
+              className='login-pictures-linkedin hover' 
+              alt=""
+              onClick={handleLinkedIn}
+            />
           </div>
           <div>
-            <img src="https://facebook-clone-pro.s3.us-east-2.amazonaws.com/laughing-left.jpeg" alt=""/>
+            <img 
+              className='login-pictures-github' 
+              alt=""
+              onClick={handleGithub}
+            />
           </div>
         </div>
       </div>

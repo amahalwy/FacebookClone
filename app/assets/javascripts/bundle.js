@@ -2765,6 +2765,14 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     setModal(false);
   };
 
+  var handleLinkedIn = function handleLinkedIn() {
+    location = "https://www.linkedin.com/in/ahmed-elmahallawy/";
+  };
+
+  var handleGithub = function handleGithub() {
+    location = "https://github.com/amahalwy/FacebookClone";
+  };
+
   var renderErrors = function renderErrors() {
     if (errors[0] === "Invalid email/password combination") {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, Object.keys(errors).map(function (error, i) {
@@ -2791,11 +2799,13 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   }, "FAKEBOOK")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "session-login-pictures"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: "https://facebook-clone-pro.s3.us-east-2.amazonaws.com/ahmed-pic",
-    alt: ""
+    className: "login-pictures-linkedin hover",
+    alt: "",
+    onClick: handleLinkedIn
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: "https://facebook-clone-pro.s3.us-east-2.amazonaws.com/laughing-left.jpeg",
-    alt: ""
+    className: "login-pictures-github",
+    alt: "",
+    onClick: handleGithub
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "session-login-form"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -3068,6 +3078,9 @@ __webpack_require__.r(__webpack_exports__);
       className: "edit-profile-button friend-button",
       onClick: function onClick() {
         dispatch(Object(_actions_friendship_actions__WEBPACK_IMPORTED_MODULE_3__["deleteFriendship"])(friendship[0].id));
+        setTimeout(function () {
+          dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_4__["fetchUser"])(user.id));
+        }, 10);
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       className: "friended"

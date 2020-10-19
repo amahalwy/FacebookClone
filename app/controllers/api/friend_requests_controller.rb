@@ -31,5 +31,3 @@ class Api::FriendRequestsController < ApplicationController
     params.require(:friend_request).permit(:requestor_id, :receiver_id)
   end
 end
-
-# TODO => errors, rendering correct page on delete

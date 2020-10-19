@@ -75,17 +75,39 @@
   display: flex;
 }
 
-.session-login-pictures img {
+
+.session-login-pictures > div {
   width: 210px;
   height: 210px;
   margin: 10px;
-  border: 1px solid black;
-  border-radius: 10px;
+}
+
+.session-login-pictures img {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+}
+
+.login-pictures-linkedin:hover,
+.login-pictures-github:hover {
+  cursor: pointer;
+}
+
+.login-pictures-linkedin {
   overflow: hidden;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-image: url('https://facebook-clone-pro.s3.us-east-2.amazonaws.com/ahmed-pic');
+}
+
+.login-pictures-github {
+  overflow: hidden;
+  background-color: black;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-image: url('https://facebook-clone-pro.s3.us-east-2.amazonaws.com/github-9-xxl.png');
 }
 
 // Flex button

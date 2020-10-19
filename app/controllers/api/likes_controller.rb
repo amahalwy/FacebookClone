@@ -1,9 +1,5 @@
 class Api::LikesController < ApplicationController
 
-  def index
-    # @likes = Like.find_by()
-  end
-
   def create
     @like = Like.new(like_params)
     if @like.save
@@ -27,5 +23,4 @@ class Api::LikesController < ApplicationController
   def like_params
     params.require(:like).permit(:post_id, :owner_id)
   end
-  
 end
