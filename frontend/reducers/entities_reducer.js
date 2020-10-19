@@ -5,6 +5,7 @@ import userShow from './user_show_reducer';
 import friendRequests from './friend_request_reducer';
 import posts from './posts_reducer';
 import comments from './comments_reducer';
+import likes from './likes_reducer';
 
 const entitiesReducer = combineReducers({
   comments,
@@ -13,6 +14,7 @@ const entitiesReducer = combineReducers({
   friendRequests,
   friendships,
   posts,
+  likes,
 })
 
 export default entitiesReducer;

@@ -151,7 +151,7 @@
 .navbar-menu-create-post {
   background-color: rgb(221, 223, 226);
   align-self: center;
-  justify-content: center;
+  // justify-content: center;
   // padding: 10px 5px;
   height: 40px;
   width: 40px;
@@ -164,8 +164,8 @@
 .navbar-menu-dropdown-click {
   background-color: rgb(221, 223, 226);
   align-self: center;
-  padding: 10px 5px;
-  height: 20px;
+  padding: 6px 5px;
+  height: 28px;
   width: 30px;
   margin-right: 5px;
   border-radius: 30px;
@@ -181,19 +181,11 @@
 .navbar-menu-create-post p {
   font-size: 20px;
   color: black;
-  margin: 11px 13px 13px 13px;
+  margin: 11px 13px 13px 14px;
 }
 
 .navbar-menu-users svg {
-  position: absolute;
-  top: 16px;
-  right: 66px;
-}
-
-.dropdown-icon {
-  position: absolute;
-  right: 31px;
-  top: 12px;
+  margin-left: 1px;
 }
 
 .dropdown-icon svg {

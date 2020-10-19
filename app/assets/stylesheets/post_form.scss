@@ -109,11 +109,11 @@
 
 .add-to-your-post {
   width: 92%;
-  height: 40px;
+  height: 30px;
   display: flex;
-  border: 1px solid rgb(206, 208, 210);
+  // border: 1px solid rgb(206, 208, 210);
   border-radius: 10px;
-  margin: 10px auto;
+  margin: 3px auto;
 }
 
 .add-to-your-post > div {
@@ -159,4 +159,29 @@
 
 .post-button button > span {
   margin: 5px 0;
+}
+
+.file {
+  display: none;
+}
+
+.file-upload-input {
+  display: flex;
+  background-color: #1b77f2;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  height: 60%;
+  width: 42%;
+  justify-self: center;
+  justify-content: center;
+  margin: auto;
+}
+
+.file-upload-input:hover {
+  cursor: pointer;
+}
+
+.file-upload-input:focus {
+  outline: none;
 }

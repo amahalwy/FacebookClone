@@ -18,7 +18,7 @@ export default props => {
 
   useEffect(() => {
     return;
-  }, [])
+  }, [props.user.friendships, props.user.requestsAsReceiver])
 
   // if (Object.values(props.friendships).length <= 0) {
   //   return (

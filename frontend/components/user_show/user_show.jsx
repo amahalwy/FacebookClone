@@ -23,7 +23,7 @@ export default props => {
       dispatch(clearFriendships());
       dispatch(clearFriendRequests());
     }
-  }, [props.match.params.userId])
+  }, [props.match.params.userId, profilePhotoFile])
 
   const user = useSelector(state => state.entities.userShow);
   const friendships = useSelector(state => Object.values(state.entities.friendships));
@@ -38,23 +38,20 @@ export default props => {
   const photoProfileUpload = React.createRef();
   const photoCoverUpload = React.createRef();
   
-  const handleProfileFile = (e) =>{
+  const handleProfileFile = (e) => {
     const reader = new FileReader();
     const file = e.currentTarget.files[0];
     reader.onloadend = () => {
       setProfilePhoto(file);
-      setTimeout(() => {
-        console.log('pro', profilePhotoFile);
-        coverProfileSubmit()
-      }, 2000)
+      coverProfileSubmit();
+      //   // this.setState({ profilePhotoFile: file }, () => coverProfileSubmit());
     }
-      // this.setState({ profilePhotoFile: file }, () => coverProfileSubmit());
 
     if (file) {
       reader.readAsDataURL(file);
     } else {
-      // this.setState({ profilePhotoFile: null });
       setProfilePhoto(null);
+      // this.setState({ profilePhotoFile: null });
     }
   }
 
@@ -73,7 +70,7 @@ export default props => {
       reader.readAsDataURL(file);
     } else {
       // this.setState({ coverPhotoFile: null });
-      debugger
+      // debugger
       setCoverPhoto(null);
     }
   }
@@ -85,6 +82,7 @@ export default props => {
   }
 
   const coverProfileSubmit = () => {
+    debugger
     const formData = new FormData();
     formData.append('user[profile_photo]', profilePhotoFile);
     dispatch(updateUserPhoto(user.id, formData));
@@ -94,7 +92,7 @@ export default props => {
     photoCoverUpload.current.click();
   }
   
-  const profilePhotoUpload =() => {
+  const profilePhotoUpload = () => { 
     photoProfileUpload.current.click()
   }
 

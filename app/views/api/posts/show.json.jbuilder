@@ -14,4 +14,11 @@ json.set! @post.id do
       json.authorLastName comment.author.last_name
       json.profilePhoto comment.author.profile_photo.attached? ? url_for(comment.author.profile_photo) : "https://facebook-clone-pro.s3.us-east-2.amazonaws.com/default_profile"
     end
+
+    json.likes @post.likes do |like|
+      json.id like.id
+      json.ownerId like.owner_id
+    end
+    json.likeCount @post.likes.length
+
   end

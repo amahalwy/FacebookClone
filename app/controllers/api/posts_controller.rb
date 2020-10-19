@@ -5,6 +5,10 @@ class Api::PostsController < ApplicationController
     @posts = Post.where(user_id: params[:user_id])
   end
 
+  def show
+    @post = Post.find_by(id: params[:id])
+  end
+
   def create
     @post = Post.new(req_params)
     if @post.save
@@ -36,7 +40,7 @@ class Api::PostsController < ApplicationController
 
   private
   def req_params
-    params.require(:post).permit(:user_id, :owner_id, :body)
+    params.require(:post).permit(:user_id, :owner_id, :body, :post_photo)
   end
 
 end

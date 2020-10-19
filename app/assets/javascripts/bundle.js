@@ -402,6 +402,96 @@ var clearErrors = function clearErrors() {
 
 /***/ }),
 
+/***/ "./frontend/actions/like_actions.js":
+/*!******************************************!*\
+  !*** ./frontend/actions/like_actions.js ***!
+  \******************************************/
+/*! exports provided: POST_LIKE, REMOVE_LIKE, RECEIVE_LIKE_ERRORS, CLEAR_LIKES, CLEAR_LIKE_ERRORS, postLike, deleteLike, clearLikes, clearLikeErrors */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "POST_LIKE", function() { return POST_LIKE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_LIKE", function() { return REMOVE_LIKE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_LIKE_ERRORS", function() { return RECEIVE_LIKE_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR_LIKES", function() { return CLEAR_LIKES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR_LIKE_ERRORS", function() { return CLEAR_LIKE_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postLike", function() { return postLike; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteLike", function() { return deleteLike; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearLikes", function() { return clearLikes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearLikeErrors", function() { return clearLikeErrors; });
+/* harmony import */ var _util_like_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/like_util */ "./frontend/util/like_util.js");
+
+var POST_LIKE = "POST_LIKE";
+var REMOVE_LIKE = "REMOVE_LIKE";
+var RECEIVE_LIKE_ERRORS = "RECEIVE_LIKE_ERRORS";
+var CLEAR_LIKES = "CLEAR_LIKES";
+var CLEAR_LIKE_ERRORS = "CLEAR_LIKE_ERRORS";
+
+var createLike = function createLike(like) {
+  return {
+    type: POST_LIKE,
+    like: like
+  };
+};
+
+var receiveErrors = function receiveErrors(errors) {
+  return {
+    type: RECEIVE_LIKE_ERRORS,
+    errors: errors
+  };
+};
+
+var removeLike = function removeLike(likeId) {
+  return {
+    type: REMOVE_LIKE,
+    likeId: likeId
+  };
+};
+
+var clear = function clear() {
+  return {
+    type: CLEAR_LIKES
+  };
+};
+
+var clearErrs = function clearErrs() {
+  return {
+    type: CLEAR_LIKE_ERRORS
+  };
+};
+
+var postLike = function postLike(ownerId, postId) {
+  return function (dispatch) {
+    return _util_like_util__WEBPACK_IMPORTED_MODULE_0__["postLike"](ownerId, postId).then(function (like) {
+      return dispatch(createLike(like));
+    }, function (err) {
+      return dispatch(receiveErrors(err.responseJSON));
+    });
+  };
+};
+var deleteLike = function deleteLike(likeId) {
+  return function (dispatch) {
+    return _util_like_util__WEBPACK_IMPORTED_MODULE_0__["deleteLike"](likeId).then(function () {
+      return dispatch(removeLike(likeId));
+    }, function (err) {
+      return dispatch(receiveErrors(err.responseJSON));
+    });
+  };
+};
+var clearLikes = function clearLikes() {
+  return function (dispatch) {
+    return dispatch(clear());
+  };
+};
+var clearLikeErrors = function clearLikeErrors() {
+  return function (dispatch) {
+    return dispatch(clearErrs());
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/post_actions.js":
 /*!******************************************!*\
   !*** ./frontend/actions/post_actions.js ***!
@@ -1301,6 +1391,89 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./frontend/components/likes/like_button.jsx":
+/*!***************************************************!*\
+  !*** ./frontend/components/likes/like_button.jsx ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_like_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/like_actions */ "./frontend/actions/like_actions.js");
+/* harmony import */ var _actions_post_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/post_actions */ "./frontend/actions/post_actions.js");
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = (function (props) {
+  var currentUser = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(function (state) {
+    return state.session.user;
+  });
+  var dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useDispatch"])();
+
+  var handleLike = function handleLike() {
+    dispatch(Object(_actions_like_actions__WEBPACK_IMPORTED_MODULE_2__["postLike"])(currentUser.id, props.post.id));
+    setTimeout(function () {
+      dispatch(Object(_actions_post_actions__WEBPACK_IMPORTED_MODULE_3__["fetchPost"])(props.post.id));
+    }, 10);
+  };
+
+  var handleUnlike = function handleUnlike() {
+    dispatch(Object(_actions_like_actions__WEBPACK_IMPORTED_MODULE_2__["deleteLike"])(props.post.likes.filter(function (like) {
+      return like.ownerId === currentUser.id;
+    })[0].id));
+    setTimeout(function () {
+      dispatch(Object(_actions_post_actions__WEBPACK_IMPORTED_MODULE_3__["fetchPost"])(props.post.id));
+    }, 10);
+  };
+
+  if (!props.post) return '';
+
+  if (props.post.likes.some(function (like) {
+    return like.ownerId === currentUser.id;
+  })) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "post-buttons-hover post-buttons-like",
+      onClick: handleUnlike
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+      "aria-hidden": "true",
+      focusable: "false",
+      "data-prefix": "far",
+      "data-icon": "thumbs-up",
+      className: "thumbs-down-svg",
+      role: "img",
+      xmlns: "http://www.w3.org/2000/svg",
+      viewBox: "0 0 512 512"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+      fill: "currentColor",
+      d: "M466.27 286.69C475.04 271.84 480 256 480 236.85c0-44.015-37.218-85.58-85.82-85.58H357.7c4.92-12.81 8.85-28.13 8.85-46.54C366.55 31.936 328.86 0 271.28 0c-61.607 0-58.093 94.933-71.76 108.6-22.747 22.747-49.615 66.447-68.76 83.4H32c-17.673 0-32 14.327-32 32v240c0 17.673 14.327 32 32 32h64c14.893 0 27.408-10.174 30.978-23.95 44.509 1.001 75.06 39.94 177.802 39.94 7.22 0 15.22.01 22.22.01 77.117 0 111.986-39.423 112.94-95.33 13.319-18.425 20.299-43.122 17.34-66.99 9.854-18.452 13.664-40.343 8.99-62.99zm-61.75 53.83c12.56 21.13 1.26 49.41-13.94 57.57 7.7 48.78-17.608 65.9-53.12 65.9h-37.82c-71.639 0-118.029-37.82-171.64-37.82V240h10.92c28.36 0 67.98-70.89 94.54-97.46 28.36-28.36 18.91-75.63 37.82-94.54 47.27 0 47.27 32.98 47.27 56.73 0 39.17-28.36 56.72-28.36 94.54h103.99c21.11 0 37.73 18.91 37.82 37.82.09 18.9-12.82 37.81-22.27 37.81 13.489 14.555 16.371 45.236-5.21 65.62zM88 432c0 13.255-10.745 24-24 24s-24-10.745-24-24 10.745-24 24-24 24 10.745 24 24z"
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Unlike ", props.post.likeCount)));
+  } else {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "post-buttons-hover post-buttons-like",
+      onClick: handleLike
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+      "aria-hidden": "true",
+      focusable: "false",
+      "data-prefix": "far",
+      "data-icon": "thumbs-up",
+      className: "thumbs-up-svg",
+      role: "img",
+      xmlns: "http://www.w3.org/2000/svg",
+      viewBox: "0 0 512 512"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+      fill: "currentColor",
+      d: "M466.27 286.69C475.04 271.84 480 256 480 236.85c0-44.015-37.218-85.58-85.82-85.58H357.7c4.92-12.81 8.85-28.13 8.85-46.54C366.55 31.936 328.86 0 271.28 0c-61.607 0-58.093 94.933-71.76 108.6-22.747 22.747-49.615 66.447-68.76 83.4H32c-17.673 0-32 14.327-32 32v240c0 17.673 14.327 32 32 32h64c14.893 0 27.408-10.174 30.978-23.95 44.509 1.001 75.06 39.94 177.802 39.94 7.22 0 15.22.01 22.22.01 77.117 0 111.986-39.423 112.94-95.33 13.319-18.425 20.299-43.122 17.34-66.99 9.854-18.452 13.664-40.343 8.99-62.99zm-61.75 53.83c12.56 21.13 1.26 49.41-13.94 57.57 7.7 48.78-17.608 65.9-53.12 65.9h-37.82c-71.639 0-118.029-37.82-171.64-37.82V240h10.92c28.36 0 67.98-70.89 94.54-97.46 28.36-28.36 18.91-75.63 37.82-94.54 47.27 0 47.27 32.98 47.27 56.73 0 39.17-28.36 56.72-28.36 94.54h103.99c21.11 0 37.73 18.91 37.82 37.82.09 18.9-12.82 37.81-22.27 37.81 13.489 14.555 16.371 45.236-5.21 65.62zM88 432c0 13.255-10.745 24-24 24s-24-10.745-24-24 10.745-24 24-24 24 10.745 24 24z"
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Like ", props.post.likeCount)));
+  }
+});
+
+/***/ }),
+
 /***/ "./frontend/components/modal/delete_modal.jsx":
 /*!****************************************************!*\
   !*** ./frontend/components/modal/delete_modal.jsx ***!
@@ -1812,6 +1985,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _posts_dropdown_post_dropdown_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../posts_dropdown/post_dropdown_container */ "./frontend/components/posts_dropdown/post_dropdown_container.js");
 /* harmony import */ var _comments_comment_index_item__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../comments/comment_index_item */ "./frontend/components/comments/comment_index_item.jsx");
 /* harmony import */ var _comment_form_create_comment_form__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../comment_form/create_comment_form */ "./frontend/components/comment_form/create_comment_form.jsx");
+/* harmony import */ var _likes_like_button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../likes/like_button */ "./frontend/components/likes/like_button.jsx");
+
 
 
 
@@ -1861,21 +2036,9 @@ __webpack_require__.r(__webpack_exports__);
     className: "post-buttons"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "post-buttons-container"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "post-buttons-hover post-buttons-like"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
-    "aria-hidden": "true",
-    focusable: "false",
-    "data-prefix": "far",
-    "data-icon": "thumbs-up",
-    className: "thumbs-up-svg",
-    role: "img",
-    xmlns: "http://www.w3.org/2000/svg",
-    viewBox: "0 0 512 512"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
-    fill: "currentColor",
-    d: "M466.27 286.69C475.04 271.84 480 256 480 236.85c0-44.015-37.218-85.58-85.82-85.58H357.7c4.92-12.81 8.85-28.13 8.85-46.54C366.55 31.936 328.86 0 271.28 0c-61.607 0-58.093 94.933-71.76 108.6-22.747 22.747-49.615 66.447-68.76 83.4H32c-17.673 0-32 14.327-32 32v240c0 17.673 14.327 32 32 32h64c14.893 0 27.408-10.174 30.978-23.95 44.509 1.001 75.06 39.94 177.802 39.94 7.22 0 15.22.01 22.22.01 77.117 0 111.986-39.423 112.94-95.33 13.319-18.425 20.299-43.122 17.34-66.99 9.854-18.452 13.664-40.343 8.99-62.99zm-61.75 53.83c12.56 21.13 1.26 49.41-13.94 57.57 7.7 48.78-17.608 65.9-53.12 65.9h-37.82c-71.639 0-118.029-37.82-171.64-37.82V240h10.92c28.36 0 67.98-70.89 94.54-97.46 28.36-28.36 18.91-75.63 37.82-94.54 47.27 0 47.27 32.98 47.27 56.73 0 39.17-28.36 56.72-28.36 94.54h103.99c21.11 0 37.73 18.91 37.82 37.82.09 18.9-12.82 37.81-22.27 37.81 13.489 14.555 16.371 45.236-5.21 65.62zM88 432c0 13.255-10.745 24-24 24s-24-10.745-24-24 10.745-24 24-24 24 10.745 24 24z"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Like"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_likes_like_button__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    post: props.post
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "post-buttons-hover post-buttons-comment",
     onClick: clickForm
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
@@ -1967,7 +2130,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _modal_dynamic_modal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../modal/dynamic_modal */ "./frontend/components/modal/dynamic_modal.jsx");
+/* harmony import */ var _modal_dynamic_modal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../modal/dynamic_modal */ "./frontend/components/modal/dynamic_modal.jsx");
 /* harmony import */ var _modal_delete_modal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../modal/delete_modal */ "./frontend/components/modal/delete_modal.jsx");
 /* harmony import */ var _posts_form_edit_post_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../posts_form/edit_post_form */ "./frontend/components/posts_form/edit_post_form.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -2132,7 +2295,7 @@ var PostDropdown = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
         fill: "currentColor",
         d: "M268 416h24a12 12 0 0 0 12-12V188a12 12 0 0 0-12-12h-24a12 12 0 0 0-12 12v216a12 12 0 0 0 12 12zM432 80h-82.41l-34-56.7A48 48 0 0 0 274.41 0H173.59a48 48 0 0 0-41.16 23.3L98.41 80H16A16 16 0 0 0 0 96v16a16 16 0 0 0 16 16h16v336a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128h16a16 16 0 0 0 16-16V96a16 16 0 0 0-16-16zM171.84 50.91A6 6 0 0 1 177 48h94a6 6 0 0 1 5.15 2.91L293.61 80H154.39zM368 464H80V128h288zm-212-48h24a12 12 0 0 0 12-12V188a12 12 0 0 0-12-12h-24a12 12 0 0 0-12 12v216a12 12 0 0 0 12 12z"
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Delete Post")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modal_dynamic_modal__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Delete Post")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modal_dynamic_modal__WEBPACK_IMPORTED_MODULE_1__["default"], {
         show: this.state.openModal,
         handleClose: this.hideModal
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_posts_form_edit_post_form__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -2219,20 +2382,27 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       postBody = _useState2[0],
       setBody = _useState2[1];
 
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState4 = _slicedToArray(_useState3, 2),
+      postPhoto = _useState4[0],
+      setPostPhoto = _useState4[1];
+
   var formType = 'Create Post';
   var buttonText = 'Post';
   var dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useDispatch"])();
+  var postProfileRef = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
   var user = props.user;
 
   var handleSubmit = function handleSubmit(e) {
-    e.preventDefault();
+    e.preventDefault(); // debugger
 
     if (user === undefined) {
       // Navbar      
       var post = {
         body: postBody,
         owner_id: props.currentUser.id,
-        user_id: props.currentUser.id
+        user_id: props.currentUser.id,
+        post_photo: postPhoto
       };
       dispatch(Object(_actions_post_actions__WEBPACK_IMPORTED_MODULE_2__["createPost"])(post));
       dispatch(Object(_actions_post_actions__WEBPACK_IMPORTED_MODULE_2__["fetchUserPosts"])(props.currentUser.id));
@@ -2245,7 +2415,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       var _post = {
         body: postBody,
         owner_id: props.currentUser.id,
-        user_id: props.currentUser.id
+        user_id: props.currentUser.id,
+        post_photo: postPhoto
       };
       dispatch(Object(_actions_post_actions__WEBPACK_IMPORTED_MODULE_2__["createPost"])(_post));
       dispatch(Object(_actions_post_actions__WEBPACK_IMPORTED_MODULE_2__["fetchUserPosts"])(props.currentUser.id));
@@ -2256,7 +2427,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       var _post2 = {
         body: postBody,
         owner_id: props.currentUser.id,
-        user_id: props.user.id
+        user_id: props.user.id,
+        post_photo: postPhoto
       };
       dispatch(Object(_actions_post_actions__WEBPACK_IMPORTED_MODULE_2__["createPost"])(_post2));
       dispatch(Object(_actions_post_actions__WEBPACK_IMPORTED_MODULE_2__["fetchUserPosts"])(props.user.id));
@@ -2264,7 +2436,30 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     }
   };
 
-  if (!props.currentUser) return 'hello'; // debugger
+  var handleFile = function handleFile(e) {
+    var reader = new FileReader();
+    var file = e.currentTarget.files[0];
+
+    reader.onloadend = function () {
+      // debugger
+      setPostPhoto(file);
+    }; // this.setState({ profilePhotoFile: file }, () => coverProfileSubmit());
+
+
+    if (file) {
+      reader.readAsDataURL(file);
+      debugger;
+    } else {
+      // this.setState({ profilePhotoFile: null });
+      setPostPhoto(null);
+    }
+  };
+
+  var clickInput = function clickInput() {
+    postProfileRef.current.click();
+  };
+
+  if (!props.currentUser) return ''; // debugger
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "post-form-card"
@@ -2320,6 +2515,18 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     },
     placeholder: "What's on your mind?"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "add-to-your-post"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "button",
+    value: "Add an image",
+    className: "file-upload-input",
+    onClick: clickInput
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "file",
+    className: "file",
+    onChange: handleFile,
+    ref: postProfileRef
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "post-button"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     onClick: handleSubmit
@@ -2818,7 +3025,7 @@ __webpack_require__.r(__webpack_exports__);
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     return;
-  }, []); // if (Object.values(props.friendships).length <= 0) {
+  }, [props.user.friendships, props.user.requestsAsReceiver]); // if (Object.values(props.friendships).length <= 0) {
   //   return (
   //     <button className='edit-profile-button' onClick={handleRequest} >
   //       <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user-plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M624 208h-64v-64c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v64h-64c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h64v64c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-64h64c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm-400 48c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"></path></svg>
@@ -2946,7 +3153,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       dispatch(Object(_actions_friendship_actions__WEBPACK_IMPORTED_MODULE_10__["clearFriendships"])());
       dispatch(Object(_actions_friend_request_actions__WEBPACK_IMPORTED_MODULE_11__["clearFriendRequests"])());
     };
-  }, [props.match.params.userId]);
+  }, [props.match.params.userId, profilePhotoFile]);
   var user = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(function (state) {
     return state.entities.userShow;
   });
@@ -2982,18 +3189,13 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
     reader.onloadend = function () {
       setProfilePhoto(file);
-      setTimeout(function () {
-        console.log('pro', profilePhotoFile);
-        coverProfileSubmit();
-      }, 2000);
-    }; // this.setState({ profilePhotoFile: file }, () => coverProfileSubmit());
-
+      coverProfileSubmit(); //   // this.setState({ profilePhotoFile: file }, () => coverProfileSubmit());
+    };
 
     if (file) {
       reader.readAsDataURL(file);
     } else {
-      // this.setState({ profilePhotoFile: null });
-      setProfilePhoto(null);
+      setProfilePhoto(null); // this.setState({ profilePhotoFile: null });
     }
   };
 
@@ -3013,7 +3215,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       reader.readAsDataURL(file);
     } else {
       // this.setState({ coverPhotoFile: null });
-      debugger;
+      // debugger
       setCoverPhoto(null);
     }
   };
@@ -3025,6 +3227,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   };
 
   var coverProfileSubmit = function coverProfileSubmit() {
+    debugger;
     var formData = new FormData();
     formData.append('user[profile_photo]', profilePhotoFile);
     dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_8__["updateUserPhoto"])(user.id, formData));
@@ -3484,6 +3687,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _friend_request_reducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./friend_request_reducer */ "./frontend/reducers/friend_request_reducer.js");
 /* harmony import */ var _posts_reducer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./posts_reducer */ "./frontend/reducers/posts_reducer.js");
 /* harmony import */ var _comments_reducer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./comments_reducer */ "./frontend/reducers/comments_reducer.js");
+/* harmony import */ var _likes_reducer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./likes_reducer */ "./frontend/reducers/likes_reducer.js");
+
 
 
 
@@ -3497,7 +3702,8 @@ var entitiesReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers
   userShow: _user_show_reducer__WEBPACK_IMPORTED_MODULE_3__["default"],
   friendRequests: _friend_request_reducer__WEBPACK_IMPORTED_MODULE_4__["default"],
   friendships: _friendships_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
-  posts: _posts_reducer__WEBPACK_IMPORTED_MODULE_5__["default"]
+  posts: _posts_reducer__WEBPACK_IMPORTED_MODULE_5__["default"],
+  likes: _likes_reducer__WEBPACK_IMPORTED_MODULE_7__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (entitiesReducer);
 
@@ -3519,6 +3725,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _posts_errors_reducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./posts_errors_reducer */ "./frontend/reducers/posts_errors_reducer.js");
 /* harmony import */ var _friend_request_errors_reducer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./friend_request_errors_reducer */ "./frontend/reducers/friend_request_errors_reducer.js");
 /* harmony import */ var _friendships_errors_reducer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./friendships_errors_reducer */ "./frontend/reducers/friendships_errors_reducer.js");
+/* harmony import */ var _likes_errors_reducer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./likes_errors_reducer */ "./frontend/reducers/likes_errors_reducer.js");
+
 
 
 
@@ -3532,7 +3740,8 @@ __webpack_require__.r(__webpack_exports__);
   comments: _comments_errors_reducer__WEBPACK_IMPORTED_MODULE_3__["default"],
   posts: _posts_errors_reducer__WEBPACK_IMPORTED_MODULE_4__["default"],
   friendRequests: _friend_request_errors_reducer__WEBPACK_IMPORTED_MODULE_5__["default"],
-  friendships: _friendships_errors_reducer__WEBPACK_IMPORTED_MODULE_6__["default"]
+  friendships: _friendships_errors_reducer__WEBPACK_IMPORTED_MODULE_6__["default"],
+  likes: _likes_errors_reducer__WEBPACK_IMPORTED_MODULE_7__["default"]
 }));
 
 /***/ }),
@@ -3668,6 +3877,72 @@ __webpack_require__.r(__webpack_exports__);
       return newState;
 
     case _actions_friendship_actions__WEBPACK_IMPORTED_MODULE_0__["CLEAR_FRIENDSHIPS"]:
+      return {};
+
+    default:
+      return oldState;
+  }
+});
+
+/***/ }),
+
+/***/ "./frontend/reducers/likes_errors_reducer.js":
+/*!***************************************************!*\
+  !*** ./frontend/reducers/likes_errors_reducer.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_like_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/like_actions */ "./frontend/actions/like_actions.js");
+
+var _nullErrors = [];
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _nullErrors;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_like_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_LIKE_ERRORS"]:
+      return action.errors;
+
+    case _actions_like_actions__WEBPACK_IMPORTED_MODULE_0__["CLEAR_LIKE_ERRORS"]:
+      return _nullErrors;
+
+    default:
+      return state;
+  }
+});
+
+/***/ }),
+
+/***/ "./frontend/reducers/likes_reducer.js":
+/*!********************************************!*\
+  !*** ./frontend/reducers/likes_reducer.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_like_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/like_actions */ "./frontend/actions/like_actions.js");
+
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+  var oldState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(oldState);
+
+  switch (action.type) {
+    case _actions_like_actions__WEBPACK_IMPORTED_MODULE_0__["POST_LIKE"]:
+      return Object.assign({}, oldState, action.like);
+
+    case _actions_like_actions__WEBPACK_IMPORTED_MODULE_0__["REMOVE_LIKE"]:
+      var newState = Object.assign({}, oldState);
+      delete newState[action.likeId];
+      return newState;
+
+    case _actions_like_actions__WEBPACK_IMPORTED_MODULE_0__["CLEAR_LIKES"]:
       return {};
 
     default:
@@ -4095,6 +4370,38 @@ var fetchFriendships = function fetchFriendships(userId) {
 var deleteFriendship = function deleteFriendship(userId) {
   return $.ajax({
     url: "/api/friendships/".concat(userId),
+    method: 'DELETE'
+  });
+};
+
+/***/ }),
+
+/***/ "./frontend/util/like_util.js":
+/*!************************************!*\
+  !*** ./frontend/util/like_util.js ***!
+  \************************************/
+/*! exports provided: postLike, deleteLike */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postLike", function() { return postLike; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteLike", function() { return deleteLike; });
+var postLike = function postLike(owner_id, post_id) {
+  return $.ajax({
+    url: '/api/likes',
+    method: 'POST',
+    data: {
+      like: {
+        owner_id: owner_id,
+        post_id: post_id
+      }
+    }
+  });
+};
+var deleteLike = function deleteLike(likeId) {
+  return $.ajax({
+    url: "/api/likes/".concat(likeId),
     method: 'DELETE'
   });
 };
