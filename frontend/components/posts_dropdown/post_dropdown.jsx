@@ -86,7 +86,7 @@ class PostDropdown extends React.Component {
                   <span>Delete Post</span>
                 </div>
 
-                <DynamicModal show={this.state.openModal} handleClose={this.hideModal} >
+                <DynamicModal show={this.state.openModal} handleClose={this.hideModal}>
                   <EditPostForm
                     hideModal={this.hideModal}
                     post={this.props.post}

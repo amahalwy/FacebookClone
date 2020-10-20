@@ -84,7 +84,7 @@ export default props => {
         </div>
 
       </div>
-      <DynamicModal show={openModal} handleClose={hideModal} >
+      <DynamicModal show={openModal} handleClose={hideModal}>
         <CreatePostForm
           history={props.history}
           match={props.match}

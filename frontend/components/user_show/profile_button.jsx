@@ -88,7 +88,7 @@ export default props => {
             }, 100);
           }
         } >
-          Accept
+          Accept Request
         </button >
         <button className='edit-profile-button' onClick={
           () => {
@@ -99,7 +99,7 @@ export default props => {
             }, 10);
           } 
         } >
-          Reject
+          Reject Request
         </button >
       </div>
     )

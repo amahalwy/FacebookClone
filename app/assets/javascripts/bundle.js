@@ -2606,12 +2606,11 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       authorLastName: props.post.authorLastName,
       body: postBody,
       authorId: props.post.authorId,
-      id: props.post.id // comments: props.post.comments
-
+      id: props.post.id
     };
     dispatch(Object(_actions_post_actions__WEBPACK_IMPORTED_MODULE_2__["updatePost"])(post));
     dispatch(Object(_actions_post_actions__WEBPACK_IMPORTED_MODULE_2__["fetchUserPosts"])(currentUser.id));
-    props.hideModal(); // Need to reroute maybe?
+    props.hideModal();
   };
 
   if (!props.post) return null;
@@ -3134,7 +3133,7 @@ __webpack_require__.r(__webpack_exports__);
           dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_4__["fetchUser"])(user.id));
         }, 100);
       }
-    }, "Accept"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    }, "Accept Request"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       className: "edit-profile-button",
       onClick: function onClick() {
         dispatch(Object(_actions_friend_request_actions__WEBPACK_IMPORTED_MODULE_2__["deleteFriendRequest"])(_request2[0].id));
@@ -3143,7 +3142,7 @@ __webpack_require__.r(__webpack_exports__);
           dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_4__["fetchUser"])(user.id));
         }, 10);
       }
-    }, "Reject"));
+    }, "Reject Request"));
   } else {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       className: "edit-profile-button",
