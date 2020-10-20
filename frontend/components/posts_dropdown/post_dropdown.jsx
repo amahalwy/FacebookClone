@@ -52,6 +52,7 @@ class PostDropdown extends React.Component {
   }
 
   render() {
+    if (this.props.currentUser.id !== this.props.post.authorId) return ''
     return (
       <div>
         <button onClick={this.showMenu} className='post-dropdown-button'>

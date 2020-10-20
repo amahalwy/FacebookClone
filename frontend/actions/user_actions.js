@@ -6,6 +6,7 @@ export const CLEAR_USERS = "CLEAR_USERS";
 export const CLEAR_USER = "CLEAR_USER";
 export const RECEIVE_USER_ERRORS = "RECEIVE_USER_ERRORS";
 export const CLEAR_USER_ERRORS = "CLEAR_USER_ERRORS";
+export const RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER";
 
 const receiveUser = user => ({
   type: RECEIVE_USER,
@@ -32,6 +33,11 @@ const receiveErrors = errors => ({
 
 const clearErrs = () => ({
   type: CLEAR_USER_ERRORS
+})
+
+const receiveCurrentUser = currentUser => ({
+  type: RECEIVE_CURRENT_USER,
+  currentUser
 })
 
 // Thunk action creators
@@ -63,4 +69,10 @@ export const clearShow = () => dispatch => (
 
 export const clearErrors = () => dispatch => (
   dispatch(clearErrs())
+)
+
+export const getCurrentUser = userId => dispatch => (
+  APIUtil.fetchUser(userId).then(
+    user => dispatch(receiveCurrentUser(user)),
+    err => dispatch(receiveErrors(err.responseJSON)))
 )

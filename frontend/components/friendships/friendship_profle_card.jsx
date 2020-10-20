@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
 
 export default props => {
   
@@ -9,7 +8,7 @@ export default props => {
     props.history.push(`/users/${friendship.friendId}`);
   }
   
-  
+  if (props.friendship.friendId === props.user.id) return '';
   return (
     <div className='profile-friendship-card' onClick={clickRedirect}>
       <div className='profile-friendship-image'>

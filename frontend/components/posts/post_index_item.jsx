@@ -44,7 +44,22 @@ export default props => {
           {/* <div className='post-photo'>
 
           </div> */}
-
+          <div className='post-number'>
+            <div className='post-like-count'>
+              <div className='post-like-count-container'>
+                <img src="https://facebook-clone-pro.s3.us-east-2.amazonaws.com/facebook-like.jpg" alt=""/>
+                <span>{post.likeCount}</span>
+              </div>
+            </div>
+            <div>
+              <div className='post-comment-count-container'>
+                <span>
+                  <p>{post.comments.length}</p>
+                  <p>Comment(s)</p>
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className='post-buttons'>

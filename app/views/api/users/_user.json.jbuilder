@@ -10,5 +10,5 @@ json.user do
   json.requestsAsRequestor user.friend_requests_as_requestor
   json.requestsAsReceiver user.friend_requests_as_receiver
   json.friendships user.friendships
-  json.userPosts user.posts
+  # json.userPosts user.posts
 end

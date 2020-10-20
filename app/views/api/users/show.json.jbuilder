@@ -9,4 +9,4 @@ json.profilePhoto @user.profile_photo.attached? ? url_for(@user.profile_photo) :
 json.requestsAsRequestor @user.friend_requests_as_requestor
 json.requestsAsReceiver @user.friend_requests_as_receiver
 json.friendships @user.friendships
-json.userPosts @user.posts
+# json.userPosts @user.posts

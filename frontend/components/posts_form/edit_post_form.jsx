@@ -35,10 +35,10 @@ export default props => {
               <h1>{formType}</h1>
             </span>
             <span>
-              <button onClick={props.hideModal}><p>X</p></button>
+              <button onClick={props.hideModal}><p className='form-close-button'>X</p></button>
             </span>
           </div>
-          <div className='post-dividor'></div>
+          <div className='post-dividor'/>
         </div>
         <div className='post-form-user'>
           <div className='post-form-user-image'>

@@ -16,5 +16,6 @@ Rails.application.routes.draw do
     resource :session, only: [:create, :destroy]
   end
 
+  post 'rails/active_storage/direct_uploads', to: 'direct_uploads#create'
   root to: 'static_pages#root'
 end

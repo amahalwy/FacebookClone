@@ -11,6 +11,7 @@ class Api::FriendshipsController < ApplicationController
     @request = FriendRequest.find_by(requestor_id: req_params.dig(:friend_id), receiver_id: req_params.dig(:user_id))
 
     if @friendship.save && @friendship2.save
+      @request.destroy
       render '/api/friendships/show', status: 201
     else
       render json: ["Couldn't create that friendship."], status: 422

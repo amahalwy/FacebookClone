@@ -5,6 +5,7 @@
     "@babel/core": "^7.11.1",
     "@babel/preset-env": "^7.11.0",
     "@babel/preset-react": "^7.10.4",
+    "activestorage": "^5.2.4-4",
     "babel-loader": "^8.1.0",
     "hash-router": "^0.4.0",
     "react": "^16.13.1",

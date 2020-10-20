@@ -2,7 +2,8 @@ import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {postFriendRequest, deleteFriendRequest} from '../../actions/friend_request_actions';
 import { deleteFriendship } from '../../actions/friendship_actions';
-import {fetchUser} from '../../actions/user_actions';
+import {fetchUser, getCurrentUser} from '../../actions/user_actions';
+import { postFriendship } from '../../actions/friendship_actions';
 
 export default props => {
   const currentUser = useSelector(state => state.session.user);
@@ -26,8 +27,8 @@ export default props => {
       </button>
     )
   } else if ((user.friendships) && (user.friendships.some(user => user.friend_id === currentUser.id)) ) {
-    const friendship = props.friendships.filter(ship => {
-      if (ship.friendId === currentUser.id) {
+    const friendship = user.friendships.filter(ship => {
+      if (ship.friend_id === currentUser.id) {
         return ship;
       }
     })
@@ -69,6 +70,39 @@ export default props => {
         <span className='unrequest'>Unrequest?</span>
       </button>
     )  
+  } else if ((currentUser.requestsAsReceiver) && (currentUser.requestsAsReceiver.some(req => req.requestor_id === user.id )) ) {
+    const request = currentUser.requestsAsReceiver.filter(req => {
+      if (req.requestor_id === user.id) {
+        return req;
+      }
+    })
+
+    return (
+      <div className='profile-button-accept-reject'>
+        <button className='edit-profile-button' onClick={
+          () => {
+            dispatch(postFriendship(currentUser.id, user.id));
+            setTimeout(() => {
+              dispatch(getCurrentUser(currentUser.id))
+              dispatch(fetchUser(user.id));
+            }, 100);
+          }
+        } >
+          Accept
+        </button >
+        <button className='edit-profile-button' onClick={
+          () => {
+            dispatch(deleteFriendRequest(request[0].id))
+            setTimeout(() => {
+              dispatch(getCurrentUser(currentUser.id))
+              dispatch(fetchUser(user.id));
+            }, 10);
+          } 
+        } >
+          Reject
+        </button >
+      </div>
+    )
   } else {
     return (
       <button className='edit-profile-button' onClick={handleRequest} >

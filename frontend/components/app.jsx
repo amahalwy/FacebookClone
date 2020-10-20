@@ -9,15 +9,12 @@ import PostsIndex from './posts/posts_index';
 
 export default () => (
   <div>
-
     <Switch> 
       <AuthRoute exact path='/login' component={Login} />
       <ProtectedRoute exact path='/feed' component={Feed}/>
       <ProtectedRoute exact path='/users' component={UsersIndex} />
       <ProtectedRoute exact path='/users/:userId' component={UserShow} />
-      <ProtectedRoute exact path='/posts' component={PostsIndex} />
-      {/* Need to redirect to /users if the id is invalid */}
-      
+      <ProtectedRoute exact path='/posts' component={PostsIndex} />      
       {/* Catch all */}
 
       <Redirect to="/feed" />

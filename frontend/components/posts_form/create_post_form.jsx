@@ -4,7 +4,7 @@ import { createPost, fetchUserPosts } from '../../actions/post_actions';
 
 export default props => {
   const [postBody, setBody] = useState('');
-  const [postPhoto, setPostPhoto] = useState('');
+  const [postPhoto, setPostPhoto] = useState(null);
   const formType = 'Create Post';
   const buttonText = 'Post';
   const dispatch = useDispatch();
@@ -25,12 +25,17 @@ export default props => {
         post_photo: postPhoto
       }
 
+      // const post = new FormData();
+      // post.append('body', postBody);
+      // post.append('owner_id', props.currentUser.id);
+      // post.append('user_id', props.currentUser.id);
+      // post.append('post_photo', postPhoto);
+
       dispatch(createPost(post));
       dispatch(fetchUserPosts(props.currentUser.id));
       props.hideModal();
       props.history.push(`/users/${props.currentUser.id}`);
     }
-
 
     if ((user && props.currentUser) && (props.currentUser.id === user.id)) { // Current user's page
       let post = {
@@ -40,10 +45,16 @@ export default props => {
         post_photo: postPhoto
       }
 
+      // const post = new FormData();
+      // post.append('body', postBody);
+      // post.append('owner_id', props.currentUser.id);
+      // post.append('user_id', props.currentUser.id);
+      // post.append('post_photo', postPhoto);
+
       dispatch(createPost(post));
       dispatch(fetchUserPosts(props.currentUser.id));
       props.hideModal();
-      props.history.push(`/users/${currentUser.id}`);
+      props.history.push(`/users/${props.currentUser.id}`);
 
 
     } else if ((user && props.currentUser) && (props.currentUser.id !== user.id)) { // Not current user's page
@@ -54,28 +65,39 @@ export default props => {
         post_photo: postPhoto
       }
 
+      // const post = new FormData();
+      // post.append('body', postBody);
+      // post.append('owner_id', props.currentUser.id);
+      // post.append('user_id', props.user.id);
+      // post.append('post_photo', postPhoto);
+
       dispatch(createPost(post));
       dispatch(fetchUserPosts(props.user.id));
       props.hideModal();
     }
   }
 
-  const handleFile = (e) =>{
+  
+  const handleFile = (e) => {
     const reader = new FileReader();
-    const file = e.currentTarget.files[0];
+    const file = e.currentTarget.files[0]
     reader.onloadend = () => {
-      // debugger
-      setPostPhoto(file);
+
     }
+    
+      handleFileChange(file);
       // this.setState({ profilePhotoFile: file }, () => coverProfileSubmit());
 
     if (file) {
-      reader.readAsDataURL(file);
-      debugger;
+      reader.readAsDataURL(file); 
     } else {
       // this.setState({ profilePhotoFile: null });
       setPostPhoto(null);
     }
+  }
+
+  const handleFileChange = (file) => {
+    setPostPhoto(file);
   }
 
   const clickInput = () => {
@@ -83,7 +105,7 @@ export default props => {
   }
 
   if (!props.currentUser) return '';
-  // debugger
+  
   return (
     <div className='post-form-card'>
       <div className='post-form-header'>
@@ -120,7 +142,7 @@ export default props => {
         <div className='add-to-your-post'>
           {/* <input 
             type="file"
-            onChange={e => setPostPhoto(e.currentTarget.value)}
+            onChange={e => setPostPhoto(e.currentTarget.files[0])}
             buttonText="Choose Image"
           /> */}
           <input type="button" value="Add an image" className="file-upload-input" onClick={clickInput} />
