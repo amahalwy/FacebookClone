@@ -12,8 +12,9 @@ export default props => {
   
   const clickForm = (e) => {
     e.preventDefault();
-    const form = document.querySelector('.post-comment-text');
-    form.focus();
+    const classId = `comment-text-${post.id}`;
+    const form = document.querySelectorAll(`.post-comment-text.${classId}`);
+    form[0].focus();
   }
 
   const renderPostImage = () => {
@@ -54,9 +55,6 @@ export default props => {
             <p className='post-body-text'>{post.body}</p>
             {renderPostImage()}
           </div>
-          {/* <div className='post-photo'>
-
-          </div> */}
           <div className='post-number'>
             <div className='post-like-count'>
               <div className='post-like-count-container'>

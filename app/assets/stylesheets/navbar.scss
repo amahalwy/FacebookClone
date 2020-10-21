@@ -49,9 +49,6 @@
 }
 // End of navbar search css
 
-
-
-
 // Beginning of navbar main css
 
 .navbar-main-li {
@@ -60,11 +57,10 @@
   border-radius: 8px;
   height: 50px;
   width: 116px;
-
 }
 
 .navbar-main-home {
-  padding-bottom: 5px;
+  padding-bottom: 3px;
   border-bottom: 3px solid rgb(27, 119, 242);
   margin: 3px 0;
 }
@@ -104,6 +100,7 @@
 
 .navbar-menu-user-profile {
   align-self: center;
+  align-content: center;
   padding: 10px 5px;
   justify-content: center;
   height: 20px;
@@ -135,6 +132,7 @@
 .navbar-menu-user-picture {
   width: 26px; 
   height: 26px;
+  margin-top: -3px;
 }
 
 .navbar-menu-user-picture img {
@@ -144,7 +142,7 @@
 }
 
 .navbar-menu-user-link {
-  margin-top: 2px;
+  margin-top: 1px;
   margin-left: 4px;
 }
 

@@ -28,11 +28,13 @@ export default props => {
     }
   };
   
+  const textClass = `post-comment-text comment-text-${postId}`;
+
   return (
       <form className='post-comment-form'>
         <div className='post-comment-form-text'>
           <textarea
-            className='post-comment-text'
+            className={textClass}
             type="text"
             value={body}
             onKeyPress={handleUserKeyPress}

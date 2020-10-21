@@ -23,66 +23,30 @@ export default props => {
       dispatch(clearFriendships());
       dispatch(clearFriendRequests());
     }
-  }, [props.match.params.userId, profilePhotoFile])
+  }, [props.match.params.userId])
 
   const user = useSelector(state => state.entities.userShow);
   const friendships = useSelector(state => Object.values(state.entities.friendships));
 
   const currentUser = useSelector(state => state.session.user)
-  const [profilePhotoFile, setProfilePhoto] = useState(null);
-  const [coverPhotoFile, setCoverPhoto] = useState(null);
   const [openModal, setModal] = useState(false);
+  let profilePhoto = null;
+  let coverPhoto = null;
   
   const dispatch = useDispatch();
   
   const photoProfileUpload = React.createRef();
   const photoCoverUpload = React.createRef();
   
-  const handleProfileFile = (e) => {
-    const reader = new FileReader();
-    const file = e.currentTarget.files[0];
-    reader.onloadend = () => {
-      setProfilePhoto(file);
-      coverProfileSubmit();
-      //   // this.setState({ profilePhotoFile: file }, () => coverProfileSubmit());
-    }
-
-    if (file) {
-      reader.readAsDataURL(file);
-    } else {
-      setProfilePhoto(null);
-      // this.setState({ profilePhotoFile: null });
-    }
-  }
-
-  const handleCoverFile = (e) => {
-    const reader = new FileReader();
-    const file = e.currentTarget.files[0];
-    reader.onloadend = () =>{
-      setCoverPhoto(file);
-      setTimeout(() => {
-        coverHandleSubmit()
-      }, 2000)
-    }
-      // this.setState({ coverPhotoFile: file }, () => this.coverHandleSubmit()); 
-
-    if (file) {
-      reader.readAsDataURL(file);
-    } else {
-      // this.setState({ coverPhotoFile: null });
-      setCoverPhoto(null);
-    }
-  }
-
-  const coverHandleSubmit = () =>{
+  const handleProfile = () => {
     const formData = new FormData();
-    formData.append('user[cover_photo]', coverPhotoFile);
+    formData.append('user[profile_photo]', profilePhoto);
     dispatch(updateUserPhoto(user.id, formData));
   }
-
-  const coverProfileSubmit = () => {
+  
+  const handleCover = () =>{
     const formData = new FormData();
-    formData.append('user[profile_photo]', profilePhotoFile);
+    formData.append('user[cover_photo]', coverPhoto);
     dispatch(updateUserPhoto(user.id, formData));
   }
 
@@ -124,7 +88,11 @@ export default props => {
             type="file"
             className='button-file'
             ref={photoProfileUpload}
-            onChange={handleProfileFile}
+            onChange={e => {
+                profilePhoto = e.currentTarget.files[0]
+                handleProfile()
+              }
+            }
           />
         </button>
       )
@@ -142,7 +110,11 @@ export default props => {
             type="file" 
             className='button-file' 
             ref={photoCoverUpload}
-            onChange={handleCoverFile}
+            onChange={e => {
+                coverPhoto = e.currentTarget.files[0]
+                handleCover()
+              }
+            }
           />
             Edit cover photo
         </button>

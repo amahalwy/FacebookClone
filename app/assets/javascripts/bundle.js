@@ -967,12 +967,13 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     }
   };
 
+  var textClass = "post-comment-text comment-text-".concat(postId);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
     className: "post-comment-form"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "post-comment-form-text"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
-    className: "post-comment-text",
+    className: textClass,
     type: "text",
     value: body,
     onKeyPress: handleUserKeyPress,
@@ -1991,8 +1992,9 @@ __webpack_require__.r(__webpack_exports__);
 
   var clickForm = function clickForm(e) {
     e.preventDefault();
-    var form = document.querySelector('.post-comment-text');
-    form.focus();
+    var classId = "comment-text-".concat(post.id);
+    var form = document.querySelectorAll(".post-comment-text.".concat(classId));
+    form[0].focus();
   };
 
   var renderPostImage = function renderPostImage() {
@@ -3219,7 +3221,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       dispatch(Object(_actions_friendship_actions__WEBPACK_IMPORTED_MODULE_10__["clearFriendships"])());
       dispatch(Object(_actions_friend_request_actions__WEBPACK_IMPORTED_MODULE_11__["clearFriendRequests"])());
     };
-  }, [props.match.params.userId, profilePhotoFile]);
+  }, [props.match.params.userId]);
   var user = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(function (state) {
     return state.entities.userShow;
   });
@@ -3230,70 +3232,26 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     return state.session.user;
   });
 
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState2 = _slicedToArray(_useState, 2),
-      profilePhotoFile = _useState2[0],
-      setProfilePhoto = _useState2[1];
+      openModal = _useState2[0],
+      setModal = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
-      _useState4 = _slicedToArray(_useState3, 2),
-      coverPhotoFile = _useState4[0],
-      setCoverPhoto = _useState4[1];
-
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
-      _useState6 = _slicedToArray(_useState5, 2),
-      openModal = _useState6[0],
-      setModal = _useState6[1];
-
+  var profilePhoto = null;
+  var coverPhoto = null;
   var dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useDispatch"])();
   var photoProfileUpload = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
   var photoCoverUpload = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
 
-  var handleProfileFile = function handleProfileFile(e) {
-    var reader = new FileReader();
-    var file = e.currentTarget.files[0];
-
-    reader.onloadend = function () {
-      setProfilePhoto(file);
-      coverProfileSubmit(); //   // this.setState({ profilePhotoFile: file }, () => coverProfileSubmit());
-    };
-
-    if (file) {
-      reader.readAsDataURL(file);
-    } else {
-      setProfilePhoto(null); // this.setState({ profilePhotoFile: null });
-    }
-  };
-
-  var handleCoverFile = function handleCoverFile(e) {
-    var reader = new FileReader();
-    var file = e.currentTarget.files[0];
-
-    reader.onloadend = function () {
-      setCoverPhoto(file);
-      setTimeout(function () {
-        coverHandleSubmit();
-      }, 2000);
-    }; // this.setState({ coverPhotoFile: file }, () => this.coverHandleSubmit()); 
-
-
-    if (file) {
-      reader.readAsDataURL(file);
-    } else {
-      // this.setState({ coverPhotoFile: null });
-      setCoverPhoto(null);
-    }
-  };
-
-  var coverHandleSubmit = function coverHandleSubmit() {
+  var handleProfile = function handleProfile() {
     var formData = new FormData();
-    formData.append('user[cover_photo]', coverPhotoFile);
+    formData.append('user[profile_photo]', profilePhoto);
     dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_8__["updateUserPhoto"])(user.id, formData));
   };
 
-  var coverProfileSubmit = function coverProfileSubmit() {
+  var handleCover = function handleCover() {
     var formData = new FormData();
-    formData.append('user[profile_photo]', profilePhotoFile);
+    formData.append('user[cover_photo]', coverPhoto);
     dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_8__["updateUserPhoto"])(user.id, formData));
   };
 
@@ -3348,7 +3306,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
         type: "file",
         className: "button-file",
         ref: photoProfileUpload,
-        onChange: handleProfileFile
+        onChange: function onChange(e) {
+          profilePhoto = e.currentTarget.files[0];
+          handleProfile();
+        }
       }));
     } else {
       return '';
@@ -3376,7 +3337,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
         type: "file",
         className: "button-file",
         ref: photoCoverUpload,
-        onChange: handleCoverFile
+        onChange: function onChange(e) {
+          coverPhoto = e.currentTarget.files[0];
+          handleCover();
+        }
       }), "Edit cover photo");
     } else {
       return '';
