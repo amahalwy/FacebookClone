@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import { createPost, fetchUserPosts } from '../../actions/post_actions';
 
 export default props => {
@@ -14,17 +14,18 @@ export default props => {
   let user = props.user;
 
   const handleSubmit = (e) => {
+    console.log(postPhoto);
     e.preventDefault();
-    // debugger
+
 
     if (user === undefined) { // Navbar      
       let post = {
         body: postBody,
         owner_id: props.currentUser.id,
         user_id: props.currentUser.id,
-        post_photo: postPhoto
+        file: postPhoto
       }
-
+      debugger
       // const post = new FormData();
       // post.append('body', postBody);
       // post.append('owner_id', props.currentUser.id);
@@ -32,9 +33,9 @@ export default props => {
       // post.append('post_photo', postPhoto);
 
       dispatch(createPost(post));
-      dispatch(fetchUserPosts(props.currentUser.id));
-      props.hideModal();
-      props.history.push(`/users/${props.currentUser.id}`);
+      // dispatch(fetchUserPosts(props.currentUser.id));
+      // props.hideModal();
+      // props.history.push(`/users/${props.currentUser.id}`);
     }
 
     if ((user && props.currentUser) && (props.currentUser.id === user.id)) { // Current user's page
@@ -42,7 +43,7 @@ export default props => {
         body: postBody,
         owner_id: props.currentUser.id,
         user_id: props.currentUser.id,
-        post_photo: postPhoto
+        file: postPhoto
       }
 
       // const post = new FormData();
@@ -61,8 +62,8 @@ export default props => {
       let post = {
         body: postBody,
         owner_id: props.currentUser.id,
-        user_id: props.user.id,
-        post_photo: postPhoto
+        user_id: user.id,
+        file: postPhoto
       }
 
       // const post = new FormData();
@@ -76,29 +77,28 @@ export default props => {
       props.hideModal();
     }
   }
-
   
-  const handleFile = (e) => {
-    const reader = new FileReader();
-    const file = e.currentTarget.files[0]
-    reader.onloadend = () => {
+  // const handleFile = (e) => {
+  //   const reader = new FileReader();
+  //   const file = e.currentTarget.files[0]
+  //   reader.onloadend = () => {
 
-    }
+  //     handleFileChange(file);
+  //   }
     
-      handleFileChange(file);
-      // this.setState({ profilePhotoFile: file }, () => coverProfileSubmit());
+  //     // this.setState({ profilePhotoFile: file }, () => coverProfileSubmit());
 
-    if (file) {
-      reader.readAsDataURL(file); 
-    } else {
-      // this.setState({ profilePhotoFile: null });
-      setPostPhoto(null);
-    }
-  }
+  //   if (file) {
+  //     reader.readAsDataURL(file); 
+  //   } else {
+  //     // this.setState({ profilePhotoFile: null });
+  //     setPostPhoto(null);
+  //   }
+  // }
 
-  const handleFileChange = (file) => {
-    setPostPhoto(file);
-  }
+  // const handleFileChange = (file) => {
+  //   setPostPhoto(file);
+  // }
 
   const clickInput = () => {
     postProfileRef.current.click()
@@ -145,11 +145,11 @@ export default props => {
             onChange={e => setPostPhoto(e.currentTarget.files[0])}
             buttonText="Choose Image"
           /> */}
-          <input type="button" value="Add an image" className="file-upload-input" onClick={clickInput} />
+          <input type="button" value="Add an image instead" className="file-upload-input" onClick={clickInput} />
           <input 
             type="file" 
-            className="file" 
-            onChange={handleFile} 
+            className="file"
+            onChange={e => setPostPhoto(e.currentTarget.files[0])}
             ref={postProfileRef}
           />
         </div>

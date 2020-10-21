@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 's3/direct_post'
   namespace :api, defaults: {format: :json} do 
 
     resources :users, only: [:index, :create, :show, :update] do
@@ -16,6 +17,5 @@ Rails.application.routes.draw do
     resource :session, only: [:create, :destroy]
   end
 
-  post 'rails/active_storage/direct_uploads', to: 'direct_uploads#create'
   root to: 'static_pages#root'
 end

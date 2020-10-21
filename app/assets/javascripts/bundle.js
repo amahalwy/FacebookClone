@@ -2401,7 +2401,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   var user = props.user;
 
   var handleSubmit = function handleSubmit(e) {
-    e.preventDefault(); // debugger
+    console.log(postPhoto);
+    e.preventDefault();
 
     if (user === undefined) {
       // Navbar      
@@ -2409,17 +2410,17 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
         body: postBody,
         owner_id: props.currentUser.id,
         user_id: props.currentUser.id,
-        post_photo: postPhoto
-      }; // const post = new FormData();
+        file: postPhoto
+      };
+      debugger; // const post = new FormData();
       // post.append('body', postBody);
       // post.append('owner_id', props.currentUser.id);
       // post.append('user_id', props.currentUser.id);
       // post.append('post_photo', postPhoto);
 
-      dispatch(Object(_actions_post_actions__WEBPACK_IMPORTED_MODULE_2__["createPost"])(post));
-      dispatch(Object(_actions_post_actions__WEBPACK_IMPORTED_MODULE_2__["fetchUserPosts"])(props.currentUser.id));
-      props.hideModal();
-      props.history.push("/users/".concat(props.currentUser.id));
+      dispatch(Object(_actions_post_actions__WEBPACK_IMPORTED_MODULE_2__["createPost"])(post)); // dispatch(fetchUserPosts(props.currentUser.id));
+      // props.hideModal();
+      // props.history.push(`/users/${props.currentUser.id}`);
     }
 
     if (user && props.currentUser && props.currentUser.id === user.id) {
@@ -2428,7 +2429,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
         body: postBody,
         owner_id: props.currentUser.id,
         user_id: props.currentUser.id,
-        post_photo: postPhoto
+        file: postPhoto
       }; // const post = new FormData();
       // post.append('body', postBody);
       // post.append('owner_id', props.currentUser.id);
@@ -2444,8 +2445,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       var _post2 = {
         body: postBody,
         owner_id: props.currentUser.id,
-        user_id: props.user.id,
-        post_photo: postPhoto
+        user_id: user.id,
+        file: postPhoto
       }; // const post = new FormData();
       // post.append('body', postBody);
       // post.append('owner_id', props.currentUser.id);
@@ -2456,27 +2457,24 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       dispatch(Object(_actions_post_actions__WEBPACK_IMPORTED_MODULE_2__["fetchUserPosts"])(props.user.id));
       props.hideModal();
     }
-  };
+  }; // const handleFile = (e) => {
+  //   const reader = new FileReader();
+  //   const file = e.currentTarget.files[0]
+  //   reader.onloadend = () => {
+  //     handleFileChange(file);
+  //   }
+  //     // this.setState({ profilePhotoFile: file }, () => coverProfileSubmit());
+  //   if (file) {
+  //     reader.readAsDataURL(file); 
+  //   } else {
+  //     // this.setState({ profilePhotoFile: null });
+  //     setPostPhoto(null);
+  //   }
+  // }
+  // const handleFileChange = (file) => {
+  //   setPostPhoto(file);
+  // }
 
-  var handleFile = function handleFile(e) {
-    var reader = new FileReader();
-    var file = e.currentTarget.files[0];
-
-    reader.onloadend = function () {};
-
-    handleFileChange(file); // this.setState({ profilePhotoFile: file }, () => coverProfileSubmit());
-
-    if (file) {
-      reader.readAsDataURL(file);
-    } else {
-      // this.setState({ profilePhotoFile: null });
-      setPostPhoto(null);
-    }
-  };
-
-  var handleFileChange = function handleFileChange(file) {
-    setPostPhoto(file);
-  };
 
   var clickInput = function clickInput() {
     postProfileRef.current.click();
@@ -2540,13 +2538,15 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     className: "add-to-your-post"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "button",
-    value: "Add an image",
+    value: "Add an image instead",
     className: "file-upload-input",
     onClick: clickInput
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "file",
     className: "file",
-    onChange: handleFile,
+    onChange: function onChange(e) {
+      return setPostPhoto(e.currentTarget.files[0]);
+    },
     ref: postProfileRef
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "post-button"
@@ -4481,17 +4481,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createPost", function() { return createPost; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updatePost", function() { return updatePost; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deletePost", function() { return deletePost; });
-// import { DirectUpload } from 'activestorage';
-// const uploadFile = (file, user) => {
-//   const upload = new DirectUpload(file, 'http://localhost:3000/rails/active_storage/direct_uploads');
-//   upload.create((error, blob) => {
-//     if (error) {
-//       console.log(error)
-//     } else {
-//       console.log('There was no error')
-//     }
-//   })
-// }
 var fetchUserPosts = function fetchUserPosts(userId) {
   return $.ajax({
     url: "/api/users/".concat(userId, "/posts")
@@ -4517,9 +4506,7 @@ var updatePost = function updatePost(post) {
   return $.ajax({
     url: "/api/posts/".concat(post.id),
     method: 'PATCH',
-    data: {
-      post: post
-    }
+    data: post
   });
 };
 var deletePost = function deletePost(postId) {
