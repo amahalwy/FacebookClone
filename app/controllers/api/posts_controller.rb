@@ -10,12 +10,9 @@ class Api::PostsController < ApplicationController
   end
 
   def create
-    debugger
     @post = Post.new(post_params)
     # @post.post_photo.attach(params[:post_photo])
-    debugger
     if @post.save
-      debugger
       render '/api/posts/show'
     else
       render json: @post.errors.full_messages, status: 422

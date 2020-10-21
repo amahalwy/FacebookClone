@@ -14,7 +14,6 @@ export default props => {
   let user = props.user;
 
   const handleSubmit = (e) => {
-    console.log(postPhoto);
     e.preventDefault();
 
 
@@ -33,9 +32,9 @@ export default props => {
       // post.append('post_photo', postPhoto);
 
       dispatch(createPost(post));
-      // dispatch(fetchUserPosts(props.currentUser.id));
-      // props.hideModal();
-      // props.history.push(`/users/${props.currentUser.id}`);
+      dispatch(fetchUserPosts(props.currentUser.id));
+      props.hideModal();
+      props.history.push(`/users/${props.currentUser.id}`);
     }
 
     if ((user && props.currentUser) && (props.currentUser.id === user.id)) { // Current user's page
@@ -78,27 +77,28 @@ export default props => {
     }
   }
   
-  // const handleFile = (e) => {
-  //   const reader = new FileReader();
-  //   const file = e.currentTarget.files[0]
-  //   reader.onloadend = () => {
-
-  //     handleFileChange(file);
-  //   }
+  const handleFile = (e) => {
+    const reader = new FileReader();
+    const file = e.currentTarget.files[0]
+    reader.onloadend = () => 
+      setTimeout(() => {
+        handleFileChange(file)
+      }, 1000);
     
-  //     // this.setState({ profilePhotoFile: file }, () => coverProfileSubmit());
+    
+      // this.setState({ profilePhotoFile: file }, () => coverProfileSubmit());
 
-  //   if (file) {
-  //     reader.readAsDataURL(file); 
-  //   } else {
-  //     // this.setState({ profilePhotoFile: null });
-  //     setPostPhoto(null);
-  //   }
-  // }
+    if (file) {
+      reader.readAsDataURL(file); 
+    } else {
+      // this.setState({ profilePhotoFile: null });
+      setPostPhoto(null);
+    }
+  }
 
-  // const handleFileChange = (file) => {
-  //   setPostPhoto(file);
-  // }
+  const handleFileChange = (file) => {
+    setPostPhoto(file);
+  }
 
   const clickInput = () => {
     postProfileRef.current.click()
@@ -149,7 +149,8 @@ export default props => {
           <input 
             type="file" 
             className="file"
-            onChange={e => setPostPhoto(e.currentTarget.files[0])}
+            // onChange={e => setPostPhoto(e.currentTarget.files[0])}
+            onChange={handleFile}
             ref={postProfileRef}
           />
         </div>

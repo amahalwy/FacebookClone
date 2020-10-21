@@ -70,7 +70,6 @@ export default props => {
       reader.readAsDataURL(file);
     } else {
       // this.setState({ coverPhotoFile: null });
-      // debugger
       setCoverPhoto(null);
     }
   }
@@ -82,7 +81,6 @@ export default props => {
   }
 
   const coverProfileSubmit = () => {
-    debugger
     const formData = new FormData();
     formData.append('user[profile_photo]', profilePhotoFile);
     dispatch(updateUserPhoto(user.id, formData));
