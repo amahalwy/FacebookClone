@@ -16,6 +16,18 @@ export default props => {
     form.focus();
   }
 
+  const renderPostImage = () => {
+    if (post.postPhoto) {
+      return (
+        <div className='post-body-img-container'>
+        <img src={post.postPhoto} alt=""/>
+      </div>
+      )
+    } else {
+      return '';
+    }
+  }
+
   if (!props.post) return '';
   return (
     <li>
@@ -40,6 +52,7 @@ export default props => {
 
           <div className='post-body'>
             <p className='post-body-text'>{post.body}</p>
+            {renderPostImage()}
           </div>
           {/* <div className='post-photo'>
 

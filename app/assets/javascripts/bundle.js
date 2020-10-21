@@ -1995,6 +1995,19 @@ __webpack_require__.r(__webpack_exports__);
     form.focus();
   };
 
+  var renderPostImage = function renderPostImage() {
+    if (post.postPhoto) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "post-body-img-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: post.postPhoto,
+        alt: ""
+      }));
+    } else {
+      return '';
+    }
+  };
+
   if (!props.post) return '';
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "post-card"
@@ -2021,7 +2034,7 @@ __webpack_require__.r(__webpack_exports__);
     className: "post-body"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "post-body-text"
-  }, post.body)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, post.body), renderPostImage()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "post-number"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "post-like-count"
@@ -2389,7 +2402,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       postBody = _useState2[0],
       setBody = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
       _useState4 = _slicedToArray(_useState3, 2),
       postPhoto = _useState4[0],
       setPostPhoto = _useState4[1];
@@ -2401,86 +2414,63 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   var user = props.user;
 
   var handleSubmit = function handleSubmit(e) {
-    console.log(postPhoto);
     e.preventDefault();
 
     if (user === undefined) {
       // Navbar      
-      var post = {
-        body: postBody,
-        owner_id: props.currentUser.id,
-        user_id: props.currentUser.id,
-        file: postPhoto
-      };
-      debugger; // const post = new FormData();
-      // post.append('body', postBody);
-      // post.append('owner_id', props.currentUser.id);
-      // post.append('user_id', props.currentUser.id);
-      // post.append('post_photo', postPhoto);
-
+      var post = new FormData();
+      post.append('post[body]', postBody);
+      post.append('post[owner_id]', props.currentUser.id);
+      post.append('post[user_id]', props.currentUser.id);
+      post.append('post[post_photo]', postPhoto);
       dispatch(Object(_actions_post_actions__WEBPACK_IMPORTED_MODULE_2__["createPost"])(post));
       dispatch(Object(_actions_post_actions__WEBPACK_IMPORTED_MODULE_2__["fetchUserPosts"])(props.currentUser.id));
+      setBody('');
       props.hideModal();
       props.history.push("/users/".concat(props.currentUser.id));
     }
 
     if (user && props.currentUser && props.currentUser.id === user.id) {
       // Current user's page
-      var _post = {
-        body: postBody,
-        owner_id: props.currentUser.id,
-        user_id: props.currentUser.id,
-        file: postPhoto
-      }; // const post = new FormData();
-      // post.append('body', postBody);
-      // post.append('owner_id', props.currentUser.id);
-      // post.append('user_id', props.currentUser.id);
-      // post.append('post_photo', postPhoto);
+      var _post = new FormData();
+
+      _post.append('post[body]', postBody);
+
+      _post.append('post[owner_id]', props.currentUser.id);
+
+      _post.append('post[user_id]', props.currentUser.id);
+
+      _post.append('post[post_photo]', postPhoto);
 
       dispatch(Object(_actions_post_actions__WEBPACK_IMPORTED_MODULE_2__["createPost"])(_post));
       dispatch(Object(_actions_post_actions__WEBPACK_IMPORTED_MODULE_2__["fetchUserPosts"])(props.currentUser.id));
+      setBody('');
       props.hideModal();
       props.history.push("/users/".concat(props.currentUser.id));
     } else if (user && props.currentUser && props.currentUser.id !== user.id) {
       // Not current user's page
-      var _post2 = {
-        body: postBody,
-        owner_id: props.currentUser.id,
-        user_id: user.id,
-        file: postPhoto
-      }; // const post = new FormData();
-      // post.append('body', postBody);
-      // post.append('owner_id', props.currentUser.id);
-      // post.append('user_id', props.user.id);
-      // post.append('post_photo', postPhoto);
+      var _post2 = new FormData();
+
+      _post2.append('post[body]', postBody);
+
+      _post2.append('post[owner_id]', props.currentUser.id);
+
+      _post2.append('post[user_id]', props.user.id);
+
+      _post2.append('post[post_photo]', postPhoto);
 
       dispatch(Object(_actions_post_actions__WEBPACK_IMPORTED_MODULE_2__["createPost"])(_post2));
+      setBody('');
       dispatch(Object(_actions_post_actions__WEBPACK_IMPORTED_MODULE_2__["fetchUserPosts"])(props.user.id));
       props.hideModal();
     }
   };
 
-  var handleFile = function handleFile(e) {
-    var reader = new FileReader();
-    var file = e.currentTarget.files[0];
-
-    reader.onloadend = function () {
-      return setTimeout(function () {
-        handleFileChange(file);
-      }, 1000);
-    }; // this.setState({ profilePhotoFile: file }, () => coverProfileSubmit());
-
-
-    if (file) {
-      reader.readAsDataURL(file);
-    } else {
-      // this.setState({ profilePhotoFile: null });
-      setPostPhoto(null);
-    }
-  };
-
-  var handleFileChange = function handleFileChange(file) {
-    setPostPhoto(file);
+  var handleClose = function handleClose() {
+    props.hideModal();
+    setTimeout(function () {
+      setBody('');
+    }, 10);
   };
 
   var clickInput = function clickInput() {
@@ -2493,7 +2483,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "post-form-header"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, formType)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    onClick: props.hideModal
+    onClick: handleClose
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "X")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "post-dividor"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2550,9 +2540,11 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     onClick: clickInput
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "file",
-    className: "file" // onChange={e => setPostPhoto(e.currentTarget.files[0])}
+    className: "file",
+    onChange: function onChange(e) {
+      return setPostPhoto(e.currentTarget.files[0]);
+    } // onChange={handleFile}
     ,
-    onChange: handleFile,
     ref: postProfileRef
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "post-button"
@@ -4499,9 +4491,10 @@ var createPost = function createPost(post) {
   return $.ajax({
     url: '/api/posts',
     method: 'POST',
-    data: {
-      post: post
-    }
+    data: post,
+    // contentType: 'multipart/form-data',
+    contentType: false,
+    processData: false
   }) // .then(response => response.json())
   // .then(data => uploadFile(post[post_photo], data))
   ;

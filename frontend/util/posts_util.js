@@ -14,7 +14,10 @@ export const createPost = post => (
   $.ajax({
     url: '/api/posts',
     method: 'POST',
-    data: {post},
+    data: post,
+    // contentType: 'multipart/form-data',
+    contentType: false,
+    processData: false,
   })
   // .then(response => response.json())
   // .then(data => uploadFile(post[post_photo], data))

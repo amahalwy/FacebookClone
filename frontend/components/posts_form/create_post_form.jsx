@@ -4,7 +4,7 @@ import { createPost, fetchUserPosts } from '../../actions/post_actions';
 
 export default props => {
   const [postBody, setBody] = useState('');
-  const [postPhoto, setPostPhoto] = useState(null);
+  const [postPhoto, setPostPhoto] = useState('');
   const formType = 'Create Post';
   const buttonText = 'Post';
   const dispatch = useDispatch();
@@ -18,86 +18,51 @@ export default props => {
 
 
     if (user === undefined) { // Navbar      
-      let post = {
-        body: postBody,
-        owner_id: props.currentUser.id,
-        user_id: props.currentUser.id,
-        file: postPhoto
-      }
-      debugger
-      // const post = new FormData();
-      // post.append('body', postBody);
-      // post.append('owner_id', props.currentUser.id);
-      // post.append('user_id', props.currentUser.id);
-      // post.append('post_photo', postPhoto);
+      const post = new FormData();
+      post.append('post[body]', postBody);
+      post.append('post[owner_id]', props.currentUser.id);
+      post.append('post[user_id]', props.currentUser.id);
+      post.append('post[post_photo]', postPhoto);
 
       dispatch(createPost(post));
       dispatch(fetchUserPosts(props.currentUser.id));
+      setBody('');
       props.hideModal();
       props.history.push(`/users/${props.currentUser.id}`);
     }
 
     if ((user && props.currentUser) && (props.currentUser.id === user.id)) { // Current user's page
-      let post = {
-        body: postBody,
-        owner_id: props.currentUser.id,
-        user_id: props.currentUser.id,
-        file: postPhoto
-      }
-
-      // const post = new FormData();
-      // post.append('body', postBody);
-      // post.append('owner_id', props.currentUser.id);
-      // post.append('user_id', props.currentUser.id);
-      // post.append('post_photo', postPhoto);
+      const post = new FormData();
+      post.append('post[body]', postBody);
+      post.append('post[owner_id]', props.currentUser.id);
+      post.append('post[user_id]', props.currentUser.id);
+      post.append('post[post_photo]', postPhoto);
 
       dispatch(createPost(post));
       dispatch(fetchUserPosts(props.currentUser.id));
+      setBody('');
       props.hideModal();
       props.history.push(`/users/${props.currentUser.id}`);
 
-
     } else if ((user && props.currentUser) && (props.currentUser.id !== user.id)) { // Not current user's page
-      let post = {
-        body: postBody,
-        owner_id: props.currentUser.id,
-        user_id: user.id,
-        file: postPhoto
-      }
-
-      // const post = new FormData();
-      // post.append('body', postBody);
-      // post.append('owner_id', props.currentUser.id);
-      // post.append('user_id', props.user.id);
-      // post.append('post_photo', postPhoto);
+      const post = new FormData();
+      post.append('post[body]', postBody);
+      post.append('post[owner_id]', props.currentUser.id);
+      post.append('post[user_id]', props.user.id);
+      post.append('post[post_photo]', postPhoto);
 
       dispatch(createPost(post));
+      setBody('');
       dispatch(fetchUserPosts(props.user.id));
       props.hideModal();
     }
   }
-  
-  const handleFile = (e) => {
-    const reader = new FileReader();
-    const file = e.currentTarget.files[0]
-    reader.onloadend = () => 
-      setTimeout(() => {
-        handleFileChange(file)
-      }, 1000);
-    
-    
-      // this.setState({ profilePhotoFile: file }, () => coverProfileSubmit());
 
-    if (file) {
-      reader.readAsDataURL(file); 
-    } else {
-      // this.setState({ profilePhotoFile: null });
-      setPostPhoto(null);
-    }
-  }
-
-  const handleFileChange = (file) => {
-    setPostPhoto(file);
+  const handleClose = () => {
+    props.hideModal();
+    setTimeout(() => {
+      setBody('');
+    }, 10);
   }
 
   const clickInput = () => {
@@ -114,7 +79,9 @@ export default props => {
             <h1>{formType}</h1>
           </span>
           <span>
-            <button onClick={props.hideModal}><p>X</p></button>
+            <button onClick={handleClose}>
+              <p>X</p>
+            </button>
           </span>
         </div>
         <div className='post-dividor'></div>
@@ -149,8 +116,8 @@ export default props => {
           <input 
             type="file" 
             className="file"
-            // onChange={e => setPostPhoto(e.currentTarget.files[0])}
-            onChange={handleFile}
+            onChange={e => setPostPhoto(e.currentTarget.files[0])}
+            // onChange={handleFile}
             ref={postProfileRef}
           />
         </div>

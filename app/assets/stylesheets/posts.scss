@@ -71,14 +71,26 @@
 // Beg of body
 
 .post-body {
-  width: 95%;
-  margin: 0px auto;
-  padding: 20px 0;
+  width: 100%;
+  // padding: 20px 0;
 }
 
 .post-body-text {
   font-size: 24px;
-  margin: 0 10px;
+  margin: 0 15px;
+}
+
+.post-body-img-container {
+  width: 100%;
+  height: 100%;
+  margin-top: 20px;
+}
+
+.post-body-img-container img {
+  background-color: black;
+  width: 97%;
+  height: 100%;
+  padding: 0 6px;
 }
 
 // End of body
