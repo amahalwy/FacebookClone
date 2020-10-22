@@ -1,5 +1,6 @@
 class Post < ApplicationRecord
   validates :body, length: {minimum: 1}
+  validates :post_photo, presence: false
 
   has_one_attached :post_photo
 
