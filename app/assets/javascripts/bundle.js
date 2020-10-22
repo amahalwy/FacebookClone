@@ -3211,25 +3211,33 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 /* harmony default export */ __webpack_exports__["default"] = (function (props) {
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_8__["fetchUser"])(props.match.params.userId));
-    dispatch(Object(_actions_post_actions__WEBPACK_IMPORTED_MODULE_9__["fetchUserPosts"])(props.match.params.userId));
-    dispatch(Object(_actions_friendship_actions__WEBPACK_IMPORTED_MODULE_10__["fetchFriendships"])(props.match.params.userId));
-    return function () {
-      dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_8__["clearShow"])());
-      dispatch(Object(_actions_post_actions__WEBPACK_IMPORTED_MODULE_9__["clearPosts"])());
-      dispatch(Object(_actions_friendship_actions__WEBPACK_IMPORTED_MODULE_10__["clearFriendships"])());
-      dispatch(Object(_actions_friend_request_actions__WEBPACK_IMPORTED_MODULE_11__["clearFriendRequests"])());
-    };
-  }, [props.match.params.userId]);
   var user = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(function (state) {
     return state.entities.userShow;
   });
-  var friendships = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(function (state) {
-    return Object.values(state.entities.friendships);
-  });
   var currentUser = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(function (state) {
     return state.session.user;
+  });
+  var profilePhoto = user.profilePhoto;
+  var coverPhoto = user.coverPhoto;
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    if (profilePhoto === undefined) {
+      dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_8__["fetchUser"])(props.match.params.userId));
+      dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_8__["getCurrentUser"])(currentUser.id));
+      dispatch(Object(_actions_post_actions__WEBPACK_IMPORTED_MODULE_9__["fetchUserPosts"])(props.match.params.userId));
+      dispatch(Object(_actions_friendship_actions__WEBPACK_IMPORTED_MODULE_10__["fetchFriendships"])(props.match.params.userId));
+    }
+
+    return function () {
+      if (profilePhoto !== undefined) {
+        dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_8__["clearShow"])());
+        dispatch(Object(_actions_post_actions__WEBPACK_IMPORTED_MODULE_9__["clearPosts"])());
+        dispatch(Object(_actions_friendship_actions__WEBPACK_IMPORTED_MODULE_10__["clearFriendships"])());
+        dispatch(Object(_actions_friend_request_actions__WEBPACK_IMPORTED_MODULE_11__["clearFriendRequests"])());
+      }
+    };
+  }, [props.match.params.userId, profilePhoto]);
+  var friendships = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(function (state) {
+    return Object.values(state.entities.friendships);
   });
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
@@ -3237,8 +3245,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       openModal = _useState2[0],
       setModal = _useState2[1];
 
-  var profilePhoto = null;
-  var coverPhoto = null;
   var dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useDispatch"])();
   var photoProfileUpload = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
   var photoCoverUpload = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
@@ -3246,13 +3252,17 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   var handleProfile = function handleProfile() {
     var formData = new FormData();
     formData.append('user[profile_photo]', profilePhoto);
-    dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_8__["updateUserPhoto"])(user.id, formData));
+    dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_8__["updateUserPhoto"])(user.id, formData)); // setTimeout(() => {
+    //   dispatch(fetchUser(props.match.params.userId));
+    // }, 10);
   };
 
   var handleCover = function handleCover() {
     var formData = new FormData();
     formData.append('user[cover_photo]', coverPhoto);
-    dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_8__["updateUserPhoto"])(user.id, formData));
+    dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_8__["updateUserPhoto"])(user.id, formData)); // setTimeout(() => {
+    //   dispatch(fetchUser(props.match.params.userId));
+    // }, 10);
   };
 
   var coverPhotoUpload = function coverPhotoUpload() {

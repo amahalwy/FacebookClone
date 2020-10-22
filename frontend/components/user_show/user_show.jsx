@@ -6,32 +6,37 @@ import ProfileButton from './profile_button';
 import PostIndex from '../posts/posts_index';
 import CreatePostForm from '../posts_form/create_post_form';
 import FriendshipItem from '../friendships/friendship_profle_card';
-import { fetchUser, clearShow, updateUserPhoto } from '../../actions/user_actions';
+import { fetchUser, clearShow, updateUserPhoto, getCurrentUser } from '../../actions/user_actions';
 import {clearPosts, fetchUserPosts} from '../../actions/post_actions';
 import {clearFriendships, fetchFriendships} from '../../actions/friendship_actions';
 import { clearFriendRequests } from '../../actions/friend_request_actions';
 
 export default props => {
 
-  useEffect(() => {
-    dispatch(fetchUser(props.match.params.userId));
-    dispatch(fetchUserPosts(props.match.params.userId));
-    dispatch(fetchFriendships(props.match.params.userId));
-    return () => {
-      dispatch(clearShow());
-      dispatch(clearPosts());
-      dispatch(clearFriendships());
-      dispatch(clearFriendRequests());
-    }
-  }, [props.match.params.userId])
-
   const user = useSelector(state => state.entities.userShow);
-  const friendships = useSelector(state => Object.values(state.entities.friendships));
-
   const currentUser = useSelector(state => state.session.user)
+  let profilePhoto = user.profilePhoto;
+  let coverPhoto = user.coverPhoto;
+
+  useEffect(() => {
+    if (profilePhoto === undefined) {
+      dispatch(fetchUser(props.match.params.userId));
+      dispatch(getCurrentUser(currentUser.id))
+      dispatch(fetchUserPosts(props.match.params.userId));
+      dispatch(fetchFriendships(props.match.params.userId));
+    }
+    return () => {
+      if (profilePhoto !== undefined) {
+        dispatch(clearShow());
+        dispatch(clearPosts());
+        dispatch(clearFriendships());
+        dispatch(clearFriendRequests());
+      }
+    }
+  }, [props.match.params.userId, profilePhoto])
+
+  const friendships = useSelector(state => Object.values(state.entities.friendships));
   const [openModal, setModal] = useState(false);
-  let profilePhoto = null;
-  let coverPhoto = null;
   
   const dispatch = useDispatch();
   
@@ -42,12 +47,18 @@ export default props => {
     const formData = new FormData();
     formData.append('user[profile_photo]', profilePhoto);
     dispatch(updateUserPhoto(user.id, formData));
+    // setTimeout(() => {
+    //   dispatch(fetchUser(props.match.params.userId));
+    // }, 10);
   }
   
   const handleCover = () =>{
     const formData = new FormData();
     formData.append('user[cover_photo]', coverPhoto);
     dispatch(updateUserPhoto(user.id, formData));
+    // setTimeout(() => {
+    //   dispatch(fetchUser(props.match.params.userId));
+    // }, 10);
   }
 
   const coverPhotoUpload = () => {
