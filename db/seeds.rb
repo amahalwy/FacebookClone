@@ -38,11 +38,11 @@ FriendRequest.create(requestor_id: u4.id, receiver_id: u6.id)
 # Posts
 # Post.new(user_id, body)
 
-p1 = Post.create(user_id: u1.id, body: "This is your first post. Congratulations, you made it this far!!")
-p2 = Post.create(user_id: u2.id, body: "This is your first post. What a time to be alive")
-p3 = Post.create(user_id: u5.id, body: "I got my license out of a cereal box. Don't tell Mrs. Puff")
-p4 = Post.create(user_id: u5.id, body: "One patty coming right up!")
-p5 = Post.create(user_id: u6.id, body: "The force is weak on this site. Can I suffocate the creator?")
+p1 = Post.create(user_id: u1.id, owner_id: u1.id, body: "This is your first post. Congratulations, you made it this far!!")
+p2 = Post.create(user_id: u2.id, owner_id: u2.id, body: "This is your first post. What a time to be alive")
+p3 = Post.create(user_id: u5.id, owner_id: u5.id, body: "I got my license out of a cereal box. Don't tell Mrs. Puff")
+p4 = Post.create(user_id: u5.id, owner_id: u5.id, body: "One patty coming right up!")
+p5 = Post.create(user_id: u1.id, owner_id: u6.id, body: "The force is weak on this site. Can I suffocate the creator?")
 
 # Comments
 # Comment.new(user_id, body, post_id)
