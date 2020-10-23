@@ -6,7 +6,7 @@
     json.authorLastName post.author.last_name
     json.body post.body
     json.authorProfilePhoto post.author.profile_photo.attached? ? url_for(post.author.profile_photo) : "https://facebook-clone-pro.s3.us-east-2.amazonaws.com/default_profile"
-    json.postPhoto post.post_photo.attached? ? url_for(post.post_photo) : ""
+    json.postPhoto post.post_photo
 
     json.comments post.comments do |comment|
       json.id comment.id

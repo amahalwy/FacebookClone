@@ -1,0 +1,5 @@
+module.exports = {
+  S3_BUCKET: process.env.REACT_APP_S3_TOKEN,
+  AWS_ACCESS_KEY_ID: process.env.REACT_APP_AWS_ACCESS_ID_TOKEN,
+  AWS_SECRET_ACCESS_KEY: process.env.REACT_APP_AWS_ACCESS_KEY_TOKEN
+}

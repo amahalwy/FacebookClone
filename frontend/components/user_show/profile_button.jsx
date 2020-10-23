@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {postFriendRequest, deleteFriendRequest} from '../../actions/friend_request_actions';
-import { deleteFriendship } from '../../actions/friendship_actions';
+import { fetchFriendships, deleteFriendship } from '../../actions/friendship_actions';
 import {fetchUser, getCurrentUser} from '../../actions/user_actions';
 import { postFriendship } from '../../actions/friendship_actions';
 
@@ -9,6 +9,7 @@ export default props => {
   const currentUser = useSelector(state => state.session.user);
   const user = useSelector(state => state.entities.userShow);
   const request = useSelector(state => Object.values(state.entities.friendRequests));
+  const userFriendships = useSelector(state => Object.values(state.entities.friendships));
 
   const dispatch = useDispatch();
 
@@ -19,6 +20,11 @@ export default props => {
     }, 10);
   }
 
+  useEffect(()=>{
+    dispatch(fetchFriendships(user.id));
+  }, [])
+
+
   if (user.id === currentUser.id) {
     return (
       <button className='edit-profile-button'>
@@ -26,16 +32,16 @@ export default props => {
         Your Profile
       </button>
     )
-  } else if ((user.friendships) && (user.friendships.some(user => user.friend_id === currentUser.id)) ) {
-    const friendship = user.friendships.filter(ship => {
-      if (ship.friend_id === currentUser.id) {
+  } else if ((userFriendships.some(user => user.friendId === currentUser.id)) ) { // User's friendship; NOT currentUser
+    const friendship = userFriendships.filter(ship => {
+      if (ship.friendId === currentUser.id) {
         return ship;
       }
     })
     return (
       <button className='edit-profile-button friend-button' 
-        onClick={
-          () => {
+      onClick={
+        () => {
             dispatch(deleteFriendship(friendship[0].id));
             setTimeout(() => {
               dispatch(fetchUser(user.id));

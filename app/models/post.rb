@@ -1,8 +1,8 @@
 class Post < ApplicationRecord
-  validates :body, length: {minimum: 1}
-  validates :post_photo, presence: false
+  # validates :body, length: {minimum: 1}
+  # validates :post_photo, presence: false
 
-  has_one_attached :post_photo
+  # has_one_attached :post_photo
 
   has_many :likes,
     foreign_key: :post_id,

@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import { createPost, fetchUserPosts } from '../../actions/post_actions';
+const keys = require('../../config/keys');
+const AWS = require("aws-sdk");
 
 export default props => {
-  const [postBody, setBody] = useState('');
-  const [postPhoto, setPostPhoto] = useState('');
+  let postBody = '';
+  let postPhoto = '';
   const formType = 'Create Post';
   const buttonText = 'Post';
   const dispatch = useDispatch();
@@ -13,11 +15,41 @@ export default props => {
 
   let user = props.user;
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const s3 = new AWS.S3({
+    accessKeyId: keys.AWS_ACCESS_KEY_ID,
+    secretAccessKey: keys.AWS_SECRET_ACCESS_KEY,
+    region: "us-east-2", 
+  });
 
+  const uploadImage = (file) => {
+    const params = {
+      Bucket: keys.S3_BUCKET,
+      Key: file.name,
+      Body: file,
+      ContentType: file.mimetype,
+      ACL: "public-read",
+    };
+    const uploadPhoto = s3.upload(params).promise();
+    return uploadPhoto;
+  };
 
-    if (user === undefined) { // Navbar      
+  const handleUpload = () => {
+    if (postPhoto !== '') {
+      uploadImage(postPhoto)
+      .then(data => {
+        postPhoto = data.Location
+      })
+      .then(() => handleSubmit());
+      console.log("With pic!");
+    } else {
+      handleSubmit();
+      console.log("No picccc");
+    }
+  }
+
+  const handleSubmit = () => {
+      
+    if (user === undefined) { // Navbar    
       const post = new FormData();
       post.append('post[body]', postBody);
       post.append('post[owner_id]', props.currentUser.id);
@@ -26,7 +58,7 @@ export default props => {
 
       dispatch(createPost(post));
       dispatch(fetchUserPosts(props.currentUser.id));
-      setBody('');
+      postBody = '';
       props.hideModal();
       props.history.push(`/users/${props.currentUser.id}`);
     }
@@ -40,7 +72,7 @@ export default props => {
 
       dispatch(createPost(post));
       dispatch(fetchUserPosts(props.currentUser.id));
-      setBody('');
+      postBody = '';
       props.hideModal();
       props.history.push(`/users/${props.currentUser.id}`);
 
@@ -52,7 +84,7 @@ export default props => {
       post.append('post[post_photo]', postPhoto);
 
       dispatch(createPost(post));
-      setBody('');
+      postBody = '';
       dispatch(fetchUserPosts(props.user.id));
       props.hideModal();
     }
@@ -60,13 +92,17 @@ export default props => {
 
   const handleClose = () => {
     props.hideModal();
-    setTimeout(() => {
-      setBody('');
-    }, 10);
+    console.log(postBody)
+    postBody = '';
+    debugger
   }
 
   const clickInput = () => {
     postProfileRef.current.click()
+  }
+
+  const handleBody = (e) => {
+    postBody = e.currentTarget.value
   }
 
   if (!props.currentUser) return '';
@@ -101,28 +137,23 @@ export default props => {
       </div>
       <form className='post-form'>
 
-          <textarea 
+        <textarea 
           type="text"
-          onChange={e => setBody(e.currentTarget.value)}
+          value={postBody}
+          onChange={handleBody}
           placeholder= "What's on your mind?"
-          ></textarea>
+        ></textarea>
         <div className='add-to-your-post'>
-          {/* <input 
-            type="file"
-            onChange={e => setPostPhoto(e.currentTarget.files[0])}
-            buttonText="Choose Image"
-          /> */}
           <input type="button" value="Add an image instead" className="file-upload-input" onClick={clickInput} />
           <input 
             type="file" 
             className="file"
-            onChange={e => setPostPhoto(e.currentTarget.files[0])}
-            // onChange={handleFile}
+            onChange={e => postPhoto = e.currentTarget.files[0]}
             ref={postProfileRef}
           />
         </div>
         <div className='post-button'>
-          <button onClick={handleSubmit}>
+          <button onClick={handleUpload}>
             <span>
               {buttonText}
             </span>

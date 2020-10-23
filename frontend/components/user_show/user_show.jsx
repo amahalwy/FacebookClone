@@ -78,13 +78,35 @@ export default props => {
   };
 
   const renderOnMind = () => {
-    if (currentUser.id !== user.id) {
+    if (currentUser.id !== user.id && (friendships.some(friendship => friendship.friendId !== currentUser.id) || friendships.length === 0) ) {
+      return ''
+    } else if (currentUser.id !== user.id && friendships.some(friendship => friendship.friendId === currentUser.id)) {
       return (
-        <div className='post-actual-input' onClick={showModal}>Write something to {user.firstName}</div>
+        <div className='post-on-your-mind-container'>
+          <div className='post-on-your-mind'>
+            <div className='post-input-click'>
+              <div className='post-input-photo'>
+                <img src={currentUser.profilePhoto} alt=""/>
+              </div>
+              <div className='post-actual-input' onClick={showModal}>Write something to {user.firstName}</div>
+
+            </div>
+          </div>     
+        </div>
       )
     } else {
       return (
-        <div className='post-actual-input' onClick={showModal}>What's on your mind, {currentUser.firstName}?</div>
+        <div className='post-on-your-mind-container'>
+          <div className='post-on-your-mind'>
+            <div className='post-input-click'>
+              <div className='post-input-photo'>
+                <img src={currentUser.profilePhoto} alt=""/>
+              </div>
+              <div className='post-actual-input' onClick={showModal}>What's on your mind, {currentUser.firstName}?</div>
+
+            </div>
+          </div>     
+        </div>
       )
     }
 
@@ -260,26 +282,12 @@ export default props => {
           </div>
 
           <div className='profile-main-right-section'>
-            <div className='post-on-your-mind-container'>
-              <div className='post-on-your-mind'>
-                <div className='post-input-click'>
-                  <div className='post-input-photo'>
-                    <img src={currentUser.profilePhoto} alt=""/>
-                  </div>
-
-                  {renderOnMind()}
-                  {/* <div className='post-actual-input' onClick={showModal}>What's on your mind, {currentUser.firstName}?</div> */}
-
-                </div>
-              </div>              
-            </div>
-
-
+            {renderOnMind()}
             <div className='posts-index-div'>
-                <PostIndex
-                  history={props.history}
-                  user={user}
-                />
+              <PostIndex
+                history={props.history}
+                user={user}
+              />
             </div>
           
             <DynamicModal show={openModal} handleClose={hideModal}>
