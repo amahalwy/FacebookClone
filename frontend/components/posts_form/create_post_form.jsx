@@ -34,6 +34,7 @@ export default props => {
   };
 
   const handleUpload = () => {
+    console.log(keys);
     if (postPhoto !== '') {
       uploadImage(postPhoto)
       .then(data => {
