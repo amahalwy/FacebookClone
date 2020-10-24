@@ -33,7 +33,7 @@ export default props => {
     return uploadPhoto;
   };
 
-  console.log(process.env)
+  console.log(process.env.REACT_APP_S3_BUCKET_TOKEN)
   console.log(keys);
 
   const handleUpload = () => {
