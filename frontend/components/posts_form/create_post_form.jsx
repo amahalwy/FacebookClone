@@ -33,9 +33,10 @@ export default props => {
     return uploadPhoto;
   };
 
+  console.log(process.env)
+  console.log(keys);
+
   const handleUpload = () => {
-    console.log(process.env.NODE_ENV)
-    console.log(keys);
     if (postPhoto !== '') {
       uploadImage(postPhoto)
       .then(data => {
