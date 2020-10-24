@@ -5,7 +5,7 @@ const keys = require('../../config/keys');
 const AWS = require("aws-sdk");
 
 export default props => {
-  let postBody = '';
+  const [postBody, setBody] = useState('');
   let postPhoto = '';
   const formType = 'Create Post';
   const buttonText = 'Post';
@@ -41,10 +41,8 @@ export default props => {
         postPhoto = data.Location
       })
       .then(() => handleSubmit());
-      console.log("With pic!");
     } else {
       handleSubmit();
-      console.log("No picccc");
     }
   }
 
@@ -59,7 +57,7 @@ export default props => {
 
       dispatch(createPost(post));
       dispatch(fetchUserPosts(props.currentUser.id));
-      postBody = '';
+      setBody('');
       props.hideModal();
       props.history.push(`/users/${props.currentUser.id}`);
     }
@@ -73,7 +71,7 @@ export default props => {
 
       dispatch(createPost(post));
       dispatch(fetchUserPosts(props.currentUser.id));
-      postBody = '';
+      setBody('');
       props.hideModal();
       props.history.push(`/users/${props.currentUser.id}`);
 
@@ -85,7 +83,7 @@ export default props => {
       post.append('post[post_photo]', postPhoto);
 
       dispatch(createPost(post));
-      postBody = '';
+      setBody('');
       dispatch(fetchUserPosts(props.user.id));
       props.hideModal();
     }
@@ -93,17 +91,11 @@ export default props => {
 
   const handleClose = () => {
     props.hideModal();
-    console.log(postBody)
-    postBody = '';
-    debugger
+    setBody('');
   }
 
   const clickInput = () => {
     postProfileRef.current.click()
-  }
-
-  const handleBody = (e) => {
-    postBody = e.currentTarget.value
   }
 
   if (!props.currentUser) return '';
@@ -141,7 +133,7 @@ export default props => {
         <textarea 
           type="text"
           value={postBody}
-          onChange={handleBody}
+          onChange={e => setBody(e.currentTarget.value)}
           placeholder= "What's on your mind?"
         ></textarea>
         <div className='add-to-your-post'>
