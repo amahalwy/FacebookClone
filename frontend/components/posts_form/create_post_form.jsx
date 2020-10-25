@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import { createPost, fetchUserPosts } from '../../actions/post_actions';
-const keys = require('../../config/keys');
+const keys = require('../../../keys');
 const AWS = require("aws-sdk");
 
 export default props => {
@@ -32,9 +32,6 @@ export default props => {
     const uploadPhoto = s3.upload(params).promise();
     return uploadPhoto;
   };
-
-  console.log(process.env.REACT_APP_S3_BUCKET_TOKEN)
-  console.log(keys);
 
   const handleUpload = () => {
     if (postPhoto !== '') {

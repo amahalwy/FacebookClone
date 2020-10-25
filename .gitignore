@@ -27,3 +27,5 @@
 /config/master.key
 /config/local_env.yml
 /frontend/config/keys_dev.js
+keys_dev.js
+.env
