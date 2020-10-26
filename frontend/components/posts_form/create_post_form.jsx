@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import { createPost, fetchUserPosts } from '../../actions/post_actions';
-const keys = require('../../config/keys');
-const AWS = require("aws-sdk");
+import keys from '../../config/keys';
+import AWS from "aws-sdk";
 
 export default props => {
   const [postBody, setBody] = useState('');
@@ -16,17 +16,14 @@ export default props => {
   let user = props.user;
 
   const s3 = new AWS.S3({
-    accessKeyId: keys.AWS_ACCESS_KEY_ID,
-    secretAccessKey: keys.AWS_SECRET_ACCESS_KEY,
+    accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY,
     region: "us-east-2", 
   });
 
-  console.log(keys);
-  console.log(process.env.REACT_APP_S3_BUCKET_TOKEN)
-
   const uploadImage = (file) => {
     const params = {
-      Bucket: keys.S3_BUCKET,
+      Bucket: process.env.REACT_APP_S3_BUCKET,
       Key: file.name,
       Body: file,
       ContentType: file.mimetype,

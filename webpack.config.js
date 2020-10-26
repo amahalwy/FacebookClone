@@ -15,9 +15,9 @@ module.exports = {
       BROWSER_SUPPORTS_HTML5: true,
       TWO: '1+1',
       'typeof window': JSON.stringify('object'),
-      'process.env.REACT_APP_S3_BUCKET_TOKEN': JSON.stringify(process.env.REACT_APP_S3_BUCKET_TOKEN),
-      'process.env.REACT_APP_AWS_ACCESS_ID_TOKEN': JSON.stringify(process.env.REACT_APP_AWS_ACCESS_ID_TOKEN),
-      'process.env.REACT_APP_AWS_ACCESS_KEY_TOKEN': JSON.stringify(process.env.REACT_APP_AWS_ACCESS_KEY_TOKEN)
+      'process.env.REACT_APP_S3_BUCKET': JSON.stringify(process.env.REACT_APP_S3_BUCKET),
+      'process.env.REACT_APP_AWS_ACCESS_KEY_ID': JSON.stringify(process.env.REACT_APP_AWS_ACCESS_KEY_ID),
+      'process.env.REACT_APP_AWS_SECRET_ACCESS_KEY': JSON.stringify(process.env.REACT_APP_AWS_SECRET_ACCESS_KEY)
     }),
   ],
   module: {
