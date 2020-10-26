@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import { createPost, fetchUserPosts } from '../../actions/post_actions';
-const keys = require('../../../keys');
+const keys = require('../../config/keys');
 const AWS = require("aws-sdk");
 
 export default props => {
@@ -20,6 +20,9 @@ export default props => {
     secretAccessKey: keys.AWS_SECRET_ACCESS_KEY,
     region: "us-east-2", 
   });
+
+  console.log(keys);
+  console.log(process.env.REACT_APP_S3_BUCKET_TOKEN)
 
   const uploadImage = (file) => {
     const params = {
