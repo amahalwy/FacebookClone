@@ -77,10 +77,11 @@ export default props => {
     setModal(false);
   };
 
+  
   const renderOnMind = () => {
-    if (currentUser.id !== user.id && (friendships.some(friendship => friendship.friendId !== currentUser.id) || friendships.length === 0) ) {
+    if (currentUser.id !== user.id && (friendships.every(friendship => friendship.friendId !== currentUser.id) || friendships.length === 0) ) {
       return ''
-    } else if (currentUser.id !== user.id && friendships.some(friendship => friendship.friendId === currentUser.id)) {
+    } else if (currentUser.id !== user.id && friendships.every(friendship => friendship.friendId === currentUser.id)) {
       return (
         <div className='post-on-your-mind-container'>
           <div className='post-on-your-mind'>

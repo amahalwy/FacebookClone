@@ -8,6 +8,7 @@ import LikeButton from '../likes/like_button';
 
 export default props => {
   const currentUser = useSelector(state => state.session.user);
+  const user = useSelector(state => state.entities.userShow);
   const post = props.post;
   
   const clickForm = (e) => {
@@ -29,6 +30,44 @@ export default props => {
     }
   }
 
+  // debugger
+  const renderFriendHeader = () => {
+
+    if (Object.values(user).length !== 0) { // If we on SHOW page
+      if (post.authorId !== post.userId) { // Not the user's post
+        return (
+          <div>
+            <Link to={`/users/${post.authorId}`}>{post.authorFirstName} {post.authorLastName}</Link>
+            <p><strong>&gt;</strong></p>
+            <Link to={`/users/${user.id}`}>{user.firstName} {user.lastName}</Link>
+          </div>
+        )
+      } else { // User's post
+        return (
+          <div>
+            <Link to={`/users/${post.authorId}`}>{post.authorFirstName} {post.authorLastName}</Link>
+          </div>
+        )
+      }
+    } else { // The FEED post index
+      if (post.authorId !== post.userId) { // Not the current user's post
+        return (
+          <div>
+            <Link to={`/users/${post.authorId}`}>{post.authorFirstName} {post.authorLastName}</Link>
+            <p><strong>&gt;</strong></p>
+            <Link to={`/users/${currentUser.id}`}>{currentUser.firstName} {currentUser.lastName}</Link>
+          </div>
+        )
+      } else { // The current user's post
+        return (
+          <div>
+            <Link to={`/users/${post.authorId}`}>{post.authorFirstName} {post.authorLastName}</Link>
+          </div>
+        )
+      }
+    }
+  }
+
   if (!props.post) return '';
   return (
     <li>
@@ -41,7 +80,9 @@ export default props => {
               </div>
               <div className='post-header-info'>
                 <span>
-                  <Link to={`/users/${post.authorId}`}>{post.authorFirstName} {post.authorLastName}</Link>
+                  <div>
+                    {renderFriendHeader()}
+                  </div>
                   <p className='post-header-date'>Date posted</p>
                 </span>
                   <PostDropdownContainer 
