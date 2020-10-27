@@ -36,7 +36,7 @@ export default props => {
     if (Object.values(user).length !== 0) { // If we on SHOW page
       if (post.authorId !== post.userId) { // Not the user's post
         return (
-          <div>
+          <div className='post-friend-header'>
             <Link to={`/users/${post.authorId}`}>{post.authorFirstName} {post.authorLastName}</Link>
             <p><strong>&gt;</strong></p>
             <Link to={`/users/${user.id}`}>{user.firstName} {user.lastName}</Link>
@@ -44,7 +44,7 @@ export default props => {
         )
       } else { // User's post
         return (
-          <div>
+          <div className='post-friend-header'>
             <Link to={`/users/${post.authorId}`}>{post.authorFirstName} {post.authorLastName}</Link>
           </div>
         )
@@ -52,7 +52,7 @@ export default props => {
     } else { // The FEED post index
       if (post.authorId !== post.userId) { // Not the current user's post
         return (
-          <div>
+          <div className='post-friend-header'>
             <Link to={`/users/${post.authorId}`}>{post.authorFirstName} {post.authorLastName}</Link>
             <p><strong>&gt;</strong></p>
             <Link to={`/users/${currentUser.id}`}>{currentUser.firstName} {currentUser.lastName}</Link>
@@ -60,7 +60,7 @@ export default props => {
         )
       } else { // The current user's post
         return (
-          <div>
+          <div className='post-friend-header'>
             <Link to={`/users/${post.authorId}`}>{post.authorFirstName} {post.authorLastName}</Link>
           </div>
         )
@@ -68,6 +68,9 @@ export default props => {
     }
   }
 
+  const postDate = new Date(post.createdAt).toUTCString().split(' ').splice(0, 4).join(' ')
+
+  // debugger
   if (!props.post) return '';
   return (
     <li>
@@ -79,12 +82,12 @@ export default props => {
                 <img src={post.authorProfilePhoto} alt=""/>
               </div>
               <div className='post-header-info'>
-                <span>
-                  <div>
+                <div>
                     {renderFriendHeader()}
+                  <div>
+                    <p className='post-header-date'>{postDate}</p>
                   </div>
-                  <p className='post-header-date'>Date posted</p>
-                </span>
+                </div>
                   <PostDropdownContainer 
                     post={post}
                   />

@@ -47,18 +47,12 @@ export default props => {
     const formData = new FormData();
     formData.append('user[profile_photo]', profilePhoto);
     dispatch(updateUserPhoto(user.id, formData));
-    // setTimeout(() => {
-    //   dispatch(fetchUser(props.match.params.userId));
-    // }, 10);
   }
   
   const handleCover = () =>{
     const formData = new FormData();
     formData.append('user[cover_photo]', coverPhoto);
     dispatch(updateUserPhoto(user.id, formData));
-    // setTimeout(() => {
-    //   dispatch(fetchUser(props.match.params.userId));
-    // }, 10);
   }
 
   const coverPhotoUpload = () => {

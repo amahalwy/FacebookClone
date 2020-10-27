@@ -8,6 +8,7 @@
     json.body post.body
     json.authorProfilePhoto post.author.profile_photo.attached? ? url_for(post.author.profile_photo) : "https://facebook-clone-pro.s3.us-east-2.amazonaws.com/default_profile"
     json.postPhoto post.post_photo
+    json.createdAt post.created_at
 
     json.comments post.comments do |comment|
       json.id comment.id

@@ -20,7 +20,7 @@ export default props => {
   return (
     <li className='request-card'>
       <img src={props.request.profilePhoto} alt="" className='request-card-image'/>
-      <Link to={`/users/${props.request.requestorId}`} className='user-profile-link'>
+      <Link to={`/users/${props.request.requestorId}`} className='user-request-link'>
         {props.request.firstName} {props.request.lastName}
       </Link>
       <button onClick={handleAccept} className='request-button button-accept'>Accept</button>

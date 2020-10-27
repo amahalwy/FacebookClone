@@ -48,11 +48,22 @@
   height: 30px;
 }
 
-.post-form-user-image img {
+.post-form-user-image {
   width: 40px;
   height: 40px;
-  margin: 0 10px;
+  margin: 0 15px;
+}
+
+.post-form-user-image img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
   border-radius: 20px;
+}
+
+.post-form-user-name {
+  margin-top: 5px;
+  margin-left: -5px
 }
 
 .friends-p {
@@ -91,35 +102,36 @@
 }
 // End of below header
 .post-form textarea {
-  margin-top: 5px;
-  margin-left: 10px;
+  margin: 10px 15px;
   outline: none;
   width: 93%;
-  min-height: 130px;
+  min-height: 180px;
   overflow: hidden;
   resize: none;
-  // border: none;
+  font-size: 20px;
+  border: none;
+  padding-left: 5px;
 }
 
-.post-form-text textarea::placeholder {
-  color: rgb(144, 148, 156);
-  font-size: 16px;
+.post-form textarea::placeholder {
+  color: rgb(165, 165, 165);
+  font-size: 20px;
+  // padding-left: 5px;
 }
 // // End of post text
 
 .add-to-your-post {
   width: 92%;
   height: 30px;
-  display: flex;
-  // border: 1px solid rgb(206, 208, 210);
   border-radius: 10px;
   margin: 3px auto;
+  display: flex;
 }
 
-.add-to-your-post > div {
-  width: 100%;
-  align-self: center;
-}
+// .add-to-your-post > div {
+//   width: 100%;
+//   align-self: center;
+// }
 
 .post-add-to-post {
   margin-left: 30px;
@@ -186,17 +198,27 @@
   outline: none;
 }
 
-// .form-close-button {
-//   width: 20px;
-//   height: 20px;
-//   padding: 4px;
-//   border: 1px solid black;
-//   border-radius: 20px;
-//   justify-self: center;
-//   align-self: center;
-//   margin: 0 auto;
-// }
+.post-dynamic-image {
+  width: 100%;
+  height: 100%;
+}
 
-// .form-close-button:hover {
+.post-image-show {
+  height: 40px;
+  width: 30px;
+  border: 1px solid black;
+}
 
-// }
+.post-image-show img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.hidden {
+  display: none;
+}
+
+.show {
+  display: block;
+}

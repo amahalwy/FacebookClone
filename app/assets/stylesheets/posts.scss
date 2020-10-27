@@ -28,6 +28,7 @@
   width: 34px;
   height: 34px;
   border-radius: 20px;
+  object-fit: cover;
 }
 
 .post-header-info {
@@ -47,7 +48,7 @@
 }
 
 .post-header-date {
-  font-size: 12px;
+  font-size: 11px;
 }
 // End of header
 
@@ -174,7 +175,6 @@
 }
 // End of buttons
 
-
 .arrow-icon {
   background-image: url(/rsrc.php/v3/yc/r/On8ypUUHlxY.png);
   background-size: auto;
@@ -182,4 +182,25 @@
   display: inline-block;
   height: 16px;
   width: 16px;
+}
+
+.post-friend-header {
+  display: flex;
+  margin-bottom: 2px;
+}
+
+.post-friend-header a {
+  font-size: 18px;
+  color: black;
+}
+
+.post-friend-header p {
+  font-size: 12px;
+  font-weight: bolder;
+  margin: 4px 4px;
+  color: rgb(134, 133, 133);
+}
+
+.post-friend-header a:hover {
+  text-decoration: underline;
 }

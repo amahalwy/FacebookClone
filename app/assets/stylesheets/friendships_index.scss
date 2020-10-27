@@ -42,15 +42,15 @@
   align-items: center;
 }
 
-.user-profile-link {
+.user-friend-link,
+.user-request-link {
   color: black;
-  height: 100%;
   width: 100%;
-  margin-top: 6px;
   margin-left: 4px;
 }
 
 .friendship-card-image {
+  object-fit: cover;
   width: 26px;
   height: 26px;
   border-radius: 14px;
