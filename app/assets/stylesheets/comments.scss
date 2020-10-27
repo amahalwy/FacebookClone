@@ -23,8 +23,7 @@
 .comment-body {
   background-color: rgb(225, 227, 229);
   border-radius: 8px;
-  // width: 100%;
-  margin: 4px;
+  margin: 4px 6px;
   padding: 7px;
   align-self: center;
 }
@@ -61,7 +60,7 @@
 
 .post-comment-text {
   width: 98%;
-  height: 28px;
+  height: 14px;
   border: none;
   border-radius: 50px;
   background-color: rgb(225, 227, 229);
@@ -69,9 +68,10 @@
   overflow: auto;
   outline: none;
   resize: none;
-  padding-left: 14px;
-  padding-top: 12px;
-  font-size: 14px;
+  // padding-left: 10px;
+  // padding-top: 10px;
+  padding: 10px;
+  font-size: 12px;
   margin-left: 4px;
 }
 
@@ -83,6 +83,7 @@
 .comment-container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .post-comment-avatar {
