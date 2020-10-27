@@ -2,9 +2,7 @@ import React from 'react';
 import {useDispatch} from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
-  deleteComment,
-  createComment,
-  fetchPostComments,
+  deleteComment
 } from "../../actions/comment_actions";
 import {fetchUserPosts} from '../../actions/post_actions';
 
@@ -31,9 +29,13 @@ export default props => {
     }
   }
 
+  const handleClick = () => {
+    props.history.push(`/users/${props.comment.authorId}`)
+  }
+
   return (
     <div className='comment-card'>
-      <div className='comment-avatar'>
+      <div className='comment-avatar' onClick={handleClick}>
         <img src={props.comment.profilePhoto} alt=""/>
       </div>
       <div className='comment-body'>

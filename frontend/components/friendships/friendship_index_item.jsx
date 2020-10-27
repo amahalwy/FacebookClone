@@ -3,12 +3,16 @@ import { Link } from 'react-router-dom';
 
 export default props => {
   
+  const handleClick = () => {
+    props.history.push(`/users/${props.friendship.friendId}`);
+  }
+
   return (
-    <li className='friendship-card'>
+    <li className='friendship-card' onClick={handleClick}>
       <img src={props.friendship.profilePhoto} alt="" className='friendship-card-image'/>
-      <Link to={`/users/${props.friendship.friendId}`} className='user-friend-link'>
+      <a className='user-friend-link'>
         {props.friendship.firstName} {props.friendship.lastName}
-      </Link>
+      </a>
     </li>
   )
 }

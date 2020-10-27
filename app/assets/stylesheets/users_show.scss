@@ -10,6 +10,8 @@
 
 .cover-photo-section {
   border-bottom: 1px solid rgb(222, 225, 228);
+  background: rgb(255,255,255);
+  background: linear-gradient(0deg, rgba(255,255,255,1) 21%, rgba(170,170,167,1) 100%);
 }
 
 .cover-photo-container {
@@ -37,7 +39,7 @@
 }
 
 .profile-pic-container > img {
-  border: 4px solid #242526;
+  border: 4px solid white;
   border-radius: 100%;
   height: 170px;
   width: 170px;
@@ -101,11 +103,11 @@
   font-family: Arial, Helvetica, sans-serif;
   margin: auto;
   width: 878px;
-  min-height: 160px;
+  min-height: 100px;
 }
 
 .under-cover-info {
-  min-height: 100px;
+  min-height: 60px;
   position: relative;
   text-align: center;
   width: 100%;
@@ -113,7 +115,7 @@
 
 .user-name {
   display: block;
-  margin-top: 16px;
+  margin-top: 22px;
   font-size: 34px;
 }
 
@@ -285,6 +287,7 @@
 .profile-button-accept-reject button:first-child {
   background-color: #2d88ff;
   margin-right: 10px;
+  color: white;
 }
 
 
@@ -299,24 +302,27 @@
 
 .profile-body {
   background-color: rgb(240, 242, 245);
-  width: 51%;
+  width: 52.2%;
   margin: 0 auto;
   display: flex;
-  justify-content: center;
 }
 
-.profile-main-left-section,
+.profile-main-left-section {
+  width: 42%;
+  margin-top: 14px;
+}
+
 .profile-main-right-section {
-  width: 48%;
+  width: 58%;
+  margin-top: 14px;
 }
 
 .profile-friends-card {
   border: 1px solid rgb(225, 227, 229);
-  width: 90%;
+  width: 96%;
   min-height: 140px;
   background-color: white;
   border-radius: 10px;
-  margin: 28px;
 }
 
 .profile-friend-header {
@@ -342,8 +348,7 @@
 
 .post-on-your-mind-container {
   min-height: 60px;
-  margin: 28px;
-  // width: 100%;
+  margin-bottom: -10px;
 }
 
 .post-on-your-mind {
@@ -356,7 +361,6 @@
 
 .post-input-click {
   display: flex;
-  // padding: 10px;
   margin: 10px 12.6px;
 }
 
@@ -403,10 +407,6 @@
 
 .under-mind-icon {
   margin-right: 10px;
-}
-
-.posts-index-div {
-  margin: 28px;
 }
 
 .profile-friendship-cards {

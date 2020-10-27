@@ -26,6 +26,7 @@ export default props => {
             currentUser={currentUser}
             request={request}
             key={request.id}
+            history={props.history}
           />
         )
       })}

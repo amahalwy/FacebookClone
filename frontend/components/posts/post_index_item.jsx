@@ -68,6 +68,10 @@ export default props => {
     }
   }
 
+  const handleClick = () => {
+    props.history.push(`/users/${currentUser.id}`)
+  }
+
   const postDate = new Date(post.createdAt).toUTCString().split(' ').splice(0, 4).join(' ')
 
   // debugger
@@ -79,7 +83,9 @@ export default props => {
           <div className='post-header'>
             <div className='post-header-top'>
               <div className='post-header-img'>
-                <img src={post.authorProfilePhoto} alt=""/>
+                <img src={post.authorProfilePhoto} alt="" onClick={
+                  ()=>props.history.push(`/users/${post.authorId}`)
+                }/>
               </div>
               <div className='post-header-info'>
                 <div>
@@ -136,6 +142,7 @@ export default props => {
           {post.comments.map(comment => {
             return (
               <CommentIndexItem
+                history={props.history}
                 key={comment.id}
                 comment={comment} 
                 currentUser={currentUser}
@@ -146,7 +153,7 @@ export default props => {
 
         <div className='post-comment'>
           <div className='comment-container'>
-            <div className='post-comment-avatar'>
+            <div className='post-comment-avatar' onClick={handleClick}>
               <img src={currentUser.profilePhoto} alt=""/>
             </div>
               <CreateCommentForm

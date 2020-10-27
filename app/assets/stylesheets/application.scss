@@ -37,6 +37,18 @@ a {
   text-decoration: none;
 }
 
+a:hover {
+  text-decoration: underline;
+}
+
 h1, h2, h3, h4, h5, h6, p, div, span, textarea, input {
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.post-header-img:hover,
+.post-input-photo:hover,
+.comment-avatar:hover,
+.post-comment-avatar:hover {
+  cursor: pointer;
+  -webkit-filter: brightness(80%);
 }

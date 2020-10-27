@@ -70,6 +70,7 @@ export default props => {
       setBody('');
       props.hideModal();
       props.history.push(`/users/${props.currentUser.id}`);
+      removePhoto();
     }
 
     if ((user && props.currentUser) && (props.currentUser.id === user.id)) { // Current user's page
@@ -84,6 +85,7 @@ export default props => {
       setBody('');
       props.hideModal();
       props.history.push(`/users/${props.currentUser.id}`);
+      removePhoto();
 
     } else if ((user && props.currentUser) && (props.currentUser.id !== user.id)) { // Not current user's page
       const post = new FormData();
@@ -96,6 +98,7 @@ export default props => {
       setBody('');
       dispatch(fetchUserPosts(props.user.id));
       props.hideModal();
+      removePhoto();
     }
   }
 

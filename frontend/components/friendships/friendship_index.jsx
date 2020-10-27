@@ -26,6 +26,7 @@ export default props =>{
             <FriendshipItem 
               key={friendship.id}
               friendship={friendship}
+              history={props.history}
             />
           )
         })

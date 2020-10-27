@@ -17,12 +17,16 @@ export default props => {
     dispatch(deleteFriendRequest(props.request.id));
   }
 
+  const handleClick = () => {
+    props.history.push(`/users/${props.request.requestorId}`);
+  }
+
   return (
     <li className='request-card'>
-      <img src={props.request.profilePhoto} alt="" className='request-card-image'/>
-      <Link to={`/users/${props.request.requestorId}`} className='user-request-link'>
+      <img src={props.request.profilePhoto} alt="" className='request-card-image' onClick={handleClick}/>
+      <a className='user-request-link' onClick={handleClick}>
         {props.request.firstName} {props.request.lastName}
-      </Link>
+      </a>
       <button onClick={handleAccept} className='request-button button-accept'>Accept</button>
       <button onClick={handleDecline} className='request-button button-decline'>Decline</button>
     </li>

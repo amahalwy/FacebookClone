@@ -188,7 +188,6 @@ export default props => {
 
             <div className='user-name'>{user.firstName} {user.lastName}</div>
             <div className='user-bio'>
-              "Some user bio"
               {/* <button className='edit-bio-button'>Edit</button> */}
             </div>
             
