@@ -52,7 +52,7 @@ export default props => {
           />
         </div>
         <div className='feed-container'>
-          <div className='post-on-your-mind-container'>
+          <div className='post-on-your-mind-container-feed'>
             <div className='post-on-your-mind'>
               <div className='post-input-click'>
                 <div className='post-input-photo'>
