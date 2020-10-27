@@ -9,7 +9,8 @@ class PostDropdown extends React.Component {
     this.state = {
       showMenu: false,
       openModal: false,
-      openDeleteModal: false
+      openDeleteModal: false,
+      editModal: 'edit'
     };
 
     this.showMenu = this.showMenu.bind(this);
@@ -90,6 +91,7 @@ class PostDropdown extends React.Component {
                   <EditPostForm
                     hideModal={this.hideModal}
                     post={this.props.post}
+                    modal={this.state.editModal}
                   />
                 </DynamicModal>
 

@@ -195,7 +195,8 @@
 .post-remove-photo-feed,
 .post-remove-photo-show,
 .post-remove-photo-index,
-.post-remove-photo-nav {
+.post-remove-photo-nav,
+.post-remove-photo-edit {
   background-color: #9c9c9c;
   border-radius: 7px;
   border: none;
@@ -209,7 +210,8 @@
 .post-remove-photo-feed:hover,
 .post-remove-photo-show:hover,
 .post-remove-photo-index:hover,
-.post-remove-photo-nav:hover{
+.post-remove-photo-nav:hover,
+.post-remove-photo-edit:hover{
   cursor: pointer;
 }
 

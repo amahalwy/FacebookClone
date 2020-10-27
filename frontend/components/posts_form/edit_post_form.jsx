@@ -5,22 +5,88 @@ import { fetchUserPosts, updatePost } from '../../actions/post_actions';
 export default props => {
   const currentUser = useSelector(state => state.session.user);
   const [postBody, setBody] = useState(props.post.body);
+  let postPhoto = props.post.postPhoto;
   const formType = 'Update Post';
   const buttonText = 'Update';
   const dispatch = useDispatch();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    let post = {
-      authorFirstName: props.post.authorFirstName,
-      authorLastName: props.post.authorLastName,
-      body: postBody,
-      authorId: props.post.authorId,
-      id: props.post.id
+  const s3 = new AWS.S3({
+    accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY,
+    region: "us-east-2", 
+  });
+
+  const uploadImage = (file) => {
+    const params = {
+      Bucket: process.env.REACT_APP_S3_BUCKET,
+      Key: file.name,
+      Body: file,
+      ContentType: file.mimetype,
+      ACL: "public-read",
+    };
+    const uploadPhoto = s3.upload(params).promise();
+    return uploadPhoto;
+  };
+
+  const handleUpload = () => {
+    debugger
+    if (typeof postPhoto !== "string") {
+      uploadImage(postPhoto)
+      .then(data => {
+        postPhoto = data.Location
+      })
+      .then(() => handleSubmit());
+    } else {
+      handleSubmit();
     }
+  }
+
+
+  const handleSubmit = () => {
+    const post = new FormData();
+    post.append('post[id]', props.post.id)
+    post.append('post[body]', postBody);
+    post.append('post[owner_id]', currentUser.id);
+    post.append('post[user_id]', currentUser.id);
+    post.append('post[post_photo]', postPhoto);
+
     dispatch(updatePost(post));
     dispatch(fetchUserPosts(currentUser.id));
     props.hideModal();
+  }
+
+  const postProfileRef = React.createRef();
+
+  const clickInput = () => {
+    postProfileRef.current.click()
+  }
+  const getImgClass = () => {
+    return `post-dynamic-image-edit show`;
+  }
+
+  const loadFile = (e) => {
+    let image = document.getElementsByClassName(`post-dynamic-image-edit`);
+    image[0].src = URL.createObjectURL(e.target.files[0]);
+    image[0].classList.remove('hidden');
+    image[0].classList.add('show');
+  }
+
+  const removePhoto = () => {
+    
+    let image = document.getElementsByClassName(`post-dynamic-image-edit`);
+    image[0].src = '';
+    image[0].classList.remove('show');
+    image[0].classList.add('hidden');
+
+    let button = document.getElementsByClassName(`post-remove-photo-edit`);
+    button[0].classList.remove('show');
+    button[0].classList.add('hidden');
+  }
+
+  const showRemoveButton = () => {
+    let button = document.getElementsByClassName(`post-remove-photo-edit`);
+    button[0].classList.remove('hidden');
+    button[0].classList.add('show');
   }
 
   if (!props.post) return null;
@@ -59,8 +125,37 @@ export default props => {
               value={postBody}
             ></textarea>
           </div>
+          
+          <div className='post-image-show'>
+            <img src={props.post.postPhoto} className={getImgClass()}/>
+          </div>
+
+          <div className='add-to-your-post'>
+            <div>
+              <p>Edit your post</p>
+            </div>
+
+
+            <div> 
+              <input type="button" value="Update image" className="file-upload-input" onClick={clickInput} />
+              <input 
+                type="file" 
+                className="file"
+                onChange={e => {
+                    postPhoto = e.currentTarget.files[0];
+                    loadFile(e);
+                    showRemoveButton();
+                  }
+                }
+                ref={postProfileRef}
+              />
+              <input type="button" value="Remove image" className='post-remove-photo-edit' onClick={removePhoto} />
+            </div>
+          </div>
+
+
           <div className='post-button'>
-            <button onClick={handleSubmit}>
+            <button onClick={handleUpload}>
               <span>
                 {buttonText}
               </span>
