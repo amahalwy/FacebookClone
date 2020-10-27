@@ -105,7 +105,7 @@
   margin: 10px 15px;
   outline: none;
   width: 93%;
-  min-height: 180px;
+  min-height: 120px;
   overflow: hidden;
   resize: none;
   font-size: 20px;
@@ -116,8 +116,8 @@
 .post-form textarea::placeholder {
   color: rgb(165, 165, 165);
   font-size: 20px;
-  // padding-left: 5px;
 }
+
 // // End of post text
 
 .add-to-your-post {
@@ -126,12 +126,8 @@
   border-radius: 10px;
   margin: 3px auto;
   display: flex;
+  justify-content: space-between;
 }
-
-// .add-to-your-post > div {
-//   width: 100%;
-//   align-self: center;
-// }
 
 .post-add-to-post {
   margin-left: 30px;
@@ -184,7 +180,6 @@
   border: none;
   color: white;
   height: 60%;
-  width: 42%;
   justify-self: center;
   justify-content: center;
   margin: auto;
@@ -204,9 +199,7 @@
 }
 
 .post-image-show {
-  height: 40px;
-  width: 30px;
-  border: 1px solid black;
+  margin: 10px;
 }
 
 .post-image-show img {

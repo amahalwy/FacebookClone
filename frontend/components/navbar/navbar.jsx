@@ -6,6 +6,7 @@ import CreatePostForm from '../posts_form/create_post_form';
 export default props => {
   const [openModal, setModal] = useState(false);
   const [search, setSearch] = useState('');
+  const navModal = "nav";
 
   const showModal = () => {
     setModal(true);
@@ -115,6 +116,7 @@ export default props => {
           location={props.location}
           hideModal={hideModal}
           currentUser={props.currentUser}
+          modal={navModal}
         />
       </DynamicModal>
     </nav>

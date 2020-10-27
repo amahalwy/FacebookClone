@@ -12,6 +12,7 @@ import { fetchUserFriendRequests} from '../../actions/friend_request_actions';
 export default props => {
   const currentUser = useSelector(state => state.session.user);
   const [openModal, setModal] = useState(false);
+  const feedModal = "feed";
 
   const dispatch = useDispatch();
 
@@ -91,6 +92,7 @@ export default props => {
           location={props.location}
           hideModal={hideModal}
           currentUser={currentUser}
+          modal={feedModal}
         />
       </DynamicModal>
 

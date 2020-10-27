@@ -10,6 +10,7 @@ export default props => {
   const users = useSelector(state => Object.values(state.entities.users));
   const currentUser = useSelector(state => state.session.user);
   const [openModal, setModal] = useState(false);
+  const indexModal = "users-index";
   
   const dispatch = useDispatch();
 
@@ -76,6 +77,7 @@ export default props => {
           location={props.location}
           hideModal={hideModal}
           currentUser={currentUser}
+          modal={indexModal}
         />
       </DynamicModal>
 

@@ -14,6 +14,14 @@ export default props => {
 
   const postProfileRef = React.createRef();
 
+  const getButtonClass = () => {
+    return `post-remove-photo-${props.modal} hidden`;
+  }
+
+  const getImgClass = () => {
+    return `post-dynamic-image-${props.modal} hidden`;
+  }
+
   const clickInput = () => {
     postProfileRef.current.click()
   }
@@ -49,7 +57,6 @@ export default props => {
   }
 
   const handleSubmit = () => {
-    debugger
       
     if (user === undefined) { // Navbar    
       const post = new FormData();
@@ -94,10 +101,16 @@ export default props => {
 
   const handleClose = () => {
     props.hideModal();
-    let image = document.getElementById('post-dynamic-image');
-    image.src = '';
-    image.classList.remove('show');
-    image.classList.add('hidden');
+    let image = document.getElementsByClassName(`post-dynamic-image-${props.modal}`);
+    image[0].src = '';
+    image[0].classList.remove('show');
+    image[0].classList.add('hidden');
+
+    let button = document.getElementsByClassName(`post-remove-photo-${props.modal}`);
+    button[0].classList.remove('show');
+    button[0].classList.add('hidden');
+
+
     setBody('');
   }
 
@@ -126,14 +139,32 @@ export default props => {
   }
 
   const loadFile = (e) => {
-    let image = document.getElementById('post-dynamic-image');
-    image.src = URL.createObjectURL(e.target.files[0]);
-    image.classList.remove('hidden');
-    image.classList.add('show');
+    let image = document.getElementsByClassName(`post-dynamic-image-${props.modal}`);
+    image[0].src = URL.createObjectURL(e.target.files[0]);
+    image[0].classList.remove('hidden');
+    image[0].classList.add('show');
+  }
+
+  const removePhoto = () => {
+    
+    let image = document.getElementsByClassName(`post-dynamic-image-${props.modal}`);
+    image[0].src = '';
+    image[0].classList.remove('show');
+    image[0].classList.add('hidden');
+
+    let button = document.getElementsByClassName(`post-remove-photo-${props.modal}`);
+    button[0].classList.remove('show');
+    button[0].classList.add('hidden');
+  }
+
+  const showRemoveButton = () => {
+    let button = document.getElementsByClassName(`post-remove-photo-${props.modal}`);
+    button[0].classList.remove('hidden');
+    button[0].classList.add('show');
   }
 
   if (!props.currentUser) return '';
-
+  
   return (
     <div className='post-form-card'>
       <div className='post-form-header'>
@@ -166,8 +197,12 @@ export default props => {
           placeholder= "What's on your mind?"
         ></textarea>
 
+        <div className='post-image-show'>
+          <img src="" className={getImgClass()}/>
+        </div>
+
         <div className='add-to-your-post'>
-          <div className='post-image-show'>
+          <div>
             <p>Add to your post</p>
           </div>
           <div> 
@@ -176,12 +211,14 @@ export default props => {
               type="file" 
               className="file"
               onChange={e => {
-                  postPhoto = e.currentTarget.files[0]
-                  loadFile(e)
+                  postPhoto = e.currentTarget.files[0];
+                  loadFile(e);
+                  showRemoveButton();
                 }
               }
               ref={postProfileRef}
             />
+            <input type="button" value="Remove image" className={getButtonClass()} onClick={removePhoto} />
           </div>
         </div>
         <div className='post-button'>

@@ -12,7 +12,7 @@ import {clearFriendships, fetchFriendships} from '../../actions/friendship_actio
 import { clearFriendRequests } from '../../actions/friend_request_actions';
 
 export default props => {
-
+  const showPageModal = "show";
   const user = useSelector(state => state.entities.userShow);
   const currentUser = useSelector(state => state.session.user)
   let profilePhoto = user.profilePhoto;
@@ -293,6 +293,7 @@ export default props => {
                 hideModal={hideModal}
                 user={user}
                 currentUser={currentUser}
+                modal={showPageModal}
               />
             </DynamicModal>
 
