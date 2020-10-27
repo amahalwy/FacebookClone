@@ -55,9 +55,9 @@ export const createPost = post => dispatch => (
     err => dispatch(receiveErrors(err.responseJSON)))
 )
 
-export const updatePost = post => dispatch => (
-  APIUtil.updatePost(post).then(
-    post => dispatch(receiveUserPosts(post)),
+export const updatePost = (postId, post) => dispatch => (
+  APIUtil.updatePost(postId, post).then(
+    post => dispatch(receivePost(post)),
     err => dispatch(receiveErrors(err.responseJSON)))
 )
 

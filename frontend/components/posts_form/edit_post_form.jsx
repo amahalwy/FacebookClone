@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import { fetchUserPosts, updatePost } from '../../actions/post_actions';
+import { fetchPost, fetchUserPosts, updatePost } from '../../actions/post_actions';
 
 export default props => {
   const currentUser = useSelector(state => state.session.user);
@@ -30,7 +30,9 @@ export default props => {
 
   const handleUpload = () => {
     debugger
-    if (typeof postPhoto !== "string") {
+    if (postPhoto === '' || postPhoto === null) {
+      handleSubmit()
+    } else if (typeof postPhoto !== "string") {
       uploadImage(postPhoto)
       .then(data => {
         postPhoto = data.Location
@@ -41,17 +43,16 @@ export default props => {
     }
   }
 
-
   const handleSubmit = () => {
     const post = new FormData();
     post.append('post[id]', props.post.id)
     post.append('post[body]', postBody);
     post.append('post[owner_id]', currentUser.id);
-    post.append('post[user_id]', currentUser.id);
+    post.append('post[user_id]', props.post.userId);
     post.append('post[post_photo]', postPhoto);
 
-    dispatch(updatePost(post));
-    dispatch(fetchUserPosts(currentUser.id));
+    dispatch(updatePost(props.post.id, post));
+    dispatch(fetchPost(props.post.id));
     props.hideModal();
   }
 
@@ -61,7 +62,19 @@ export default props => {
     postProfileRef.current.click()
   }
   const getImgClass = () => {
-    return `post-dynamic-image-edit show`;
+    if (postPhoto === null || postPhoto === '') {
+      return 'post-dynamic-image-edit hidden';
+    } else {
+      return 'post-dynamic-image-edit show';
+    }
+  }
+
+  const getButtonClass = () => {
+    if (postPhoto === null || postPhoto === '') {
+      return 'post-remove-photo-edit hidden';
+    } else {
+      return 'post-remove-photo-edit show';
+    }
   }
 
   const loadFile = (e) => {
@@ -72,7 +85,6 @@ export default props => {
   }
 
   const removePhoto = () => {
-    
     let image = document.getElementsByClassName(`post-dynamic-image-edit`);
     image[0].src = '';
     image[0].classList.remove('show');
@@ -81,6 +93,8 @@ export default props => {
     let button = document.getElementsByClassName(`post-remove-photo-edit`);
     button[0].classList.remove('show');
     button[0].classList.add('hidden');
+
+    postPhoto = '';
   }
 
   const showRemoveButton = () => {
@@ -143,13 +157,14 @@ export default props => {
                 className="file"
                 onChange={e => {
                     postPhoto = e.currentTarget.files[0];
+                    console.log(postPhoto)
                     loadFile(e);
                     showRemoveButton();
                   }
                 }
                 ref={postProfileRef}
               />
-              <input type="button" value="Remove image" className='post-remove-photo-edit' onClick={removePhoto} />
+              <input type="button" value="Remove image" className={getButtonClass()} onClick={removePhoto} />
             </div>
           </div>
 

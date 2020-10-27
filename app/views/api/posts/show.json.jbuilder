@@ -1,12 +1,12 @@
 json.set! @post.id do
     json.id @post.id
-    json.authorId @post.user_id
+    json.authorId @post.owner_id
     json.userId @post.user_id
     json.authorFirstName @post.author.first_name
     json.authorLastName @post.author.last_name
     json.body @post.body
     json.authorProfilePhoto @post.author.profile_photo.attached? ? url_for(@post.author.profile_photo) : "https://facebook-clone-pro.s3.us-east-2.amazonaws.com/default_profile"
-    json.postPhoto @post.post_photo
+    json.postPhoto @post.post_photo != '' || !@post.post_photo  ? @post.post_photo : '' 
     json.createdAt @post.created_at
 
     json.comments @post.comments do |comment|

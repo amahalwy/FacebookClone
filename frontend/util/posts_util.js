@@ -23,11 +23,13 @@ export const createPost = post => (
   // .then(data => uploadFile(post[post_photo], data))
 )
 
-export const updatePost = post => (
+export const updatePost = (postId, post) => (
   $.ajax({
-    url: `/api/posts/${post.id}`,
+    url: `/api/posts/${postId}`,
     method: 'PATCH',
-    data: post
+    data: post,
+    contentType: false,
+    processData: false,
   })
 )
 

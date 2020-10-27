@@ -19,10 +19,9 @@ class Api::PostsController < ApplicationController
   end
 
   def update
-    @post = Post.find_by(id: params[:id])
+    @post = Post.find_by(id: params[:post][:id])
     if @post.update(post_params)
-      @posts = Post.where(user_id: params[:post][:authorId])
-      render '/api/posts/index'
+      render '/api/posts/show'
     else
       render json: @post.errors.full_messages, status: 422
     end
