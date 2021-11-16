@@ -6,7 +6,7 @@
     "@babel/preset-env": "^7.11.0",
     "@babel/preset-react": "^7.10.4",
     "activestorage": "^5.2.4-4",
-    "aws-sdk": "^2.778.0",
+    "aws-sdk": "^2.814.0",
     "babel-loader": "^8.1.0",
     "fs": "0.0.1-security",
     "hash-router": "^0.4.0",
